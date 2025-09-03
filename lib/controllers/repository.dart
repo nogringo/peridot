@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
+import 'package:nip01/nip01.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:sembast/sembast.dart' hide Filter;
@@ -16,15 +19,42 @@ class Repository extends GetxController {
 
   List<String> get bunkerDefaultRelays => ["wss://relay.nsec.app"];
 
-  void loadApp() async {
+  Future<void> loadApp() async {
     if (isAppLoaded) return;
     isAppLoaded = true;
 
     db = await getDatabase(appTitle);
-    listenSigningRequests();
+    await loadSigners();
+    await listenSigningRequests();
   }
 
-  void listenSigningRequests() async {
+  Future<void> loadSigners() async {
+    final storage = FlutterSecureStorage();
+
+    final storedPrivateKeys = await storage.read(key: "private_keys");
+    if (storedPrivateKeys == null) return;
+
+    List<String> privateKeys = jsonDecode(storedPrivateKeys);
+
+    for (var privateKey in privateKeys) {
+      final keyPair = KeyPair.fromPrivateKey(privateKey: privateKey);
+
+      if (ndk.accounts.hasAccount(keyPair.publicKey)) continue;
+
+      final signer = Bip340EventSigner(
+        privateKey: keyPair.privateKey,
+        publicKey: keyPair.publicKey,
+      );
+
+      ndk.accounts.addAccount(
+        pubkey: keyPair.publicKey,
+        type: AccountType.privateKey,
+        signer: signer,
+      );
+    }
+  }
+
+  Future<void> listenSigningRequests() async {
     stopSigningRequestsSubscription();
 
     // Get authorized keys from database
@@ -49,7 +79,7 @@ class Repository extends GetxController {
     signingRequestsSubscription!.stream.listen(processSigningRequest);
   }
 
-  void stopSigningRequestsSubscription() async {
+  Future<void> stopSigningRequestsSubscription() async {
     if (signingRequestsSubscription == null) return;
 
     final subId = signingRequestsSubscription!.requestId;
@@ -58,7 +88,10 @@ class Repository extends GetxController {
   }
 
   void processSigningRequest(Nip01Event event) {
-    
+    final targetPubkey = event.getFirstTag("p");
+    final account = ndk.accounts.accounts[targetPubkey];
+    if (account == null) return;
+    final signer = account.signer as Bip340EventSigner;
   }
 
   String generateBunkerUrl() {
