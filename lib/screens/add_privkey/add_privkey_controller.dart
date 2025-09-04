@@ -53,12 +53,8 @@ class AddPrivkeyController extends GetxController {
     }
   }
 
-  void addAccount(KeyPair keypair) {
-    Repository.ndk.accounts.loginPrivateKey(
-      pubkey: keypair.publicKey,
-      privkey: keypair.privateKey,
-    );
-
+  void addAccount(KeyPair keypair) async {
+    await Repository.to.addAccount(keypair);
     Get.offAllNamed(AppRoutes.applications);
   }
 }

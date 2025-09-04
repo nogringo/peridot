@@ -11,7 +11,11 @@ class ApplicationsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Applications"),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.person_outline)),
+          IconButton(
+            onPressed: () => Get.toNamed(AppRoutes.settings),
+            icon: Icon(Icons.person_outline),
+          ),
+          SizedBox(width: 12),
         ],
       ),
       floatingActionButton: FloatingActionButton(

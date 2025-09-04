@@ -6,10 +6,15 @@ import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   final ndk = Ndk.defaultConfig();
   Get.put(ndk);
-  Get.put(Repository());
+
+  final repository = Repository();
+  await repository.loadApp();
+  Get.put(repository);
 
   runApp(const MainApp());
 }
