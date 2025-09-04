@@ -5,6 +5,7 @@ import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
+import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,21 +25,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: appTitle,
-      localizationsDelegates: [nostr_widgets.AppLocalizations.delegate],
-      theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-      ),
-      darkTheme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
-          brightness: Brightness.dark,
+    return ToastificationWrapper(
+      child: GetMaterialApp(
+        title: appTitle,
+        localizationsDelegates: [nostr_widgets.AppLocalizations.delegate],
+        theme: ThemeData.from(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         ),
+        darkTheme: ThemeData.from(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.teal,
+            brightness: Brightness.dark,
+          ),
+        ),
+        themeMode: ThemeMode.system,
+        initialRoute: AppRoutes.applications,
+        getPages: AppRoutes.pages,
       ),
-      themeMode: ThemeMode.system,
-      initialRoute: AppRoutes.applications,
-      getPages: AppRoutes.pages,
     );
   }
 }

@@ -32,9 +32,13 @@ class SettingsPage extends StatelessWidget {
                 icon: Icon(Icons.more_vert),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
+                  side: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                    width: 1,
+                  ),
                 ),
-                onSelected: (value) => SettingsController.to.handleAccountMenuAction(value, pubkey),
+                onSelected: (value) => SettingsController.to
+                    .handleAccountMenuAction(value, pubkey),
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     value: 'copy',
@@ -63,7 +67,10 @@ class SettingsPage extends StatelessWidget {
                       children: [
                         Icon(Icons.delete, size: 20, color: Colors.red),
                         SizedBox(width: 8),
-                        Text('Remove account', style: TextStyle(color: Colors.red)),
+                        Text(
+                          'Remove account',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ],
                     ),
                   ),

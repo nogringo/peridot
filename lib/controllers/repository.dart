@@ -246,7 +246,7 @@ class Repository extends GetxController {
           );
       }
     } catch (e) {
-      // 
+      //
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/routes/app_routes.dart';
 import 'package:sembast/sembast.dart';
 import 'package:toastification/toastification.dart';
 
@@ -29,7 +30,7 @@ class SettingsController extends GetxController {
   void copyNpubToClipboard(String pubkey) {
     final npub = Nip19.npubFromHex(pubkey);
     Clipboard.setData(ClipboardData(text: npub));
-    
+
     toastification.show(
       context: Get.context!,
       title: const Text('Copied to clipboard'),
@@ -41,15 +42,7 @@ class SettingsController extends GetxController {
   }
 
   void showBackupAccount(String pubkey) {
-    // TODO: Implement backup account dialog
-    toastification.show(
-      context: Get.context!,
-      title: const Text('Backup account'),
-      description: const Text('Feature coming soon'),
-      autoCloseDuration: const Duration(seconds: 2),
-      alignment: Alignment.bottomRight,
-      type: ToastificationType.info,
-    );
+    Get.toNamed(AppRoutes.backupAccount.replaceAll(':pubkey', pubkey));
   }
 
   void removeAccount(String pubkey) {
