@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/screens/backup_account/backup_account_controller.dart';
+import 'package:peridot/widgets/border_area_view.dart';
 
 class BackupAccountPage extends StatelessWidget {
   const BackupAccountPage({super.key});
@@ -46,12 +47,7 @@ class SecureBackupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).dividerColor, width: 1.5),
-        borderRadius: BorderRadius.circular(24),
-      ),
+    return BorderAreaView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -107,12 +103,7 @@ class UnsecureBackupView extends StatelessWidget {
     );
     return Theme(
       data: themeData,
-      child: Container(
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          border: Border.all(color: themeData.dividerColor, width: 1.5),
-          borderRadius: BorderRadius.circular(24),
-        ),
+      child: BorderAreaView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

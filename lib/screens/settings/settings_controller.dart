@@ -35,9 +35,10 @@ class SettingsController extends GetxController {
       context: Get.context!,
       title: const Text('Copied to clipboard'),
       description: const Text('Public key copied successfully'),
-      autoCloseDuration: const Duration(seconds: 2),
+      autoCloseDuration: const Duration(seconds: 5),
       alignment: Alignment.bottomRight,
       type: ToastificationType.success,
+      showProgressBar: true,
     );
   }
 
@@ -51,9 +52,10 @@ class SettingsController extends GetxController {
       context: Get.context!,
       title: const Text('Remove account'),
       description: const Text('Feature coming soon'),
-      autoCloseDuration: const Duration(seconds: 2),
+      autoCloseDuration: const Duration(seconds: 5),
       alignment: Alignment.bottomRight,
       type: ToastificationType.warning,
+      showProgressBar: true,
     );
   }
 
