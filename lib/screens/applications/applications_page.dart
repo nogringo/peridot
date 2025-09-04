@@ -13,7 +13,7 @@ class ApplicationsPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () => Get.toNamed(AppRoutes.settings),
-            icon: Icon(Icons.person_outline),
+            icon: Icon(Icons.settings),
           ),
           SizedBox(width: 12),
         ],

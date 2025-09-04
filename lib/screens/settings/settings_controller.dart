@@ -1,12 +1,68 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:nip19/nip19.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:sembast/sembast.dart';
+import 'package:toastification/toastification.dart';
 
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find();
 
   final newRelayFieldController = TextEditingController();
+
+  void handleAccountMenuAction(String action, String pubkey) {
+    switch (action) {
+      case 'copy':
+        copyNpubToClipboard(pubkey);
+        break;
+      case 'backup':
+        showBackupAccount(pubkey);
+        break;
+      case 'remove':
+        removeAccount(pubkey);
+        break;
+    }
+  }
+
+  void copyNpubToClipboard(String pubkey) {
+    final npub = Nip19.npubFromHex(pubkey);
+    Clipboard.setData(ClipboardData(text: npub));
+    
+    toastification.show(
+      context: Get.context!,
+      title: const Text('Copied to clipboard'),
+      description: const Text('Public key copied successfully'),
+      autoCloseDuration: const Duration(seconds: 2),
+      alignment: Alignment.bottomRight,
+      type: ToastificationType.success,
+    );
+  }
+
+  void showBackupAccount(String pubkey) {
+    // TODO: Implement backup account dialog
+    toastification.show(
+      context: Get.context!,
+      title: const Text('Backup account'),
+      description: const Text('Feature coming soon'),
+      autoCloseDuration: const Duration(seconds: 2),
+      alignment: Alignment.bottomRight,
+      type: ToastificationType.info,
+    );
+  }
+
+  void removeAccount(String pubkey) {
+    // TODO: Implement remove account with confirmation dialog
+    toastification.show(
+      context: Get.context!,
+      title: const Text('Remove account'),
+      description: const Text('Feature coming soon'),
+      autoCloseDuration: const Duration(seconds: 2),
+      alignment: Alignment.bottomRight,
+      type: ToastificationType.warning,
+    );
+  }
 
   Future<void> addDefaultBunkerRelay() async {
     final relay = newRelayFieldController.text.trim();

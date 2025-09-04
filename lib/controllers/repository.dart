@@ -147,7 +147,6 @@ class Repository extends GetxController {
           decryptedContent = await signer.decrypt(event.content, event.pubKey);
           useNip44 = false; // Successfully decrypted with NIP-04
         } catch (e) {
-          print('Failed to decrypt: $e');
           return;
         }
       }
@@ -247,7 +246,7 @@ class Repository extends GetxController {
           );
       }
     } catch (e) {
-      print('Error processing request: $e');
+      // 
     }
   }
 
