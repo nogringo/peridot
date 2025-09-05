@@ -15,6 +15,7 @@ class AddThisAppView extends StatelessWidget {
         Text("App name", style: Get.textTheme.titleMedium),
         TextField(
           controller: AddApplicationController.to.appNameFieldController,
+          onChanged: (value) => AddApplicationController.to.update(),
         ),
         SizedBox(height: 16),
         Text("Requested permissions", style: Get.textTheme.titleMedium),
@@ -23,13 +24,7 @@ class AddThisAppView extends StatelessWidget {
           ...app.permissions.map(
             (permission) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                children: [
-                  Icon(Icons.check_circle_outline, size: 20),
-                  SizedBox(width: 8),
-                  Text(permission),
-                ],
-              ),
+              child: Text(permission),
             ),
           )
         else
@@ -38,7 +33,14 @@ class AddThisAppView extends StatelessWidget {
             style: TextStyle(fontStyle: FontStyle.italic),
           ),
         SizedBox(height: 32),
-        FilledButton(onPressed: () {}, child: Text("Add this app")),
+        GetBuilder<AddApplicationController>(
+          builder: (c) {
+            return FilledButton(
+              onPressed: c.canAddApp ? c.addApp : null,
+              child: Text("Add this app"),
+            );
+          },
+        ),
       ],
     );
   }

@@ -30,7 +30,8 @@ class ConnectAnAppView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onChanged: AddApplicationController.to.onNostrConnectFieldChanged,
+                onChanged:
+                    AddApplicationController.to.onNostrConnectFieldChanged,
               ),
               SizedBox(height: 12),
               GetBuilder<AddApplicationController>(

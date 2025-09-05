@@ -1,10 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:ndk/ndk.dart';
+import 'package:ndk/ndk.dart' hide NostrConnect;
 import 'package:peridot/controllers/repository.dart';
-import 'package:peridot/models/nostr_app.dart';
+import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/bunker.dart';
+import 'package:peridot/models/nip46_request.dart';
+import 'package:peridot/models/nostr_connect.dart';
 import 'package:peridot/utils/nip46_parser.dart';
 import 'package:toastification/toastification.dart';
 
@@ -18,11 +20,12 @@ class AddApplicationController extends GetxController {
   String? currentSecret;
   NdkResponse? bunkerSubscription;
   NdkResponse? nostrConnectSubscription;
-  NostrApp? app;
+  AuthorizedApp? app;
+  bool isNostrConnect = false;
 
   bool get hasNostrConnectURL {
     try {
-      NostrApp.fromNostrConnectUrl(nostrConnectFieldController.text.trim());
+      NostrConnect.fromUrl(nostrConnectFieldController.text.trim());
       return true;
     } catch (e) {
       return false;
@@ -42,6 +45,8 @@ class AddApplicationController extends GetxController {
   }
 
   bool get isConnected => app != null;
+
+  bool get canAddApp => appNameFieldController.text.trim().isNotEmpty;
 
   AddApplicationController() {
     selectedPubkey = Repository.ndk.accounts.accounts.keys.first.obs;
@@ -75,10 +80,12 @@ class AddApplicationController extends GetxController {
         ? (request.params[2]).split(',').map((p) => p.trim()).toList()
         : <String>[];
 
-    app = NostrApp(
-      pubkey: request.clientPubkey,
+    app = AuthorizedApp(
+      appPubkey: request.clientPubkey,
+      signerPubkey: selectedPubkey.value,
       relays: bunkerUrl!.relays,
       permissions: requestedPermissions,
+      name: '',
     );
     update();
   }
@@ -121,14 +128,37 @@ class AddApplicationController extends GetxController {
   }
 
   void connectWithNostrConnect() {
-    app = NostrApp.fromNostrConnectUrl(nostrConnectFieldController.text.trim());
-    if (app!.name != null) {
-      appNameFieldController.text = app!.name!;
+    final nostrConnect = NostrConnect.fromUrl(
+      nostrConnectFieldController.text.trim(),
+    );
+    app = nostrConnect.toAuthorizedApp(
+      signerPubkey: selectedPubkey.value,
+      name: "",
+    );
+    if (nostrConnect.name != null) {
+      appNameFieldController.text = nostrConnect.name!;
     }
+    isNostrConnect = true;
     update();
   }
 
   void onNostrConnectFieldChanged(String value) {
     update();
   }
+
+  void addApp() {
+    if (!canAddApp) return;
+
+    if (isNostrConnect) {
+      addNostrConnectApp();
+    } else {
+      addBunkerApp();
+    }
+  }
+
+  void addBunkerApp() {
+    
+  }
+
+  void addNostrConnectApp() {}
 }
