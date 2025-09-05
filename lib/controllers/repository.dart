@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
 import 'package:peridot/config.dart';
+import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:sembast/sembast.dart' hide Filter;
 
@@ -17,6 +18,7 @@ class Repository extends GetxController {
   late Database db;
 
   RxList<String> bunkerDefaultRelays = <String>[].obs;
+  RxList<AuthorizedApp> authorizedApps = <AuthorizedApp>[].obs;
 
   Future<void> loadApp() async {
     if (isAppLoaded) return;
@@ -25,6 +27,7 @@ class Repository extends GetxController {
     db = await getDatabase(appTitle);
     await loadSigners();
     await loadBunkerRelays();
+    await loadAuthorizedApps();
     await listenSigningRequests();
   }
 
@@ -90,6 +93,15 @@ class Repository extends GetxController {
     } else {
       bunkerDefaultRelays.value = [];
     }
+  }
+
+  Future<void> loadAuthorizedApps() async {
+    final store = intMapStoreFactory.store('authorized_apps');
+    final records = await store.find(db);
+
+    authorizedApps.value = records.map((record) {
+      return AuthorizedApp.fromJson(record.value);
+    }).toList();
   }
 
   Future<void> removeDefaultBunkerRelay(String relay) async {

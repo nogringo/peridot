@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'package:peridot/utils/generate_secret.dart';
 
 class Bunker {
   final String pubkey;
@@ -19,11 +19,5 @@ class Bunker {
   }
 
   Bunker({required this.pubkey, required this.relays, String? secret})
-    : secret = secret ?? _generateSecret();
-
-  static String _generateSecret() {
-    final random = Random.secure();
-    final secretBytes = List<int>.generate(16, (i) => random.nextInt(256));
-    return secretBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-  }
+    : secret = secret ?? generateSecret();
 }

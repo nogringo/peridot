@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,11 @@ import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/bunker.dart';
 import 'package:peridot/models/nip46_request.dart';
 import 'package:peridot/models/nostr_connect.dart';
+import 'package:peridot/utils/generate_secret.dart';
+import 'package:peridot/utils/get_signer.dart';
+import 'package:peridot/utils/nip46_encryption.dart';
 import 'package:peridot/utils/nip46_parser.dart';
+import 'package:sembast/sembast.dart' hide Filter;
 import 'package:toastification/toastification.dart';
 
 class AddApplicationController extends GetxController {
@@ -19,8 +24,8 @@ class AddApplicationController extends GetxController {
   Bunker? bunkerUrl;
   String? currentSecret;
   NdkResponse? bunkerSubscription;
-  NdkResponse? nostrConnectSubscription;
   AuthorizedApp? app;
+  Nip46Request? bunkerRequest;
   bool isNostrConnect = false;
 
   bool get hasNostrConnectURL {
@@ -52,12 +57,21 @@ class AddApplicationController extends GetxController {
     selectedPubkey = Repository.ndk.accounts.accounts.keys.first.obs;
   }
 
+  @override
+  void onClose() {
+    // Clean up subscriptions when controller is disposed
+    stopListeningBunker();
+    nostrConnectFieldController.dispose();
+    appNameFieldController.dispose();
+    super.onClose();
+  }
+
   void listenBunker() {
     if (bunkerUrl == null) return;
 
     bunkerSubscription = Repository.ndk.requests.subscription(
       filters: [
-        Filter(kinds: [24133], pTags: [bunkerUrl!.pubkey], limit: 0),
+        Filter(kinds: [24133], pTags: [bunkerUrl!.pubkey]),
       ],
       explicitRelays: bunkerUrl!.relays,
     );
@@ -76,6 +90,8 @@ class AddApplicationController extends GetxController {
     final secret = request.params[1];
     if (bunkerUrl!.secret != secret) return;
 
+    bunkerRequest = request;
+
     final requestedPermissions = request.params.length > 2
         ? (request.params[2]).split(',').map((p) => p.trim()).toList()
         : <String>[];
@@ -93,12 +109,6 @@ class AddApplicationController extends GetxController {
   Future<void> stopListeningBunker() async {
     if (bunkerSubscription == null) return;
     final subId = bunkerSubscription!.requestId;
-    await Repository.ndk.requests.closeSubscription(subId);
-  }
-
-  Future<void> stopListeningNostrConnect() async {
-    if (nostrConnectSubscription == null) return;
-    final subId = nostrConnectSubscription!.requestId;
     await Repository.ndk.requests.closeSubscription(subId);
   }
 
@@ -156,9 +166,110 @@ class AddApplicationController extends GetxController {
     }
   }
 
-  void addBunkerApp() {
-    
+  void addBunkerApp() async {
+    final signer = getSigner(app!.signerPubkey)!;
+
+    final finalName = appNameFieldController.text.trim();
+
+    // Update app with final name
+    final finalApp = AuthorizedApp(
+      appPubkey: app!.appPubkey,
+      signerPubkey: app!.signerPubkey,
+      name: finalName,
+      relays: app!.relays,
+      permissions: app!.permissions,
+    );
+
+    // Save to database
+    final db = Repository.to.db;
+    final store = intMapStoreFactory.store('authorized_apps');
+
+    await store.add(db, finalApp.toJson());
+
+    // Restart listening for signing requests with the new app
+    await Repository.to.listenSigningRequests();
+
+    final encryptedContent = await encryptNip46(
+      signer,
+      jsonEncode({'id': bunkerRequest!.id, 'result': 'ack', 'error': null}),
+      bunkerRequest!.clientPubkey,
+      bunkerRequest!.useNip44,
+    );
+
+    if (encryptedContent == null) return;
+
+    final ackEvent = Nip01Event(
+      pubKey: signer.publicKey,
+      kind: 24133,
+      tags: [
+        ["p", finalApp.appPubkey],
+      ],
+      content: encryptedContent,
+    );
+
+    await signer.sign(ackEvent);
+
+    Repository.ndk.broadcast.broadcast(
+      nostrEvent: ackEvent,
+      specificRelays: finalApp.relays,
+    );
+
+    // Reload authorized apps list
+    await Repository.to.loadAuthorizedApps();
+
+    // Navigate back
+    Get.back();
   }
 
-  void addNostrConnectApp() {}
+  void addNostrConnectApp() async {
+    final finalName = appNameFieldController.text.trim();
+
+    final finalApp = AuthorizedApp(
+      appPubkey: app!.appPubkey,
+      signerPubkey: app!.signerPubkey,
+      name: finalName,
+      relays: app!.relays,
+      permissions: app!.permissions,
+    );
+
+    final db = Repository.to.db;
+    final store = intMapStoreFactory.store('authorized_apps');
+
+    await store.add(db, finalApp.toJson());
+
+    await Repository.to.loadAuthorizedApps();
+
+    // Restart listening for signing requests with the new app
+    await Repository.to.listenSigningRequests();
+
+    final signer = getSigner(app!.signerPubkey)!;
+    final nostrConnect = NostrConnect.fromUrl(
+      nostrConnectFieldController.text.trim(),
+    );
+    final connectRequestId = generateSecret();
+    final connectEvent = Nip01Event(
+      pubKey: signer.publicKey,
+      kind: 24133,
+      tags: [
+        ["p", app!.appPubkey],
+      ],
+      content: (await signer.encryptNip44(
+        plaintext: jsonEncode({
+          "id": connectRequestId,
+          "method": "connect",
+          "params": [signer.publicKey, nostrConnect.secret],
+        }),
+        recipientPubKey: app!.appPubkey,
+      ))!,
+    );
+
+    signer.sign(connectEvent);
+
+    Repository.ndk.broadcast.broadcast(
+      nostrEvent: connectEvent,
+      specificRelays: nostrConnect.relays,
+    );
+
+    Get.back();
+  }
 }
