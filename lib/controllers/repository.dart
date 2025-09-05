@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
@@ -74,6 +73,12 @@ class Repository extends GetxController {
     );
 
     await savePrivateKeys();
+  }
+
+  Future<void> removeAccount(String pubkey) async {
+    ndk.accounts.removeAccount(pubkey: pubkey);
+    await savePrivateKeys();
+    update();
   }
 
   Future<void> loadBunkerRelays() async {
@@ -316,26 +321,5 @@ class Repository extends GetxController {
 
     await signer.sign(responseEvent);
     ndk.broadcast.broadcast(nostrEvent: responseEvent);
-  }
-
-  String generateBunkerUrl() {
-    // Get the current user's public key
-    final account = ndk.accounts.getLoggedAccount();
-    if (account == null) return '';
-
-    // Generate a random secret token
-    final random = Random.secure();
-    final secretBytes = List<int>.generate(16, (i) => random.nextInt(256));
-    final secret = secretBytes
-        .map((b) => b.toRadixString(16).padLeft(2, '0'))
-        .join();
-
-    // Use bunker default relays
-    final relayParams = bunkerDefaultRelays
-        .map((url) => 'relay=$url')
-        .join('&');
-
-    // Construct the bunker URL
-    return 'bunker://${account.pubkey}?$relayParams&secret=$secret';
   }
 }

@@ -30,6 +30,7 @@ class DefaultBunkerRelaysView extends StatelessWidget {
               }).toList(),
             );
           }),
+          SizedBox(height: 8),
           TextField(
             controller: SettingsController.to.newRelayFieldController,
             decoration: InputDecoration(
@@ -37,6 +38,9 @@ class DefaultBunkerRelaysView extends StatelessWidget {
               suffixIcon: IconButton(
                 onPressed: SettingsController.to.addDefaultBunkerRelay,
                 icon: Icon(Icons.add),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
             ),
             onSubmitted: (_) => SettingsController.to.addDefaultBunkerRelay(),

@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
+import 'package:peridot/screens/settings/remove_account_dialog.dart';
 import 'package:sembast/sembast.dart';
 import 'package:toastification/toastification.dart';
 
@@ -46,17 +46,18 @@ class SettingsController extends GetxController {
     Get.toNamed(AppRoutes.backupAccount.replaceAll(':pubkey', pubkey));
   }
 
-  void removeAccount(String pubkey) {
-    // TODO: Implement remove account with confirmation dialog
-    toastification.show(
-      context: Get.context!,
-      title: const Text('Remove account'),
-      description: const Text('Feature coming soon'),
-      autoCloseDuration: const Duration(seconds: 5),
-      alignment: Alignment.bottomRight,
-      type: ToastificationType.warning,
-      showProgressBar: true,
+  void removeAccount(String pubkey) async {
+    final shouldRemove = await Get.dialog<bool>(
+      RemoveAccountDialog(pubkey: pubkey),
     );
+
+    if (shouldRemove != true) return;
+
+    await Repository.to.removeAccount(pubkey);
+
+    if (Repository.ndk.accounts.accounts.isEmpty) {
+      Get.offAllNamed(AppRoutes.addPrivkey);
+    }
   }
 
   Future<void> addDefaultBunkerRelay() async {
