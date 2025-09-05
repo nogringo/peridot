@@ -109,7 +109,11 @@ Future<Nip46Request?> parseNip46Request(Nip01Event event) async {
     // Parse the JSON request
     final request = jsonDecode(decryptedContent);
     final method = request['method'] as String?;
-    final params = request['params'];
+    final params =
+        (request['params'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList() ??
+        [];
     final id = request['id'] as String?;
 
     if (method == null || id == null) return null;

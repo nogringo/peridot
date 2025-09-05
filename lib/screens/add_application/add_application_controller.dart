@@ -1,27 +1,44 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:peridot/controllers/repository.dart';
-import 'package:peridot/models/authorized_app.dart';
+import 'package:peridot/models/nostr_app.dart';
 import 'package:peridot/models/bunker.dart';
 import 'package:peridot/utils/nip46_parser.dart';
+import 'package:toastification/toastification.dart';
 
 class AddApplicationController extends GetxController {
   static AddApplicationController get to => Get.find();
 
   final nostrConnectFieldController = TextEditingController();
-  RxInt currentStep = 0.obs;
+  final appNameFieldController = TextEditingController();
   late RxString selectedPubkey;
   Bunker? bunkerUrl;
   String? currentSecret;
   NdkResponse? bunkerSubscription;
   NdkResponse? nostrConnectSubscription;
-  AuthorizedApp? app;
+  NostrApp? app;
+
+  bool get hasNostrConnectURL {
+    try {
+      NostrApp.fromNostrConnectUrl(nostrConnectFieldController.text.trim());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   bool get canContinue {
-    if (currentStep.value == 0) return true;
+    if (currentStep == 0) return true;
 
     return false;
+  }
+
+  int get currentStep {
+    if (bunkerUrl == null) return 0;
+    if (app == null) return 1;
+    return 2;
   }
 
   bool get isConnected => app != null;
@@ -37,6 +54,7 @@ class AddApplicationController extends GetxController {
       filters: [
         Filter(kinds: [24133], pTags: [bunkerUrl!.pubkey], limit: 0),
       ],
+      explicitRelays: bunkerUrl!.relays,
     );
 
     bunkerSubscription!.stream.listen(onBunkerEvent);
@@ -57,7 +75,7 @@ class AddApplicationController extends GetxController {
         ? (request.params[2]).split(',').map((p) => p.trim()).toList()
         : <String>[];
 
-    app = AuthorizedApp(
+    app = NostrApp(
       pubkey: request.clientPubkey,
       relays: bunkerUrl!.relays,
       permissions: requestedPermissions,
@@ -77,15 +95,40 @@ class AddApplicationController extends GetxController {
     await Repository.ndk.requests.closeSubscription(subId);
   }
 
-  void onStepContinue() {
-    if (currentStep.value == 0) {
-      bunkerUrl = Bunker(
-        pubkey: selectedPubkey.value,
-        relays: Repository.to.bunkerDefaultRelays,
-      );
-      update();
-    }
+  void copyBunkerUrl() {
+    if (bunkerUrl == null || bunkerUrl!.url.isEmpty) return;
 
-    currentStep.value++;
+    Clipboard.setData(ClipboardData(text: bunkerUrl!.url));
+
+    toastification.show(
+      context: Get.context!,
+      title: const Text('Copied to clipboard'),
+      description: const Text('Bunker URL copied successfully'),
+      autoCloseDuration: const Duration(seconds: 5),
+      alignment: Alignment.bottomRight,
+      type: ToastificationType.success,
+      showProgressBar: true,
+    );
+  }
+
+  void chooseAccountStepDone() {
+    bunkerUrl = Bunker(
+      pubkey: selectedPubkey.value,
+      relays: Repository.to.bunkerDefaultRelays,
+    );
+    listenBunker();
+    update();
+  }
+
+  void connectWithNostrConnect() {
+    app = NostrApp.fromNostrConnectUrl(nostrConnectFieldController.text.trim());
+    if (app!.name != null) {
+      appNameFieldController.text = app!.name!;
+    }
+    update();
+  }
+
+  void onNostrConnectFieldChanged(String value) {
+    update();
   }
 }
