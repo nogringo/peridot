@@ -44,7 +44,10 @@ class AddApplicationController extends GetxController {
   }
 
   int get currentStep {
-    if (bunkerUrl == null) return 0;
+    if (bunkerUrl == null) {
+      if (Repository.ndk.accounts.accounts.length == 1) return 1;
+      return 0;
+    }
     if (app == null) return 1;
     return 2;
   }
@@ -55,6 +58,9 @@ class AddApplicationController extends GetxController {
 
   AddApplicationController() {
     selectedPubkey = Repository.ndk.accounts.accounts.keys.first.obs;
+    if (Repository.ndk.accounts.accounts.length == 1) {
+      chooseAccountStepDone();
+    }
   }
 
   @override
@@ -191,7 +197,7 @@ class AddApplicationController extends GetxController {
 
     final encryptedContent = await encryptNip46(
       signer,
-      jsonEncode({'id': bunkerRequest!.id, 'result': 'ack', 'error': null}),
+      jsonEncode({'id': bunkerRequest!.id, 'result': 'ack'}),
       bunkerRequest!.clientPubkey,
       bunkerRequest!.useNip44,
     );

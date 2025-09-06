@@ -5,8 +5,10 @@ import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/models/authorized_app.dart';
+import 'package:peridot/models/nip46_request.dart';
 import 'package:peridot/utils/get_database.dart';
-import 'package:sembast/sembast.dart' hide Filter;
+import 'package:peridot/utils/nip46_parser.dart';
+import 'package:sembast/sembast.dart' as sembast;
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
@@ -15,7 +17,7 @@ class Repository extends GetxController {
   bool isAppLoaded = false;
   NdkResponse? signingRequestsSubscription;
 
-  late Database db;
+  late sembast.Database db;
 
   RxList<String> bunkerDefaultRelays = <String>[].obs;
   RxList<AuthorizedApp> authorizedApps = <AuthorizedApp>[].obs;
@@ -79,13 +81,33 @@ class Repository extends GetxController {
   }
 
   Future<void> removeAccount(String pubkey) async {
+    // Remove the account from NDK
     ndk.accounts.removeAccount(pubkey: pubkey);
+
+    // Remove all apps associated with this account
+    final store = sembast.intMapStoreFactory.store('authorized_apps');
+    final records = await store.find(
+      db,
+      finder: sembast.Finder(
+        filter: sembast.Filter.equals('signerPubkey', pubkey),
+      ),
+    );
+
+    // Delete all matching records
+    for (final record in records) {
+      await store.record(record.key).delete(db);
+    }
+
+    // Reload authorized apps to update the UI
+    await loadAuthorizedApps();
+
+    // Save and update
     await savePrivateKeys();
     update();
   }
 
   Future<void> loadBunkerRelays() async {
-    final store = stringMapStoreFactory.store('default_bunker_relays');
+    final store = sembast.stringMapStoreFactory.store('default_bunker_relays');
     final records = await store.find(db);
 
     if (records.isNotEmpty) {
@@ -96,7 +118,7 @@ class Repository extends GetxController {
   }
 
   Future<void> loadAuthorizedApps() async {
-    final store = intMapStoreFactory.store('authorized_apps');
+    final store = sembast.intMapStoreFactory.store('authorized_apps');
     final records = await store.find(db);
 
     authorizedApps.value = records.map((record) {
@@ -105,7 +127,7 @@ class Repository extends GetxController {
   }
 
   Future<void> removeDefaultBunkerRelay(String relay) async {
-    final store = stringMapStoreFactory.store('default_bunker_relays');
+    final store = sembast.stringMapStoreFactory.store('default_bunker_relays');
     await store.record(relay).delete(db);
     bunkerDefaultRelays.remove(relay);
   }
@@ -113,23 +135,23 @@ class Repository extends GetxController {
   Future<void> listenSigningRequests() async {
     stopSigningRequestsSubscription();
 
-    // Get authorized keys from database
-    final store = intMapStoreFactory.store('authorized_apps');
-    final records = await store.find(db);
-    final authorizedKeys = records
-        .map((record) => record.value['pubkey'] as String?)
-        .where((key) => key != null)
-        .cast<String>()
-        .toList();
+    // Get all unique relays from authorized apps
+    final Set<String> allRelays = {};
+    for (final app in authorizedApps) {
+      allRelays.addAll(app.relays);
+    }
+    
+    // Add default bunker relays as fallback
+    allRelays.addAll(bunkerDefaultRelays);
 
     signingRequestsSubscription = ndk.requests.subscription(
       filters: [
         Filter(
           kinds: [24133],
-          authors: authorizedKeys,
           pTags: ndk.accounts.accounts.keys.toList(),
         ),
       ],
+      explicitRelays: allRelays.toList(),
     );
 
     signingRequestsSubscription!.stream.listen(processSigningRequest);
@@ -144,122 +166,128 @@ class Repository extends GetxController {
   }
 
   void processSigningRequest(Nip01Event event) async {
-    final targetPubkey = event.getFirstTag("p");
-    final account = ndk.accounts.accounts[targetPubkey];
+    // Use the NIP-46 parser to parse the request
+    final nip46Request = await parseNip46Request(event);
+    print(nip46Request);
+    if (nip46Request == null) return;
+
+    final account = ndk.accounts.accounts[nip46Request.remotePubkey];
     if (account == null) return;
     final signer = account.signer as Bip340EventSigner;
 
     try {
-      // Try to decrypt with NIP-44 first, fallback to NIP-04
-      String? decryptedContent;
-      bool useNip44 = true; // Track which NIP was used for decryption
-      try {
-        decryptedContent = await signer.decryptNip44(
-          ciphertext: event.content,
-          senderPubKey: event.pubKey,
-        );
-      } catch (_) {
-        // NIP-44 failed, try NIP-04
-        try {
-          decryptedContent = await signer.decrypt(event.content, event.pubKey);
-          useNip44 = false; // Successfully decrypted with NIP-04
-        } catch (e) {
-          return;
-        }
-      }
-
-      if (decryptedContent == null) return;
-
-      // Parse the JSON request
-      final request = jsonDecode(decryptedContent);
-      final method = request['method'] as String?;
-      final params = request['params'];
-      final id = request['id'] as String?;
-
-      if (method == null || id == null) return;
-
       // Handle different NIP-46 methods
-      switch (method) {
-        case 'sign_event':
+      switch (nip46Request.command) {
+        case Nip46Commands.signEvent:
           // Store request in database for user approval
-          final store = intMapStoreFactory.store('pending_requests');
+          final store = sembast.intMapStoreFactory.store('pending_requests');
           await store.add(db, {
-            'id': id,
-            'method': method,
-            'params': params,
-            'from_pubkey': event.pubKey,
-            'target_pubkey': targetPubkey,
+            'id': nip46Request.id,
+            'method': nip46CommandToString(nip46Request.command),
+            'params': nip46Request.params,
+            'from_pubkey': nip46Request.clientPubkey,
+            'target_pubkey': nip46Request.remotePubkey,
             'timestamp': DateTime.now().millisecondsSinceEpoch,
           });
           // TODO: Show notification to user
           break;
 
-        case 'get_public_key':
+        case Nip46Commands.getPublicKey:
           await _sendResponse(
-            event.pubKey,
-            id,
+            nip46Request.clientPubkey,
+            nip46Request.id,
             signer.publicKey,
             signer,
-            useNip44,
+            nip46Request.useNip44,
           );
           break;
 
-        case 'connect':
-          await _sendResponse(event.pubKey, id, 'ack', signer, useNip44);
+        case Nip46Commands.connect:
+          // await _sendResponse(
+          //   nip46Request.clientPubkey,
+          //   nip46Request.id,
+          //   'ack',
+          //   signer,
+          //   nip46Request.useNip44,
+          // );
           break;
 
-        case 'nip04_encrypt':
-          if (params is List && params.length >= 2) {
-            final thirdPartyPubkey = params[0] as String;
-            final plaintext = params[1] as String;
+        case Nip46Commands.nip04Encrypt:
+          if (nip46Request.params.length >= 2) {
+            final thirdPartyPubkey = nip46Request.params[0];
+            final plaintext = nip46Request.params[1];
             final encrypted = await signer.encrypt(plaintext, thirdPartyPubkey);
-            await _sendResponse(event.pubKey, id, encrypted, signer, useNip44);
+            await _sendResponse(
+              nip46Request.clientPubkey,
+              nip46Request.id,
+              encrypted,
+              signer,
+              nip46Request.useNip44,
+            );
           }
           break;
 
-        case 'nip04_decrypt':
-          if (params is List && params.length >= 2) {
-            final thirdPartyPubkey = params[0] as String;
-            final ciphertext = params[1] as String;
+        case Nip46Commands.nip04Decrypt:
+          if (nip46Request.params.length >= 2) {
+            final thirdPartyPubkey = nip46Request.params[0];
+            final ciphertext = nip46Request.params[1];
             final decrypted = await signer.decrypt(
               ciphertext,
               thirdPartyPubkey,
             );
-            await _sendResponse(event.pubKey, id, decrypted, signer, useNip44);
+            await _sendResponse(
+              nip46Request.clientPubkey,
+              nip46Request.id,
+              decrypted,
+              signer,
+              nip46Request.useNip44,
+            );
           }
           break;
 
-        case 'nip44_encrypt':
-          if (params is List && params.length >= 2) {
-            final thirdPartyPubkey = params[0] as String;
-            final plaintext = params[1] as String;
+        case Nip46Commands.nip44Encrypt:
+          if (nip46Request.params.length >= 2) {
+            final thirdPartyPubkey = nip46Request.params[0];
+            final plaintext = nip46Request.params[1];
             final encrypted = await signer.encryptNip44(
               plaintext: plaintext,
               recipientPubKey: thirdPartyPubkey,
             );
-            await _sendResponse(event.pubKey, id, encrypted, signer, useNip44);
+            await _sendResponse(
+              nip46Request.clientPubkey,
+              nip46Request.id,
+              encrypted,
+              signer,
+              nip46Request.useNip44,
+            );
           }
           break;
 
-        case 'nip44_decrypt':
-          if (params is List && params.length >= 2) {
-            final thirdPartyPubkey = params[0] as String;
-            final ciphertext = params[1] as String;
+        case Nip46Commands.nip44Decrypt:
+          if (nip46Request.params.length >= 2) {
+            final thirdPartyPubkey = nip46Request.params[0];
+            final ciphertext = nip46Request.params[1];
             final decrypted = await signer.decryptNip44(
               ciphertext: ciphertext,
               senderPubKey: thirdPartyPubkey,
             );
-            await _sendResponse(event.pubKey, id, decrypted, signer, useNip44);
+            await _sendResponse(
+              nip46Request.clientPubkey,
+              nip46Request.id,
+              decrypted,
+              signer,
+              nip46Request.useNip44,
+            );
           }
           break;
 
-        default:
-          await _sendErrorResponse(
-            event.pubKey,
-            id,
-            'Method not supported',
+        case Nip46Commands.ping:
+          await _sendResponse(
+            nip46Request.clientPubkey,
+            nip46Request.id,
+            'pong',
             signer,
-            useNip44,
+            nip46Request.useNip44,
           );
       }
     } catch (e) {
@@ -275,40 +303,6 @@ class Repository extends GetxController {
     bool useNip44,
   ) async {
     final response = jsonEncode({'id': id, 'result': result, 'error': null});
-
-    // Use the same NIP that was used for decryption
-    final String? encryptedContent;
-    if (useNip44) {
-      encryptedContent = await signer.encryptNip44(
-        plaintext: response,
-        recipientPubKey: toPubkey,
-      );
-    } else {
-      encryptedContent = await signer.encrypt(response, toPubkey);
-    }
-
-    final responseEvent = Nip01Event(
-      pubKey: signer.publicKey,
-      kind: 24133,
-      content: encryptedContent ?? '',
-      tags: [
-        ['p', toPubkey],
-      ],
-      createdAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-    );
-
-    await signer.sign(responseEvent);
-    ndk.broadcast.broadcast(nostrEvent: responseEvent);
-  }
-
-  Future<void> _sendErrorResponse(
-    String toPubkey,
-    String id,
-    String error,
-    Bip340EventSigner signer,
-    bool useNip44,
-  ) async {
-    final response = jsonEncode({'id': id, 'result': null, 'error': error});
 
     // Use the same NIP that was used for decryption
     final String? encryptedContent;

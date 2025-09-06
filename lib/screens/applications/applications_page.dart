@@ -59,7 +59,11 @@ class ApplicationsPage extends StatelessWidget {
         }
 
         return ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.only(
+            left: 12,
+            right: 12,
+            bottom: kToolbarHeight + 12,
+          ),
           itemCount: apps.length,
           itemBuilder: (context, index) {
             final app = apps[index];
