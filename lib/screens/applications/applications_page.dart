@@ -81,6 +81,10 @@ class ApplicationsPage extends StatelessWidget {
                 subtitle: Text(
                   '${app.permissions.length} permission${app.permissions.length > 1 ? 's' : ''}',
                 ),
+                onTap: () => Get.toNamed(
+                  AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
+                  arguments: app,
+                ),
               ),
             );
           },

@@ -8,6 +8,7 @@ import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/bunker.dart';
 import 'package:peridot/models/nip46_request.dart';
 import 'package:peridot/models/nostr_connect.dart';
+import 'package:peridot/models/permission.dart';
 import 'package:peridot/utils/generate_secret.dart';
 import 'package:peridot/utils/get_signer.dart';
 import 'package:peridot/utils/nip46_encryption.dart';
@@ -106,7 +107,9 @@ class AddApplicationController extends GetxController {
       appPubkey: request.clientPubkey,
       signerPubkey: selectedPubkey.value,
       relays: bunkerUrl!.relays,
-      permissions: requestedPermissions,
+      permissions: requestedPermissions
+          .map((p) => Permission(name: p, isAllowed: !p.startsWith('-')))
+          .toList(),
       name: '',
     );
     update();

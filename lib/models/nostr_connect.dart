@@ -1,4 +1,5 @@
 import 'package:peridot/models/authorized_app.dart';
+import 'package:peridot/models/permission.dart';
 
 class NostrConnect {
   final String clientPubkey;
@@ -78,7 +79,9 @@ class NostrConnect {
       signerPubkey: signerPubkey,
       name: name,
       relays: relays,
-      permissions: permissions,
+      permissions: permissions
+          .map((p) => Permission(name: p, isAllowed: !p.startsWith('-')))
+          .toList(),
     );
   }
 }

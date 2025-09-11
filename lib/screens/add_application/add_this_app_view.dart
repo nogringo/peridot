@@ -24,7 +24,7 @@ class AddThisAppView extends StatelessWidget {
           ...app.permissions.map(
             (permission) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Text(permission),
+              child: Text(permission.name),
             ),
           )
         else
