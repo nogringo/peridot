@@ -23,10 +23,6 @@ class UnknownPermissionDialog extends StatelessWidget {
           SizedBox(height: 12),
           Container(
             padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(4),
-            ),
             child: Text(permission, style: TextStyle(fontFamily: 'monospace')),
           ),
           SizedBox(height: 16),

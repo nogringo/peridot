@@ -5,7 +5,10 @@ import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/models/authorized_app.dart';
+import 'package:peridot/models/nip46_request.dart';
 import 'package:peridot/utils/get_database.dart';
+import 'package:peridot/utils/get_signer.dart';
+import 'package:peridot/utils/nip46_encryption.dart';
 import 'package:peridot/utils/nip46_parser.dart';
 import 'package:peridot/widgets/unknown_permission_dialog.dart';
 import 'package:sembast/sembast.dart' as sembast;
@@ -217,7 +220,166 @@ class Repository extends GetxController {
         }
         // Update the app in storage
         await updateAuthorizedApp(authorizedApp);
+      } else {
+        // User cancelled the dialog, don't respond to the request
+        return;
       }
+    }
+
+    // Get the signer for this app
+    final signer = getSigner(authorizedApp.signerPubkey);
+    if (signer == null) return;
+
+    // Handle based on permission status
+    if (permissionStatus == PermissionStatus.blocked) {
+      // Send error response for blocked permission
+      await _sendNip46Response(
+        signer: signer,
+        app: authorizedApp,
+        requestId: nip46Request.id,
+        error: 'Permission denied for $commandString',
+      );
+      return;
+    }
+
+    // Permission is authorized, execute the command
+    await _executeNip46Command(
+      signer: signer,
+      app: authorizedApp,
+      request: nip46Request,
+    );
+  }
+
+  Future<void> _sendNip46Response({
+    required Bip340EventSigner signer,
+    required AuthorizedApp app,
+    required String requestId,
+    String? result,
+    String? error,
+  }) async {
+    final response = {
+      'id': requestId,
+      if (result != null) 'result': result,
+      if (error != null) 'error': error,
+    };
+
+    final encryptedContent = await encryptNip46(
+      signer,
+      jsonEncode(response),
+      app.appPubkey,
+      true, // Use NIP-44
+    );
+
+    if (encryptedContent == null) return;
+
+    final responseEvent = Nip01Event(
+      pubKey: signer.publicKey,
+      kind: 24133,
+      tags: [
+        ["p", app.appPubkey],
+      ],
+      content: encryptedContent,
+    );
+
+    await signer.sign(responseEvent);
+
+    ndk.broadcast.broadcast(
+      nostrEvent: responseEvent,
+      specificRelays: app.relays,
+    );
+  }
+
+  Future<void> _executeNip46Command({
+    required Bip340EventSigner signer,
+    required AuthorizedApp app,
+    required Nip46Request request,
+  }) async {
+    try {
+      String? result;
+
+      switch (request.command) {
+        case Nip46Commands.connect:
+          // Connect is handled during app authorization, just send ack
+          result = 'ack';
+          break;
+
+        case Nip46Commands.getPublicKey:
+          result = signer.publicKey;
+          break;
+
+        case Nip46Commands.signEvent:
+          if (request.params.isNotEmpty) {
+            final eventData = jsonDecode(request.params[0]);
+            final event = Nip01Event(
+              pubKey: signer.publicKey,
+              kind: eventData['kind'] ?? 1,
+              tags: List<List<String>>.from(
+                (eventData['tags'] ?? []).map((tag) => List<String>.from(tag)),
+              ),
+              content: eventData['content'] ?? '',
+              createdAt: eventData['created_at'],
+            );
+            await signer.sign(event);
+            result = jsonEncode(event.toJson());
+          }
+          break;
+
+        case Nip46Commands.ping:
+          result = 'pong';
+          break;
+
+        case Nip46Commands.nip04Encrypt:
+          if (request.params.length >= 2) {
+            final pubkey = request.params[0];
+            final plaintext = request.params[1];
+            result = await signer.encrypt(plaintext, pubkey);
+          }
+          break;
+
+        case Nip46Commands.nip04Decrypt:
+          if (request.params.length >= 2) {
+            final pubkey = request.params[0];
+            final ciphertext = request.params[1];
+            result = await signer.decrypt(ciphertext, pubkey);
+          }
+          break;
+
+        case Nip46Commands.nip44Encrypt:
+          if (request.params.length >= 2) {
+            final pubkey = request.params[0];
+            final plaintext = request.params[1];
+            result = await signer.encryptNip44(
+              plaintext: plaintext,
+              recipientPubKey: pubkey,
+            );
+          }
+          break;
+
+        case Nip46Commands.nip44Decrypt:
+          if (request.params.length >= 2) {
+            final pubkey = request.params[0];
+            final ciphertext = request.params[1];
+            result = await signer.decryptNip44(
+              ciphertext: ciphertext,
+              senderPubKey: pubkey,
+            );
+          }
+          break;
+      }
+
+      await _sendNip46Response(
+        signer: signer,
+        app: app,
+        requestId: request.id,
+        result: result,
+      );
+    } catch (e) {
+      await _sendNip46Response(
+        signer: signer,
+        app: app,
+        requestId: request.id,
+        error: 'Error executing command: $e',
+      );
     }
   }
 }
