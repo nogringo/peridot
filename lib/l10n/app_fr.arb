@@ -1,0 +1,61 @@
+{
+  "@@locale": "fr",
+  
+  "applications": "Applications",
+  "settings": "Paramètres",
+  "noApplicationsConnected": "Aucune application connectée",
+  "tapPlusToAddApplication": "Appuyez sur + pour ajouter une application",
+  
+  "manageApplication": "Gérer l'Application",
+  "connectedAccount": "Compte connecté",
+  "permissions": "Permissions",
+  "noPermissionsSet": "Aucune permission définie",
+  "removeApp": "Supprimer {appName}",
+  
+  "deleteApplication": "Supprimer l'Application",
+  "deleteApplicationConfirm": "Êtes-vous sûr de vouloir supprimer '{appName}' ? Cette action ne peut pas être annulée.",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  
+  "addApplication": "Ajouter une Application",
+  "chooseAccount": "Choisir un compte",
+  "nostrConnect": "Nostr Connect",
+  "appName": "Nom de l'application",
+  "enterAppName": "Entrez le nom de l'application",
+  "addThisApp": "Ajouter cette application",
+  "requestedPermissions": "Permissions demandées",
+  "noSpecificPermissionsRequested": "Aucune permission spécifique demandée",
+  
+  "unknownPermission": "Permission Inconnue",
+  "unknownPermissionMessage": "L'application '{appName}' demande la permission pour '{permission}'. Voulez-vous l'autoriser ?",
+  "allow": "Autoriser",
+  "deny": "Refuser",
+  
+  "copiedToClipboard": "Copié dans le presse-papiers",
+  "applicationDeleted": "Application supprimée",
+  "permissionUpdated": "Permission mise à jour",
+  "permissionRemoved": "Permission supprimée",
+  "permissionAdded": "Permission ajoutée",
+  
+  "permissionCount": "{count, plural, =0{aucune permission} =1{1 permission} other{{count} permissions}}",
+  
+  "loggedAccounts": "Comptes connectés",
+  "defaultBunkerRelays": "Relais Bunker par défaut",
+  "addRelay": "Ajouter un relais",
+  "enterRelayUrl": "Entrez l'URL du relais",
+  
+  "addPrivateKey": "Ajouter une Clé Privée",
+  "enterPrivateKey": "Entrez votre clé privée (nsec ou hex)",
+  "invalidPrivateKey": "Clé privée invalide",
+  "accountAddedSuccessfully": "Compte ajouté avec succès",
+  
+  "backupAccount": "Sauvegarder le Compte",
+  "showPrivateKey": "Afficher la Clé Privée",
+  "hidePrivateKey": "Masquer la Clé Privée",
+  "copyPrivateKey": "Copier la Clé Privée",
+  "privateKeyCopied": "Clé privée copiée dans le presse-papiers",
+  
+  "appNotFound": "Application non trouvée",
+  "allowed": "Autorisé",
+  "blocked": "Bloqué"
+}

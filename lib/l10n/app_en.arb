@@ -1,0 +1,92 @@
+{
+  "@@locale": "en",
+  
+  "applications": "Applications",
+  "settings": "Settings",
+  "noApplicationsConnected": "No applications connected",
+  "tapPlusToAddApplication": "Tap + to add an application",
+  
+  "manageApplication": "Manage Application",
+  "connectedAccount": "Connected account",
+  "permissions": "Permissions",
+  "noPermissionsSet": "No permissions set",
+  "removeApp": "Remove {appName}",
+  "@removeApp": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "deleteApplication": "Delete Application",
+  "deleteApplicationConfirm": "Are you sure you want to delete '{appName}'? This action cannot be undone.",
+  "@deleteApplicationConfirm": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "delete": "Delete",
+  
+  "addApplication": "Add Application",
+  "chooseAccount": "Choose account",
+  "nostrConnect": "Nostr Connect",
+  "appName": "App name",
+  "enterAppName": "Enter app name",
+  "addThisApp": "Add this app",
+  "requestedPermissions": "Requested permissions",
+  "noSpecificPermissionsRequested": "No specific permissions requested",
+  
+  "unknownPermission": "Unknown Permission",
+  "unknownPermissionMessage": "The app '{appName}' is requesting permission for '{permission}'. Do you want to allow this?",
+  "@unknownPermissionMessage": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      },
+      "permission": {
+        "type": "String"
+      }
+    }
+  },
+  "allow": "Allow",
+  "deny": "Deny",
+  
+  "copiedToClipboard": "Copied to clipboard",
+  "applicationDeleted": "Application deleted",
+  "permissionUpdated": "Permission updated",
+  "permissionRemoved": "Permission removed",
+  "permissionAdded": "Permission added",
+  
+  "permissionCount": "{count, plural, =0{no permissions} =1{1 permission} other{{count} permissions}}",
+  "@permissionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  
+  "loggedAccounts": "Logged accounts",
+  "defaultBunkerRelays": "Default bunker relays",
+  "addRelay": "Add relay",
+  "enterRelayUrl": "Enter relay URL",
+  
+  "addPrivateKey": "Add Private Key",
+  "enterPrivateKey": "Enter your private key (nsec or hex)",
+  "invalidPrivateKey": "Invalid private key",
+  "accountAddedSuccessfully": "Account added successfully",
+  
+  "backupAccount": "Backup Account",
+  "showPrivateKey": "Show Private Key",
+  "hidePrivateKey": "Hide Private Key",
+  "copyPrivateKey": "Copy Private Key",
+  "privateKeyCopied": "Private key copied to clipboard",
+  
+  "appNotFound": "App not found",
+  "allowed": "Allowed",
+  "blocked": "Blocked"
+}

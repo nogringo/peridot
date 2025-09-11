@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 
 class ApplicationsPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class ApplicationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Applications"),
+        title: Text(AppLocalizations.of(context)!.applications),
         actions: [
           IconButton(
             onPressed: () => Get.toNamed(AppRoutes.settings),
@@ -37,7 +38,7 @@ class ApplicationsPage extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  "No applications connected",
+                  AppLocalizations.of(context)!.noApplicationsConnected,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Theme.of(
                       context,
@@ -46,7 +47,7 @@ class ApplicationsPage extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "Tap + to add an application",
+                  AppLocalizations.of(context)!.tapPlusToAddApplication,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(
                       context,
@@ -70,7 +71,7 @@ class ApplicationsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                '${app.permissions.length} permission${app.permissions.length > 1 ? 's' : ''}',
+                AppLocalizations.of(context)!.permissionCount(app.permissions.length),
               ),
               onTap: () => Get.toNamed(
                 AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),

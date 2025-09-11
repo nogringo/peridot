@@ -1,0 +1,168 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Russian (`ru`).
+class AppLocalizationsRu extends AppLocalizations {
+  AppLocalizationsRu([String locale = 'ru']) : super(locale);
+
+  @override
+  String get applications => 'Приложения';
+
+  @override
+  String get settings => 'Настройки';
+
+  @override
+  String get noApplicationsConnected => 'Нет подключенных приложений';
+
+  @override
+  String get tapPlusToAddApplication => 'Нажмите + чтобы добавить приложение';
+
+  @override
+  String get manageApplication => 'Управление приложением';
+
+  @override
+  String get connectedAccount => 'Подключенная учетная запись';
+
+  @override
+  String get permissions => 'Разрешения';
+
+  @override
+  String get noPermissionsSet => 'Разрешения не установлены';
+
+  @override
+  String removeApp(String appName) {
+    return 'Удалить $appName';
+  }
+
+  @override
+  String get deleteApplication => 'Удалить приложение';
+
+  @override
+  String deleteApplicationConfirm(String appName) {
+    return 'Вы уверены, что хотите удалить \'$appName\'? Это действие нельзя отменить.';
+  }
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get delete => 'Удалить';
+
+  @override
+  String get addApplication => 'Добавить приложение';
+
+  @override
+  String get chooseAccount => 'Выбрать учетную запись';
+
+  @override
+  String get nostrConnect => 'Nostr Connect';
+
+  @override
+  String get appName => 'Название приложения';
+
+  @override
+  String get enterAppName => 'Введите название приложения';
+
+  @override
+  String get addThisApp => 'Добавить это приложение';
+
+  @override
+  String get requestedPermissions => 'Запрошенные разрешения';
+
+  @override
+  String get noSpecificPermissionsRequested =>
+      'Конкретные разрешения не запрошены';
+
+  @override
+  String get unknownPermission => 'Неизвестное разрешение';
+
+  @override
+  String unknownPermissionMessage(String appName, String permission) {
+    return 'Приложение \'$appName\' запрашивает разрешение для \'$permission\'. Хотите разрешить?';
+  }
+
+  @override
+  String get allow => 'Разрешить';
+
+  @override
+  String get deny => 'Отказать';
+
+  @override
+  String get copiedToClipboard => 'Скопировано в буфер обмена';
+
+  @override
+  String get applicationDeleted => 'Приложение удалено';
+
+  @override
+  String get permissionUpdated => 'Разрешение обновлено';
+
+  @override
+  String get permissionRemoved => 'Разрешение удалено';
+
+  @override
+  String get permissionAdded => 'Разрешение добавлено';
+
+  @override
+  String permissionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count разрешений',
+      few: '$count разрешения',
+      one: '1 разрешение',
+      zero: 'нет разрешений',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get loggedAccounts => 'Учетные записи';
+
+  @override
+  String get defaultBunkerRelays => 'Реле Bunker по умолчанию';
+
+  @override
+  String get addRelay => 'Добавить реле';
+
+  @override
+  String get enterRelayUrl => 'Введите URL реле';
+
+  @override
+  String get addPrivateKey => 'Добавить приватный ключ';
+
+  @override
+  String get enterPrivateKey => 'Введите ваш приватный ключ (nsec или hex)';
+
+  @override
+  String get invalidPrivateKey => 'Недействительный приватный ключ';
+
+  @override
+  String get accountAddedSuccessfully => 'Учетная запись успешно добавлена';
+
+  @override
+  String get backupAccount => 'Резервная копия учетной записи';
+
+  @override
+  String get showPrivateKey => 'Показать приватный ключ';
+
+  @override
+  String get hidePrivateKey => 'Скрыть приватный ключ';
+
+  @override
+  String get copyPrivateKey => 'Копировать приватный ключ';
+
+  @override
+  String get privateKeyCopied => 'Приватный ключ скопирован в буфер обмена';
+
+  @override
+  String get appNotFound => 'Приложение не найдено';
+
+  @override
+  String get allowed => 'Разрешено';
+
+  @override
+  String get blocked => 'Заблокировано';
+}

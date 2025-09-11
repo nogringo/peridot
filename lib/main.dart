@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
 import 'package:toastification/toastification.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +30,14 @@ class MainApp extends StatelessWidget {
     return ToastificationWrapper(
       child: GetMaterialApp(
         title: appTitle,
-        localizationsDelegates: [nostr_widgets.AppLocalizations.delegate],
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          nostr_widgets.AppLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData.from(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         ),

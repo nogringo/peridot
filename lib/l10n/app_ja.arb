@@ -1,0 +1,61 @@
+{
+  "@@locale": "ja",
+  
+  "applications": "アプリケーション",
+  "settings": "設定",
+  "noApplicationsConnected": "接続されているアプリケーションはありません",
+  "tapPlusToAddApplication": "+ をタップしてアプリケーションを追加",
+  
+  "manageApplication": "アプリケーション管理",
+  "connectedAccount": "接続済みアカウント",
+  "permissions": "権限",
+  "noPermissionsSet": "権限が設定されていません",
+  "removeApp": "{appName} を削除",
+  
+  "deleteApplication": "アプリケーションを削除",
+  "deleteApplicationConfirm": "'{appName}' を削除してもよろしいですか？この操作は取り消せません。",
+  "cancel": "キャンセル",
+  "delete": "削除",
+  
+  "addApplication": "アプリケーションを追加",
+  "chooseAccount": "アカウントを選択",
+  "nostrConnect": "Nostr コネクト",
+  "appName": "アプリケーション名",
+  "enterAppName": "アプリケーション名を入力",
+  "addThisApp": "このアプリを追加",
+  "requestedPermissions": "要求された権限",
+  "noSpecificPermissionsRequested": "特定の権限は要求されていません",
+  
+  "unknownPermission": "不明な権限",
+  "unknownPermissionMessage": "アプリケーション '{appName}' が '{permission}' の権限を要求しています。許可しますか？",
+  "allow": "許可",
+  "deny": "拒否",
+  
+  "copiedToClipboard": "クリップボードにコピーしました",
+  "applicationDeleted": "アプリケーションを削除しました",
+  "permissionUpdated": "権限を更新しました",
+  "permissionRemoved": "権限を削除しました",
+  "permissionAdded": "権限を追加しました",
+  
+  "permissionCount": "{count, plural, =0{権限なし} =1{1個の権限} other{{count}個の権限}}",
+  
+  "loggedAccounts": "ログイン済みアカウント",
+  "defaultBunkerRelays": "デフォルト Bunker リレー",
+  "addRelay": "リレーを追加",
+  "enterRelayUrl": "リレー URL を入力",
+  
+  "addPrivateKey": "秘密鍵を追加",
+  "enterPrivateKey": "秘密鍵を入力（nsec または hex）",
+  "invalidPrivateKey": "無効な秘密鍵",
+  "accountAddedSuccessfully": "アカウントを正常に追加しました",
+  
+  "backupAccount": "アカウントをバックアップ",
+  "showPrivateKey": "秘密鍵を表示",
+  "hidePrivateKey": "秘密鍵を非表示",
+  "copyPrivateKey": "秘密鍵をコピー",
+  "privateKeyCopied": "秘密鍵をクリップボードにコピーしました",
+  
+  "appNotFound": "アプリケーションが見つかりません",
+  "allowed": "許可済み",
+  "blocked": "ブロック済み"
+}

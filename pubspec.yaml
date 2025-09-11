@@ -9,8 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_secure_storage: ^9.2.4
   get: ^4.7.2
+  intl: any
   ndk: ^0.5.1
   nip01: ^0.3.0+1
   nip19: ^0.2.0
@@ -28,4 +31,5 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
+  generate: true
   uses-material-design: true

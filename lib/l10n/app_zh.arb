@@ -1,0 +1,61 @@
+{
+  "@@locale": "zh",
+  
+  "applications": "应用程序",
+  "settings": "设置",
+  "noApplicationsConnected": "没有连接的应用程序",
+  "tapPlusToAddApplication": "点击 + 添加应用程序",
+  
+  "manageApplication": "管理应用程序",
+  "connectedAccount": "已连接账户",
+  "permissions": "权限",
+  "noPermissionsSet": "未设置权限",
+  "removeApp": "移除 {appName}",
+  
+  "deleteApplication": "删除应用程序",
+  "deleteApplicationConfirm": "您确定要删除 '{appName}' 吗？此操作无法撤销。",
+  "cancel": "取消",
+  "delete": "删除",
+  
+  "addApplication": "添加应用程序",
+  "chooseAccount": "选择账户",
+  "nostrConnect": "Nostr 连接",
+  "appName": "应用程序名称",
+  "enterAppName": "输入应用程序名称",
+  "addThisApp": "添加此应用程序",
+  "requestedPermissions": "请求的权限",
+  "noSpecificPermissionsRequested": "未请求特定权限",
+  
+  "unknownPermission": "未知权限",
+  "unknownPermissionMessage": "应用程序 '{appName}' 正在请求 '{permission}' 权限。您要允许吗？",
+  "allow": "允许",
+  "deny": "拒绝",
+  
+  "copiedToClipboard": "已复制到剪贴板",
+  "applicationDeleted": "应用程序已删除",
+  "permissionUpdated": "权限已更新",
+  "permissionRemoved": "权限已移除",
+  "permissionAdded": "权限已添加",
+  
+  "permissionCount": "{count, plural, =0{无权限} =1{1 个权限} other{{count} 个权限}}",
+  
+  "loggedAccounts": "已登录账户",
+  "defaultBunkerRelays": "默认 Bunker 中继",
+  "addRelay": "添加中继",
+  "enterRelayUrl": "输入中继 URL",
+  
+  "addPrivateKey": "添加私钥",
+  "enterPrivateKey": "输入您的私钥（nsec 或 hex）",
+  "invalidPrivateKey": "无效的私钥",
+  "accountAddedSuccessfully": "账户添加成功",
+  
+  "backupAccount": "备份账户",
+  "showPrivateKey": "显示私钥",
+  "hidePrivateKey": "隐藏私钥",
+  "copyPrivateKey": "复制私钥",
+  "privateKeyCopied": "私钥已复制到剪贴板",
+  
+  "appNotFound": "未找到应用程序",
+  "allowed": "已允许",
+  "blocked": "已阻止"
+}

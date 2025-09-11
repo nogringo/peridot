@@ -1,0 +1,61 @@
+{
+  "@@locale": "ru",
+  
+  "applications": "Приложения",
+  "settings": "Настройки",
+  "noApplicationsConnected": "Нет подключенных приложений",
+  "tapPlusToAddApplication": "Нажмите + чтобы добавить приложение",
+  
+  "manageApplication": "Управление приложением",
+  "connectedAccount": "Подключенная учетная запись",
+  "permissions": "Разрешения",
+  "noPermissionsSet": "Разрешения не установлены",
+  "removeApp": "Удалить {appName}",
+  
+  "deleteApplication": "Удалить приложение",
+  "deleteApplicationConfirm": "Вы уверены, что хотите удалить '{appName}'? Это действие нельзя отменить.",
+  "cancel": "Отмена",
+  "delete": "Удалить",
+  
+  "addApplication": "Добавить приложение",
+  "chooseAccount": "Выбрать учетную запись",
+  "nostrConnect": "Nostr Connect",
+  "appName": "Название приложения",
+  "enterAppName": "Введите название приложения",
+  "addThisApp": "Добавить это приложение",
+  "requestedPermissions": "Запрошенные разрешения",
+  "noSpecificPermissionsRequested": "Конкретные разрешения не запрошены",
+  
+  "unknownPermission": "Неизвестное разрешение",
+  "unknownPermissionMessage": "Приложение '{appName}' запрашивает разрешение для '{permission}'. Хотите разрешить?",
+  "allow": "Разрешить",
+  "deny": "Отказать",
+  
+  "copiedToClipboard": "Скопировано в буфер обмена",
+  "applicationDeleted": "Приложение удалено",
+  "permissionUpdated": "Разрешение обновлено",
+  "permissionRemoved": "Разрешение удалено",
+  "permissionAdded": "Разрешение добавлено",
+  
+  "permissionCount": "{count, plural, =0{нет разрешений} =1{1 разрешение} few{{count} разрешения} other{{count} разрешений}}",
+  
+  "loggedAccounts": "Учетные записи",
+  "defaultBunkerRelays": "Реле Bunker по умолчанию",
+  "addRelay": "Добавить реле",
+  "enterRelayUrl": "Введите URL реле",
+  
+  "addPrivateKey": "Добавить приватный ключ",
+  "enterPrivateKey": "Введите ваш приватный ключ (nsec или hex)",
+  "invalidPrivateKey": "Недействительный приватный ключ",
+  "accountAddedSuccessfully": "Учетная запись успешно добавлена",
+  
+  "backupAccount": "Резервная копия учетной записи",
+  "showPrivateKey": "Показать приватный ключ",
+  "hidePrivateKey": "Скрыть приватный ключ",
+  "copyPrivateKey": "Копировать приватный ключ",
+  "privateKeyCopied": "Приватный ключ скопирован в буфер обмена",
+  
+  "appNotFound": "Приложение не найдено",
+  "allowed": "Разрешено",
+  "blocked": "Заблокировано"
+}

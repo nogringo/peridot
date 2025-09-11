@@ -1,0 +1,61 @@
+{
+  "@@locale": "es",
+  
+  "applications": "Aplicaciones",
+  "settings": "Configuración",
+  "noApplicationsConnected": "No hay aplicaciones conectadas",
+  "tapPlusToAddApplication": "Toca + para añadir una aplicación",
+  
+  "manageApplication": "Gestionar Aplicación",
+  "connectedAccount": "Cuenta conectada",
+  "permissions": "Permisos",
+  "noPermissionsSet": "No hay permisos establecidos",
+  "removeApp": "Eliminar {appName}",
+  
+  "deleteApplication": "Eliminar Aplicación",
+  "deleteApplicationConfirm": "¿Estás seguro de que quieres eliminar '{appName}'? Esta acción no se puede deshacer.",
+  "cancel": "Cancelar",
+  "delete": "Eliminar",
+  
+  "addApplication": "Añadir Aplicación",
+  "chooseAccount": "Elegir cuenta",
+  "nostrConnect": "Nostr Connect",
+  "appName": "Nombre de la aplicación",
+  "enterAppName": "Ingresa el nombre de la aplicación",
+  "addThisApp": "Añadir esta aplicación",
+  "requestedPermissions": "Permisos solicitados",
+  "noSpecificPermissionsRequested": "No se solicitaron permisos específicos",
+  
+  "unknownPermission": "Permiso Desconocido",
+  "unknownPermissionMessage": "La aplicación '{appName}' está solicitando permiso para '{permission}'. ¿Quieres permitirlo?",
+  "allow": "Permitir",
+  "deny": "Denegar",
+  
+  "copiedToClipboard": "Copiado al portapapeles",
+  "applicationDeleted": "Aplicación eliminada",
+  "permissionUpdated": "Permiso actualizado",
+  "permissionRemoved": "Permiso eliminado",
+  "permissionAdded": "Permiso añadido",
+  
+  "permissionCount": "{count, plural, =0{sin permisos} =1{1 permiso} other{{count} permisos}}",
+  
+  "loggedAccounts": "Cuentas conectadas",
+  "defaultBunkerRelays": "Relés Bunker predeterminados",
+  "addRelay": "Añadir relé",
+  "enterRelayUrl": "Ingresa la URL del relé",
+  
+  "addPrivateKey": "Añadir Clave Privada",
+  "enterPrivateKey": "Ingresa tu clave privada (nsec o hex)",
+  "invalidPrivateKey": "Clave privada inválida",
+  "accountAddedSuccessfully": "Cuenta añadida exitosamente",
+  
+  "backupAccount": "Respaldar Cuenta",
+  "showPrivateKey": "Mostrar Clave Privada",
+  "hidePrivateKey": "Ocultar Clave Privada",
+  "copyPrivateKey": "Copiar Clave Privada",
+  "privateKeyCopied": "Clave privada copiada al portapapeles",
+  
+  "appNotFound": "Aplicación no encontrada",
+  "allowed": "Permitido",
+  "blocked": "Bloqueado"
+}
