@@ -57,5 +57,15 @@
   
   "appNotFound": "未找到应用程序",
   "allowed": "已允许",
-  "blocked": "已阻止"
+  "blocked": "已阻止",
+  
+  "permission_connect": "连接",
+  "permission_get_public_key": "获取公钥",
+  "permission_sign_event": "签名事件",
+  "permission_ping": "Ping",
+  "permission_get_relays": "获取中继",
+  "permission_nip04_encrypt": "加密 (NIP-04)",
+  "permission_nip04_decrypt": "解密 (NIP-04)",
+  "permission_nip44_encrypt": "加密 (NIP-44)",
+  "permission_nip44_decrypt": "解密 (NIP-44)"
 }

@@ -163,4 +163,31 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get blocked => '已阻止';
+
+  @override
+  String get permission_connect => '连接';
+
+  @override
+  String get permission_get_public_key => '获取公钥';
+
+  @override
+  String get permission_sign_event => '签名事件';
+
+  @override
+  String get permission_ping => 'Ping';
+
+  @override
+  String get permission_get_relays => '获取中继';
+
+  @override
+  String get permission_nip04_encrypt => '加密 (NIP-04)';
+
+  @override
+  String get permission_nip04_decrypt => '解密 (NIP-04)';
+
+  @override
+  String get permission_nip44_encrypt => '加密 (NIP-44)';
+
+  @override
+  String get permission_nip44_decrypt => '解密 (NIP-44)';
 }

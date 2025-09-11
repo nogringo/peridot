@@ -88,5 +88,15 @@
   
   "appNotFound": "App not found",
   "allowed": "Allowed",
-  "blocked": "Blocked"
+  "blocked": "Blocked",
+  
+  "permission_connect": "Connect",
+  "permission_get_public_key": "Get Public Key",
+  "permission_sign_event": "Sign Event",
+  "permission_ping": "Ping",
+  "permission_get_relays": "Get Relays",
+  "permission_nip04_encrypt": "Encrypt (NIP-04)",
+  "permission_nip04_decrypt": "Decrypt (NIP-04)",
+  "permission_nip44_encrypt": "Encrypt (NIP-44)",
+  "permission_nip44_decrypt": "Decrypt (NIP-44)"
 }

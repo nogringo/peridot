@@ -57,5 +57,15 @@
   
   "appNotFound": "アプリケーションが見つかりません",
   "allowed": "許可済み",
-  "blocked": "ブロック済み"
+  "blocked": "ブロック済み",
+  
+  "permission_connect": "接続",
+  "permission_get_public_key": "公開鍵を取得",
+  "permission_sign_event": "イベントに署名",
+  "permission_ping": "Ping",
+  "permission_get_relays": "リレーを取得",
+  "permission_nip04_encrypt": "暗号化 (NIP-04)",
+  "permission_nip04_decrypt": "復号化 (NIP-04)",
+  "permission_nip44_encrypt": "暗号化 (NIP-44)",
+  "permission_nip44_decrypt": "復号化 (NIP-44)"
 }

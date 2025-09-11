@@ -163,4 +163,31 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get blocked => 'ブロック済み';
+
+  @override
+  String get permission_connect => '接続';
+
+  @override
+  String get permission_get_public_key => '公開鍵を取得';
+
+  @override
+  String get permission_sign_event => 'イベントに署名';
+
+  @override
+  String get permission_ping => 'Ping';
+
+  @override
+  String get permission_get_relays => 'リレーを取得';
+
+  @override
+  String get permission_nip04_encrypt => '暗号化 (NIP-04)';
+
+  @override
+  String get permission_nip04_decrypt => '復号化 (NIP-04)';
+
+  @override
+  String get permission_nip44_encrypt => '暗号化 (NIP-44)';
+
+  @override
+  String get permission_nip44_decrypt => '復号化 (NIP-44)';
 }

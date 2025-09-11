@@ -71,7 +71,9 @@ class ApplicationsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                AppLocalizations.of(context)!.permissionCount(app.permissions.length),
+                AppLocalizations.of(
+                  context,
+                )!.permissionCount(app.permissions.length),
               ),
               onTap: () => Get.toNamed(
                 AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),

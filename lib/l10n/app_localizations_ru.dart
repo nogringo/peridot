@@ -165,4 +165,31 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get blocked => 'Заблокировано';
+
+  @override
+  String get permission_connect => 'Подключение';
+
+  @override
+  String get permission_get_public_key => 'Получить публичный ключ';
+
+  @override
+  String get permission_sign_event => 'Подписать событие';
+
+  @override
+  String get permission_ping => 'Пинг';
+
+  @override
+  String get permission_get_relays => 'Получить реле';
+
+  @override
+  String get permission_nip04_encrypt => 'Шифрование (NIP-04)';
+
+  @override
+  String get permission_nip04_decrypt => 'Расшифровка (NIP-04)';
+
+  @override
+  String get permission_nip44_encrypt => 'Шифрование (NIP-44)';
+
+  @override
+  String get permission_nip44_decrypt => 'Расшифровка (NIP-44)';
 }

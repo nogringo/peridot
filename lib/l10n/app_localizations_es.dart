@@ -164,4 +164,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get blocked => 'Bloqueado';
+
+  @override
+  String get permission_connect => 'Conectar';
+
+  @override
+  String get permission_get_public_key => 'Obtener Clave Pública';
+
+  @override
+  String get permission_sign_event => 'Firmar Evento';
+
+  @override
+  String get permission_ping => 'Ping';
+
+  @override
+  String get permission_get_relays => 'Obtener Relés';
+
+  @override
+  String get permission_nip04_encrypt => 'Cifrar (NIP-04)';
+
+  @override
+  String get permission_nip04_decrypt => 'Descifrar (NIP-04)';
+
+  @override
+  String get permission_nip44_encrypt => 'Cifrar (NIP-44)';
+
+  @override
+  String get permission_nip44_decrypt => 'Descifrar (NIP-44)';
 }

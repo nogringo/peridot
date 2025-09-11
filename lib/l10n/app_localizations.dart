@@ -387,6 +387,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Blocked'**
   String get blocked;
+
+  /// No description provided for @permission_connect.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get permission_connect;
+
+  /// No description provided for @permission_get_public_key.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Public Key'**
+  String get permission_get_public_key;
+
+  /// No description provided for @permission_sign_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Event'**
+  String get permission_sign_event;
+
+  /// No description provided for @permission_ping.
+  ///
+  /// In en, this message translates to:
+  /// **'Ping'**
+  String get permission_ping;
+
+  /// No description provided for @permission_get_relays.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Relays'**
+  String get permission_get_relays;
+
+  /// No description provided for @permission_nip04_encrypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Encrypt (NIP-04)'**
+  String get permission_nip04_encrypt;
+
+  /// No description provided for @permission_nip04_decrypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrypt (NIP-04)'**
+  String get permission_nip04_decrypt;
+
+  /// No description provided for @permission_nip44_encrypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Encrypt (NIP-44)'**
+  String get permission_nip44_encrypt;
+
+  /// No description provided for @permission_nip44_decrypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrypt (NIP-44)'**
+  String get permission_nip44_decrypt;
 }
 
 class _AppLocalizationsDelegate

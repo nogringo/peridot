@@ -57,5 +57,15 @@
   
   "appNotFound": "Приложение не найдено",
   "allowed": "Разрешено",
-  "blocked": "Заблокировано"
+  "blocked": "Заблокировано",
+  
+  "permission_connect": "Подключение",
+  "permission_get_public_key": "Получить публичный ключ",
+  "permission_sign_event": "Подписать событие",
+  "permission_ping": "Пинг",
+  "permission_get_relays": "Получить реле",
+  "permission_nip04_encrypt": "Шифрование (NIP-04)",
+  "permission_nip04_decrypt": "Расшифровка (NIP-04)",
+  "permission_nip44_encrypt": "Шифрование (NIP-44)",
+  "permission_nip44_decrypt": "Расшифровка (NIP-44)"
 }
