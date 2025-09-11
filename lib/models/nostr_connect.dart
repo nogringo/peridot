@@ -35,8 +35,23 @@ class NostrConnect {
       throw ArgumentError('Invalid client pubkey in URL');
     }
 
-    // Extract required relay parameters
-    final relayParams = uri.queryParametersAll['relay'] ?? [];
+    // Extract relay parameters - handle both standard and concatenated formats
+    final relayParams = <String>[];
+    final relayValues = uri.queryParametersAll['relay'] ?? [];
+    
+    for (final relayValue in relayValues) {
+      // Check if this relay value contains multiple relays concatenated with &relay=
+      // This handles malformed URLs where all relays are in a single parameter
+      if (relayValue.contains('&relay=')) {
+        // Split by &relay= to get individual relays
+        final relays = relayValue.split('&relay=');
+        relayParams.addAll(relays);
+      } else {
+        // Standard format: each relay is a separate parameter
+        relayParams.add(relayValue);
+      }
+    }
+    
     if (relayParams.isEmpty) {
       throw ArgumentError('Missing required relay parameter');
     }

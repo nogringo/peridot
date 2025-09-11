@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
-import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/border_area_view.dart';
