@@ -59,32 +59,22 @@ class ApplicationsPage extends StatelessWidget {
         }
 
         return ListView.builder(
-          padding: EdgeInsets.only(
-            left: 12,
-            right: 12,
-            bottom: kToolbarHeight + 12,
-          ),
+          padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
           itemCount: apps.length,
           itemBuilder: (context, index) {
             final app = apps[index];
-            return Card(
-              margin: EdgeInsets.only(bottom: 12),
-              child: ListTile(
-                leading: NPicture(
-                  ndk: Repository.ndk,
-                  pubkey: app.signerPubkey,
-                ),
-                title: Text(
-                  app.name,
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                subtitle: Text(
-                  '${app.permissions.length} permission${app.permissions.length > 1 ? 's' : ''}',
-                ),
-                onTap: () => Get.toNamed(
-                  AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
-                  arguments: app,
-                ),
+            return ListTile(
+              leading: NPicture(ndk: Repository.ndk, pubkey: app.signerPubkey),
+              title: Text(
+                app.name,
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text(
+                '${app.permissions.length} permission${app.permissions.length > 1 ? 's' : ''}',
+              ),
+              onTap: () => Get.toNamed(
+                AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
+                arguments: app,
               ),
             );
           },

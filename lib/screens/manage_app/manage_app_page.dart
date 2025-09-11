@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
-import 'package:peridot/models/authorized_app.dart';
-import 'package:peridot/models/permission.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
-import 'package:toastification/toastification.dart';
 
 class ManageAppPage extends StatelessWidget {
   const ManageAppPage({super.key});

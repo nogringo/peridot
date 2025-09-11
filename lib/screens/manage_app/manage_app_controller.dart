@@ -36,7 +36,6 @@ class ManageAppController extends GetxController {
     update();
   }
 
-
   void deleteApp() async {
     if (app == null) return;
 
