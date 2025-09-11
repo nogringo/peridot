@@ -190,4 +190,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get permission_nip44_decrypt => '解密 (NIP-44)';
+
+  @override
+  String get permissionRequested => 'Permission Requested';
+
+  @override
+  String appRequestingPermission(String appName) {
+    return '$appName is requesting permission:';
+  }
+
+  @override
+  String get authorizeOrBlockRequest =>
+      'Would you like to authorize or block this request?';
+
+  @override
+  String get block => 'Block';
+
+  @override
+  String get authorize => 'Authorize';
 }

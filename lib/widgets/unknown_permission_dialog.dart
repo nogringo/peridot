@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/authorized_app.dart';
+import 'package:peridot/utils/translate_permission.dart';
 
 class UnknownPermissionDialog extends StatelessWidget {
   final AuthorizedApp app;
@@ -13,30 +15,40 @@ class UnknownPermissionDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final translatedPermission = translatePermission(context, permission);
+
     return AlertDialog(
-      title: Text("Permission Requested"),
+      title: Text(l10n.permissionRequested),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("${app.name} is requesting permission:"),
+          Text(l10n.appRequestingPermission(app.name)),
           SizedBox(height: 12),
           Container(
             padding: EdgeInsets.all(8),
-            child: Text(permission, style: TextStyle(fontFamily: 'monospace')),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              translatedPermission,
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
           ),
           SizedBox(height: 16),
-          Text("Would you like to authorize or block this request?"),
+          Text(l10n.authorizeOrBlockRequest),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: Text("Block"),
+          child: Text(l10n.block),
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
-          child: Text("Authorize"),
+          child: Text(l10n.authorize),
         ),
       ],
     );

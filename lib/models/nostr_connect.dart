@@ -38,7 +38,7 @@ class NostrConnect {
     // Extract relay parameters - handle both standard and concatenated formats
     final relayParams = <String>[];
     final relayValues = uri.queryParametersAll['relay'] ?? [];
-    
+
     for (final relayValue in relayValues) {
       // Check if this relay value contains multiple relays concatenated with &relay=
       // This handles malformed URLs where all relays are in a single parameter
@@ -51,7 +51,7 @@ class NostrConnect {
         relayParams.add(relayValue);
       }
     }
-    
+
     if (relayParams.isEmpty) {
       throw ArgumentError('Missing required relay parameter');
     }

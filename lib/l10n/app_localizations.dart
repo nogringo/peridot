@@ -441,6 +441,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Decrypt (NIP-44)'**
   String get permission_nip44_decrypt;
+
+  /// No description provided for @permissionRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission Requested'**
+  String get permissionRequested;
+
+  /// No description provided for @appRequestingPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'{appName} is requesting permission:'**
+  String appRequestingPermission(String appName);
+
+  /// No description provided for @authorizeOrBlockRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like to authorize or block this request?'**
+  String get authorizeOrBlockRequest;
+
+  /// No description provided for @block.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get block;
+
+  /// No description provided for @authorize.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorize'**
+  String get authorize;
 }
 
 class _AppLocalizationsDelegate
