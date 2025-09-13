@@ -106,371 +106,401 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
-  /// No description provided for @applications.
+  /// Title for the applications list screen
   ///
   /// In en, this message translates to:
   /// **'Applications'**
   String get applications;
 
-  /// No description provided for @settings.
+  /// Title for the settings screen
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
 
-  /// No description provided for @noApplicationsConnected.
+  /// Message shown when no applications are connected
   ///
   /// In en, this message translates to:
   /// **'No applications connected'**
   String get noApplicationsConnected;
 
-  /// No description provided for @tapPlusToAddApplication.
+  /// Instruction to add a new application
   ///
   /// In en, this message translates to:
   /// **'Tap + to add an application'**
   String get tapPlusToAddApplication;
 
-  /// No description provided for @manageApplication.
+  /// Title for the manage application screen
   ///
   /// In en, this message translates to:
   /// **'Manage Application'**
   String get manageApplication;
 
-  /// No description provided for @connectedAccount.
+  /// Label for the connected account section
   ///
   /// In en, this message translates to:
   /// **'Connected account'**
   String get connectedAccount;
 
-  /// No description provided for @permissions.
+  /// Label for the permissions section
   ///
   /// In en, this message translates to:
   /// **'Permissions'**
   String get permissions;
 
-  /// No description provided for @noPermissionsSet.
+  /// Message shown when no permissions are set
   ///
   /// In en, this message translates to:
   /// **'No permissions set'**
   String get noPermissionsSet;
 
-  /// No description provided for @removeApp.
+  /// Button text to remove an application
   ///
   /// In en, this message translates to:
   /// **'Remove {appName}'**
   String removeApp(String appName);
 
-  /// No description provided for @deleteApplication.
+  /// Dialog title for deleting an application
   ///
   /// In en, this message translates to:
   /// **'Delete Application'**
   String get deleteApplication;
 
-  /// No description provided for @deleteApplicationConfirm.
+  /// Confirmation message for deleting an application
   ///
   /// In en, this message translates to:
   /// **'Are you sure you want to delete \'{appName}\'? This action cannot be undone.'**
   String deleteApplicationConfirm(String appName);
 
-  /// No description provided for @cancel.
+  /// Cancel button text
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
 
-  /// No description provided for @delete.
+  /// Delete button text
   ///
   /// In en, this message translates to:
   /// **'Delete'**
   String get delete;
 
-  /// No description provided for @addApplication.
+  /// Title for the add application screen
   ///
   /// In en, this message translates to:
   /// **'Add Application'**
   String get addApplication;
 
-  /// No description provided for @chooseAccount.
+  /// Label for choosing an account
   ///
   /// In en, this message translates to:
   /// **'Choose account'**
   String get chooseAccount;
 
-  /// No description provided for @nostrConnect.
+  /// Label for Nostr Connect section
   ///
   /// In en, this message translates to:
   /// **'Nostr Connect'**
   String get nostrConnect;
 
-  /// No description provided for @appName.
+  /// Label for application name field
   ///
   /// In en, this message translates to:
   /// **'App name'**
   String get appName;
 
-  /// No description provided for @enterAppName.
+  /// Placeholder text for app name input field
   ///
   /// In en, this message translates to:
   /// **'Enter app name'**
   String get enterAppName;
 
-  /// No description provided for @addThisApp.
+  /// Button text to add the current application
   ///
   /// In en, this message translates to:
   /// **'Add this app'**
   String get addThisApp;
 
-  /// No description provided for @requestedPermissions.
+  /// Label for requested permissions section
   ///
   /// In en, this message translates to:
   /// **'Requested permissions'**
   String get requestedPermissions;
 
-  /// No description provided for @noSpecificPermissionsRequested.
+  /// Message shown when no specific permissions are requested
   ///
   /// In en, this message translates to:
   /// **'No specific permissions requested'**
   String get noSpecificPermissionsRequested;
 
-  /// No description provided for @unknownPermission.
+  /// Title for unknown permission dialog
   ///
   /// In en, this message translates to:
   /// **'Unknown Permission'**
   String get unknownPermission;
 
-  /// No description provided for @unknownPermissionMessage.
+  /// Message for unknown permission request
   ///
   /// In en, this message translates to:
   /// **'The app \'{appName}\' is requesting permission for \'{permission}\'. Do you want to allow this?'**
   String unknownPermissionMessage(String appName, String permission);
 
-  /// No description provided for @allow.
+  /// Allow button text
   ///
   /// In en, this message translates to:
   /// **'Allow'**
   String get allow;
 
-  /// No description provided for @deny.
+  /// Deny button text
   ///
   /// In en, this message translates to:
   /// **'Deny'**
   String get deny;
 
-  /// No description provided for @copiedToClipboard.
+  /// Toast message when content is copied to clipboard
   ///
   /// In en, this message translates to:
   /// **'Copied to clipboard'**
   String get copiedToClipboard;
 
-  /// No description provided for @applicationDeleted.
+  /// Toast message when application is deleted
   ///
   /// In en, this message translates to:
   /// **'Application deleted'**
   String get applicationDeleted;
 
-  /// No description provided for @permissionUpdated.
+  /// Toast message when permission is updated
   ///
   /// In en, this message translates to:
   /// **'Permission updated'**
   String get permissionUpdated;
 
-  /// No description provided for @permissionRemoved.
+  /// Toast message when permission is removed
   ///
   /// In en, this message translates to:
   /// **'Permission removed'**
   String get permissionRemoved;
 
-  /// No description provided for @permissionAdded.
+  /// Toast message when permission is added
   ///
   /// In en, this message translates to:
   /// **'Permission added'**
   String get permissionAdded;
 
-  /// No description provided for @permissionCount.
+  /// Pluralized permission count
   ///
   /// In en, this message translates to:
   /// **'{count, plural, =0{no permissions} =1{1 permission} other{{count} permissions}}'**
   String permissionCount(int count);
 
-  /// No description provided for @loggedAccounts.
+  /// Title for logged accounts section
   ///
   /// In en, this message translates to:
   /// **'Logged accounts'**
   String get loggedAccounts;
 
-  /// No description provided for @defaultBunkerRelays.
+  /// Label for default bunker relays section
   ///
   /// In en, this message translates to:
   /// **'Default bunker relays'**
   String get defaultBunkerRelays;
 
-  /// No description provided for @addRelay.
+  /// Button text to add a relay
   ///
   /// In en, this message translates to:
   /// **'Add relay'**
   String get addRelay;
 
-  /// No description provided for @enterRelayUrl.
+  /// Placeholder text for relay URL input
   ///
   /// In en, this message translates to:
   /// **'Enter relay URL'**
   String get enterRelayUrl;
 
-  /// No description provided for @addPrivateKey.
+  /// Title for add private key dialog
   ///
   /// In en, this message translates to:
   /// **'Add Private Key'**
   String get addPrivateKey;
 
-  /// No description provided for @enterPrivateKey.
+  /// Placeholder text for private key input
   ///
   /// In en, this message translates to:
   /// **'Enter your private key (nsec or hex)'**
   String get enterPrivateKey;
 
-  /// No description provided for @invalidPrivateKey.
+  /// Error message for invalid private key
   ///
   /// In en, this message translates to:
   /// **'Invalid private key'**
   String get invalidPrivateKey;
 
-  /// No description provided for @accountAddedSuccessfully.
+  /// Success message when account is added
   ///
   /// In en, this message translates to:
   /// **'Account added successfully'**
   String get accountAddedSuccessfully;
 
-  /// No description provided for @backupAccount.
+  /// Menu option to backup account
   ///
   /// In en, this message translates to:
   /// **'Backup Account'**
   String get backupAccount;
 
-  /// No description provided for @showPrivateKey.
+  /// Button text to show private key
   ///
   /// In en, this message translates to:
   /// **'Show Private Key'**
   String get showPrivateKey;
 
-  /// No description provided for @hidePrivateKey.
+  /// Button text to hide private key
   ///
   /// In en, this message translates to:
   /// **'Hide Private Key'**
   String get hidePrivateKey;
 
-  /// No description provided for @copyPrivateKey.
+  /// Button text to copy private key
   ///
   /// In en, this message translates to:
   /// **'Copy Private Key'**
   String get copyPrivateKey;
 
-  /// No description provided for @privateKeyCopied.
+  /// Toast message when private key is copied
   ///
   /// In en, this message translates to:
   /// **'Private key copied to clipboard'**
   String get privateKeyCopied;
 
-  /// No description provided for @appNotFound.
+  /// Error message when app is not found
   ///
   /// In en, this message translates to:
   /// **'App not found'**
   String get appNotFound;
 
-  /// No description provided for @allowed.
+  /// Status label for allowed permission
   ///
   /// In en, this message translates to:
   /// **'Allowed'**
   String get allowed;
 
-  /// No description provided for @blocked.
+  /// Status label for blocked permission
   ///
   /// In en, this message translates to:
   /// **'Blocked'**
   String get blocked;
 
-  /// No description provided for @permission_connect.
+  /// Permission name for connect action
   ///
   /// In en, this message translates to:
   /// **'Connect'**
   String get permission_connect;
 
-  /// No description provided for @permission_get_public_key.
+  /// Permission name for getting public key
   ///
   /// In en, this message translates to:
   /// **'Get Public Key'**
   String get permission_get_public_key;
 
-  /// No description provided for @permission_sign_event.
+  /// Permission name for signing events
   ///
   /// In en, this message translates to:
   /// **'Sign Event'**
   String get permission_sign_event;
 
-  /// No description provided for @permission_ping.
+  /// Permission name for ping action
   ///
   /// In en, this message translates to:
   /// **'Ping'**
   String get permission_ping;
 
-  /// No description provided for @permission_get_relays.
+  /// Permission name for getting relays
   ///
   /// In en, this message translates to:
   /// **'Get Relays'**
   String get permission_get_relays;
 
-  /// No description provided for @permission_nip04_encrypt.
+  /// Permission name for NIP-04 encryption
   ///
   /// In en, this message translates to:
   /// **'Encrypt (NIP-04)'**
   String get permission_nip04_encrypt;
 
-  /// No description provided for @permission_nip04_decrypt.
+  /// Permission name for NIP-04 decryption
   ///
   /// In en, this message translates to:
   /// **'Decrypt (NIP-04)'**
   String get permission_nip04_decrypt;
 
-  /// No description provided for @permission_nip44_encrypt.
+  /// Permission name for NIP-44 encryption
   ///
   /// In en, this message translates to:
   /// **'Encrypt (NIP-44)'**
   String get permission_nip44_encrypt;
 
-  /// No description provided for @permission_nip44_decrypt.
+  /// Permission name for NIP-44 decryption
   ///
   /// In en, this message translates to:
   /// **'Decrypt (NIP-44)'**
   String get permission_nip44_decrypt;
 
-  /// No description provided for @permissionRequested.
+  /// Dialog title for permission request
   ///
   /// In en, this message translates to:
   /// **'Permission Requested'**
   String get permissionRequested;
 
-  /// No description provided for @appRequestingPermission.
+  /// Message showing which app is requesting permission
   ///
   /// In en, this message translates to:
   /// **'{appName} is requesting permission:'**
   String appRequestingPermission(String appName);
 
-  /// No description provided for @authorizeOrBlockRequest.
+  /// Question asking whether to authorize or block request
   ///
   /// In en, this message translates to:
   /// **'Would you like to authorize or block this request?'**
   String get authorizeOrBlockRequest;
 
-  /// No description provided for @block.
+  /// Block button text
   ///
   /// In en, this message translates to:
   /// **'Block'**
   String get block;
 
-  /// No description provided for @authorize.
+  /// Authorize button text
   ///
   /// In en, this message translates to:
   /// **'Authorize'**
   String get authorize;
+
+  /// Dialog title and menu option for removing an account
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Account'**
+  String get removeAccount;
+
+  /// Confirmation message for removing an account
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this account? This action cannot be undone.'**
+  String get removeAccountConfirm;
+
+  /// Remove button text
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// Menu option to copy the npub (public key)
+  ///
+  /// In en, this message translates to:
+  /// **'Copy npub'**
+  String get copyNpub;
+
+  /// Button text to add a new account
+  ///
+  /// In en, this message translates to:
+  /// **'Add an account'**
+  String get addAnAccount;
 }
 
 class _AppLocalizationsDelegate

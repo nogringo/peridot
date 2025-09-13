@@ -209,4 +209,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authorize => 'Authorize';
+
+  @override
+  String get removeAccount => 'Remove Account';
+
+  @override
+  String get removeAccountConfirm =>
+      'Are you sure you want to remove this account? This action cannot be undone.';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get copyNpub => 'Copy npub';
+
+  @override
+  String get addAnAccount => 'Add an account';
 }

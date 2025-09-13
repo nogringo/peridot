@@ -192,20 +192,34 @@ class AppLocalizationsJa extends AppLocalizations {
   String get permission_nip44_decrypt => '復号化 (NIP-44)';
 
   @override
-  String get permissionRequested => 'Permission Requested';
+  String get permissionRequested => '権限のリクエスト';
 
   @override
   String appRequestingPermission(String appName) {
-    return '$appName is requesting permission:';
+    return '$appName が権限を要求しています：';
   }
 
   @override
-  String get authorizeOrBlockRequest =>
-      'Would you like to authorize or block this request?';
+  String get authorizeOrBlockRequest => 'このリクエストを許可またはブロックしますか？';
 
   @override
-  String get block => 'Block';
+  String get block => 'ブロック';
 
   @override
-  String get authorize => 'Authorize';
+  String get authorize => '許可';
+
+  @override
+  String get removeAccount => 'アカウントを削除';
+
+  @override
+  String get removeAccountConfirm => 'このアカウントを削除してもよろしいですか？この操作は取り消せません。';
+
+  @override
+  String get remove => '削除';
+
+  @override
+  String get copyNpub => 'npubをコピー';
+
+  @override
+  String get addAnAccount => 'アカウントを追加';
 }

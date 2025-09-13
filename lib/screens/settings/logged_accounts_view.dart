@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/settings_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
@@ -11,6 +12,7 @@ class LoggedAccountsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BorderAreaView(
       padding: EdgeInsets.all(16),
       child: GetBuilder<Repository>(
@@ -18,7 +20,7 @@ class LoggedAccountsView extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text("Logged Accounts", style: Get.textTheme.titleLarge),
+              Text(l10n.loggedAccounts, style: Get.textTheme.titleLarge),
               SizedBox(height: 8),
               ...Repository.ndk.accounts.accounts.keys.map((pubkey) {
                 return ListTile(
@@ -48,7 +50,7 @@ class LoggedAccountsView extends StatelessWidget {
                           children: [
                             Icon(Icons.copy, size: 20),
                             SizedBox(width: 8),
-                            Text('Copy npub'),
+                            Text(l10n.copyNpub),
                           ],
                         ),
                       ),
@@ -58,7 +60,7 @@ class LoggedAccountsView extends StatelessWidget {
                           children: [
                             Icon(Icons.vertical_align_bottom, size: 20),
                             SizedBox(width: 8),
-                            Text('Backup account'),
+                            Text(l10n.backupAccount),
                           ],
                         ),
                       ),
@@ -70,7 +72,7 @@ class LoggedAccountsView extends StatelessWidget {
                             Icon(Icons.delete, size: 20, color: Colors.red),
                             SizedBox(width: 8),
                             Text(
-                              'Remove account',
+                              l10n.removeAccount,
                               style: TextStyle(color: Colors.red),
                             ),
                           ],
@@ -85,7 +87,7 @@ class LoggedAccountsView extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed('/add-nsec');
                 },
-                child: Text("Add an account"),
+                child: Text(l10n.addAnAccount),
               ),
             ],
           );

@@ -28,17 +28,7 @@ class AddThisAppView extends StatelessWidget {
           ...app.permissions.map(
             (permission) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                children: [
-                  Icon(
-                    permission.isAllowed ? Icons.check_circle : Icons.block,
-                    size: 16,
-                    color: permission.isAllowed ? Colors.green : Colors.red,
-                  ),
-                  SizedBox(width: 8),
-                  Text(translatePermission(context, permission.name)),
-                ],
-              ),
+              child: Text(translatePermission(context, permission.name)),
             ),
           )
         else

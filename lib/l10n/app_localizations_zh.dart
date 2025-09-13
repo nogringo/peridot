@@ -192,20 +192,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String get permission_nip44_decrypt => '解密 (NIP-44)';
 
   @override
-  String get permissionRequested => 'Permission Requested';
+  String get permissionRequested => '权限请求';
 
   @override
   String appRequestingPermission(String appName) {
-    return '$appName is requesting permission:';
+    return '$appName 正在请求权限：';
   }
 
   @override
-  String get authorizeOrBlockRequest =>
-      'Would you like to authorize or block this request?';
+  String get authorizeOrBlockRequest => '您要授权还是阻止此请求？';
 
   @override
-  String get block => 'Block';
+  String get block => '阻止';
 
   @override
-  String get authorize => 'Authorize';
+  String get authorize => '授权';
+
+  @override
+  String get removeAccount => '删除账户';
+
+  @override
+  String get removeAccountConfirm => '您确定要删除此账户吗？此操作无法撤销。';
+
+  @override
+  String get remove => '删除';
+
+  @override
+  String get copyNpub => '复制 npub';
+
+  @override
+  String get addAnAccount => '添加账户';
 }

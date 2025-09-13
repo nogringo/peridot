@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 
 class RemoveAccountDialog extends StatelessWidget {
   final String pubkey;
@@ -12,9 +13,10 @@ class RemoveAccountDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final npub = Nip19.npubFromHex(pubkey);
+    final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(
-      title: const Text('Remove Account'),
+      title: Text(l10n.removeAccount),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,19 +47,17 @@ class RemoveAccountDialog extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Are you sure you want to remove this account? This action cannot be undone.',
-          ),
+          Text(l10n.removeAccountConfirm),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Get.back(result: false),
-          child: const Text('Cancel'),
+          child: Text(l10n.cancel),
         ),
-        TextButton(
+        FilledButton(
           onPressed: () => Get.back(result: true),
-          child: const Text('Remove', style: TextStyle(color: Colors.red)),
+          child: Text(l10n.remove),
         ),
       ],
     );

@@ -67,5 +67,18 @@
   "permission_nip04_encrypt": "加密 (NIP-04)",
   "permission_nip04_decrypt": "解密 (NIP-04)",
   "permission_nip44_encrypt": "加密 (NIP-44)",
-  "permission_nip44_decrypt": "解密 (NIP-44)"
+  "permission_nip44_decrypt": "解密 (NIP-44)",
+
+  "permissionRequested": "权限请求",
+  "appRequestingPermission": "{appName} 正在请求权限：",
+  "authorizeOrBlockRequest": "您要授权还是阻止此请求？",
+  "block": "阻止",
+  "authorize": "授权",
+
+  "removeAccount": "删除账户",
+  "removeAccountConfirm": "您确定要删除此账户吗？此操作无法撤销。",
+  "remove": "删除",
+
+  "copyNpub": "复制 npub",
+  "addAnAccount": "添加账户"
 }

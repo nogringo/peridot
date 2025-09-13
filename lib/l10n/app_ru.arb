@@ -67,5 +67,18 @@
   "permission_nip04_encrypt": "Шифрование (NIP-04)",
   "permission_nip04_decrypt": "Расшифровка (NIP-04)",
   "permission_nip44_encrypt": "Шифрование (NIP-44)",
-  "permission_nip44_decrypt": "Расшифровка (NIP-44)"
+  "permission_nip44_decrypt": "Расшифровка (NIP-44)",
+
+  "permissionRequested": "Запрос разрешения",
+  "appRequestingPermission": "{appName} запрашивает разрешение:",
+  "authorizeOrBlockRequest": "Вы хотите авторизовать или заблокировать этот запрос?",
+  "block": "Блокировать",
+  "authorize": "Авторизовать",
+
+  "removeAccount": "Удалить учетную запись",
+  "removeAccountConfirm": "Вы уверены, что хотите удалить эту учетную запись? Это действие нельзя отменить.",
+  "remove": "Удалить",
+
+  "copyNpub": "Копировать npub",
+  "addAnAccount": "Добавить учетную запись"
 }

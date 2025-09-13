@@ -67,5 +67,18 @@
   "permission_nip04_encrypt": "暗号化 (NIP-04)",
   "permission_nip04_decrypt": "復号化 (NIP-04)",
   "permission_nip44_encrypt": "暗号化 (NIP-44)",
-  "permission_nip44_decrypt": "復号化 (NIP-44)"
+  "permission_nip44_decrypt": "復号化 (NIP-44)",
+
+  "permissionRequested": "権限のリクエスト",
+  "appRequestingPermission": "{appName} が権限を要求しています：",
+  "authorizeOrBlockRequest": "このリクエストを許可またはブロックしますか？",
+  "block": "ブロック",
+  "authorize": "許可",
+
+  "removeAccount": "アカウントを削除",
+  "removeAccountConfirm": "このアカウントを削除してもよろしいですか？この操作は取り消せません。",
+  "remove": "削除",
+
+  "copyNpub": "npubをコピー",
+  "addAnAccount": "アカウントを追加"
 }

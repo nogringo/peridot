@@ -67,5 +67,18 @@
   "permission_nip04_encrypt": "Chiffrer (NIP-04)",
   "permission_nip04_decrypt": "Déchiffrer (NIP-04)",
   "permission_nip44_encrypt": "Chiffrer (NIP-44)",
-  "permission_nip44_decrypt": "Déchiffrer (NIP-44)"
+  "permission_nip44_decrypt": "Déchiffrer (NIP-44)",
+
+  "permissionRequested": "Permission Demandée",
+  "appRequestingPermission": "{appName} demande une permission :",
+  "authorizeOrBlockRequest": "Voulez-vous autoriser ou bloquer cette demande ?",
+  "block": "Bloquer",
+  "authorize": "Autoriser",
+
+  "removeAccount": "Supprimer le Compte",
+  "removeAccountConfirm": "Êtes-vous sûr de vouloir supprimer ce compte ? Cette action ne peut pas être annulée.",
+  "remove": "Supprimer",
+
+  "copyNpub": "Copier npub",
+  "addAnAccount": "Ajouter un compte"
 }

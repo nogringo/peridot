@@ -194,20 +194,36 @@ class AppLocalizationsRu extends AppLocalizations {
   String get permission_nip44_decrypt => 'Расшифровка (NIP-44)';
 
   @override
-  String get permissionRequested => 'Permission Requested';
+  String get permissionRequested => 'Запрос разрешения';
 
   @override
   String appRequestingPermission(String appName) {
-    return '$appName is requesting permission:';
+    return '$appName запрашивает разрешение:';
   }
 
   @override
   String get authorizeOrBlockRequest =>
-      'Would you like to authorize or block this request?';
+      'Вы хотите авторизовать или заблокировать этот запрос?';
 
   @override
-  String get block => 'Block';
+  String get block => 'Блокировать';
 
   @override
-  String get authorize => 'Authorize';
+  String get authorize => 'Авторизовать';
+
+  @override
+  String get removeAccount => 'Удалить учетную запись';
+
+  @override
+  String get removeAccountConfirm =>
+      'Вы уверены, что хотите удалить эту учетную запись? Это действие нельзя отменить.';
+
+  @override
+  String get remove => 'Удалить';
+
+  @override
+  String get copyNpub => 'Копировать npub';
+
+  @override
+  String get addAnAccount => 'Добавить учетную запись';
 }

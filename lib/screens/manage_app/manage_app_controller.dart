@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/permission.dart';
 import 'package:sembast/sembast.dart';
@@ -39,21 +40,19 @@ class ManageAppController extends GetxController {
   void deleteApp() async {
     if (app == null) return;
 
+    final l10n = AppLocalizations.of(Get.context!)!;
     final confirmed = await Get.dialog<bool>(
       AlertDialog(
-        title: Text("Delete Application"),
-        content: Text(
-          "Are you sure you want to delete '${app!.name}'? This action cannot be undone.",
-        ),
+        title: Text(l10n.deleteApplication),
+        content: Text(l10n.deleteApplicationConfirm(app!.name)),
         actions: [
           TextButton(
             onPressed: () => Get.back(result: false),
-            child: Text("Cancel"),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Get.back(result: true),
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            child: Text("Delete"),
+            child: Text(l10n.delete),
           ),
         ],
       ),
@@ -80,7 +79,7 @@ class ManageAppController extends GetxController {
 
       toastification.show(
         context: Get.context!,
-        title: Text("Application deleted"),
+        title: Text(l10n.applicationDeleted),
         type: ToastificationType.success,
         autoCloseDuration: Duration(seconds: 2),
         alignment: Alignment.bottomRight,

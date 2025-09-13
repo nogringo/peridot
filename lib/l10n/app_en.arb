@@ -1,115 +1,316 @@
 {
   "@@locale": "en",
-  
+
   "applications": "Applications",
+  "@applications": {
+    "description": "Title for the applications list screen"
+  },
   "settings": "Settings",
+  "@settings": {
+    "description": "Title for the settings screen"
+  },
   "noApplicationsConnected": "No applications connected",
+  "@noApplicationsConnected": {
+    "description": "Message shown when no applications are connected"
+  },
   "tapPlusToAddApplication": "Tap + to add an application",
-  
+  "@tapPlusToAddApplication": {
+    "description": "Instruction to add a new application"
+  },
+
   "manageApplication": "Manage Application",
+  "@manageApplication": {
+    "description": "Title for the manage application screen"
+  },
   "connectedAccount": "Connected account",
+  "@connectedAccount": {
+    "description": "Label for the connected account section"
+  },
   "permissions": "Permissions",
+  "@permissions": {
+    "description": "Label for the permissions section"
+  },
   "noPermissionsSet": "No permissions set",
+  "@noPermissionsSet": {
+    "description": "Message shown when no permissions are set"
+  },
   "removeApp": "Remove {appName}",
   "@removeApp": {
+    "description": "Button text to remove an application",
     "placeholders": {
       "appName": {
-        "type": "String"
+        "type": "String",
+        "description": "Name of the application to be removed"
       }
     }
   },
-  
+
   "deleteApplication": "Delete Application",
+  "@deleteApplication": {
+    "description": "Dialog title for deleting an application"
+  },
   "deleteApplicationConfirm": "Are you sure you want to delete '{appName}'? This action cannot be undone.",
   "@deleteApplicationConfirm": {
+    "description": "Confirmation message for deleting an application",
     "placeholders": {
       "appName": {
-        "type": "String"
+        "type": "String",
+        "description": "Name of the application to be deleted"
       }
     }
   },
   "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
   "delete": "Delete",
-  
+  "@delete": {
+    "description": "Delete button text"
+  },
+
   "addApplication": "Add Application",
+  "@addApplication": {
+    "description": "Title for the add application screen"
+  },
   "chooseAccount": "Choose account",
+  "@chooseAccount": {
+    "description": "Label for choosing an account"
+  },
   "nostrConnect": "Nostr Connect",
+  "@nostrConnect": {
+    "description": "Label for Nostr Connect section"
+  },
   "appName": "App name",
+  "@appName": {
+    "description": "Label for application name field"
+  },
   "enterAppName": "Enter app name",
+  "@enterAppName": {
+    "description": "Placeholder text for app name input field"
+  },
   "addThisApp": "Add this app",
+  "@addThisApp": {
+    "description": "Button text to add the current application"
+  },
   "requestedPermissions": "Requested permissions",
+  "@requestedPermissions": {
+    "description": "Label for requested permissions section"
+  },
   "noSpecificPermissionsRequested": "No specific permissions requested",
-  
+  "@noSpecificPermissionsRequested": {
+    "description": "Message shown when no specific permissions are requested"
+  },
+
   "unknownPermission": "Unknown Permission",
+  "@unknownPermission": {
+    "description": "Title for unknown permission dialog"
+  },
   "unknownPermissionMessage": "The app '{appName}' is requesting permission for '{permission}'. Do you want to allow this?",
   "@unknownPermissionMessage": {
+    "description": "Message for unknown permission request",
     "placeholders": {
       "appName": {
-        "type": "String"
+        "type": "String",
+        "description": "Name of the requesting application"
       },
       "permission": {
-        "type": "String"
+        "type": "String",
+        "description": "The permission being requested"
       }
     }
   },
   "allow": "Allow",
+  "@allow": {
+    "description": "Allow button text"
+  },
   "deny": "Deny",
-  
+  "@deny": {
+    "description": "Deny button text"
+  },
+
   "copiedToClipboard": "Copied to clipboard",
+  "@copiedToClipboard": {
+    "description": "Toast message when content is copied to clipboard"
+  },
   "applicationDeleted": "Application deleted",
+  "@applicationDeleted": {
+    "description": "Toast message when application is deleted"
+  },
   "permissionUpdated": "Permission updated",
+  "@permissionUpdated": {
+    "description": "Toast message when permission is updated"
+  },
   "permissionRemoved": "Permission removed",
+  "@permissionRemoved": {
+    "description": "Toast message when permission is removed"
+  },
   "permissionAdded": "Permission added",
-  
+  "@permissionAdded": {
+    "description": "Toast message when permission is added"
+  },
+
   "permissionCount": "{count, plural, =0{no permissions} =1{1 permission} other{{count} permissions}}",
   "@permissionCount": {
+    "description": "Pluralized permission count",
     "placeholders": {
       "count": {
-        "type": "int"
+        "type": "int",
+        "description": "Number of permissions"
       }
     }
   },
-  
+
   "loggedAccounts": "Logged accounts",
+  "@loggedAccounts": {
+    "description": "Title for logged accounts section"
+  },
   "defaultBunkerRelays": "Default bunker relays",
+  "@defaultBunkerRelays": {
+    "description": "Label for default bunker relays section"
+  },
   "addRelay": "Add relay",
+  "@addRelay": {
+    "description": "Button text to add a relay"
+  },
   "enterRelayUrl": "Enter relay URL",
-  
+  "@enterRelayUrl": {
+    "description": "Placeholder text for relay URL input"
+  },
+
   "addPrivateKey": "Add Private Key",
+  "@addPrivateKey": {
+    "description": "Title for add private key dialog"
+  },
   "enterPrivateKey": "Enter your private key (nsec or hex)",
+  "@enterPrivateKey": {
+    "description": "Placeholder text for private key input"
+  },
   "invalidPrivateKey": "Invalid private key",
+  "@invalidPrivateKey": {
+    "description": "Error message for invalid private key"
+  },
   "accountAddedSuccessfully": "Account added successfully",
-  
+  "@accountAddedSuccessfully": {
+    "description": "Success message when account is added"
+  },
+
   "backupAccount": "Backup Account",
+  "@backupAccount": {
+    "description": "Menu option to backup account"
+  },
   "showPrivateKey": "Show Private Key",
+  "@showPrivateKey": {
+    "description": "Button text to show private key"
+  },
   "hidePrivateKey": "Hide Private Key",
+  "@hidePrivateKey": {
+    "description": "Button text to hide private key"
+  },
   "copyPrivateKey": "Copy Private Key",
+  "@copyPrivateKey": {
+    "description": "Button text to copy private key"
+  },
   "privateKeyCopied": "Private key copied to clipboard",
-  
+  "@privateKeyCopied": {
+    "description": "Toast message when private key is copied"
+  },
+
   "appNotFound": "App not found",
+  "@appNotFound": {
+    "description": "Error message when app is not found"
+  },
   "allowed": "Allowed",
+  "@allowed": {
+    "description": "Status label for allowed permission"
+  },
   "blocked": "Blocked",
-  
+  "@blocked": {
+    "description": "Status label for blocked permission"
+  },
+
   "permission_connect": "Connect",
+  "@permission_connect": {
+    "description": "Permission name for connect action"
+  },
   "permission_get_public_key": "Get Public Key",
+  "@permission_get_public_key": {
+    "description": "Permission name for getting public key"
+  },
   "permission_sign_event": "Sign Event",
+  "@permission_sign_event": {
+    "description": "Permission name for signing events"
+  },
   "permission_ping": "Ping",
+  "@permission_ping": {
+    "description": "Permission name for ping action"
+  },
   "permission_get_relays": "Get Relays",
+  "@permission_get_relays": {
+    "description": "Permission name for getting relays"
+  },
   "permission_nip04_encrypt": "Encrypt (NIP-04)",
+  "@permission_nip04_encrypt": {
+    "description": "Permission name for NIP-04 encryption"
+  },
   "permission_nip04_decrypt": "Decrypt (NIP-04)",
+  "@permission_nip04_decrypt": {
+    "description": "Permission name for NIP-04 decryption"
+  },
   "permission_nip44_encrypt": "Encrypt (NIP-44)",
+  "@permission_nip44_encrypt": {
+    "description": "Permission name for NIP-44 encryption"
+  },
   "permission_nip44_decrypt": "Decrypt (NIP-44)",
-  
+  "@permission_nip44_decrypt": {
+    "description": "Permission name for NIP-44 decryption"
+  },
+
   "permissionRequested": "Permission Requested",
+  "@permissionRequested": {
+    "description": "Dialog title for permission request"
+  },
   "appRequestingPermission": "{appName} is requesting permission:",
   "@appRequestingPermission": {
+    "description": "Message showing which app is requesting permission",
     "placeholders": {
       "appName": {
-        "type": "String"
+        "type": "String",
+        "description": "Name of the requesting application"
       }
     }
   },
   "authorizeOrBlockRequest": "Would you like to authorize or block this request?",
+  "@authorizeOrBlockRequest": {
+    "description": "Question asking whether to authorize or block request"
+  },
   "block": "Block",
-  "authorize": "Authorize"
+  "@block": {
+    "description": "Block button text"
+  },
+  "authorize": "Authorize",
+  "@authorize": {
+    "description": "Authorize button text"
+  },
+
+  "removeAccount": "Remove Account",
+  "@removeAccount": {
+    "description": "Dialog title and menu option for removing an account"
+  },
+  "removeAccountConfirm": "Are you sure you want to remove this account? This action cannot be undone.",
+  "@removeAccountConfirm": {
+    "description": "Confirmation message for removing an account"
+  },
+  "remove": "Remove",
+  "@remove": {
+    "description": "Remove button text"
+  },
+
+  "copyNpub": "Copy npub",
+  "@copyNpub": {
+    "description": "Menu option to copy the npub (public key)"
+  },
+  "addAnAccount": "Add an account",
+  "@addAnAccount": {
+    "description": "Button text to add a new account"
+  }
 }
