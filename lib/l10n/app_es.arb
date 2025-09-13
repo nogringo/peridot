@@ -80,5 +80,12 @@
   "remove": "Eliminar",
 
   "copyNpub": "Copiar npub",
-  "addAnAccount": "Añadir una cuenta"
+  "addAnAccount": "Añadir una cuenta",
+
+  "removeRelay": "Eliminar Relé",
+  "removeRelayConfirm": "¿Estás seguro de que quieres eliminar este relé?\n{relay}",
+  "relayRemoved": "Relé eliminado",
+  "cannotRemoveLastRelay": "No se puede eliminar el último relé",
+  "cannotRemoveLastRelayMessage": "Debes tener al menos un relé. Por favor, añade otro relé antes de eliminar este.",
+  "ok": "OK"
 }

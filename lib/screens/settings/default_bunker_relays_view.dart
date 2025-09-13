@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/settings_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
@@ -9,12 +10,14 @@ class DefaultBunkerRelaysView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BorderAreaView(
       padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text("Default bunker relays", style: Get.textTheme.titleLarge),
+          Text(l10n.defaultBunkerRelays, style: Get.textTheme.titleLarge),
           Obx(() {
             return Column(
               children: Repository.to.bunkerDefaultRelays.map((relay) {
@@ -22,8 +25,7 @@ class DefaultBunkerRelaysView extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   title: Text(relay),
                   trailing: IconButton(
-                    onPressed: () =>
-                        Repository.to.removeDefaultBunkerRelay(relay),
+                    onPressed: () => _confirmRemoveRelay(context, relay),
                     icon: Icon(Icons.close),
                   ),
                 );
@@ -34,7 +36,7 @@ class DefaultBunkerRelaysView extends StatelessWidget {
           TextField(
             controller: SettingsController.to.newRelayFieldController,
             decoration: InputDecoration(
-              hintText: "wss://relay.example.com",
+              hintText: l10n.enterRelayUrl,
               suffixIcon: IconButton(
                 onPressed: SettingsController.to.addDefaultBunkerRelay,
                 icon: Icon(Icons.add),
@@ -48,5 +50,44 @@ class DefaultBunkerRelaysView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _confirmRemoveRelay(BuildContext context, String relay) async {
+    final l10n = AppLocalizations.of(context)!;
+
+    // Check if this is the last relay
+    if (Repository.to.bunkerDefaultRelays.length <= 1) {
+      await Get.dialog(
+        AlertDialog(
+          title: Text(l10n.cannotRemoveLastRelay),
+          content: Text(l10n.cannotRemoveLastRelayMessage),
+          actions: [
+            FilledButton(onPressed: () => Get.back(), child: Text(l10n.ok)),
+          ],
+        ),
+      );
+      return;
+    }
+
+    final confirmed = await Get.dialog<bool>(
+      AlertDialog(
+        title: Text(l10n.removeRelay),
+        content: Text(l10n.removeRelayConfirm(relay)),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(result: false),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () => Get.back(result: true),
+            child: Text(l10n.remove),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await Repository.to.removeDefaultBunkerRelay(relay);
+    }
   }
 }

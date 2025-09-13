@@ -501,6 +501,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add an account'**
   String get addAnAccount;
+
+  /// Dialog title for removing a relay
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Relay'**
+  String get removeRelay;
+
+  /// Confirmation message for removing a relay
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove this relay?\n{relay}'**
+  String removeRelayConfirm(String relay);
+
+  /// Toast message when relay is removed
+  ///
+  /// In en, this message translates to:
+  /// **'Relay removed'**
+  String get relayRemoved;
+
+  /// Dialog title when trying to remove the last relay
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot Remove Last Relay'**
+  String get cannotRemoveLastRelay;
+
+  /// Message explaining why the last relay cannot be removed
+  ///
+  /// In en, this message translates to:
+  /// **'You must have at least one relay. Please add another relay before removing this one.'**
+  String get cannotRemoveLastRelayMessage;
+
+  /// OK button text
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate

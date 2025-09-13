@@ -80,5 +80,12 @@
   "remove": "Supprimer",
 
   "copyNpub": "Copier npub",
-  "addAnAccount": "Ajouter un compte"
+  "addAnAccount": "Ajouter un compte",
+
+  "removeRelay": "Supprimer le Relais",
+  "removeRelayConfirm": "Êtes-vous sûr de vouloir supprimer ce relais ?\n{relay}",
+  "relayRemoved": "Relais supprimé",
+  "cannotRemoveLastRelay": "Impossible de supprimer le dernier relais",
+  "cannotRemoveLastRelayMessage": "Vous devez avoir au moins un relais. Veuillez ajouter un autre relais avant de supprimer celui-ci.",
+  "ok": "OK"
 }

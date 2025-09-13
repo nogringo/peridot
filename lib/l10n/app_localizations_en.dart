@@ -225,4 +225,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addAnAccount => 'Add an account';
+
+  @override
+  String get removeRelay => 'Remove Relay';
+
+  @override
+  String removeRelayConfirm(String relay) {
+    return 'Are you sure you want to remove this relay?\n$relay';
+  }
+
+  @override
+  String get relayRemoved => 'Relay removed';
+
+  @override
+  String get cannotRemoveLastRelay => 'Cannot Remove Last Relay';
+
+  @override
+  String get cannotRemoveLastRelayMessage =>
+      'You must have at least one relay. Please add another relay before removing this one.';
+
+  @override
+  String get ok => 'OK';
 }

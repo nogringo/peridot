@@ -312,5 +312,36 @@
   "addAnAccount": "Add an account",
   "@addAnAccount": {
     "description": "Button text to add a new account"
+  },
+
+  "removeRelay": "Remove Relay",
+  "@removeRelay": {
+    "description": "Dialog title for removing a relay"
+  },
+  "removeRelayConfirm": "Are you sure you want to remove this relay?\n{relay}",
+  "@removeRelayConfirm": {
+    "description": "Confirmation message for removing a relay",
+    "placeholders": {
+      "relay": {
+        "type": "String",
+        "description": "The relay URL to be removed"
+      }
+    }
+  },
+  "relayRemoved": "Relay removed",
+  "@relayRemoved": {
+    "description": "Toast message when relay is removed"
+  },
+  "cannotRemoveLastRelay": "Cannot Remove Last Relay",
+  "@cannotRemoveLastRelay": {
+    "description": "Dialog title when trying to remove the last relay"
+  },
+  "cannotRemoveLastRelayMessage": "You must have at least one relay. Please add another relay before removing this one.",
+  "@cannotRemoveLastRelayMessage": {
+    "description": "Message explaining why the last relay cannot be removed"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
   }
 }

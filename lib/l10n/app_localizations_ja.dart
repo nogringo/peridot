@@ -222,4 +222,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get addAnAccount => 'アカウントを追加';
+
+  @override
+  String get removeRelay => 'リレーを削除';
+
+  @override
+  String removeRelayConfirm(String relay) {
+    return 'このリレーを削除してもよろしいですか？\n$relay';
+  }
+
+  @override
+  String get relayRemoved => 'リレーを削除しました';
+
+  @override
+  String get cannotRemoveLastRelay => '最後のリレーは削除できません';
+
+  @override
+  String get cannotRemoveLastRelayMessage =>
+      '少なくとも1つのリレーが必要です。このリレーを削除する前に別のリレーを追加してください。';
+
+  @override
+  String get ok => 'OK';
 }

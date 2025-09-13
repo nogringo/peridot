@@ -222,4 +222,24 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get addAnAccount => '添加账户';
+
+  @override
+  String get removeRelay => '删除中继';
+
+  @override
+  String removeRelayConfirm(String relay) {
+    return '您确定要删除此中继吗？\n$relay';
+  }
+
+  @override
+  String get relayRemoved => '中继已删除';
+
+  @override
+  String get cannotRemoveLastRelay => '无法删除最后一个中继';
+
+  @override
+  String get cannotRemoveLastRelayMessage => '您必须至少有一个中继。请在删除此中继之前添加另一个中继。';
+
+  @override
+  String get ok => '确定';
 }

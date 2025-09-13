@@ -80,5 +80,12 @@
   "remove": "Удалить",
 
   "copyNpub": "Копировать npub",
-  "addAnAccount": "Добавить учетную запись"
+  "addAnAccount": "Добавить учетную запись",
+
+  "removeRelay": "Удалить реле",
+  "removeRelayConfirm": "Вы уверены, что хотите удалить это реле?\n{relay}",
+  "relayRemoved": "Реле удалено",
+  "cannotRemoveLastRelay": "Невозможно удалить последнее реле",
+  "cannotRemoveLastRelayMessage": "У вас должно быть хотя бы одно реле. Пожалуйста, добавьте другое реле перед удалением этого.",
+  "ok": "OK"
 }

@@ -226,4 +226,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get addAnAccount => 'Добавить учетную запись';
+
+  @override
+  String get removeRelay => 'Удалить реле';
+
+  @override
+  String removeRelayConfirm(String relay) {
+    return 'Вы уверены, что хотите удалить это реле?\n$relay';
+  }
+
+  @override
+  String get relayRemoved => 'Реле удалено';
+
+  @override
+  String get cannotRemoveLastRelay => 'Невозможно удалить последнее реле';
+
+  @override
+  String get cannotRemoveLastRelayMessage =>
+      'У вас должно быть хотя бы одно реле. Пожалуйста, добавьте другое реле перед удалением этого.';
+
+  @override
+  String get ok => 'OK';
 }

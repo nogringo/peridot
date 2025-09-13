@@ -226,4 +226,26 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get addAnAccount => 'Ajouter un compte';
+
+  @override
+  String get removeRelay => 'Supprimer le Relais';
+
+  @override
+  String removeRelayConfirm(String relay) {
+    return 'Êtes-vous sûr de vouloir supprimer ce relais ?\n$relay';
+  }
+
+  @override
+  String get relayRemoved => 'Relais supprimé';
+
+  @override
+  String get cannotRemoveLastRelay =>
+      'Impossible de supprimer le dernier relais';
+
+  @override
+  String get cannotRemoveLastRelayMessage =>
+      'Vous devez avoir au moins un relais. Veuillez ajouter un autre relais avant de supprimer celui-ci.';
+
+  @override
+  String get ok => 'OK';
 }

@@ -80,5 +80,12 @@
   "remove": "削除",
 
   "copyNpub": "npubをコピー",
-  "addAnAccount": "アカウントを追加"
+  "addAnAccount": "アカウントを追加",
+
+  "removeRelay": "リレーを削除",
+  "removeRelayConfirm": "このリレーを削除してもよろしいですか？\n{relay}",
+  "relayRemoved": "リレーを削除しました",
+  "cannotRemoveLastRelay": "最後のリレーは削除できません",
+  "cannotRemoveLastRelayMessage": "少なくとも1つのリレーが必要です。このリレーを削除する前に別のリレーを追加してください。",
+  "ok": "OK"
 }

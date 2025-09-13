@@ -80,5 +80,12 @@
   "remove": "删除",
 
   "copyNpub": "复制 npub",
-  "addAnAccount": "添加账户"
+  "addAnAccount": "添加账户",
+
+  "removeRelay": "删除中继",
+  "removeRelayConfirm": "您确定要删除此中继吗？\n{relay}",
+  "relayRemoved": "中继已删除",
+  "cannotRemoveLastRelay": "无法删除最后一个中继",
+  "cannotRemoveLastRelayMessage": "您必须至少有一个中继。请在删除此中继之前添加另一个中继。",
+  "ok": "确定"
 }
