@@ -33,4 +33,4 @@ linux:
   categories: "Utility;"
   # Application ID for StartupWMClass (e.g., com.example.myapp)
   # This should match your Flutter app's application ID
-  app_id: "com.example.peridot"
+  app_id: "io.github.nogringo.peridot"

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:peridot/services/auto_start_service.dart';
+import 'package:peridot/screens/settings/settings_controller.dart';
 import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -11,7 +11,7 @@ class SystemSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final autoStartService = AutoStartService.to;
+    final settingsController = Get.find<SettingsController>();
     final notificationService = NotificationService.to;
     final controller = Get.put(SystemSettingsController());
     final l10n = AppLocalizations.of(context)!;
@@ -30,9 +30,9 @@ class SystemSettingsView extends StatelessWidget {
             () => SwitchListTile(
               title: Text(l10n.startOnSystemStartup),
               subtitle: Text(l10n.startOnSystemStartupDescription),
-              value: autoStartService.isEnabled.value,
+              value: settingsController.isAutoStartEnabled.value,
               onChanged: (value) async {
-                await autoStartService.toggleAutoStart();
+                await settingsController.toggleAutoStart();
               },
             ),
           ),

@@ -1,4 +1,4 @@
-package com.example.peridot
+package io.github.nogringo.peridot
 
 import io.flutter.embedding.android.FlutterActivity
 
