@@ -4,11 +4,24 @@ import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
+class NotificationAction {
+  final String id;
+  final String title;
+
+  NotificationAction({
+    required this.id,
+    required this.title,
+  });
+}
+
 class NotificationService extends GetxService {
   static NotificationService get to => Get.find();
 
   final FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
+
+  // Store callbacks for permission requests
+  final Map<int, Function(bool)> _permissionCallbacks = {};
 
   Future<NotificationService> init() async {
     const androidSettings = AndroidInitializationSettings(
@@ -35,13 +48,30 @@ class NotificationService extends GetxService {
     await _notifications.initialize(
       initSettings,
       onDidReceiveNotificationResponse: _onNotificationTapped,
+      onDidReceiveBackgroundNotificationResponse: _onNotificationTapped,
     );
 
     return this;
   }
 
   void _onNotificationTapped(NotificationResponse response) {
-    // Handle notification tap if needed
+    // Handle notification action
+    if (response.actionId != null) {
+      final notificationId = response.id;
+      if (notificationId != null) {
+        final callback = _permissionCallbacks[notificationId];
+        if (callback != null) {
+          // Call the callback based on action
+          if (response.actionId == 'allow') {
+            callback(true);
+          } else if (response.actionId == 'deny') {
+            callback(false);
+          }
+          // Remove callback after use
+          _permissionCallbacks.remove(notificationId);
+        }
+      }
+    }
   }
 
   Future<bool> requestPermissions() async {
@@ -91,6 +121,7 @@ class NotificationService extends GetxService {
     required String appName,
     required String permission,
     String? accountName,
+    Function(bool)? onAction,
   }) async {
     final l10n = AppLocalizations.of(context)!;
     final translatedPermission = translatePermission(context, permission);
@@ -98,10 +129,85 @@ class NotificationService extends GetxService {
     final title = l10n.permissionRequested;
     final body = l10n.unknownPermissionMessage(appName, translatedPermission);
 
-    await showNotification(
+    final notificationId = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+    // Store callback if provided
+    if (onAction != null) {
+      _permissionCallbacks[notificationId] = onAction;
+    }
+
+    await showNotificationWithActions(
+      id: notificationId,
       title: title,
       body: body,
+      actions: [
+        NotificationAction(
+          id: 'allow',
+          title: l10n.allow,
+        ),
+        NotificationAction(
+          id: 'deny',
+          title: l10n.deny,
+        ),
+      ],
       payload: 'permission_request',
+    );
+  }
+
+  Future<void> showNotificationWithActions({
+    required int id,
+    required String title,
+    required String body,
+    required List<NotificationAction> actions,
+    String? payload,
+  }) async {
+    // Android notification with actions
+    final androidDetails = AndroidNotificationDetails(
+      'permission_channel',
+      'Permission Notifications',
+      channelDescription: 'Notifications for permission requests',
+      importance: Importance.high,
+      priority: Priority.high,
+      actions: actions
+          .map((action) => AndroidNotificationAction(
+                action.id,
+                action.title,
+                showsUserInterface: true,
+              ))
+          .toList(),
+    );
+
+    // Darwin (iOS/macOS) notification with actions
+    final darwinDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+      categoryIdentifier: 'permission_category',
+    );
+
+    // Linux notification with actions
+    final linuxDetails = LinuxNotificationDetails(
+      actions: actions
+          .map((action) => LinuxNotificationAction(
+                key: action.id,
+                label: action.title,
+              ))
+          .toList(),
+    );
+
+    final notificationDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: darwinDetails,
+      macOS: darwinDetails,
+      linux: linuxDetails,
+    );
+
+    await _notifications.show(
+      id,
+      title,
+      body,
+      notificationDetails,
+      payload: payload,
     );
   }
 
