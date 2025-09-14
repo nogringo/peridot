@@ -87,5 +87,14 @@
   "relayRemoved": "中继已删除",
   "cannotRemoveLastRelay": "无法删除最后一个中继",
   "cannotRemoveLastRelayMessage": "您必须至少有一个中继。请在删除此中继之前添加另一个中继。",
-  "ok": "确定"
+  "ok": "确定",
+
+  "systemSettings": "系统设置",
+  "startOnSystemStartup": "开机自启动",
+  "startOnSystemStartupDescription": "计算机启动时自动运行 Peridot",
+  "desktopNotifications": "桌面通知",
+  "desktopNotificationsDescription": "为权限请求显示桌面通知",
+  "useTor": "使用 Tor",
+  "useTorDescription": "通过 Tor 网络路由连接以增强隐私",
+  "useTorComingSoon": "通过 Tor 网络路由连接以增强隐私（即将推出）"
 }

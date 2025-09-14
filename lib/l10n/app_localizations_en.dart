@@ -246,4 +246,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get systemSettings => 'System Settings';
+
+  @override
+  String get startOnSystemStartup => 'Start on system startup';
+
+  @override
+  String get startOnSystemStartupDescription =>
+      'Launch Peridot automatically when your computer starts';
+
+  @override
+  String get desktopNotifications => 'Desktop notifications';
+
+  @override
+  String get desktopNotificationsDescription =>
+      'Show desktop notifications for permission requests';
+
+  @override
+  String get useTor => 'Use Tor';
+
+  @override
+  String get useTorDescription =>
+      'Route connections through Tor network for enhanced privacy';
+
+  @override
+  String get useTorComingSoon =>
+      'Route connections through Tor network for enhanced privacy (Coming soon)';
 }

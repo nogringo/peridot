@@ -246,4 +246,32 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get systemSettings => 'Configuración del sistema';
+
+  @override
+  String get startOnSystemStartup => 'Iniciar con el sistema';
+
+  @override
+  String get startOnSystemStartupDescription =>
+      'Ejecutar Peridot automáticamente cuando se inicie tu computadora';
+
+  @override
+  String get desktopNotifications => 'Notificaciones de escritorio';
+
+  @override
+  String get desktopNotificationsDescription =>
+      'Mostrar notificaciones de escritorio para solicitudes de permisos';
+
+  @override
+  String get useTor => 'Usar Tor';
+
+  @override
+  String get useTorDescription =>
+      'Enrutar conexiones a través de la red Tor para mayor privacidad';
+
+  @override
+  String get useTorComingSoon =>
+      'Enrutar conexiones a través de la red Tor para mayor privacidad (Próximamente)';
 }

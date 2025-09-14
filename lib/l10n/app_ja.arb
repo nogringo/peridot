@@ -87,5 +87,14 @@
   "relayRemoved": "リレーを削除しました",
   "cannotRemoveLastRelay": "最後のリレーは削除できません",
   "cannotRemoveLastRelayMessage": "少なくとも1つのリレーが必要です。このリレーを削除する前に別のリレーを追加してください。",
-  "ok": "OK"
+  "ok": "OK",
+
+  "systemSettings": "システム設定",
+  "startOnSystemStartup": "システム起動時に開始",
+  "startOnSystemStartupDescription": "コンピューターの起動時に自動的にPeridotを起動する",
+  "desktopNotifications": "デスクトップ通知",
+  "desktopNotificationsDescription": "権限リクエストのデスクトップ通知を表示する",
+  "useTor": "Torを使用",
+  "useTorDescription": "プライバシー強化のためTorネットワーク経由で接続をルーティング",
+  "useTorComingSoon": "プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）"
 }

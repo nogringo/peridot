@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/translate_permission.dart';
@@ -8,10 +9,7 @@ class NotificationAction {
   final String id;
   final String title;
 
-  NotificationAction({
-    required this.id,
-    required this.title,
-  });
+  NotificationAction({required this.id, required this.title});
 }
 
 class NotificationService extends GetxService {
@@ -20,10 +18,19 @@ class NotificationService extends GetxService {
   final FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
 
+  final _storage = const FlutterSecureStorage();
+
   // Store callbacks for permission requests
   final Map<int, Function(bool)> _permissionCallbacks = {};
 
+  // Observable for notification enabled state
+  final RxBool isNotificationEnabled = true.obs;
+
   Future<NotificationService> init() async {
+    // Load saved notification preference
+    final savedPref = await _storage.read(key: 'notifications_enabled');
+    isNotificationEnabled.value = savedPref != 'false';
+
     const androidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
@@ -52,6 +59,14 @@ class NotificationService extends GetxService {
     );
 
     return this;
+  }
+
+  Future<void> setNotificationsEnabled(bool enabled) async {
+    isNotificationEnabled.value = enabled;
+    await _storage.write(
+      key: 'notifications_enabled',
+      value: enabled.toString(),
+    );
   }
 
   void _onNotificationTapped(NotificationResponse response) {
@@ -123,6 +138,9 @@ class NotificationService extends GetxService {
     String? accountName,
     Function(bool)? onAction,
   }) async {
+    // Check if notifications are enabled
+    if (!isNotificationEnabled.value) return;
+
     final l10n = AppLocalizations.of(context)!;
     final translatedPermission = translatePermission(context, permission);
 
@@ -141,14 +159,8 @@ class NotificationService extends GetxService {
       title: title,
       body: body,
       actions: [
-        NotificationAction(
-          id: 'allow',
-          title: l10n.allow,
-        ),
-        NotificationAction(
-          id: 'deny',
-          title: l10n.deny,
-        ),
+        NotificationAction(id: 'allow', title: l10n.allow),
+        NotificationAction(id: 'deny', title: l10n.deny),
       ],
       payload: 'permission_request',
     );
@@ -169,11 +181,13 @@ class NotificationService extends GetxService {
       importance: Importance.high,
       priority: Priority.high,
       actions: actions
-          .map((action) => AndroidNotificationAction(
-                action.id,
-                action.title,
-                showsUserInterface: true,
-              ))
+          .map(
+            (action) => AndroidNotificationAction(
+              action.id,
+              action.title,
+              showsUserInterface: true,
+            ),
+          )
           .toList(),
     );
 
@@ -188,10 +202,10 @@ class NotificationService extends GetxService {
     // Linux notification with actions
     final linuxDetails = LinuxNotificationDetails(
       actions: actions
-          .map((action) => LinuxNotificationAction(
-                key: action.id,
-                label: action.title,
-              ))
+          .map(
+            (action) =>
+                LinuxNotificationAction(key: action.id, label: action.title),
+          )
           .toList(),
     );
 

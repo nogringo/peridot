@@ -5,6 +5,7 @@ import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
+import 'package:peridot/services/auto_start_service.dart';
 import 'package:peridot/services/notification_service.dart';
 import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
 import 'package:toastification/toastification.dart';
@@ -22,6 +23,12 @@ void main() async {
 
   final notificationService = await NotificationService().init();
   Get.put(notificationService);
+
+  final autoStartService = await AutoStartService().init();
+  Get.put(autoStartService);
+
+  // Enable auto-start by default
+  await autoStartService.enableAutoStart();
 
   runApp(const MainApp());
 }

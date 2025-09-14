@@ -343,5 +343,38 @@
   "ok": "OK",
   "@ok": {
     "description": "OK button text"
+  },
+
+  "systemSettings": "System Settings",
+  "@systemSettings": {
+    "description": "Title for system settings section"
+  },
+  "startOnSystemStartup": "Start on system startup",
+  "@startOnSystemStartup": {
+    "description": "Setting to enable auto-start on system boot"
+  },
+  "startOnSystemStartupDescription": "Launch Peridot automatically when your computer starts",
+  "@startOnSystemStartupDescription": {
+    "description": "Description for auto-start setting"
+  },
+  "desktopNotifications": "Desktop notifications",
+  "@desktopNotifications": {
+    "description": "Setting to enable desktop notifications"
+  },
+  "desktopNotificationsDescription": "Show desktop notifications for permission requests",
+  "@desktopNotificationsDescription": {
+    "description": "Description for desktop notifications setting"
+  },
+  "useTor": "Use Tor",
+  "@useTor": {
+    "description": "Setting to enable Tor routing"
+  },
+  "useTorDescription": "Route connections through Tor network for enhanced privacy",
+  "@useTorDescription": {
+    "description": "Description for Tor setting"
+  },
+  "useTorComingSoon": "Route connections through Tor network for enhanced privacy (Coming soon)",
+  "@useTorComingSoon": {
+    "description": "Description for Tor setting when it's not yet available"
   }
 }

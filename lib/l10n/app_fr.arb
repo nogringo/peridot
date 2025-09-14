@@ -87,5 +87,14 @@
   "relayRemoved": "Relais supprimé",
   "cannotRemoveLastRelay": "Impossible de supprimer le dernier relais",
   "cannotRemoveLastRelayMessage": "Vous devez avoir au moins un relais. Veuillez ajouter un autre relais avant de supprimer celui-ci.",
-  "ok": "OK"
+  "ok": "OK",
+
+  "systemSettings": "Paramètres système",
+  "startOnSystemStartup": "Démarrer avec le système",
+  "startOnSystemStartupDescription": "Lancer Peridot automatiquement au démarrage de votre ordinateur",
+  "desktopNotifications": "Notifications de bureau",
+  "desktopNotificationsDescription": "Afficher les notifications de bureau pour les demandes de permission",
+  "useTor": "Utiliser Tor",
+  "useTorDescription": "Router les connexions via le réseau Tor pour une confidentialité accrue",
+  "useTorComingSoon": "Router les connexions via le réseau Tor pour une confidentialité accrue (Bientôt disponible)"
 }

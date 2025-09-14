@@ -217,7 +217,7 @@ class Repository extends GetxController {
       if (context != null) {
         // Show notification with action buttons
         await notificationService.showPermissionRequestNotification(
-          context: context,
+          context: Get.context!,
           appName: authorizedApp.name,
           permission: commandString,
           accountName: authorizedApp.signerPubkey.substring(0, 8),
@@ -232,11 +232,9 @@ class Repository extends GetxController {
       }
 
       // Show dialog if notification action hasn't been triggered
-      if (shouldAuthorize == null) {
-        shouldAuthorize = await Get.dialog<bool>(
-          UnknownPermissionDialog(app: authorizedApp, permission: commandString),
-        );
-      }
+      shouldAuthorize ??= await Get.dialog<bool>(
+        UnknownPermissionDialog(app: authorizedApp, permission: commandString),
+      );
 
       if (shouldAuthorize != null) {
         if (shouldAuthorize!) {

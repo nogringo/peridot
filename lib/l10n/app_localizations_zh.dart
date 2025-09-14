@@ -242,4 +242,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ok => '确定';
+
+  @override
+  String get systemSettings => '系统设置';
+
+  @override
+  String get startOnSystemStartup => '开机自启动';
+
+  @override
+  String get startOnSystemStartupDescription => '计算机启动时自动运行 Peridot';
+
+  @override
+  String get desktopNotifications => '桌面通知';
+
+  @override
+  String get desktopNotificationsDescription => '为权限请求显示桌面通知';
+
+  @override
+  String get useTor => '使用 Tor';
+
+  @override
+  String get useTorDescription => '通过 Tor 网络路由连接以增强隐私';
+
+  @override
+  String get useTorComingSoon => '通过 Tor 网络路由连接以增强隐私（即将推出）';
 }

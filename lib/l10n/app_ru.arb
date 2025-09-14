@@ -87,5 +87,14 @@
   "relayRemoved": "Реле удалено",
   "cannotRemoveLastRelay": "Невозможно удалить последнее реле",
   "cannotRemoveLastRelayMessage": "У вас должно быть хотя бы одно реле. Пожалуйста, добавьте другое реле перед удалением этого.",
-  "ok": "OK"
+  "ok": "OK",
+
+  "systemSettings": "Системные настройки",
+  "startOnSystemStartup": "Запуск при старте системы",
+  "startOnSystemStartupDescription": "Автоматически запускать Peridot при включении компьютера",
+  "desktopNotifications": "Уведомления на рабочем столе",
+  "desktopNotificationsDescription": "Показывать уведомления на рабочем столе для запросов разрешений",
+  "useTor": "Использовать Tor",
+  "useTorDescription": "Маршрутизировать соединения через сеть Tor для повышения конфиденциальности",
+  "useTorComingSoon": "Маршрутизировать соединения через сеть Tor для повышения конфиденциальности (Скоро)"
 }

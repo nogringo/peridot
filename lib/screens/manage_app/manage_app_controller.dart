@@ -5,7 +5,6 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/permission.dart';
 import 'package:sembast/sembast.dart';
-import 'package:toastification/toastification.dart';
 
 class ManageAppController extends GetxController {
   AuthorizedApp? app;

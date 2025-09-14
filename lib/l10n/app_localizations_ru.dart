@@ -247,4 +247,32 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get systemSettings => 'Системные настройки';
+
+  @override
+  String get startOnSystemStartup => 'Запуск при старте системы';
+
+  @override
+  String get startOnSystemStartupDescription =>
+      'Автоматически запускать Peridot при включении компьютера';
+
+  @override
+  String get desktopNotifications => 'Уведомления на рабочем столе';
+
+  @override
+  String get desktopNotificationsDescription =>
+      'Показывать уведомления на рабочем столе для запросов разрешений';
+
+  @override
+  String get useTor => 'Использовать Tor';
+
+  @override
+  String get useTorDescription =>
+      'Маршрутизировать соединения через сеть Tor для повышения конфиденциальности';
+
+  @override
+  String get useTorComingSoon =>
+      'Маршрутизировать соединения через сеть Tor для повышения конфиденциальности (Скоро)';
 }

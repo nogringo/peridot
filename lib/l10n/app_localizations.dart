@@ -537,6 +537,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OK'**
   String get ok;
+
+  /// Title for system settings section
+  ///
+  /// In en, this message translates to:
+  /// **'System Settings'**
+  String get systemSettings;
+
+  /// Setting to enable auto-start on system boot
+  ///
+  /// In en, this message translates to:
+  /// **'Start on system startup'**
+  String get startOnSystemStartup;
+
+  /// Description for auto-start setting
+  ///
+  /// In en, this message translates to:
+  /// **'Launch Peridot automatically when your computer starts'**
+  String get startOnSystemStartupDescription;
+
+  /// Setting to enable desktop notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop notifications'**
+  String get desktopNotifications;
+
+  /// Description for desktop notifications setting
+  ///
+  /// In en, this message translates to:
+  /// **'Show desktop notifications for permission requests'**
+  String get desktopNotificationsDescription;
+
+  /// Setting to enable Tor routing
+  ///
+  /// In en, this message translates to:
+  /// **'Use Tor'**
+  String get useTor;
+
+  /// Description for Tor setting
+  ///
+  /// In en, this message translates to:
+  /// **'Route connections through Tor network for enhanced privacy'**
+  String get useTorDescription;
+
+  /// Description for Tor setting when it's not yet available
+  ///
+  /// In en, this message translates to:
+  /// **'Route connections through Tor network for enhanced privacy (Coming soon)'**
+  String get useTorComingSoon;
 }
 
 class _AppLocalizationsDelegate

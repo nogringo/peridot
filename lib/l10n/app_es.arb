@@ -87,5 +87,14 @@
   "relayRemoved": "Relé eliminado",
   "cannotRemoveLastRelay": "No se puede eliminar el último relé",
   "cannotRemoveLastRelayMessage": "Debes tener al menos un relé. Por favor, añade otro relé antes de eliminar este.",
-  "ok": "OK"
+  "ok": "OK",
+
+  "systemSettings": "Configuración del sistema",
+  "startOnSystemStartup": "Iniciar con el sistema",
+  "startOnSystemStartupDescription": "Ejecutar Peridot automáticamente cuando se inicie tu computadora",
+  "desktopNotifications": "Notificaciones de escritorio",
+  "desktopNotificationsDescription": "Mostrar notificaciones de escritorio para solicitudes de permisos",
+  "useTor": "Usar Tor",
+  "useTorDescription": "Enrutar conexiones a través de la red Tor para mayor privacidad",
+  "useTorComingSoon": "Enrutar conexiones a través de la red Tor para mayor privacidad (Próximamente)"
 }

@@ -243,4 +243,28 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get systemSettings => 'システム設定';
+
+  @override
+  String get startOnSystemStartup => 'システム起動時に開始';
+
+  @override
+  String get startOnSystemStartupDescription => 'コンピューターの起動時に自動的にPeridotを起動する';
+
+  @override
+  String get desktopNotifications => 'デスクトップ通知';
+
+  @override
+  String get desktopNotificationsDescription => '権限リクエストのデスクトップ通知を表示する';
+
+  @override
+  String get useTor => 'Torを使用';
+
+  @override
+  String get useTorDescription => 'プライバシー強化のためTorネットワーク経由で接続をルーティング';
+
+  @override
+  String get useTorComingSoon => 'プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）';
 }
