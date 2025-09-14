@@ -152,6 +152,22 @@ class Repository extends GetxController {
     await loadAuthorizedApps();
   }
 
+  Future<void> renameAuthorizedApp(String appPubkey, String newName) async {
+    final store = sembast.intMapStoreFactory.store('authorized_apps');
+    final records = await store.find(db);
+
+    for (final record in records) {
+      final app = AuthorizedApp.fromJson(record.value);
+      if (app.appPubkey != appPubkey) continue;
+
+      app.name = newName;
+      await store.record(record.key).put(db, app.toJson());
+      break;
+    }
+
+    await loadAuthorizedApps();
+  }
+
   Future<void> removeDefaultBunkerRelay(String relay) async {
     final store = sembast.stringMapStoreFactory.store('default_bunker_relays');
     await store.record(relay).delete(db);

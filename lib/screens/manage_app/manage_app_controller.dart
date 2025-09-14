@@ -8,6 +8,8 @@ import 'package:sembast/sembast.dart';
 
 class ManageAppController extends GetxController {
   AuthorizedApp? app;
+  final renameController = TextEditingController();
+  final renameFocusNode = FocusNode();
 
   @override
   void onInit() {
@@ -26,6 +28,26 @@ class ManageAppController extends GetxController {
         );
       }
     }
+
+    if (app != null) {
+      renameController.text = app!.name;
+    }
+
+    // Listen to focus changes to auto-save
+    renameFocusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void onClose() {
+    renameFocusNode.removeListener(_onFocusChange);
+    renameController.dispose();
+    renameFocusNode.dispose();
+    super.onClose();
+  }
+
+  void _onFocusChange() {
+    if (renameFocusNode.hasFocus) return;
+    saveRename();
   }
 
   void togglePermission(Permission permission) async {
@@ -33,6 +55,24 @@ class ManageAppController extends GetxController {
 
     permission.isAllowed = !permission.isAllowed;
     await Repository.to.updateAuthorizedApp(app!);
+    update();
+  }
+
+  void saveRename() async {
+    if (app == null) return;
+
+    final newName = renameController.text.trim();
+    if (newName.isEmpty) {
+      renameController.text = app!.name;
+      return;
+    }
+
+    if (newName == app!.name) return;
+
+    await Repository.to.renameAuthorizedApp(app!.appPubkey, newName);
+    app = Repository.to.authorizedApps.firstWhereOrNull(
+      (a) => a.appPubkey == app!.appPubkey,
+    );
     update();
   }
 

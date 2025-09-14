@@ -21,7 +21,19 @@ class ManageAppPage extends StatelessWidget {
           return Center(child: Text("App not found"));
         }
         return Scaffold(
-          appBar: AppBar(title: Text(app.name)),
+          appBar: AppBar(
+            title: TextField(
+              controller: controller.renameController,
+              focusNode: controller.renameFocusNode,
+              style: Theme.of(context).textTheme.titleLarge,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+              ),
+              onSubmitted: (_) => controller.saveRename(),
+            ),
+          ),
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
@@ -90,7 +102,7 @@ class ManageAppPage extends StatelessWidget {
               Center(
                 child: TextButton.icon(
                   onPressed: controller.deleteApp,
-                  label: Text("Remove ${app.name}"),
+                  label: Text("Delete"),
                   icon: Icon(Icons.delete_outline),
                 ),
               ),

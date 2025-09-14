@@ -3,11 +3,11 @@ import 'package:peridot/models/permission.dart';
 enum PermissionStatus { authorized, blocked, unknown }
 
 class AuthorizedApp {
-  final String appPubkey;
-  final String signerPubkey;
-  final String name;
-  final List<String> relays;
-  final List<Permission> permissions;
+  String appPubkey;
+  String signerPubkey;
+  String name;
+  List<String> relays;
+  List<Permission> permissions;
 
   AuthorizedApp({
     required this.appPubkey,
