@@ -131,7 +131,7 @@ class NotificationService extends GetxService {
     return true;
   }
 
-  Future<void> showPermissionRequestNotification({
+  Future<int?> showPermissionRequestNotification({
     required BuildContext context,
     required String appName,
     required String permission,
@@ -139,7 +139,7 @@ class NotificationService extends GetxService {
     Function(bool)? onAction,
   }) async {
     // Check if notifications are enabled
-    if (!isNotificationEnabled.value) return;
+    if (!isNotificationEnabled.value) return null;
 
     final l10n = AppLocalizations.of(context)!;
     final translatedPermission = translatePermission(context, permission);
@@ -168,6 +168,8 @@ class NotificationService extends GetxService {
       ],
       payload: 'permission_request',
     );
+
+    return notificationId;
   }
 
   Future<void> showNotificationWithActions({
@@ -264,6 +266,12 @@ class NotificationService extends GetxService {
       notificationDetails,
       payload: payload,
     );
+  }
+
+  Future<void> cancelNotification(int id) async {
+    await _notifications.cancel(id);
+    // Also remove any stored callback for this notification
+    _permissionCallbacks.remove(id);
   }
 
   Future<void> cancelAllNotifications() async {

@@ -326,6 +326,7 @@ class Repository extends GetxController {
 
       // Create a completer to handle both notification actions and dialog result
       bool? shouldAuthorize;
+      int? notificationId;
 
       if (context != null) {
         // Fetch user metadata to get the display name
@@ -338,25 +339,31 @@ class Repository extends GetxController {
             Nip19.npubFromHex(authorizedApp.signerPubkey);
 
         // Show notification with action buttons
-        await notificationService.showPermissionRequestNotification(
-          context: Get.context!,
-          appName: authorizedApp.name,
-          permission: commandString,
-          accountName: userName,
-          onAction: (bool allowed) {
-            // Handle notification button click
-            if (Get.isDialogOpen ?? false) {
-              Get.back(result: allowed);
-            }
-            shouldAuthorize = allowed;
-          },
-        );
+        notificationId = await notificationService
+            .showPermissionRequestNotification(
+              context: Get.context!,
+              appName: authorizedApp.name,
+              permission: commandString,
+              accountName: userName,
+              onAction: (bool allowed) {
+                // Handle notification button click
+                if (Get.isDialogOpen ?? false) {
+                  Get.back(result: allowed);
+                }
+                shouldAuthorize = allowed;
+              },
+            );
       }
 
       // Show dialog if notification action hasn't been triggered
       shouldAuthorize ??= await Get.dialog<bool>(
         UnknownPermissionDialog(app: authorizedApp, permission: commandString),
       );
+
+      // Cancel the notification if it exists (user resolved via dialog)
+      if (notificationId != null && shouldAuthorize != null) {
+        await notificationService.cancelNotification(notificationId);
+      }
 
       if (shouldAuthorize != null) {
         PermissionStatus permissionStatus;
