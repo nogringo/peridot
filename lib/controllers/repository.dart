@@ -4,12 +4,15 @@ import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
 import 'package:peridot/config.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/nip46_request.dart';
+import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:peridot/utils/get_signer.dart';
 import 'package:peridot/utils/nip46_encryption.dart';
 import 'package:peridot/utils/nip46_parser.dart';
+import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/unknown_permission_dialog.dart';
 import 'package:sembast/sembast.dart' as sembast;
 
@@ -206,6 +209,30 @@ class Repository extends GetxController {
     );
 
     if (permissionStatus == PermissionStatus.unknown) {
+      // Show desktop notification for permission request
+      final notificationService = NotificationService.to;
+      final context = Get.context;
+      if (context != null) {
+        // Capture translations before async call
+        final l10n = AppLocalizations.of(Get.context!)!;
+        final translatedPermission = translatePermission(
+          Get.context!,
+          commandString,
+        );
+        final title = l10n.permissionRequested;
+        final body = l10n.unknownPermissionMessage(
+          authorizedApp.name,
+          translatedPermission,
+        );
+
+        // Now show notification with pre-captured translations
+        await notificationService.showNotification(
+          title: title,
+          body: body,
+          payload: 'permission_request',
+        );
+      }
+
       final bool? shouldAuthorize = await Get.dialog<bool>(
         UnknownPermissionDialog(app: authorizedApp, permission: commandString),
       );

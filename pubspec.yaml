@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^19.4.2
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^9.2.4

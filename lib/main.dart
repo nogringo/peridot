@@ -5,6 +5,7 @@ import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
+import 'package:peridot/services/notification_service.dart';
 import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
 import 'package:toastification/toastification.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,6 +19,9 @@ void main() async {
   final repository = Repository();
   await repository.loadApp();
   Get.put(repository);
+
+  final notificationService = await NotificationService().init();
+  Get.put(notificationService);
 
   runApp(const MainApp());
 }

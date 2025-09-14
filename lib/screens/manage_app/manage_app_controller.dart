@@ -76,14 +76,6 @@ class ManageAppController extends GetxController {
       await Repository.to.listenSigningRequests();
 
       Get.back();
-
-      toastification.show(
-        context: Get.context!,
-        title: Text(l10n.applicationDeleted),
-        type: ToastificationType.success,
-        autoCloseDuration: Duration(seconds: 2),
-        alignment: Alignment.bottomRight,
-      );
     }
   }
 }
