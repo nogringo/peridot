@@ -585,6 +585,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Route connections through Tor network for enhanced privacy (Coming soon)'**
   String get useTorComingSoon;
+
+  /// Continue button text
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// Message when Bunker URL is copied
+  ///
+  /// In en, this message translates to:
+  /// **'Bunker URL copied successfully'**
+  String get bunkerUrlCopiedSuccessfully;
+
+  /// Title for add an app page
+  ///
+  /// In en, this message translates to:
+  /// **'Add an app'**
+  String get addAnApp;
+
+  /// Label for choosing account
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the account'**
+  String get chooseTheAccount;
+
+  /// Title for connect an app section
+  ///
+  /// In en, this message translates to:
+  /// **'Connect an app'**
+  String get connectAnApp;
+
+  /// Question asking to add the app
+  ///
+  /// In en, this message translates to:
+  /// **'Add this app?'**
+  String get addThisAppQuestion;
+
+  /// Connect button text
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get connect;
+
+  /// Title for Bunker URL connection method
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with Bunker URL'**
+  String get connectWithBunkerUrl;
+
+  /// Button to copy Bunker URL
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Bunker URL'**
+  String get copyBunkerUrl;
+
+  /// Hint text for nostr connect URL input
+  ///
+  /// In en, this message translates to:
+  /// **'nostrconnect://'**
+  String get nostrConnectUrlHint;
+
+  /// Message when public key is copied
+  ///
+  /// In en, this message translates to:
+  /// **'Public key copied successfully'**
+  String get publicKeyCopiedSuccessfully;
+
+  /// Request to enter password
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a password'**
+  String get pleaseEnterPassword;
+
+  /// Message when encrypted backup is copied
+  ///
+  /// In en, this message translates to:
+  /// **'Encrypted backup copied'**
+  String get encryptedBackupCopied;
+
+  /// Error message when backup fails
+  ///
+  /// In en, this message translates to:
+  /// **'Backup failed'**
+  String get backupFailed;
+
+  /// Message when private key is copied
+  ///
+  /// In en, this message translates to:
+  /// **'Private key copied'**
+  String get privateKeyCopiedToClipboard;
+
+  /// Error message when copy fails
+  ///
+  /// In en, this message translates to:
+  /// **'Copy failed'**
+  String get copyFailed;
+
+  /// Title for backup account page
+  ///
+  /// In en, this message translates to:
+  /// **'Backup this account'**
+  String get backupThisAccount;
+
+  /// Message when no account is selected
+  ///
+  /// In en, this message translates to:
+  /// **'No account selected'**
+  String get noAccountSelected;
+
+  /// Label for recommended option
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get recommended;
+
+  /// Label for not recommended option
+  ///
+  /// In en, this message translates to:
+  /// **'Not recommended'**
+  String get notRecommended;
+
+  /// Password label
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// Button to copy encrypted version
+  ///
+  /// In en, this message translates to:
+  /// **'Copy encrypted version'**
+  String get copyEncryptedVersion;
+
+  /// Button to copy unencrypted version
+  ///
+  /// In en, this message translates to:
+  /// **'Copy unencrypted version'**
+  String get copyUnencryptedVersion;
+
+  /// Placeholder for password input
+  ///
+  /// In en, this message translates to:
+  /// **'Your password'**
+  String get yourPassword;
 }
 
 class _AppLocalizationsDelegate

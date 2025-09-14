@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_application/add_application_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
@@ -25,7 +26,7 @@ class ConnectAnAppView extends StatelessWidget {
                 controller:
                     AddApplicationController.to.nostrConnectFieldController,
                 decoration: InputDecoration(
-                  hintText: "nostrconnect://",
+                  hintText: AppLocalizations.of(context)!.nostrConnectUrlHint,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -40,7 +41,7 @@ class ConnectAnAppView extends StatelessWidget {
                     onPressed: c.hasNostrConnectURL
                         ? c.connectWithNostrConnect
                         : null,
-                    child: Text("Connect"),
+                    child: Text(AppLocalizations.of(context)!.connect),
                   );
                 },
               ),
@@ -53,7 +54,10 @@ class ConnectAnAppView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text("Connect with Bunker URL", style: Get.textTheme.titleMedium),
+              Text(
+                AppLocalizations.of(context)!.connectWithBunkerUrl,
+                style: Get.textTheme.titleMedium,
+              ),
               SizedBox(height: 8),
               GetBuilder<AddApplicationController>(
                 builder: (c) {
@@ -63,7 +67,7 @@ class ConnectAnAppView extends StatelessWidget {
               SizedBox(height: 12),
               OutlinedButton(
                 onPressed: () => AddApplicationController.to.copyBunkerUrl(),
-                child: Text("Copy Bunker URL"),
+                child: Text(AppLocalizations.of(context)!.copyBunkerUrl),
               ),
             ],
           ),

@@ -54,8 +54,8 @@
   "hidePrivateKey": "隐藏私钥",
   "copyPrivateKey": "复制私钥",
   "privateKeyCopied": "私钥已复制到剪贴板",
-  
-  "appNotFound": "未找到应用程序",
+
+  "appNotFound": "未找到应用",
   "allowed": "已允许",
   "blocked": "已阻止",
   
@@ -96,5 +96,30 @@
   "desktopNotificationsDescription": "为权限请求显示桌面通知",
   "useTor": "使用 Tor",
   "useTorDescription": "通过 Tor 网络路由连接以增强隐私",
-  "useTorComingSoon": "通过 Tor 网络路由连接以增强隐私（即将推出）"
+  "useTorComingSoon": "通过 Tor 网络路由连接以增强隐私（即将推出）",
+
+  "continueButton": "继续",
+  "bunkerUrlCopiedSuccessfully": "Bunker URL 复制成功",
+  "addAnApp": "添加应用",
+  "chooseTheAccount": "选择账户",
+  "connectAnApp": "连接应用",
+  "addThisAppQuestion": "添加此应用？",
+  "connect": "连接",
+  "connectWithBunkerUrl": "使用 Bunker URL 连接",
+  "copyBunkerUrl": "复制 Bunker URL",
+  "nostrConnectUrlHint": "nostrconnect://",
+  "publicKeyCopiedSuccessfully": "公钥复制成功",
+  "pleaseEnterPassword": "请输入密码",
+  "encryptedBackupCopied": "加密备份已复制",
+  "backupFailed": "备份失败",
+  "privateKeyCopiedToClipboard": "私钥已复制",
+  "copyFailed": "复制失败",
+  "backupThisAccount": "备份此账户",
+  "noAccountSelected": "未选择账户",
+  "recommended": "推荐",
+  "notRecommended": "不推荐",
+  "password": "密码",
+  "copyEncryptedVersion": "复制加密版本",
+  "copyUnencryptedVersion": "复制未加密版本",
+  "yourPassword": "您的密码"
 }

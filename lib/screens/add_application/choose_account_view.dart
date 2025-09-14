@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_application/add_application_controller.dart';
 
 class ChooseAccountView extends StatelessWidget {
@@ -41,7 +42,7 @@ class ChooseAccountView extends StatelessWidget {
         SizedBox(height: 16),
         TextButton(
           onPressed: AddApplicationController.to.chooseAccountStepDone,
-          child: Text("Continue"),
+          child: Text(AppLocalizations.of(context)!.continueButton),
         ),
       ],
     );

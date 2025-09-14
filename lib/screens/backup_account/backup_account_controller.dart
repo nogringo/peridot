@@ -6,6 +6,7 @@ import 'package:nip19/nip19.dart';
 import 'package:nip49/nip49.dart';
 import 'package:toastification/toastification.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 
 class BackupAccountController extends GetxController {
   static BackupAccountController get to => Get.find();
@@ -21,9 +22,10 @@ class BackupAccountController extends GetxController {
   Future<void> copySecureBackup() async {
     final password = passwordFieldController.text.trim();
     if (password.isEmpty) {
+      final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(
         context: Get.context!,
-        title: Text('Please enter a password'),
+        title: Text(l10n.pleaseEnterPassword),
         type: ToastificationType.error,
         autoCloseDuration: Duration(seconds: 5),
         alignment: Alignment.bottomRight,
@@ -48,9 +50,10 @@ class BackupAccountController extends GetxController {
       // Copy to clipboard
       await Clipboard.setData(ClipboardData(text: encryptedKey));
 
+      final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(
         context: Get.context!,
-        title: Text('Encrypted backup copied'),
+        title: Text(l10n.encryptedBackupCopied),
         description: Text(
           'Your encrypted private key has been copied to clipboard',
         ),
@@ -64,9 +67,10 @@ class BackupAccountController extends GetxController {
       passwordFieldController.clear();
       canEncrypt.value = false;
     } catch (e) {
+      final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(
         context: Get.context!,
-        title: Text('Backup failed'),
+        title: Text(l10n.backupFailed),
         description: Text(e.toString()),
         type: ToastificationType.error,
         autoCloseDuration: Duration(seconds: 5),
@@ -93,9 +97,10 @@ class BackupAccountController extends GetxController {
       // Copy to clipboard
       await Clipboard.setData(ClipboardData(text: nsec));
 
+      final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(
         context: Get.context!,
-        title: Text('Private key copied'),
+        title: Text(l10n.privateKeyCopiedToClipboard),
         description: Text(
           'Your unencrypted private key has been copied to clipboard',
         ),
@@ -105,9 +110,10 @@ class BackupAccountController extends GetxController {
         showProgressBar: true,
       );
     } catch (e) {
+      final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(
         context: Get.context!,
-        title: Text('Copy failed'),
+        title: Text(l10n.copyFailed),
         description: Text(e.toString()),
         type: ToastificationType.error,
         autoCloseDuration: Duration(seconds: 5),

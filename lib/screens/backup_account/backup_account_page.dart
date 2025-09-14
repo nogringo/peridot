@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/backup_account/backup_account_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
@@ -10,19 +11,20 @@ class BackupAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final pubkey = Get.parameters["pubkey"];
 
     if (pubkey == null) {
       return Scaffold(
-        appBar: AppBar(title: Text("Backup account")),
+        appBar: AppBar(title: Text(l10n.backupAccount)),
         body: Center(
-          child: Text("No account selected", style: Get.textTheme.titleLarge),
+          child: Text(l10n.noAccountSelected, style: Get.textTheme.titleLarge),
         ),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Backup this account")),
+      appBar: AppBar(title: Text(l10n.backupThisAccount)),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 12),
         children: [
@@ -47,6 +49,7 @@ class SecureBackupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BorderAreaView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,7 +57,7 @@ class SecureBackupView extends StatelessWidget {
           Align(
             alignment: AlignmentGeometry.topLeft,
             child: Chip(
-              label: Text("Recommanded"),
+              label: Text(l10n.recommended),
               shape: StadiumBorder(),
               avatar: Icon(Icons.favorite),
             ),
@@ -70,7 +73,7 @@ class SecureBackupView extends StatelessWidget {
               return TextField(
                 controller: c.passwordFieldController,
                 obscureText: true,
-                decoration: InputDecoration(hintText: "Password"),
+                decoration: InputDecoration(hintText: l10n.password),
                 onChanged: c.onPasswordFieldChanged,
               );
             },
@@ -81,7 +84,7 @@ class SecureBackupView extends StatelessWidget {
               onPressed: BackupAccountController.to.canEncrypt.value
                   ? () => BackupAccountController.to.copySecureBackup()
                   : null,
-              child: Text("Copy encrypted version"),
+              child: Text(l10n.copyEncryptedVersion),
             );
           }),
         ],
@@ -95,6 +98,7 @@ class UnsecureBackupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final themeData = ThemeData.from(
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.red,
@@ -110,7 +114,7 @@ class UnsecureBackupView extends StatelessWidget {
             Align(
               alignment: AlignmentGeometry.topLeft,
               child: Chip(
-                label: Text("Unrecommanded"),
+                label: Text(l10n.notRecommended),
                 shape: StadiumBorder(),
                 avatar: Icon(Icons.warning_rounded),
               ),
@@ -123,7 +127,7 @@ class UnsecureBackupView extends StatelessWidget {
             SizedBox(height: 8),
             FilledButton(
               onPressed: () => BackupAccountController.to.copyUnsecureBackup(),
-              child: Text("Copy unencrypted version"),
+              child: Text(l10n.copyUnencryptedVersion),
             ),
           ],
         ),

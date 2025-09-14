@@ -156,7 +156,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privateKeyCopied => '私钥已复制到剪贴板';
 
   @override
-  String get appNotFound => '未找到应用程序';
+  String get appNotFound => '未找到应用';
 
   @override
   String get allowed => '已允许';
@@ -266,4 +266,76 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get useTorComingSoon => '通过 Tor 网络路由连接以增强隐私（即将推出）';
+
+  @override
+  String get continueButton => '继续';
+
+  @override
+  String get bunkerUrlCopiedSuccessfully => 'Bunker URL 复制成功';
+
+  @override
+  String get addAnApp => '添加应用';
+
+  @override
+  String get chooseTheAccount => '选择账户';
+
+  @override
+  String get connectAnApp => '连接应用';
+
+  @override
+  String get addThisAppQuestion => '添加此应用？';
+
+  @override
+  String get connect => '连接';
+
+  @override
+  String get connectWithBunkerUrl => '使用 Bunker URL 连接';
+
+  @override
+  String get copyBunkerUrl => '复制 Bunker URL';
+
+  @override
+  String get nostrConnectUrlHint => 'nostrconnect://';
+
+  @override
+  String get publicKeyCopiedSuccessfully => '公钥复制成功';
+
+  @override
+  String get pleaseEnterPassword => '请输入密码';
+
+  @override
+  String get encryptedBackupCopied => '加密备份已复制';
+
+  @override
+  String get backupFailed => '备份失败';
+
+  @override
+  String get privateKeyCopiedToClipboard => '私钥已复制';
+
+  @override
+  String get copyFailed => '复制失败';
+
+  @override
+  String get backupThisAccount => '备份此账户';
+
+  @override
+  String get noAccountSelected => '未选择账户';
+
+  @override
+  String get recommended => '推荐';
+
+  @override
+  String get notRecommended => '不推荐';
+
+  @override
+  String get password => '密码';
+
+  @override
+  String get copyEncryptedVersion => '复制加密版本';
+
+  @override
+  String get copyUnencryptedVersion => '复制未加密版本';
+
+  @override
+  String get yourPassword => '您的密码';
 }

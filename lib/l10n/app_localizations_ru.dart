@@ -275,4 +275,77 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get useTorComingSoon =>
       'Маршрутизировать соединения через сеть Tor для повышения конфиденциальности (Скоро)';
+
+  @override
+  String get continueButton => 'Продолжить';
+
+  @override
+  String get bunkerUrlCopiedSuccessfully => 'URL Bunker успешно скопирован';
+
+  @override
+  String get addAnApp => 'Добавить приложение';
+
+  @override
+  String get chooseTheAccount => 'Выберите аккаунт';
+
+  @override
+  String get connectAnApp => 'Подключить приложение';
+
+  @override
+  String get addThisAppQuestion => 'Добавить это приложение?';
+
+  @override
+  String get connect => 'Подключить';
+
+  @override
+  String get connectWithBunkerUrl => 'Подключиться через URL Bunker';
+
+  @override
+  String get copyBunkerUrl => 'Скопировать URL Bunker';
+
+  @override
+  String get nostrConnectUrlHint => 'nostrconnect://';
+
+  @override
+  String get publicKeyCopiedSuccessfully => 'Публичный ключ успешно скопирован';
+
+  @override
+  String get pleaseEnterPassword => 'Пожалуйста, введите пароль';
+
+  @override
+  String get encryptedBackupCopied =>
+      'Зашифрованная резервная копия скопирована';
+
+  @override
+  String get backupFailed => 'Ошибка резервного копирования';
+
+  @override
+  String get privateKeyCopiedToClipboard => 'Приватный ключ скопирован';
+
+  @override
+  String get copyFailed => 'Ошибка копирования';
+
+  @override
+  String get backupThisAccount => 'Резервное копирование этого аккаунта';
+
+  @override
+  String get noAccountSelected => 'Аккаунт не выбран';
+
+  @override
+  String get recommended => 'Рекомендуется';
+
+  @override
+  String get notRecommended => 'Не рекомендуется';
+
+  @override
+  String get password => 'Пароль';
+
+  @override
+  String get copyEncryptedVersion => 'Скопировать зашифрованную версию';
+
+  @override
+  String get copyUnencryptedVersion => 'Скопировать незашифрованную версию';
+
+  @override
+  String get yourPassword => 'Ваш пароль';
 }

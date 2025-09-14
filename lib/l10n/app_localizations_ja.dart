@@ -156,7 +156,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get privateKeyCopied => '秘密鍵をクリップボードにコピーしました';
 
   @override
-  String get appNotFound => 'アプリケーションが見つかりません';
+  String get appNotFound => 'アプリが見つかりません';
 
   @override
   String get allowed => '許可済み';
@@ -267,4 +267,76 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get useTorComingSoon => 'プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）';
+
+  @override
+  String get continueButton => '続ける';
+
+  @override
+  String get bunkerUrlCopiedSuccessfully => 'Bunker URLを正常にコピーしました';
+
+  @override
+  String get addAnApp => 'アプリを追加';
+
+  @override
+  String get chooseTheAccount => 'アカウントを選択';
+
+  @override
+  String get connectAnApp => 'アプリを接続';
+
+  @override
+  String get addThisAppQuestion => 'このアプリを追加しますか？';
+
+  @override
+  String get connect => '接続';
+
+  @override
+  String get connectWithBunkerUrl => 'Bunker URLで接続';
+
+  @override
+  String get copyBunkerUrl => 'Bunker URLをコピー';
+
+  @override
+  String get nostrConnectUrlHint => 'nostrconnect://';
+
+  @override
+  String get publicKeyCopiedSuccessfully => '公開鍵を正常にコピーしました';
+
+  @override
+  String get pleaseEnterPassword => 'パスワードを入力してください';
+
+  @override
+  String get encryptedBackupCopied => '暗号化されたバックアップをコピーしました';
+
+  @override
+  String get backupFailed => 'バックアップに失敗しました';
+
+  @override
+  String get privateKeyCopiedToClipboard => '秘密鍵をコピーしました';
+
+  @override
+  String get copyFailed => 'コピーに失敗しました';
+
+  @override
+  String get backupThisAccount => 'このアカウントをバックアップ';
+
+  @override
+  String get noAccountSelected => 'アカウントが選択されていません';
+
+  @override
+  String get recommended => '推奨';
+
+  @override
+  String get notRecommended => '非推奨';
+
+  @override
+  String get password => 'パスワード';
+
+  @override
+  String get copyEncryptedVersion => '暗号化されたバージョンをコピー';
+
+  @override
+  String get copyUnencryptedVersion => '暗号化されていないバージョンをコピー';
+
+  @override
+  String get yourPassword => 'あなたのパスワード';
 }

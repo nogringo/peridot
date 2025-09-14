@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart' hide NostrConnect;
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/bunker.dart';
 import 'package:peridot/models/nip46_request.dart';
@@ -126,10 +127,11 @@ class AddApplicationController extends GetxController {
 
     Clipboard.setData(ClipboardData(text: bunkerUrl!.url));
 
+    final l10n = AppLocalizations.of(Get.context!)!;
     toastification.show(
       context: Get.context!,
-      title: const Text('Copied to clipboard'),
-      description: const Text('Bunker URL copied successfully'),
+      title: Text(l10n.copiedToClipboard),
+      description: Text(l10n.bunkerUrlCopiedSuccessfully),
       autoCloseDuration: const Duration(seconds: 5),
       alignment: Alignment.bottomRight,
       type: ToastificationType.success,

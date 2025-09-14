@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/remove_account_dialog.dart';
 import 'package:sembast/sembast.dart';
@@ -31,10 +32,11 @@ class SettingsController extends GetxController {
     final npub = Nip19.npubFromHex(pubkey);
     Clipboard.setData(ClipboardData(text: npub));
 
+    final l10n = AppLocalizations.of(Get.context!)!;
     toastification.show(
       context: Get.context!,
-      title: const Text('Copied to clipboard'),
-      description: const Text('Public key copied successfully'),
+      title: Text(l10n.copiedToClipboard),
+      description: Text(l10n.publicKeyCopiedSuccessfully),
       autoCloseDuration: const Duration(seconds: 5),
       alignment: Alignment.bottomRight,
       type: ToastificationType.success,

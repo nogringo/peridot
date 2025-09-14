@@ -274,4 +274,77 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get useTorComingSoon =>
       'Enrutar conexiones a través de la red Tor para mayor privacidad (Próximamente)';
+
+  @override
+  String get continueButton => 'Continuar';
+
+  @override
+  String get bunkerUrlCopiedSuccessfully => 'URL Bunker copiada exitosamente';
+
+  @override
+  String get addAnApp => 'Añadir una aplicación';
+
+  @override
+  String get chooseTheAccount => 'Elegir la cuenta';
+
+  @override
+  String get connectAnApp => 'Conectar una aplicación';
+
+  @override
+  String get addThisAppQuestion => '¿Añadir esta aplicación?';
+
+  @override
+  String get connect => 'Conectar';
+
+  @override
+  String get connectWithBunkerUrl => 'Conectar con URL Bunker';
+
+  @override
+  String get copyBunkerUrl => 'Copiar URL Bunker';
+
+  @override
+  String get nostrConnectUrlHint => 'nostrconnect://';
+
+  @override
+  String get publicKeyCopiedSuccessfully =>
+      'Clave pública copiada exitosamente';
+
+  @override
+  String get pleaseEnterPassword => 'Por favor ingresa una contraseña';
+
+  @override
+  String get encryptedBackupCopied => 'Copia de seguridad cifrada copiada';
+
+  @override
+  String get backupFailed => 'Copia de seguridad fallida';
+
+  @override
+  String get privateKeyCopiedToClipboard => 'Clave privada copiada';
+
+  @override
+  String get copyFailed => 'Error al copiar';
+
+  @override
+  String get backupThisAccount => 'Respaldar esta cuenta';
+
+  @override
+  String get noAccountSelected => 'No hay cuenta seleccionada';
+
+  @override
+  String get recommended => 'Recomendado';
+
+  @override
+  String get notRecommended => 'No recomendado';
+
+  @override
+  String get password => 'Contraseña';
+
+  @override
+  String get copyEncryptedVersion => 'Copiar versión cifrada';
+
+  @override
+  String get copyUnencryptedVersion => 'Copiar versión sin cifrar';
+
+  @override
+  String get yourPassword => 'Tu contraseña';
 }

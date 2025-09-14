@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/border_area_view.dart';
@@ -17,8 +18,9 @@ class ManageAppPage extends StatelessWidget {
     return GetBuilder<ManageAppController>(
       builder: (c) {
         final app = c.app;
+        final l10n = AppLocalizations.of(context)!;
         if (app == null) {
-          return Center(child: Text("App not found"));
+          return Center(child: Text(l10n.appNotFound));
         }
         return Scaffold(
           appBar: AppBar(
@@ -43,7 +45,7 @@ class ManageAppPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "Connected account",
+                      l10n.connectedAccount,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     ListTile(
@@ -70,7 +72,7 @@ class ManageAppPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        "Permissions",
+                        l10n.permissions,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -78,7 +80,7 @@ class ManageAppPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(16),
                         child: Text(
-                          "No permissions set",
+                          l10n.noPermissionsSet,
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(fontStyle: FontStyle.italic),
                         ),
@@ -102,7 +104,7 @@ class ManageAppPage extends StatelessWidget {
               Center(
                 child: TextButton.icon(
                   onPressed: controller.deleteApp,
-                  label: Text("Delete"),
+                  label: Text(l10n.delete),
                   icon: Icon(Icons.delete_outline),
                 ),
               ),

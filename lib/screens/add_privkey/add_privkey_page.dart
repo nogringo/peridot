@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_privkey/add_privkey_controller.dart';
 
 class AddPrivkeyPage extends StatelessWidget {
@@ -10,8 +11,9 @@ class AddPrivkeyPage extends StatelessWidget {
     return GetBuilder<AddPrivkeyController>(
       init: AddPrivkeyController(),
       builder: (c) {
+        final l10n = AppLocalizations.of(context)!;
         return Scaffold(
-          appBar: AppBar(title: Text("Add private key")),
+          appBar: AppBar(title: Text(l10n.addPrivateKey)),
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
@@ -40,7 +42,7 @@ class AddPrivkeyPage extends StatelessWidget {
                       controller: AddPrivkeyController
                           .to
                           .ncryptsecPasswordFieldController,
-                      decoration: InputDecoration(hintText: "Your password"),
+                      decoration: InputDecoration(hintText: l10n.yourPassword),
                     ),
                   ],
                 );

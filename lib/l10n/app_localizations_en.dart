@@ -274,4 +274,76 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get useTorComingSoon =>
       'Route connections through Tor network for enhanced privacy (Coming soon)';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get bunkerUrlCopiedSuccessfully => 'Bunker URL copied successfully';
+
+  @override
+  String get addAnApp => 'Add an app';
+
+  @override
+  String get chooseTheAccount => 'Choose the account';
+
+  @override
+  String get connectAnApp => 'Connect an app';
+
+  @override
+  String get addThisAppQuestion => 'Add this app?';
+
+  @override
+  String get connect => 'Connect';
+
+  @override
+  String get connectWithBunkerUrl => 'Connect with Bunker URL';
+
+  @override
+  String get copyBunkerUrl => 'Copy Bunker URL';
+
+  @override
+  String get nostrConnectUrlHint => 'nostrconnect://';
+
+  @override
+  String get publicKeyCopiedSuccessfully => 'Public key copied successfully';
+
+  @override
+  String get pleaseEnterPassword => 'Please enter a password';
+
+  @override
+  String get encryptedBackupCopied => 'Encrypted backup copied';
+
+  @override
+  String get backupFailed => 'Backup failed';
+
+  @override
+  String get privateKeyCopiedToClipboard => 'Private key copied';
+
+  @override
+  String get copyFailed => 'Copy failed';
+
+  @override
+  String get backupThisAccount => 'Backup this account';
+
+  @override
+  String get noAccountSelected => 'No account selected';
+
+  @override
+  String get recommended => 'Recommended';
+
+  @override
+  String get notRecommended => 'Not recommended';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get copyEncryptedVersion => 'Copy encrypted version';
+
+  @override
+  String get copyUnencryptedVersion => 'Copy unencrypted version';
+
+  @override
+  String get yourPassword => 'Your password';
 }

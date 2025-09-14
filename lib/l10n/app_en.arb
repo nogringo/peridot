@@ -376,5 +376,102 @@
   "useTorComingSoon": "Route connections through Tor network for enhanced privacy (Coming soon)",
   "@useTorComingSoon": {
     "description": "Description for Tor setting when it's not yet available"
+  },
+
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "bunkerUrlCopiedSuccessfully": "Bunker URL copied successfully",
+  "@bunkerUrlCopiedSuccessfully": {
+    "description": "Message when Bunker URL is copied"
+  },
+  "addAnApp": "Add an app",
+  "@addAnApp": {
+    "description": "Title for add an app page"
+  },
+  "chooseTheAccount": "Choose the account",
+  "@chooseTheAccount": {
+    "description": "Label for choosing account"
+  },
+  "connectAnApp": "Connect an app",
+  "@connectAnApp": {
+    "description": "Title for connect an app section"
+  },
+  "addThisAppQuestion": "Add this app?",
+  "@addThisAppQuestion": {
+    "description": "Question asking to add the app"
+  },
+  "connect": "Connect",
+  "@connect": {
+    "description": "Connect button text"
+  },
+  "connectWithBunkerUrl": "Connect with Bunker URL",
+  "@connectWithBunkerUrl": {
+    "description": "Title for Bunker URL connection method"
+  },
+  "copyBunkerUrl": "Copy Bunker URL",
+  "@copyBunkerUrl": {
+    "description": "Button to copy Bunker URL"
+  },
+  "nostrConnectUrlHint": "nostrconnect://",
+  "@nostrConnectUrlHint": {
+    "description": "Hint text for nostr connect URL input"
+  },
+  "publicKeyCopiedSuccessfully": "Public key copied successfully",
+  "@publicKeyCopiedSuccessfully": {
+    "description": "Message when public key is copied"
+  },
+  "pleaseEnterPassword": "Please enter a password",
+  "@pleaseEnterPassword": {
+    "description": "Request to enter password"
+  },
+  "encryptedBackupCopied": "Encrypted backup copied",
+  "@encryptedBackupCopied": {
+    "description": "Message when encrypted backup is copied"
+  },
+  "backupFailed": "Backup failed",
+  "@backupFailed": {
+    "description": "Error message when backup fails"
+  },
+  "privateKeyCopiedToClipboard": "Private key copied",
+  "@privateKeyCopiedToClipboard": {
+    "description": "Message when private key is copied"
+  },
+  "copyFailed": "Copy failed",
+  "@copyFailed": {
+    "description": "Error message when copy fails"
+  },
+  "backupThisAccount": "Backup this account",
+  "@backupThisAccount": {
+    "description": "Title for backup account page"
+  },
+  "noAccountSelected": "No account selected",
+  "@noAccountSelected": {
+    "description": "Message when no account is selected"
+  },
+  "recommended": "Recommended",
+  "@recommended": {
+    "description": "Label for recommended option"
+  },
+  "notRecommended": "Not recommended",
+  "@notRecommended": {
+    "description": "Label for not recommended option"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password label"
+  },
+  "copyEncryptedVersion": "Copy encrypted version",
+  "@copyEncryptedVersion": {
+    "description": "Button to copy encrypted version"
+  },
+  "copyUnencryptedVersion": "Copy unencrypted version",
+  "@copyUnencryptedVersion": {
+    "description": "Button to copy unencrypted version"
+  },
+  "yourPassword": "Your password",
+  "@yourPassword": {
+    "description": "Placeholder for password input"
   }
 }

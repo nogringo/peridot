@@ -54,8 +54,8 @@
   "hidePrivateKey": "秘密鍵を非表示",
   "copyPrivateKey": "秘密鍵をコピー",
   "privateKeyCopied": "秘密鍵をクリップボードにコピーしました",
-  
-  "appNotFound": "アプリケーションが見つかりません",
+
+  "appNotFound": "アプリが見つかりません",
   "allowed": "許可済み",
   "blocked": "ブロック済み",
   
@@ -96,5 +96,30 @@
   "desktopNotificationsDescription": "権限リクエストのデスクトップ通知を表示する",
   "useTor": "Torを使用",
   "useTorDescription": "プライバシー強化のためTorネットワーク経由で接続をルーティング",
-  "useTorComingSoon": "プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）"
+  "useTorComingSoon": "プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）",
+
+  "continueButton": "続ける",
+  "bunkerUrlCopiedSuccessfully": "Bunker URLを正常にコピーしました",
+  "addAnApp": "アプリを追加",
+  "chooseTheAccount": "アカウントを選択",
+  "connectAnApp": "アプリを接続",
+  "addThisAppQuestion": "このアプリを追加しますか？",
+  "connect": "接続",
+  "connectWithBunkerUrl": "Bunker URLで接続",
+  "copyBunkerUrl": "Bunker URLをコピー",
+  "nostrConnectUrlHint": "nostrconnect://",
+  "publicKeyCopiedSuccessfully": "公開鍵を正常にコピーしました",
+  "pleaseEnterPassword": "パスワードを入力してください",
+  "encryptedBackupCopied": "暗号化されたバックアップをコピーしました",
+  "backupFailed": "バックアップに失敗しました",
+  "privateKeyCopiedToClipboard": "秘密鍵をコピーしました",
+  "copyFailed": "コピーに失敗しました",
+  "backupThisAccount": "このアカウントをバックアップ",
+  "noAccountSelected": "アカウントが選択されていません",
+  "recommended": "推奨",
+  "notRecommended": "非推奨",
+  "password": "パスワード",
+  "copyEncryptedVersion": "暗号化されたバージョンをコピー",
+  "copyUnencryptedVersion": "暗号化されていないバージョンをコピー",
+  "yourPassword": "あなたのパスワード"
 }
