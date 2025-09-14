@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
+import 'package:nip19/nip19.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/nip46_request.dart';
@@ -231,12 +232,21 @@ class Repository extends GetxController {
       bool? shouldAuthorize;
 
       if (context != null) {
+        // Fetch user metadata to get the display name
+        final metadata = await ndk.metadata.loadMetadata(
+          authorizedApp.signerPubkey,
+        );
+        String userName =
+            metadata?.displayName ??
+            metadata?.name ??
+            Nip19.npubFromHex(authorizedApp.signerPubkey);
+
         // Show notification with action buttons
         await notificationService.showPermissionRequestNotification(
           context: Get.context!,
           appName: authorizedApp.name,
           permission: commandString,
-          accountName: authorizedApp.signerPubkey.substring(0, 8),
+          accountName: userName,
           onAction: (bool allowed) {
             // Handle notification button click
             if (Get.isDialogOpen ?? false) {

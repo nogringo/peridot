@@ -44,7 +44,7 @@ class UnknownPermissionDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: Text(l10n.block),
+          child: Text(l10n.reject),
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),

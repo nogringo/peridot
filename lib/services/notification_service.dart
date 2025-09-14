@@ -77,9 +77,9 @@ class NotificationService extends GetxService {
         final callback = _permissionCallbacks[notificationId];
         if (callback != null) {
           // Call the callback based on action
-          if (response.actionId == 'allow') {
+          if (response.actionId == 'authorize') {
             callback(true);
-          } else if (response.actionId == 'deny') {
+          } else if (response.actionId == 'reject') {
             callback(false);
           }
           // Remove callback after use
@@ -135,7 +135,7 @@ class NotificationService extends GetxService {
     required BuildContext context,
     required String appName,
     required String permission,
-    String? accountName,
+    required String accountName,
     Function(bool)? onAction,
   }) async {
     // Check if notifications are enabled
@@ -145,7 +145,11 @@ class NotificationService extends GetxService {
     final translatedPermission = translatePermission(context, permission);
 
     final title = l10n.permissionRequested;
-    final body = l10n.unknownPermissionMessage(appName, translatedPermission);
+    final body = l10n.unknownPermissionMessage(
+      appName,
+      translatedPermission,
+      accountName,
+    );
 
     final notificationId = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
@@ -159,8 +163,8 @@ class NotificationService extends GetxService {
       title: title,
       body: body,
       actions: [
-        NotificationAction(id: 'allow', title: l10n.allow),
-        NotificationAction(id: 'deny', title: l10n.deny),
+        NotificationAction(id: 'reject', title: l10n.reject),
+        NotificationAction(id: 'authorize', title: l10n.authorize),
       ],
       payload: 'permission_request',
     );

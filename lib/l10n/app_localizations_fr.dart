@@ -81,8 +81,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unknownPermission => 'Permission Inconnue';
 
   @override
-  String unknownPermissionMessage(String appName, String permission) {
-    return 'L\'application \'$appName\' demande la permission pour \'$permission\'. Voulez-vous l\'autoriser ?';
+  String unknownPermissionMessage(
+    String appName,
+    String permission,
+    String userName,
+  ) {
+    return 'L\'application \'$appName\' demande la permission pour \'$permission\' au nom de l\'utilisateur \'$userName\'. Voulez-vous l\'autoriser ?';
   }
 
   @override
@@ -207,6 +211,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get block => 'Bloquer';
+
+  @override
+  String get reject => 'Rejeter';
 
   @override
   String get authorize => 'Autoriser';

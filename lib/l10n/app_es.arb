@@ -27,7 +27,7 @@
   "noSpecificPermissionsRequested": "No se solicitaron permisos específicos",
   
   "unknownPermission": "Permiso Desconocido",
-  "unknownPermissionMessage": "La aplicación '{appName}' está solicitando permiso para '{permission}'. ¿Quieres permitirlo?",
+  "unknownPermissionMessage": "La aplicación '{appName}' está solicitando permiso para '{permission}' en nombre del usuario '{userName}'. ¿Quieres permitirlo?",
   "allow": "Permitir",
   "deny": "Denegar",
   
@@ -73,6 +73,7 @@
   "appRequestingPermission": "{appName} está solicitando permiso:",
   "authorizeOrBlockRequest": "¿Desea autorizar o bloquear esta solicitud?",
   "block": "Bloquear",
+  "reject": "Rechazar",
   "authorize": "Autorizar",
 
   "removeAccount": "Eliminar Cuenta",

@@ -105,7 +105,7 @@
   "@unknownPermission": {
     "description": "Title for unknown permission dialog"
   },
-  "unknownPermissionMessage": "The app '{appName}' is requesting permission for '{permission}'. Do you want to allow this?",
+  "unknownPermissionMessage": "The app '{appName}' is requesting permission for '{permission}' on behalf of user '{userName}'. Do you want to allow this?",
   "@unknownPermissionMessage": {
     "description": "Message for unknown permission request",
     "placeholders": {
@@ -116,6 +116,10 @@
       "permission": {
         "type": "String",
         "description": "The permission being requested"
+      },
+      "userName": {
+        "type": "String",
+        "description": "Name of the user for whom permission is requested"
       }
     }
   },
@@ -286,6 +290,10 @@
   "block": "Block",
   "@block": {
     "description": "Block button text"
+  },
+  "reject": "Reject",
+  "@reject": {
+    "description": "Reject button text"
   },
   "authorize": "Authorize",
   "@authorize": {

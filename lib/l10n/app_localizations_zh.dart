@@ -79,8 +79,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unknownPermission => '未知权限';
 
   @override
-  String unknownPermissionMessage(String appName, String permission) {
-    return '应用程序 \'$appName\' 正在请求 \'$permission\' 权限。您要允许吗？';
+  String unknownPermissionMessage(
+    String appName,
+    String permission,
+    String userName,
+  ) {
+    return '应用程序 \'$appName\' 正在为用户 \'$userName\' 请求 \'$permission\' 权限。您要允许吗？';
   }
 
   @override
@@ -204,6 +208,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get block => '阻止';
+
+  @override
+  String get reject => '拒绝';
 
   @override
   String get authorize => '授权';

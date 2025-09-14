@@ -241,8 +241,12 @@ abstract class AppLocalizations {
   /// Message for unknown permission request
   ///
   /// In en, this message translates to:
-  /// **'The app \'{appName}\' is requesting permission for \'{permission}\'. Do you want to allow this?'**
-  String unknownPermissionMessage(String appName, String permission);
+  /// **'The app \'{appName}\' is requesting permission for \'{permission}\' on behalf of user \'{userName}\'. Do you want to allow this?'**
+  String unknownPermissionMessage(
+    String appName,
+    String permission,
+    String userName,
+  );
 
   /// Allow button text
   ///
@@ -465,6 +469,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Block'**
   String get block;
+
+  /// Reject button text
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
 
   /// Authorize button text
   ///

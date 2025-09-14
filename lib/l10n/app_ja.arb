@@ -27,7 +27,7 @@
   "noSpecificPermissionsRequested": "特定の権限は要求されていません",
   
   "unknownPermission": "不明な権限",
-  "unknownPermissionMessage": "アプリケーション '{appName}' が '{permission}' の権限を要求しています。許可しますか？",
+  "unknownPermissionMessage": "アプリケーション '{appName}' がユーザー '{userName}' のために '{permission}' の権限を要求しています。許可しますか？",
   "allow": "許可",
   "deny": "拒否",
   
@@ -73,6 +73,7 @@
   "appRequestingPermission": "{appName} が権限を要求しています：",
   "authorizeOrBlockRequest": "このリクエストを許可またはブロックしますか？",
   "block": "ブロック",
+  "reject": "拒否",
   "authorize": "許可",
 
   "removeAccount": "アカウントを削除",

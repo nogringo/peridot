@@ -27,7 +27,7 @@
   "noSpecificPermissionsRequested": "Конкретные разрешения не запрошены",
   
   "unknownPermission": "Неизвестное разрешение",
-  "unknownPermissionMessage": "Приложение '{appName}' запрашивает разрешение для '{permission}'. Хотите разрешить?",
+  "unknownPermissionMessage": "Приложение '{appName}' запрашивает разрешение для '{permission}' от имени пользователя '{userName}'. Хотите разрешить?",
   "allow": "Разрешить",
   "deny": "Отказать",
   
@@ -73,6 +73,7 @@
   "appRequestingPermission": "{appName} запрашивает разрешение:",
   "authorizeOrBlockRequest": "Вы хотите авторизовать или заблокировать этот запрос?",
   "block": "Блокировать",
+  "reject": "Отклонить",
   "authorize": "Авторизовать",
 
   "removeAccount": "Удалить учетную запись",

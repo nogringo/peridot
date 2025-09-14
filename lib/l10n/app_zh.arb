@@ -27,7 +27,7 @@
   "noSpecificPermissionsRequested": "未请求特定权限",
   
   "unknownPermission": "未知权限",
-  "unknownPermissionMessage": "应用程序 '{appName}' 正在请求 '{permission}' 权限。您要允许吗？",
+  "unknownPermissionMessage": "应用程序 '{appName}' 正在为用户 '{userName}' 请求 '{permission}' 权限。您要允许吗？",
   "allow": "允许",
   "deny": "拒绝",
   
@@ -73,6 +73,7 @@
   "appRequestingPermission": "{appName} 正在请求权限：",
   "authorizeOrBlockRequest": "您要授权还是阻止此请求？",
   "block": "阻止",
+  "reject": "拒绝",
   "authorize": "授权",
 
   "removeAccount": "删除账户",
