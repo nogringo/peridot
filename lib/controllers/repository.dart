@@ -27,6 +27,10 @@ class Repository extends GetxController {
   RxList<String> bunkerDefaultRelays = <String>[].obs;
   RxList<AuthorizedApp> authorizedApps = <AuthorizedApp>[].obs;
 
+  // Queue for permission requests
+  final List<Nip46Request> _permissionRequestQueue = [];
+  bool _isProcessingPermissionRequest = false;
+
   Future<void> loadApp() async {
     if (isAppLoaded) return;
     isAppLoaded = true;
@@ -224,6 +228,98 @@ class Repository extends GetxController {
     );
 
     if (permissionStatus == PermissionStatus.unknown) {
+      // Add to queue and process
+      _permissionRequestQueue.add(nip46Request);
+      _processNextPermissionRequest();
+      return;
+    }
+
+    // Get the signer for this app
+    final signer = getSigner(authorizedApp.signerPubkey);
+    if (signer == null) return;
+
+    // Handle based on permission status
+    if (permissionStatus == PermissionStatus.blocked) {
+      // Send error response for blocked permission
+      await _sendNip46Response(
+        signer: signer,
+        app: authorizedApp,
+        requestId: nip46Request.id,
+        error: 'Permission denied for $commandString',
+      );
+      return;
+    }
+
+    // Permission is authorized, execute the command
+    await _executeNip46Command(
+      signer: signer,
+      app: authorizedApp,
+      request: nip46Request,
+    );
+  }
+
+  Future<void> _processNextPermissionRequest() async {
+    // Prevent concurrent processing
+    if (_isProcessingPermissionRequest || _permissionRequestQueue.isEmpty) {
+      return;
+    }
+
+    _isProcessingPermissionRequest = true;
+
+    try {
+      final nip46Request = _permissionRequestQueue.removeAt(0);
+
+      // Reload authorized apps to get latest permission states
+      await loadAuthorizedApps();
+
+      // Find the authorized app for this request with updated permissions
+      final authorizedApp = authorizedApps.firstWhereOrNull(
+        (app) =>
+            app.appPubkey == nip46Request.clientPubkey &&
+            app.signerPubkey == nip46Request.remotePubkey,
+      );
+
+      if (authorizedApp == null) {
+        // Process next request if this one is invalid
+        _isProcessingPermissionRequest = false;
+        _processNextPermissionRequest();
+        return;
+      }
+
+      final commandString = nip46CommandToString(nip46Request.command);
+
+      // Check permission status with the refreshed app data
+      PermissionStatus currentPermissionStatus = authorizedApp
+          .getPermissionStatus(commandString);
+
+      // If permission is no longer unknown, process it directly
+      if (currentPermissionStatus != PermissionStatus.unknown) {
+        final signer = getSigner(authorizedApp.signerPubkey);
+        if (signer != null) {
+          if (currentPermissionStatus == PermissionStatus.blocked) {
+            await _sendNip46Response(
+              signer: signer,
+              app: authorizedApp,
+              requestId: nip46Request.id,
+              error: 'Permission denied for $commandString',
+            );
+          } else {
+            await _executeNip46Command(
+              signer: signer,
+              app: authorizedApp,
+              request: nip46Request,
+            );
+          }
+        }
+        // Process next request in queue
+        _isProcessingPermissionRequest = false;
+        if (_permissionRequestQueue.isNotEmpty) {
+          await Future.delayed(Duration(milliseconds: 200));
+          _processNextPermissionRequest();
+        }
+        return;
+      }
+
       // Show desktop notification for permission request with action buttons
       final notificationService = NotificationService.to;
       final context = Get.context;
@@ -263,7 +359,8 @@ class Repository extends GetxController {
       );
 
       if (shouldAuthorize != null) {
-        if (shouldAuthorize!) {
+        PermissionStatus permissionStatus;
+        if (shouldAuthorize == true) {
           authorizedApp.authorizePermission(commandString);
           permissionStatus = PermissionStatus.authorized;
         } else {
@@ -272,34 +369,40 @@ class Repository extends GetxController {
         }
         // Update the app in storage
         await updateAuthorizedApp(authorizedApp);
-      } else {
-        // User cancelled the dialog, don't respond to the request
-        return;
+
+        // Get the signer for this app
+        final signer = getSigner(authorizedApp.signerPubkey);
+        if (signer != null) {
+          // Handle based on permission status
+          if (permissionStatus == PermissionStatus.blocked) {
+            // Send error response for blocked permission
+            await _sendNip46Response(
+              signer: signer,
+              app: authorizedApp,
+              requestId: nip46Request.id,
+              error: 'Permission denied for $commandString',
+            );
+          } else {
+            // Permission is authorized, execute the command
+            await _executeNip46Command(
+              signer: signer,
+              app: authorizedApp,
+              request: nip46Request,
+            );
+          }
+        }
+      }
+      // If user cancelled (shouldAuthorize is null), we don't send any response
+    } finally {
+      _isProcessingPermissionRequest = false;
+      // Process next request in queue if any
+      if (_permissionRequestQueue.isNotEmpty) {
+        await Future.delayed(
+          Duration(milliseconds: 500),
+        ); // Small delay between requests
+        _processNextPermissionRequest();
       }
     }
-
-    // Get the signer for this app
-    final signer = getSigner(authorizedApp.signerPubkey);
-    if (signer == null) return;
-
-    // Handle based on permission status
-    if (permissionStatus == PermissionStatus.blocked) {
-      // Send error response for blocked permission
-      await _sendNip46Response(
-        signer: signer,
-        app: authorizedApp,
-        requestId: nip46Request.id,
-        error: 'Permission denied for $commandString',
-      );
-      return;
-    }
-
-    // Permission is authorized, execute the command
-    await _executeNip46Command(
-      signer: signer,
-      app: authorizedApp,
-      request: nip46Request,
-    );
   }
 
   Future<void> _sendNip46Response({
