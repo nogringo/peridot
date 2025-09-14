@@ -266,6 +266,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get desktopNotificationsDescription => '为权限请求显示桌面通知';
 
   @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get notificationsDescription =>
+      'Show notifications for permission requests';
+
+  @override
   String get useTor => '使用 Tor';
 
   @override

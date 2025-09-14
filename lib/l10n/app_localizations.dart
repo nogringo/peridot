@@ -578,6 +578,18 @@ abstract class AppLocalizations {
   /// **'Show desktop notifications for permission requests'**
   String get desktopNotificationsDescription;
 
+  /// Setting to enable notifications (mobile)
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// Description for notifications setting (mobile)
+  ///
+  /// In en, this message translates to:
+  /// **'Show notifications for permission requests'**
+  String get notificationsDescription;
+
   /// Setting to enable Tor routing
   ///
   /// In en, this message translates to:

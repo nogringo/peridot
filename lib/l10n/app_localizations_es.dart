@@ -272,6 +272,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'Mostrar notificaciones de escritorio para solicitudes de permisos';
 
   @override
+  String get notifications => 'Notificaciones';
+
+  @override
+  String get notificationsDescription =>
+      'Mostrar notificaciones para solicitudes de permisos';
+
+  @override
   String get useTor => 'Usar Tor';
 
   @override

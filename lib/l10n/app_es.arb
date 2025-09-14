@@ -95,6 +95,8 @@
   "startOnSystemStartupDescription": "Ejecutar Peridot automáticamente cuando se inicie tu computadora",
   "desktopNotifications": "Notificaciones de escritorio",
   "desktopNotificationsDescription": "Mostrar notificaciones de escritorio para solicitudes de permisos",
+  "notifications": "Notificaciones",
+  "notificationsDescription": "Mostrar notificaciones para solicitudes de permisos",
   "useTor": "Usar Tor",
   "useTorDescription": "Enrutar conexiones a través de la red Tor para mayor privacidad",
   "useTorComingSoon": "Enrutar conexiones a través de la red Tor para mayor privacidad (Próximamente)",

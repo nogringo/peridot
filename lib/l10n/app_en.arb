@@ -373,6 +373,14 @@
   "@desktopNotificationsDescription": {
     "description": "Description for desktop notifications setting"
   },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Setting to enable notifications (mobile)"
+  },
+  "notificationsDescription": "Show notifications for permission requests",
+  "@notificationsDescription": {
+    "description": "Description for notifications setting (mobile)"
+  },
   "useTor": "Use Tor",
   "@useTor": {
     "description": "Setting to enable Tor routing"

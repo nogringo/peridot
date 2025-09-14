@@ -5,6 +5,14 @@ import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
+// Top-level function for background notification handling
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse response) {
+  // Handle background notification tap
+  // Since this is a background handler, we can't directly access the NotificationService instance
+  // The actual handling will be done when the app comes to foreground
+}
+
 class NotificationAction {
   final String id;
   final String title;
@@ -55,7 +63,7 @@ class NotificationService extends GetxService {
     await _notifications.initialize(
       initSettings,
       onDidReceiveNotificationResponse: _onNotificationTapped,
-      onDidReceiveBackgroundNotificationResponse: _onNotificationTapped,
+      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
 
     return this;

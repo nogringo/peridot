@@ -38,8 +38,8 @@ class SystemSettingsView extends StatelessWidget {
           ),
           Obx(
             () => SwitchListTile(
-              title: Text(l10n.desktopNotifications),
-              subtitle: Text(l10n.desktopNotificationsDescription),
+              title: Text(l10n.notifications),
+              subtitle: Text(l10n.notificationsDescription),
               value: notificationService.isNotificationEnabled.value,
               onChanged: (value) async {
                 await notificationService.setNotificationsEnabled(value);

@@ -267,6 +267,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get desktopNotificationsDescription => '権限リクエストのデスクトップ通知を表示する';
 
   @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get notificationsDescription =>
+      'Show notifications for permission requests';
+
+  @override
   String get useTor => 'Torを使用';
 
   @override

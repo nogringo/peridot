@@ -95,6 +95,8 @@
   "startOnSystemStartupDescription": "Автоматически запускать Peridot при включении компьютера",
   "desktopNotifications": "Уведомления на рабочем столе",
   "desktopNotificationsDescription": "Показывать уведомления на рабочем столе для запросов разрешений",
+  "notifications": "Уведомления",
+  "notificationsDescription": "Показывать уведомления для запросов разрешений",
   "useTor": "Использовать Tor",
   "useTorDescription": "Маршрутизировать соединения через сеть Tor для повышения конфиденциальности",
   "useTorComingSoon": "Маршрутизировать соединения через сеть Tor для повышения конфиденциальности (Скоро)",

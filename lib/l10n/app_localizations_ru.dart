@@ -273,6 +273,13 @@ class AppLocalizationsRu extends AppLocalizations {
       'Показывать уведомления на рабочем столе для запросов разрешений';
 
   @override
+  String get notifications => 'Уведомления';
+
+  @override
+  String get notificationsDescription =>
+      'Показывать уведомления для запросов разрешений';
+
+  @override
   String get useTor => 'Использовать Tor';
 
   @override

@@ -274,6 +274,13 @@ class AppLocalizationsFr extends AppLocalizations {
       'Afficher les notifications de bureau pour les demandes de permission';
 
   @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get notificationsDescription =>
+      'Afficher les notifications pour les demandes de permission';
+
+  @override
   String get useTor => 'Utiliser Tor';
 
   @override
