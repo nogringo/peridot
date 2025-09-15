@@ -53,8 +53,12 @@ class AddPrivkeyController extends GetxController {
     }
   }
 
-  void addAccount(KeyPair keypair) async {
+  Future<void> addAccount(KeyPair keypair) async {
     await Repository.to.addAccount(keypair);
     Get.offAllNamed(AppRoutes.applications);
+  }
+
+  void createAccount() {
+    addAccount(KeyPair.generate());
   }
 }

@@ -14,41 +14,87 @@ class AddPrivkeyPage extends StatelessWidget {
         final l10n = AppLocalizations.of(context)!;
         return Scaffold(
           appBar: AppBar(title: Text(l10n.addPrivateKey)),
-          body: ListView(
+          body: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 12),
-            children: [
-              Text(
-                "Nsec, ncryptsec or hex",
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              TextField(
-                controller: AddPrivkeyController.to.privkeyFieldController,
-                onChanged: AddPrivkeyController.to.onPrivkeyFieldChanged,
-              ),
-              Obx(() {
-                if (!AddPrivkeyController.to.isNcryptsec.value) {
-                  return Container();
-                }
-
-                return Column(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 400),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(height: 8),
                     Text(
-                      "Ncryptsec password",
-                      style: Theme.of(context).textTheme.labelLarge,
+                      "Create one",
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
+                    SizedBox(height: 8),
+                    FilledButton(
+                      onPressed: c.createAccount,
+                      child: Text("Create"),
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            "OR",
+                            style: TextStyle(
+                              color: Get.theme.colorScheme.onSurface.withValues(
+                                alpha: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      "Import one",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    SizedBox(height: 8),
                     TextField(
-                      controller: AddPrivkeyController
-                          .to
-                          .ncryptsecPasswordFieldController,
-                      decoration: InputDecoration(hintText: l10n.yourPassword),
+                      controller:
+                          AddPrivkeyController.to.privkeyFieldController,
+                      decoration: InputDecoration(
+                        labelText: "Nsec, ncryptsec or hex",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      onChanged: AddPrivkeyController.to.onPrivkeyFieldChanged,
                     ),
+                    Obx(() {
+                      if (!AddPrivkeyController.to.isNcryptsec.value) {
+                        return Container();
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          SizedBox(height: 8),
+                          Text(
+                            "Ncryptsec password",
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          TextField(
+                            controller: AddPrivkeyController
+                                .to
+                                .ncryptsecPasswordFieldController,
+                            decoration: InputDecoration(
+                              hintText: l10n.yourPassword,
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                    SizedBox(height: kToolbarHeight),
                   ],
-                );
-              }),
-              SizedBox(height: kToolbarHeight),
-            ],
+                ),
+              ),
+            ),
           ),
         );
       },
