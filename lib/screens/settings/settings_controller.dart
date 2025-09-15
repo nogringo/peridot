@@ -1,16 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:peridot/utils/toast_utils.dart';
 import 'package:get/get.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:nip19/nip19.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
-import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/remove_account_dialog.dart';
 import 'package:sembast/sembast.dart';
-import 'package:toastification/toastification.dart';
 
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find();
@@ -79,17 +78,7 @@ class SettingsController extends GetxController {
   void copyNpubToClipboard(String pubkey) {
     final npub = Nip19.npubFromHex(pubkey);
     Clipboard.setData(ClipboardData(text: npub));
-
-    final l10n = AppLocalizations.of(Get.context!)!;
-    toastification.show(
-      context: Get.context!,
-      title: Text(l10n.copiedToClipboard),
-      description: Text(l10n.publicKeyCopiedSuccessfully),
-      autoCloseDuration: const Duration(seconds: 5),
-      alignment: Alignment.bottomRight,
-      type: ToastificationType.success,
-      showProgressBar: true,
-    );
+    showCopyToast();
   }
 
   void showBackupAccount(String pubkey) {

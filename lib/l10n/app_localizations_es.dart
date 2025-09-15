@@ -95,6 +95,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get deny => 'Denegar';
 
   @override
+  String get copied => 'Copiado';
+
+  @override
   String get copiedToClipboard => 'Copiado al portapapeles';
 
   @override

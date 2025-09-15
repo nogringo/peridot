@@ -30,7 +30,8 @@
   "unknownPermissionMessage": "应用程序 '{appName}' 正在为用户 '{userName}' 请求 '{permission}' 权限。您要允许吗？",
   "allow": "允许",
   "deny": "拒绝",
-  
+
+  "copied": "已复制",
   "copiedToClipboard": "已复制到剪贴板",
   "applicationDeleted": "应用程序已删除",
   "permissionUpdated": "权限已更新",
@@ -122,5 +123,7 @@
   "password": "密码",
   "copyEncryptedVersion": "复制加密版本",
   "copyUnencryptedVersion": "复制未加密版本",
-  "yourPassword": "您的密码"
+  "yourPassword": "您的密码",
+  "notifications": "通知",
+  "notificationsDescription": "显示权限请求通知"
 }

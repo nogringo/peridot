@@ -260,6 +260,12 @@ abstract class AppLocalizations {
   /// **'Deny'**
   String get deny;
 
+  /// Short toast message when content is copied
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get copied;
+
   /// Toast message when content is copied to clipboard
   ///
   /// In en, this message translates to:

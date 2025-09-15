@@ -1,10 +1,11 @@
 import 'package:flutter/services.dart';
+import 'package:peridot/utils/toast_utils.dart';
 import 'package:flutter/widgets.dart';
+import 'package:toastification/toastification.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nip49/nip49.dart';
-import 'package:toastification/toastification.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
@@ -49,19 +50,7 @@ class BackupAccountController extends GetxController {
 
       // Copy to clipboard
       await Clipboard.setData(ClipboardData(text: encryptedKey));
-
-      final l10n = AppLocalizations.of(Get.context!)!;
-      toastification.show(
-        context: Get.context!,
-        title: Text(l10n.encryptedBackupCopied),
-        description: Text(
-          'Your encrypted private key has been copied to clipboard',
-        ),
-        type: ToastificationType.success,
-        autoCloseDuration: Duration(seconds: 5),
-        alignment: Alignment.bottomRight,
-        showProgressBar: true,
-      );
+      showCopyToast();
 
       // Clear password field for security
       passwordFieldController.clear();
@@ -96,19 +85,7 @@ class BackupAccountController extends GetxController {
 
       // Copy to clipboard
       await Clipboard.setData(ClipboardData(text: nsec));
-
-      final l10n = AppLocalizations.of(Get.context!)!;
-      toastification.show(
-        context: Get.context!,
-        title: Text(l10n.privateKeyCopiedToClipboard),
-        description: Text(
-          'Your unencrypted private key has been copied to clipboard',
-        ),
-        type: ToastificationType.warning,
-        autoCloseDuration: Duration(seconds: 5),
-        alignment: Alignment.bottomRight,
-        showProgressBar: true,
-      );
+      showCopyToast();
     } catch (e) {
       final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(

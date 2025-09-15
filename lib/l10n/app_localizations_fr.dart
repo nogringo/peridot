@@ -96,6 +96,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deny => 'Refuser';
 
   @override
+  String get copied => 'Copié';
+
+  @override
   String get copiedToClipboard => 'Copié dans le presse-papiers';
 
   @override

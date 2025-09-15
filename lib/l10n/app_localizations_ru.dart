@@ -95,6 +95,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get deny => 'Отказать';
 
   @override
+  String get copied => 'Скопировано';
+
+  @override
   String get copiedToClipboard => 'Скопировано в буфер обмена';
 
   @override

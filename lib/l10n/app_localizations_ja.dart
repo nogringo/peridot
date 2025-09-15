@@ -94,6 +94,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get deny => '拒否';
 
   @override
+  String get copied => 'コピー済み';
+
+  @override
   String get copiedToClipboard => 'クリップボードにコピーしました';
 
   @override
@@ -267,11 +270,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get desktopNotificationsDescription => '権限リクエストのデスクトップ通知を表示する';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => '通知';
 
   @override
-  String get notificationsDescription =>
-      'Show notifications for permission requests';
+  String get notificationsDescription => '権限リクエストの通知を表示';
 
   @override
   String get useTor => 'Torを使用';

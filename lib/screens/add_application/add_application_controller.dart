@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:peridot/utils/toast_utils.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart' hide NostrConnect;
 import 'package:peridot/controllers/repository.dart';
-import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/models/bunker.dart';
 import 'package:peridot/models/nip46_request.dart';
@@ -15,7 +15,6 @@ import 'package:peridot/utils/get_signer.dart';
 import 'package:peridot/utils/nip46_encryption.dart';
 import 'package:peridot/utils/nip46_parser.dart';
 import 'package:sembast/sembast.dart' hide Filter;
-import 'package:toastification/toastification.dart';
 
 class AddApplicationController extends GetxController {
   static AddApplicationController get to => Get.find();
@@ -126,17 +125,7 @@ class AddApplicationController extends GetxController {
     if (bunkerUrl == null || bunkerUrl!.url.isEmpty) return;
 
     Clipboard.setData(ClipboardData(text: bunkerUrl!.url));
-
-    final l10n = AppLocalizations.of(Get.context!)!;
-    toastification.show(
-      context: Get.context!,
-      title: Text(l10n.copiedToClipboard),
-      description: Text(l10n.bunkerUrlCopiedSuccessfully),
-      autoCloseDuration: const Duration(seconds: 5),
-      alignment: Alignment.bottomRight,
-      type: ToastificationType.success,
-      showProgressBar: true,
-    );
+    showCopyToast();
   }
 
   void chooseAccountStepDone() {

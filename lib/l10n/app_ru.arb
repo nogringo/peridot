@@ -30,7 +30,8 @@
   "unknownPermissionMessage": "Приложение '{appName}' запрашивает разрешение для '{permission}' от имени пользователя '{userName}'. Хотите разрешить?",
   "allow": "Разрешить",
   "deny": "Отказать",
-  
+
+  "copied": "Скопировано",
   "copiedToClipboard": "Скопировано в буфер обмена",
   "applicationDeleted": "Приложение удалено",
   "permissionUpdated": "Разрешение обновлено",

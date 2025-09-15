@@ -132,6 +132,10 @@
     "description": "Deny button text"
   },
 
+  "copied": "Copied",
+  "@copied": {
+    "description": "Short toast message when content is copied"
+  },
   "copiedToClipboard": "Copied to clipboard",
   "@copiedToClipboard": {
     "description": "Toast message when content is copied to clipboard"

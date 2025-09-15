@@ -30,7 +30,8 @@
   "unknownPermissionMessage": "アプリケーション '{appName}' がユーザー '{userName}' のために '{permission}' の権限を要求しています。許可しますか？",
   "allow": "許可",
   "deny": "拒否",
-  
+
+  "copied": "コピー済み",
   "copiedToClipboard": "クリップボードにコピーしました",
   "applicationDeleted": "アプリケーションを削除しました",
   "permissionUpdated": "権限を更新しました",
@@ -122,5 +123,7 @@
   "password": "パスワード",
   "copyEncryptedVersion": "暗号化されたバージョンをコピー",
   "copyUnencryptedVersion": "暗号化されていないバージョンをコピー",
-  "yourPassword": "あなたのパスワード"
+  "yourPassword": "あなたのパスワード",
+  "notifications": "通知",
+  "notificationsDescription": "権限リクエストの通知を表示"
 }

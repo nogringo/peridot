@@ -30,7 +30,8 @@
   "unknownPermissionMessage": "La aplicación '{appName}' está solicitando permiso para '{permission}' en nombre del usuario '{userName}'. ¿Quieres permitirlo?",
   "allow": "Permitir",
   "deny": "Denegar",
-  
+
+  "copied": "Copiado",
   "copiedToClipboard": "Copiado al portapapeles",
   "applicationDeleted": "Aplicación eliminada",
   "permissionUpdated": "Permiso actualizado",

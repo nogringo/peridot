@@ -94,6 +94,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get deny => '拒绝';
 
   @override
+  String get copied => '已复制';
+
+  @override
   String get copiedToClipboard => '已复制到剪贴板';
 
   @override
@@ -266,11 +269,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get desktopNotificationsDescription => '为权限请求显示桌面通知';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => '通知';
 
   @override
-  String get notificationsDescription =>
-      'Show notifications for permission requests';
+  String get notificationsDescription => '显示权限请求通知';
 
   @override
   String get useTor => '使用 Tor';
