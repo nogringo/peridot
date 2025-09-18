@@ -28,7 +28,7 @@ jobs:
 
       - name: Create MSIX installer
         run: |
-          flutter pub run msix:create
+          flutter pub run msix:create --certificate certificate.pfx --certificate-password "${{ secrets.CERTIFICATE_PASSWORD }}" --install-certificate false
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
