@@ -26,24 +26,29 @@ jobs:
       - name: Build Windows app
         run: flutter build windows --release
 
-      - name: Create MSIX installer
+      - name: Get version from pubspec
+        id: version
         run: |
-          flutter pub run msix:create --certificate certificate.pfx --certificate-password "${{ secrets.CERTIFICATE_PASSWORD }}" --install-certificate false
+          $yaml = Get-Content pubspec.yaml
+          $version = ($yaml | Select-String "version:\s*(.+)").Matches.Groups[1].Value
+          echo "VERSION=$version" >> $env:GITHUB_OUTPUT
+          echo "Version: $version"
+
+      - name: Create zip archive
+        run: |
+          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: |
-            build/windows/x64/runner/Release/
-            build/windows/x64/runner/*.msix
+          path: peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
 
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            build/windows/x64/runner/*.msix
+          files: peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
           draft: false
           prerelease: false
         env:
