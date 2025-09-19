@@ -184,8 +184,10 @@ class Repository extends GetxController {
 
     // Get all unique relays from authorized apps
     final Set<String> allRelays = {};
+    final Set<String> allPubkeys = {};
     for (final app in authorizedApps) {
       allRelays.addAll(app.relays);
+      allPubkeys.add(app.signerPubkey);
     }
 
     // Add default bunker relays as fallback
@@ -193,7 +195,7 @@ class Repository extends GetxController {
 
     signingRequestsSubscription = ndk.requests.subscription(
       filters: [
-        Filter(kinds: [24133], pTags: ndk.accounts.accounts.keys.toList()),
+        Filter(kinds: [24133], pTags: allPubkeys.toList()),
       ],
       explicitRelays: allRelays.toList(),
     );
