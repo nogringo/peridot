@@ -90,6 +90,11 @@ class AddPrivkeyPage extends StatelessWidget {
                         ],
                       );
                     }),
+                    SizedBox(height: 8),
+                    FilledButton(
+                      onPressed: AddPrivkeyController.to.importPrivateKey,
+                      child: Text("Import Key"),
+                    ),
                     SizedBox(height: kToolbarHeight),
                   ],
                 ),
