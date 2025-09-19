@@ -53,11 +53,18 @@ class NotificationService extends GetxService {
       defaultActionName: 'Open notification',
     );
 
+    const windowsSettings = WindowsInitializationSettings(
+      appName: 'Peridot',
+      appUserModelId: 'io.github.nogringo.peridot',
+      guid: '7b1565e4-22ff-42ab-96b6-de142e608e98',
+    );
+
     const initSettings = InitializationSettings(
       android: androidSettings,
       iOS: darwinSettings,
       macOS: darwinSettings,
       linux: linuxSettings,
+      windows: windowsSettings,
     );
 
     await _notifications.initialize(
@@ -223,11 +230,15 @@ class NotificationService extends GetxService {
           .toList(),
     );
 
+    // Windows notification details
+    const windowsDetails = WindowsNotificationDetails();
+
     final notificationDetails = NotificationDetails(
       android: androidDetails,
       iOS: darwinDetails,
       macOS: darwinDetails,
       linux: linuxDetails,
+      windows: windowsDetails,
     );
 
     await _notifications.show(
@@ -260,11 +271,14 @@ class NotificationService extends GetxService {
 
     const linuxDetails = LinuxNotificationDetails();
 
+    const windowsDetails = WindowsNotificationDetails();
+
     const notificationDetails = NotificationDetails(
       android: androidDetails,
       iOS: darwinDetails,
       macOS: darwinDetails,
       linux: linuxDetails,
+      windows: windowsDetails,
     );
 
     await _notifications.show(
