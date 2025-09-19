@@ -44,3 +44,9 @@ msix_config:
   msix_version: 0.3.0.0
   logo_path: linux\icon.png
   capabilities: internetClient
+  store: false
+  install_certificate: false
+  toast_activator:
+    clsid: "7b1565e4-22ff-42ab-96b6-de142e608e98"
+    arguments: "msix-args"
+    display_name: "Peridot"
