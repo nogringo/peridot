@@ -256,8 +256,7 @@ class AddApplicationController extends GetxController {
       content: (await signer.encryptNip44(
         plaintext: jsonEncode({
           "id": connectRequestId,
-          "method": "connect",
-          "params": [signer.publicKey, nostrConnect.secret],
+          "result": nostrConnect.secret,
         }),
         recipientPubKey: app!.appPubkey,
       ))!,
