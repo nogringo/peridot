@@ -106,12 +106,15 @@ class SettingsController extends GetxController {
     try {
       final uri = Uri.parse(relay);
       if (uri.scheme != 'wss' && uri.scheme != 'ws') {
+        showErrorToast('Relay URL must use wss:// or ws:// protocol');
         return;
       }
       if (!uri.hasAuthority) {
+        showErrorToast('Invalid relay URL format');
         return;
       }
     } catch (e) {
+      showErrorToast('Invalid relay URL');
       return;
     }
 

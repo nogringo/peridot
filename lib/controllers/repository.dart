@@ -125,7 +125,10 @@ class Repository extends GetxController {
     if (records.isNotEmpty) {
       bunkerDefaultRelays.value = records.map((r) => r.key).toList();
     } else {
-      bunkerDefaultRelays.value = [];
+      bunkerDefaultRelays.value = [
+        'wss://relay.nsec.app',
+        'wss://offchain.pub',
+      ];
     }
   }
 

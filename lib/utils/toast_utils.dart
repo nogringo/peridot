@@ -23,3 +23,24 @@ void showCopyToast([BuildContext? context]) {
     borderSide: BorderSide(color: Get.theme.dividerColor, width: 2),
   );
 }
+
+void showErrorToast(String message, [BuildContext? context]) {
+  context ??= Get.context;
+
+  if (context == null) return;
+
+  toastification.show(
+    context: context,
+    type: ToastificationType.error,
+    style: ToastificationStyle.flatColored,
+    title: Text(message),
+    alignment: Alignment.bottomCenter,
+    autoCloseDuration: const Duration(seconds: 5),
+    borderRadius: BorderRadius.circular(12.0),
+    closeButton: ToastCloseButton(showType: CloseButtonShowType.none),
+    applyBlurEffect: false,
+    backgroundColor: Colors.red.shade600,
+    foregroundColor: Colors.red,
+    borderSide: const BorderSide(color: Colors.red, width: 2),
+  );
+}
