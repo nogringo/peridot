@@ -56,7 +56,7 @@ class AddApplicationPage extends StatelessWidget {
                 content: AddThisAppView(),
               ),
             ],
-            controlsBuilder: (_, __) => Container(),
+            controlsBuilder: (_, _) => Container(),
           );
         },
       ),

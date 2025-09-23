@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nip01/nip01.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nip49/nip49.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/toast_utils.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
@@ -30,7 +31,8 @@ class AddPrivkeyController extends GetxController {
         final keyPair = KeyPair.fromPrivateKey(privateKey: privateKey);
         addAccount(keyPair);
       } catch (e) {
-        showErrorToast("Sorry, we weren't able to decrypt your private key with that password.");
+        final l10n = AppLocalizations.of(Get.context!)!;
+        showErrorToast(l10n.decryptionFailed);
       }
     } else if (privkey.startsWith("nsec1")) {
       final nsec = privkey;
@@ -39,14 +41,16 @@ class AddPrivkeyController extends GetxController {
         final keyPair = KeyPair.fromPrivateKey(privateKey: privateKey);
         addAccount(keyPair);
       } catch (e) {
-        showErrorToast("Sorry, it looks like that private key is invalid.");
+        final l10n = AppLocalizations.of(Get.context!)!;
+        showErrorToast(l10n.invalidPrivateKey);
       }
     } else {
       try {
         final keyPair = KeyPair.fromPrivateKey(privateKey: privkey);
         addAccount(keyPair);
       } catch (e) {
-        showErrorToast("Sorry, it looks like that private key is invalid.");
+        final l10n = AppLocalizations.of(Get.context!)!;
+        showErrorToast(l10n.invalidPrivateKey);
       }
     }
   }

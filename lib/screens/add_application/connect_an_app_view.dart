@@ -18,7 +18,7 @@ class ConnectAnAppView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Connect with Nostr connect URL",
+                AppLocalizations.of(context)!.connectWithNostrConnectUrl,
                 style: Get.textTheme.titleMedium,
               ),
               SizedBox(height: 8),

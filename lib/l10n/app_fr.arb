@@ -125,5 +125,17 @@
   "password": "Mot de passe",
   "copyEncryptedVersion": "Copier la version chiffrée",
   "copyUnencryptedVersion": "Copier la version non chiffrée",
-  "yourPassword": "Votre mot de passe"
+  "yourPassword": "Votre mot de passe",
+  "createOne": "En créer une",
+  "create": "Créer",
+  "or": "OU",
+  "importOne": "En importer une",
+  "nsecNcryptsecOrHex": "Nsec, ncryptsec ou hex",
+  "ncryptsecPassword": "Mot de passe ncryptsec",
+  "importKey": "Importer la clé",
+  "backupSecurelyWithPassword": "Sauvegarder ce compte de manière sécurisée avec un mot de passe",
+  "backupInsecurelyWithoutPassword": "Sauvegarder ce compte de manière non sécurisée sans mot de passe",
+  "connectWithNostrConnectUrl": "Se connecter avec l'URL Nostr connect",
+  "decryptionFailed": "Désolé, nous n'avons pas pu déchiffrer votre clé privée avec ce mot de passe.",
+  "invalidPrivateKey": "Désolé, il semble que cette clé privée soit invalide."
 }

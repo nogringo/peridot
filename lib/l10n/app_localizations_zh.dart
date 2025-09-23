@@ -142,7 +142,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get enterPrivateKey => '输入您的私钥（nsec 或 hex）';
 
   @override
-  String get invalidPrivateKey => '无效的私钥';
+  String get invalidPrivateKey => '抱歉，该私钥似乎无效。';
 
   @override
   String get accountAddedSuccessfully => '账户添加成功';
@@ -354,4 +354,37 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get yourPassword => '您的密码';
+
+  @override
+  String get createOne => '创建一个';
+
+  @override
+  String get create => '创建';
+
+  @override
+  String get or => '或';
+
+  @override
+  String get importOne => '导入一个';
+
+  @override
+  String get nsecNcryptsecOrHex => 'Nsec、ncryptsec 或 hex';
+
+  @override
+  String get ncryptsecPassword => 'Ncryptsec 密码';
+
+  @override
+  String get importKey => '导入密钥';
+
+  @override
+  String get backupSecurelyWithPassword => '使用密码安全备份此账户';
+
+  @override
+  String get backupInsecurelyWithoutPassword => '不使用密码不安全地备份此账户';
+
+  @override
+  String get connectWithNostrConnectUrl => '使用 Nostr connect URL 连接';
+
+  @override
+  String get decryptionFailed => '抱歉，我们无法使用该密码解密您的私钥。';
 }

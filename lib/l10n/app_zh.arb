@@ -125,5 +125,17 @@
   "copyUnencryptedVersion": "复制未加密版本",
   "yourPassword": "您的密码",
   "notifications": "通知",
-  "notificationsDescription": "显示权限请求通知"
+  "notificationsDescription": "显示权限请求通知",
+  "createOne": "创建一个",
+  "create": "创建",
+  "or": "或",
+  "importOne": "导入一个",
+  "nsecNcryptsecOrHex": "Nsec、ncryptsec 或 hex",
+  "ncryptsecPassword": "Ncryptsec 密码",
+  "importKey": "导入密钥",
+  "backupSecurelyWithPassword": "使用密码安全备份此账户",
+  "backupInsecurelyWithoutPassword": "不使用密码不安全地备份此账户",
+  "connectWithNostrConnectUrl": "使用 Nostr connect URL 连接",
+  "decryptionFailed": "抱歉，我们无法使用该密码解密您的私钥。",
+  "invalidPrivateKey": "抱歉，该私钥似乎无效。"
 }

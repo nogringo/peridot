@@ -125,5 +125,17 @@
   "password": "Contraseña",
   "copyEncryptedVersion": "Copiar versión cifrada",
   "copyUnencryptedVersion": "Copiar versión sin cifrar",
-  "yourPassword": "Tu contraseña"
+  "yourPassword": "Tu contraseña",
+  "createOne": "Crear una",
+  "create": "Crear",
+  "or": "O",
+  "importOne": "Importar una",
+  "nsecNcryptsecOrHex": "Nsec, ncryptsec o hex",
+  "ncryptsecPassword": "Contraseña ncryptsec",
+  "importKey": "Importar Clave",
+  "backupSecurelyWithPassword": "Respaldar esta cuenta de forma segura con una contraseña",
+  "backupInsecurelyWithoutPassword": "Respaldar esta cuenta de forma insegura sin contraseña",
+  "connectWithNostrConnectUrl": "Conectar con URL de Nostr connect",
+  "decryptionFailed": "Lo sentimos, no pudimos descifrar tu clave privada con esa contraseña.",
+  "invalidPrivateKey": "Lo sentimos, parece que esa clave privada no es válida."
 }

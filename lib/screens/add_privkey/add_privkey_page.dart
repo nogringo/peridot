@@ -23,13 +23,13 @@ class AddPrivkeyPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "Create one",
+                      l10n.createOne,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(height: 8),
                     FilledButton(
                       onPressed: c.createAccount,
-                      child: Text("Create"),
+                      child: Text(l10n.create),
                     ),
                     SizedBox(height: 16),
                     Row(
@@ -38,7 +38,7 @@ class AddPrivkeyPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
-                            "OR",
+                            l10n.or,
                             style: TextStyle(
                               color: Get.theme.colorScheme.onSurface.withValues(
                                 alpha: 0.5,
@@ -51,7 +51,7 @@ class AddPrivkeyPage extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
                     Text(
-                      "Import one",
+                      l10n.importOne,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SizedBox(height: 8),
@@ -59,7 +59,7 @@ class AddPrivkeyPage extends StatelessWidget {
                       controller:
                           AddPrivkeyController.to.privkeyFieldController,
                       decoration: InputDecoration(
-                        labelText: "Nsec, ncryptsec or hex",
+                        labelText: l10n.nsecNcryptsecOrHex,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -76,7 +76,7 @@ class AddPrivkeyPage extends StatelessWidget {
                         children: [
                           SizedBox(height: 8),
                           Text(
-                            "Ncryptsec password",
+                            l10n.ncryptsecPassword,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           TextField(
@@ -93,7 +93,7 @@ class AddPrivkeyPage extends StatelessWidget {
                     SizedBox(height: 8),
                     FilledButton(
                       onPressed: AddPrivkeyController.to.importPrivateKey,
-                      child: Text("Import Key"),
+                      child: Text(l10n.importKey),
                     ),
                     SizedBox(height: kToolbarHeight),
                   ],

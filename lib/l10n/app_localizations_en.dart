@@ -143,7 +143,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterPrivateKey => 'Enter your private key (nsec or hex)';
 
   @override
-  String get invalidPrivateKey => 'Invalid private key';
+  String get invalidPrivateKey =>
+      'Sorry, it looks like that private key is invalid.';
 
   @override
   String get accountAddedSuccessfully => 'Account added successfully';
@@ -363,4 +364,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourPassword => 'Your password';
+
+  @override
+  String get createOne => 'Create one';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get or => 'OR';
+
+  @override
+  String get importOne => 'Import one';
+
+  @override
+  String get nsecNcryptsecOrHex => 'Nsec, ncryptsec or hex';
+
+  @override
+  String get ncryptsecPassword => 'Ncryptsec password';
+
+  @override
+  String get importKey => 'Import Key';
+
+  @override
+  String get backupSecurelyWithPassword =>
+      'Backup this account securely with a password';
+
+  @override
+  String get backupInsecurelyWithoutPassword =>
+      'Backup this account insecurely without a password';
+
+  @override
+  String get connectWithNostrConnectUrl => 'Connect with Nostr connect URL';
+
+  @override
+  String get decryptionFailed =>
+      'Sorry, we weren\'t able to decrypt your private key with that password.';
 }

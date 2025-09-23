@@ -142,7 +142,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get enterPrivateKey => '秘密鍵を入力（nsec または hex）';
 
   @override
-  String get invalidPrivateKey => '無効な秘密鍵';
+  String get invalidPrivateKey => '申し訳ありませんが、その秘密鍵は無効のようです。';
 
   @override
   String get accountAddedSuccessfully => 'アカウントを正常に追加しました';
@@ -355,4 +355,38 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get yourPassword => 'あなたのパスワード';
+
+  @override
+  String get createOne => '新規作成';
+
+  @override
+  String get create => '作成';
+
+  @override
+  String get or => 'または';
+
+  @override
+  String get importOne => 'インポート';
+
+  @override
+  String get nsecNcryptsecOrHex => 'Nsec、ncryptsecまたはhex';
+
+  @override
+  String get ncryptsecPassword => 'Ncryptsecパスワード';
+
+  @override
+  String get importKey => '鍵をインポート';
+
+  @override
+  String get backupSecurelyWithPassword => 'このアカウントをパスワードで安全にバックアップ';
+
+  @override
+  String get backupInsecurelyWithoutPassword =>
+      'このアカウントをパスワードなしで安全でない方法でバックアップ';
+
+  @override
+  String get connectWithNostrConnectUrl => 'Nostr connect URLで接続';
+
+  @override
+  String get decryptionFailed => '申し訳ありませんが、そのパスワードで秘密鍵を復号化できませんでした。';
 }

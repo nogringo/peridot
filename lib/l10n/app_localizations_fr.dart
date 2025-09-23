@@ -144,7 +144,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterPrivateKey => 'Entrez votre clé privée (nsec ou hex)';
 
   @override
-  String get invalidPrivateKey => 'Clé privée invalide';
+  String get invalidPrivateKey =>
+      'Désolé, il semble que cette clé privée soit invalide.';
 
   @override
   String get accountAddedSuccessfully => 'Compte ajouté avec succès';
@@ -365,4 +366,41 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get yourPassword => 'Votre mot de passe';
+
+  @override
+  String get createOne => 'En créer une';
+
+  @override
+  String get create => 'Créer';
+
+  @override
+  String get or => 'OU';
+
+  @override
+  String get importOne => 'En importer une';
+
+  @override
+  String get nsecNcryptsecOrHex => 'Nsec, ncryptsec ou hex';
+
+  @override
+  String get ncryptsecPassword => 'Mot de passe ncryptsec';
+
+  @override
+  String get importKey => 'Importer la clé';
+
+  @override
+  String get backupSecurelyWithPassword =>
+      'Sauvegarder ce compte de manière sécurisée avec un mot de passe';
+
+  @override
+  String get backupInsecurelyWithoutPassword =>
+      'Sauvegarder ce compte de manière non sécurisée sans mot de passe';
+
+  @override
+  String get connectWithNostrConnectUrl =>
+      'Se connecter avec l\'URL Nostr connect';
+
+  @override
+  String get decryptionFailed =>
+      'Désolé, nous n\'avons pas pu déchiffrer votre clé privée avec ce mot de passe.';
 }

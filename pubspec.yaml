@@ -1,7 +1,7 @@
 name: peridot
 description: "Nostr bunker for desktop."
 publish_to: 'none'
-version: 0.3.0
+version: 0.4.0
 
 environment:
   sdk: ^3.9.0
@@ -19,8 +19,8 @@ dependencies:
   ndk: ^0.5.1
   nip01: ^0.3.0+1
   nip19: ^0.2.0
-  nip49: ^1.1.0
-  nostr_widgets: ^0.0.3
+  nip49: ^1.1.2
+  nostr_widgets: ^1.1.0
   path: ^1.9.1
   path_provider: ^2.1.5
   sembast: ^3.8.5+1
@@ -30,7 +30,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   generate: true

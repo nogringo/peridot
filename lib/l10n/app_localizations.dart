@@ -338,10 +338,10 @@ abstract class AppLocalizations {
   /// **'Enter your private key (nsec or hex)'**
   String get enterPrivateKey;
 
-  /// Error message for invalid private key
+  /// Error message when private key is invalid
   ///
   /// In en, this message translates to:
-  /// **'Invalid private key'**
+  /// **'Sorry, it looks like that private key is invalid.'**
   String get invalidPrivateKey;
 
   /// Success message when account is added
@@ -757,6 +757,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your password'**
   String get yourPassword;
+
+  /// Section title for creating a new account
+  ///
+  /// In en, this message translates to:
+  /// **'Create one'**
+  String get createOne;
+
+  /// Button text to create a new account
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
+
+  /// Divider text between two options
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get or;
+
+  /// Section title for importing an account
+  ///
+  /// In en, this message translates to:
+  /// **'Import one'**
+  String get importOne;
+
+  /// Label for private key import field
+  ///
+  /// In en, this message translates to:
+  /// **'Nsec, ncryptsec or hex'**
+  String get nsecNcryptsecOrHex;
+
+  /// Label for ncryptsec password field
+  ///
+  /// In en, this message translates to:
+  /// **'Ncryptsec password'**
+  String get ncryptsecPassword;
+
+  /// Button text to import a private key
+  ///
+  /// In en, this message translates to:
+  /// **'Import Key'**
+  String get importKey;
+
+  /// Description for secure backup option
+  ///
+  /// In en, this message translates to:
+  /// **'Backup this account securely with a password'**
+  String get backupSecurelyWithPassword;
+
+  /// Description for insecure backup option
+  ///
+  /// In en, this message translates to:
+  /// **'Backup this account insecurely without a password'**
+  String get backupInsecurelyWithoutPassword;
+
+  /// Title for Nostr connect URL connection method
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with Nostr connect URL'**
+  String get connectWithNostrConnectUrl;
+
+  /// Error message when ncryptsec decryption fails
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, we weren\'t able to decrypt your private key with that password.'**
+  String get decryptionFailed;
 }
 
 class _AppLocalizationsDelegate

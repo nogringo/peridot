@@ -125,5 +125,17 @@
   "copyUnencryptedVersion": "暗号化されていないバージョンをコピー",
   "yourPassword": "あなたのパスワード",
   "notifications": "通知",
-  "notificationsDescription": "権限リクエストの通知を表示"
+  "notificationsDescription": "権限リクエストの通知を表示",
+  "createOne": "新規作成",
+  "create": "作成",
+  "or": "または",
+  "importOne": "インポート",
+  "nsecNcryptsecOrHex": "Nsec、ncryptsecまたはhex",
+  "ncryptsecPassword": "Ncryptsecパスワード",
+  "importKey": "鍵をインポート",
+  "backupSecurelyWithPassword": "このアカウントをパスワードで安全にバックアップ",
+  "backupInsecurelyWithoutPassword": "このアカウントをパスワードなしで安全でない方法でバックアップ",
+  "connectWithNostrConnectUrl": "Nostr connect URLで接続",
+  "decryptionFailed": "申し訳ありませんが、そのパスワードで秘密鍵を復号化できませんでした。",
+  "invalidPrivateKey": "申し訳ありませんが、その秘密鍵は無効のようです。"
 }

@@ -493,5 +493,53 @@
   "yourPassword": "Your password",
   "@yourPassword": {
     "description": "Placeholder for password input"
+  },
+  "createOne": "Create one",
+  "@createOne": {
+    "description": "Section title for creating a new account"
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Button text to create a new account"
+  },
+  "or": "OR",
+  "@or": {
+    "description": "Divider text between two options"
+  },
+  "importOne": "Import one",
+  "@importOne": {
+    "description": "Section title for importing an account"
+  },
+  "nsecNcryptsecOrHex": "Nsec, ncryptsec or hex",
+  "@nsecNcryptsecOrHex": {
+    "description": "Label for private key import field"
+  },
+  "ncryptsecPassword": "Ncryptsec password",
+  "@ncryptsecPassword": {
+    "description": "Label for ncryptsec password field"
+  },
+  "importKey": "Import Key",
+  "@importKey": {
+    "description": "Button text to import a private key"
+  },
+  "backupSecurelyWithPassword": "Backup this account securely with a password",
+  "@backupSecurelyWithPassword": {
+    "description": "Description for secure backup option"
+  },
+  "backupInsecurelyWithoutPassword": "Backup this account insecurely without a password",
+  "@backupInsecurelyWithoutPassword": {
+    "description": "Description for insecure backup option"
+  },
+  "connectWithNostrConnectUrl": "Connect with Nostr connect URL",
+  "@connectWithNostrConnectUrl": {
+    "description": "Title for Nostr connect URL connection method"
+  },
+  "decryptionFailed": "Sorry, we weren't able to decrypt your private key with that password.",
+  "@decryptionFailed": {
+    "description": "Error message when ncryptsec decryption fails"
+  },
+  "invalidPrivateKey": "Sorry, it looks like that private key is invalid.",
+  "@invalidPrivateKey": {
+    "description": "Error message when private key is invalid"
   }
 }

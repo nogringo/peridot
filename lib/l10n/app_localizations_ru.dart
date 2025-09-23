@@ -144,7 +144,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get enterPrivateKey => 'Введите ваш приватный ключ (nsec или hex)';
 
   @override
-  String get invalidPrivateKey => 'Недействительный приватный ключ';
+  String get invalidPrivateKey =>
+      'Извините, похоже, что этот приватный ключ недействителен.';
 
   @override
   String get accountAddedSuccessfully => 'Учетная запись успешно добавлена';
@@ -365,4 +366,41 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get yourPassword => 'Ваш пароль';
+
+  @override
+  String get createOne => 'Создать новый';
+
+  @override
+  String get create => 'Создать';
+
+  @override
+  String get or => 'ИЛИ';
+
+  @override
+  String get importOne => 'Импортировать';
+
+  @override
+  String get nsecNcryptsecOrHex => 'Nsec, ncryptsec или hex';
+
+  @override
+  String get ncryptsecPassword => 'Пароль ncryptsec';
+
+  @override
+  String get importKey => 'Импортировать ключ';
+
+  @override
+  String get backupSecurelyWithPassword =>
+      'Создать резервную копию этого аккаунта безопасно с паролем';
+
+  @override
+  String get backupInsecurelyWithoutPassword =>
+      'Создать резервную копию этого аккаунта небезопасно без пароля';
+
+  @override
+  String get connectWithNostrConnectUrl =>
+      'Подключиться через URL Nostr connect';
+
+  @override
+  String get decryptionFailed =>
+      'Извините, мы не смогли расшифровать ваш приватный ключ с этим паролем.';
 }

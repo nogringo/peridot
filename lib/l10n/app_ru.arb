@@ -125,5 +125,17 @@
   "password": "Пароль",
   "copyEncryptedVersion": "Скопировать зашифрованную версию",
   "copyUnencryptedVersion": "Скопировать незашифрованную версию",
-  "yourPassword": "Ваш пароль"
+  "yourPassword": "Ваш пароль",
+  "createOne": "Создать новый",
+  "create": "Создать",
+  "or": "ИЛИ",
+  "importOne": "Импортировать",
+  "nsecNcryptsecOrHex": "Nsec, ncryptsec или hex",
+  "ncryptsecPassword": "Пароль ncryptsec",
+  "importKey": "Импортировать ключ",
+  "backupSecurelyWithPassword": "Создать резервную копию этого аккаунта безопасно с паролем",
+  "backupInsecurelyWithoutPassword": "Создать резервную копию этого аккаунта небезопасно без пароля",
+  "connectWithNostrConnectUrl": "Подключиться через URL Nostr connect",
+  "decryptionFailed": "Извините, мы не смогли расшифровать ваш приватный ключ с этим паролем.",
+  "invalidPrivateKey": "Извините, похоже, что этот приватный ключ недействителен."
 }

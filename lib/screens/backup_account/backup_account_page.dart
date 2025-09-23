@@ -64,7 +64,7 @@ class SecureBackupView extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Text(
-            "Backup this account securly with a password",
+            l10n.backupSecurelyWithPassword,
             style: Get.textTheme.titleMedium,
           ),
           GetBuilder<BackupAccountController>(
@@ -121,7 +121,7 @@ class UnsecureBackupView extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              "Backup this account unsecurly without a password",
+              l10n.backupInsecurelyWithoutPassword,
               style: Get.textTheme.titleMedium,
             ),
             SizedBox(height: 8),
