@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nip19/nip19.dart';
+import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/border_area_view.dart';
+import 'package:peridot/widgets/trust_level_options_view.dart';
 
 class ManageAppPage extends StatelessWidget {
   const ManageAppPage({super.key});
@@ -63,6 +65,18 @@ class ManageAppPage extends StatelessWidget {
               SizedBox(height: 16),
               BorderAreaView(
                 padding: EdgeInsets.zero,
+                child: SwitchListTile(
+                  title: Text("Enable this app"),
+                  subtitle: Text("When disabled, every requests are blocked"),
+                  value: ManageAppController.to.app!.isEnabled,
+                  onChanged: ManageAppController.to.appEnableChange,
+                ),
+              ),
+              SizedBox(height: 16),
+              TrustLevelView(),
+              SizedBox(height: 16),
+              BorderAreaView(
+                padding: EdgeInsets.zero,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -110,6 +124,64 @@ class ManageAppPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class TrustLevelView extends StatelessWidget {
+  const TrustLevelView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BorderAreaView(
+      padding: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Trust level",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          GetBuilder<ManageAppController>(
+            builder: (c) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    TrustLevelOptionsView(
+                      appMode: c.app!.authorisationMode,
+                      optionMode: AuthorisationMode.allwaysAsk,
+                      onSelected: () => c.updateAuthorisationMode(
+                        AuthorisationMode.allwaysAsk,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    TrustLevelOptionsView(
+                      appMode: ManageAppController.to.app!.authorisationMode,
+                      optionMode: AuthorisationMode.allowCommonRequests,
+                      onSelected: () => c.updateAuthorisationMode(
+                        AuthorisationMode.allowCommonRequests,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    TrustLevelOptionsView(
+                      appMode: ManageAppController.to.app!.authorisationMode,
+                      optionMode: AuthorisationMode.fullyTrust,
+                      onSelected: () => c.updateAuthorisationMode(
+                        AuthorisationMode.fullyTrust,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          SizedBox(height: 8),
+        ],
+      ),
     );
   }
 }

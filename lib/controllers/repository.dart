@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class Repository extends GetxController {
 
   bool isAppLoaded = false;
   RxSet<String> usersPubkeys = RxSet<String>({});
+  StreamSubscription<Nip46Request>? pendingRequestsSub;
 
   late sembast.Database db;
 
@@ -24,6 +26,14 @@ class Repository extends GetxController {
 
     db = await getDatabase(databaseName);
     await loadBunkerState();
+    update();
+
+    bunker.start();
+
+    pendingRequestsSub = bunker.pendingRequestsStream.listen((e) {
+      update();
+      print("req");
+    });
   }
 
   Future<void> addAccount(String privateKey) async {
@@ -38,6 +48,13 @@ class Repository extends GetxController {
     bunker.removePrivateKey(pubkey);
     update();
     await saveBunkerState();
+  }
+
+  Future<void> removeApp(App app) async {
+    bunker.removeApp(app);
+    update();
+    var store = sembast.stringMapStoreFactory.store('apps');
+    await store.record(app.bunkerPubkey).delete(db);
   }
 
   Future<void> saveApp(App app) async {

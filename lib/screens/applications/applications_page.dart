@@ -4,6 +4,7 @@ import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
+import 'package:peridot/screens/applications/application_controller.dart';
 
 class ApplicationsPage extends StatelessWidget {
   const ApplicationsPage({super.key});
@@ -65,20 +66,73 @@ class ApplicationsPage extends StatelessWidget {
             itemCount: apps.length,
             itemBuilder: (context, index) {
               final app = apps[index];
-              return ListTile(
-                leading: NPicture(ndk: Repository.ndk, pubkey: app.userPubkey),
-                title: Text(
-                  app.name ?? "Unamed App",
-                  style: TextStyle(fontWeight: FontWeight.w600),
+
+              return Container(
+                margin: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.2),
+                    width: 1.5,
+                  ),
+                  borderRadius: BorderRadius.circular(24),
                 ),
-                subtitle: Text(
-                  AppLocalizations.of(
-                    context,
-                  )!.permissionCount(app.permissions.length),
-                ),
-                onTap: () => Get.toNamed(
-                  AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
-                  arguments: app,
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: NPicture(
+                        ndk: Repository.ndk,
+                        pubkey: app.userPubkey,
+                      ),
+                      title: Text(
+                        app.name ?? "Unamed App",
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      subtitle: Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.permissionCount(app.permissions.length),
+                      ),
+                      onTap: () => Get.toNamed(
+                        AppRoutes.manageApp.replaceAll(
+                          ':appPubkey',
+                          app.appPubkey,
+                        ),
+                        arguments: app,
+                      ),
+                    ),
+                    ...Repository.bunker
+                        .getPendingRequests(app)
+                        .map((req) => req.commandString)
+                        .toSet()
+                        .toList()
+                        .map(
+                          (command) => ListTile(
+                            title: Text(command),
+                            trailing: Wrap(
+                              children: [
+                                IconButton(
+                                  onPressed: () =>
+                                      ApplicationController.rejectForever(
+                                        command: command,
+                                        app: app,
+                                      ),
+                                  icon: Icon(Icons.close),
+                                ),
+                                IconButton(
+                                  onPressed: () =>
+                                      ApplicationController.allowForever(
+                                        command: command,
+                                        app: app,
+                                      ),
+                                  icon: Icon(Icons.check),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                  ],
                 ),
               );
             },

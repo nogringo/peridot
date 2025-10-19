@@ -5,6 +5,8 @@ import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
 class ManageAppController extends GetxController {
+  static ManageAppController get to => Get.find();
+
   App? app;
   final renameController = TextEditingController();
   final renameFocusNode = FocusNode();
@@ -92,10 +94,20 @@ class ManageAppController extends GetxController {
     );
 
     if (confirmed == true) {
-      Repository.bunker.removeApp(app!);
-      Repository.to.update();
+      Repository.to.removeApp(app!);
       Get.back();
-      Repository.to.saveBunkerState();
+      await Repository.to.saveBunkerState();
     }
+  }
+
+  void updateAuthorisationMode(AuthorisationMode value) {
+    app!.authorisationMode = value;
+    update();
+  }
+
+  void appEnableChange(bool value) {
+    app!.isEnabled = value;
+    update();
+    Repository.to.saveBunkerState();
   }
 }

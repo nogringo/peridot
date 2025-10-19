@@ -61,7 +61,6 @@ class AddApplicationController extends GetxController {
 
   @override
   void onClose() {
-    // Clean up subscriptions when controller is disposed
     stopListeningBunker();
     nostrConnectFieldController.dispose();
     appNameFieldController.dispose();
@@ -87,6 +86,7 @@ class AddApplicationController extends GetxController {
       onConnected: (app) {
         this.app = app;
         update();
+        Repository.to.update();
       },
     );
     update();
@@ -104,7 +104,12 @@ class AddApplicationController extends GetxController {
 
     isNostrConnectConnecting.value = false;
 
+    if (app!.name != null) {
+      appNameFieldController.text = app!.name!;
+    }
+
     update();
+    Repository.to.update();
   }
 
   void onNostrConnectFieldChanged(String value) {
@@ -117,8 +122,12 @@ class AddApplicationController extends GetxController {
       app!.name = newName;
     }
 
+    app!.authorisationMode = appAuthorisationMode.value;
+
     Repository.to.update();
 
     Get.back();
+
+    Repository.to.saveBunkerState();
   }
 }

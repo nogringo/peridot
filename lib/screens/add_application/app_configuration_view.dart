@@ -4,6 +4,7 @@ import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_application/add_application_controller.dart';
 import 'package:peridot/utils/translate_permission.dart';
+import 'package:peridot/widgets/trust_level_options_view.dart';
 
 class AppConfigurationView extends StatelessWidget {
   const AppConfigurationView({super.key});
@@ -64,119 +65,30 @@ class TrustLevelView extends StatelessWidget {
               AddApplicationController.to.appAuthorisationMode.value;
           return Column(
             children: [
-              Builder(
-                builder: (context) {
-                  final isSelected =
-                      selectedAuthorisationMode == AuthorisationMode.allwaysAsk;
-
-                  final child = Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: isSelected
-                            ? Get.theme.colorScheme.primary
-                            : Get.theme.colorScheme.onSurface.withValues(
-                                alpha: 0.5,
-                              ),
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      color: isSelected
-                          ? Get.theme.colorScheme.primary.withValues(alpha: 0.1)
-                          : null,
-                    ),
-                    child: ListTile(
-                      title: Text("Allways ask permission"),
-                      subtitle: Text(
-                        "For each request from the app, you will chose what to do",
-                      ),
-                    ),
-                  );
-
-                  if (isSelected) return child;
-
-                  return GestureDetector(
-                    onTap: () {
-                      AddApplicationController.to.appAuthorisationMode.value =
-                          AuthorisationMode.allwaysAsk;
-                    },
-                    child: child,
-                  );
+              TrustLevelOptionsView(
+                appMode: selectedAuthorisationMode,
+                optionMode: AuthorisationMode.allwaysAsk,
+                onSelected: () {
+                  AddApplicationController.to.appAuthorisationMode.value =
+                      AuthorisationMode.allwaysAsk;
                 },
               ),
               SizedBox(height: 8),
-              Builder(
-                builder: (context) {
-                  final isSelected =
-                      selectedAuthorisationMode ==
+              TrustLevelOptionsView(
+                appMode: selectedAuthorisationMode,
+                optionMode: AuthorisationMode.allowCommonRequests,
+                onSelected: () {
+                  AddApplicationController.to.appAuthorisationMode.value =
                       AuthorisationMode.allowCommonRequests;
-                  final child = Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: isSelected
-                            ? Get.theme.colorScheme.primary
-                            : Get.theme.colorScheme.onSurface.withValues(
-                                alpha: 0.5,
-                              ),
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      color: isSelected
-                          ? Get.theme.colorScheme.primary.withValues(alpha: 0.1)
-                          : null,
-                    ),
-                    child: ListTile(
-                      title: Text("Allow common actions"),
-                      subtitle: Text(
-                        "Common requests are automatically processed, you will chose what to do with the others",
-                      ),
-                    ),
-                  );
-
-                  if (isSelected) return child;
-
-                  return GestureDetector(
-                    onTap: () {
-                      AddApplicationController.to.appAuthorisationMode.value =
-                          AuthorisationMode.allowCommonRequests;
-                    },
-                    child: child,
-                  );
                 },
               ),
               SizedBox(height: 8),
-              Builder(
-                builder: (context) {
-                  final isSelected =
-                      selectedAuthorisationMode == AuthorisationMode.fullyTrust;
-                  final child = Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: isSelected
-                            ? Get.theme.colorScheme.primary
-                            : Get.theme.colorScheme.onSurface.withValues(
-                                alpha: 0.5,
-                              ),
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      color: isSelected
-                          ? Get.theme.colorScheme.primary.withValues(alpha: 0.1)
-                          : null,
-                    ),
-                    child: ListTile(
-                      title: Text("Fully trust"),
-                      subtitle: Text(
-                        "Every requests are automatically processed",
-                      ),
-                    ),
-                  );
-
-                  if (isSelected) return child;
-
-                  return GestureDetector(
-                    onTap: () {
-                      AddApplicationController.to.appAuthorisationMode.value =
-                          AuthorisationMode.fullyTrust;
-                    },
-                    child: child,
-                  );
+              TrustLevelOptionsView(
+                appMode: selectedAuthorisationMode,
+                optionMode: AuthorisationMode.fullyTrust,
+                onSelected: () {
+                  AddApplicationController.to.appAuthorisationMode.value =
+                      AuthorisationMode.fullyTrust;
                 },
               ),
             ],

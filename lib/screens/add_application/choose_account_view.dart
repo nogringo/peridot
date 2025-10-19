@@ -22,7 +22,9 @@ class ChooseAccountView extends StatelessWidget {
             final isSelected =
                 AddApplicationController.to.selectedPubkey.value == pubkey;
             if (isSelected) {
-              titleStyle = TextStyle(color: Theme.of(context).colorScheme.primary);
+              titleStyle = TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              );
               trailing = Icon(
                 Icons.check_circle,
                 color: Theme.of(context).colorScheme.primary,
