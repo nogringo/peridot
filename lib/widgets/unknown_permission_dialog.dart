@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:peridot/models/authorized_app.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
 class UnknownPermissionDialog extends StatelessWidget {
-  final AuthorizedApp app;
+  final App app;
   final String permission;
 
   const UnknownPermissionDialog({
@@ -24,7 +24,7 @@ class UnknownPermissionDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l10n.appRequestingPermission(app.name)),
+          Text(l10n.appRequestingPermission(app.name ?? "Unamed App")),
           SizedBox(height: 12),
           Container(
             padding: EdgeInsets.all(8),

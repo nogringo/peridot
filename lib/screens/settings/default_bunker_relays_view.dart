@@ -18,20 +18,22 @@ class DefaultBunkerRelaysView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(l10n.defaultBunkerRelays, style: Get.textTheme.titleLarge),
-          Obx(() {
-            return Column(
-              children: Repository.to.bunkerDefaultRelays.map((relay) {
-                return ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(relay),
-                  trailing: IconButton(
-                    onPressed: () => _confirmRemoveRelay(context, relay),
-                    icon: Icon(Icons.close),
-                  ),
-                );
-              }).toList(),
-            );
-          }),
+          GetBuilder<SettingsController>(
+            builder: (_) {
+              return Column(
+                children: Repository.bunker.defaultBunkerRelays.map((relay) {
+                  return ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text(relay),
+                    trailing: IconButton(
+                      onPressed: () => _confirmRemoveRelay(context, relay),
+                      icon: Icon(Icons.close),
+                    ),
+                  );
+                }).toList(),
+              );
+            },
+          ),
           SizedBox(height: 8),
           TextField(
             controller: SettingsController.to.newRelayFieldController,
@@ -56,7 +58,7 @@ class DefaultBunkerRelaysView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     // Check if this is the last relay
-    if (Repository.to.bunkerDefaultRelays.length <= 1) {
+    if (Repository.bunker.defaultBunkerRelays.length <= 1) {
       await Get.dialog(
         AlertDialog(
           title: Text(l10n.cannotRemoveLastRelay),
@@ -87,7 +89,9 @@ class DefaultBunkerRelaysView extends StatelessWidget {
     );
 
     if (confirmed == true) {
-      await Repository.to.removeDefaultBunkerRelay(relay);
+      Repository.bunker.defaultBunkerRelays.remove(relay);
+      SettingsController.to.update();
+      await Repository.to.saveBunkerState();
     }
   }
 }

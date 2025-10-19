@@ -22,7 +22,7 @@ class LoggedAccountsView extends StatelessWidget {
             children: [
               Text(l10n.loggedAccounts, style: Get.textTheme.titleLarge),
               SizedBox(height: 8),
-              ...Repository.ndk.accounts.accounts.keys.map((pubkey) {
+              ...Repository.to.usersPubkeys.map((pubkey) {
                 return ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: NPicture(ndk: Repository.ndk, pubkey: pubkey),

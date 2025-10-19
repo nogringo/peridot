@@ -20,6 +20,7 @@ dependencies:
   nip01: ^0.3.0+1
   nip19: ^0.2.0
   nip49: ^1.1.2
+  nostr_bunker: ^1.0.0
   nostr_widgets: ^1.1.0
   path: ^1.9.1
   path_provider: ^2.1.5

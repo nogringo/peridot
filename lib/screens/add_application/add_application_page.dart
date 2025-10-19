@@ -4,7 +4,7 @@ import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_application/add_application_controller.dart';
-import 'package:peridot/screens/add_application/add_this_app_view.dart';
+import 'package:peridot/screens/add_application/app_configuration_view.dart';
 import 'package:peridot/screens/add_application/choose_account_view.dart';
 import 'package:peridot/screens/add_application/connect_an_app_view.dart';
 
@@ -52,8 +52,8 @@ class AddApplicationPage extends StatelessWidget {
               ),
               Step(
                 isActive: c.currentStep == 2,
-                title: Text(l10n.addThisAppQuestion),
-                content: AddThisAppView(),
+                title: Text("App configuration"),
+                content: AppConfigurationView(),
               ),
             ],
             controlsBuilder: (_, _) => Container(),

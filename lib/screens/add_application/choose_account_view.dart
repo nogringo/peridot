@@ -13,14 +13,16 @@ class ChooseAccountView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...Repository.ndk.accounts.accounts.keys.map((pubkey) {
+        ...Repository.to.usersPubkeys.map((pubkey) {
           return Obx(() {
+            TextStyle? titleStyle;
             Widget? trailing;
             void Function()? onTap;
 
             final isSelected =
                 AddApplicationController.to.selectedPubkey.value == pubkey;
             if (isSelected) {
+              titleStyle = TextStyle(color: Theme.of(context).colorScheme.primary);
               trailing = Icon(
                 Icons.check_circle,
                 color: Theme.of(context).colorScheme.primary,
@@ -33,7 +35,11 @@ class ChooseAccountView extends StatelessWidget {
 
             return ListTile(
               leading: NPicture(ndk: Repository.ndk, pubkey: pubkey),
-              title: NName(ndk: Repository.ndk, pubkey: pubkey),
+              title: NName(
+                ndk: Repository.ndk,
+                pubkey: pubkey,
+                style: titleStyle,
+              ),
               trailing: trailing,
               onTap: onTap,
             );

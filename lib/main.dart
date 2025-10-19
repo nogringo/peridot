@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
+import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -16,6 +17,9 @@ void main() async {
 
   final ndk = Ndk.defaultConfig();
   Get.put(ndk);
+
+  final bunker = Bunker(ndk: ndk);
+  Get.put(bunker);
 
   final repository = Repository();
   await repository.loadApp();

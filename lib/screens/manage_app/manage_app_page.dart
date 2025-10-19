@@ -52,12 +52,9 @@ class ManageAppPage extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       leading: NPicture(
                         ndk: Repository.ndk,
-                        pubkey: app.signerPubkey,
+                        pubkey: app.userPubkey,
                       ),
-                      title: NName(
-                        ndk: Repository.ndk,
-                        pubkey: app.signerPubkey,
-                      ),
+                      title: NName(ndk: Repository.ndk, pubkey: app.userPubkey),
                       subtitle: Text(Nip19.npubFromHex(app.appPubkey)),
                     ),
                   ],
@@ -89,7 +86,7 @@ class ManageAppPage extends StatelessWidget {
                       ...app.permissions.map(
                         (permission) => SwitchListTile(
                           title: Text(
-                            translatePermission(context, permission.name),
+                            translatePermission(context, permission.command),
                           ),
                           value: permission.isAllowed,
                           onChanged: (_) =>

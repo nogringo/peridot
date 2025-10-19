@@ -28,8 +28,7 @@ class AddPrivkeyController extends GetxController {
       final ncryptsec = privkey;
       try {
         final privateKey = await Nip49.decrypt(ncryptsec, password);
-        final keyPair = KeyPair.fromPrivateKey(privateKey: privateKey);
-        addAccount(keyPair);
+        addAccount(privateKey);
       } catch (e) {
         final l10n = AppLocalizations.of(Get.context!)!;
         showErrorToast(l10n.decryptionFailed);
@@ -38,16 +37,14 @@ class AddPrivkeyController extends GetxController {
       final nsec = privkey;
       try {
         final privateKey = Nip19.nsecToHex(nsec);
-        final keyPair = KeyPair.fromPrivateKey(privateKey: privateKey);
-        addAccount(keyPair);
+        addAccount(privateKey);
       } catch (e) {
         final l10n = AppLocalizations.of(Get.context!)!;
         showErrorToast(l10n.invalidPrivateKey);
       }
     } else {
       try {
-        final keyPair = KeyPair.fromPrivateKey(privateKey: privkey);
-        addAccount(keyPair);
+        addAccount(privkey);
       } catch (e) {
         final l10n = AppLocalizations.of(Get.context!)!;
         showErrorToast(l10n.invalidPrivateKey);
@@ -55,12 +52,12 @@ class AddPrivkeyController extends GetxController {
     }
   }
 
-  Future<void> addAccount(KeyPair keypair) async {
-    await Repository.to.addAccount(keypair);
+  Future<void> addAccount(String privateKey) async {
+    await Repository.to.addAccount(privateKey);
     Get.offAllNamed(AppRoutes.applications);
   }
 
   void createAccount() {
-    addAccount(KeyPair.generate());
+    addAccount(KeyPair.generate().privateKey);
   }
 }

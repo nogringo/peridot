@@ -21,73 +21,73 @@ class ApplicationsPage extends StatelessWidget {
           SizedBox(width: 12),
         ],
       ),
-      body: Obx(() {
-        final apps = Repository.to.authorizedApps;
+      body: GetBuilder<Repository>(
+        builder: (_) {
+          final apps = Repository.bunker.apps;
 
-        if (apps.isEmpty) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.apps_outlined,
-                  size: 64,
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onSurface.withValues(alpha: 0.3),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  AppLocalizations.of(context)!.noApplicationsConnected,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          if (apps.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.apps_outlined,
+                    size: 64,
                     color: Theme.of(
                       context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    ).colorScheme.onSurface.withValues(alpha: 0.3),
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  AppLocalizations.of(context)!.tapPlusToAddApplication,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.5),
+                  SizedBox(height: 16),
+                  Text(
+                    AppLocalizations.of(context)!.noApplicationsConnected,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }
-
-        return ListView.builder(
-          padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
-          itemCount: apps.length,
-          itemBuilder: (context, index) {
-            final app = apps[index];
-            return ListTile(
-              leading: NPicture(ndk: Repository.ndk, pubkey: app.signerPubkey),
-              title: Text(
-                app.name,
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              subtitle: Text(
-                AppLocalizations.of(
-                  context,
-                )!.permissionCount(app.permissions.length),
-              ),
-              onTap: () => Get.toNamed(
-                AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
-                arguments: app,
+                  SizedBox(height: 8),
+                  Text(
+                    AppLocalizations.of(context)!.tapPlusToAddApplication,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
+                  ),
+                ],
               ),
             );
-          },
-        );
-      }),
+          }
+
+          return ListView.builder(
+            padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
+            itemCount: apps.length,
+            itemBuilder: (context, index) {
+              final app = apps[index];
+              return ListTile(
+                leading: NPicture(ndk: Repository.ndk, pubkey: app.userPubkey),
+                title: Text(
+                  app.name ?? "Unamed App",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.permissionCount(app.permissions.length),
+                ),
+                onTap: () => Get.toNamed(
+                  AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
+                  arguments: app,
+                ),
+              );
+            },
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Get.toNamed(AppRoutes.addApplication);
-          // Reload apps after returning
-          Repository.to.loadAuthorizedApps();
+          Get.toNamed(AppRoutes.addApplication);
         },
         child: Icon(Icons.add),
       ),

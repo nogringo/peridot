@@ -18,6 +18,43 @@ class ConnectAnAppView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
+                AppLocalizations.of(context)!.connectWithBunkerUrl,
+                style: Get.textTheme.titleMedium,
+              ),
+              SizedBox(height: 8),
+              GetBuilder<AddApplicationController>(
+                builder: (c) {
+                  return SelectableText(c.bunkerUrl ?? "");
+                },
+              ),
+              SizedBox(height: 12),
+              OutlinedButton(
+                onPressed: () => AddApplicationController.to.copyBunkerUrl(),
+                child: Text(AppLocalizations.of(context)!.copyBunkerUrl),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 16),
+        NostrConnectView(),
+      ],
+    );
+  }
+}
+
+class NostrConnectView extends StatelessWidget {
+  const NostrConnectView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BorderAreaView(
+      padding: EdgeInsets.all(16),
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
                 AppLocalizations.of(context)!.connectWithNostrConnectUrl,
                 style: Get.textTheme.titleMedium,
               ),
@@ -47,32 +84,20 @@ class ConnectAnAppView extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        SizedBox(height: 16),
-        BorderAreaView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                AppLocalizations.of(context)!.connectWithBunkerUrl,
-                style: Get.textTheme.titleMedium,
+          Obx(() {
+            if (!AddApplicationController.to.isNostrConnectConnecting.value) {
+              return Container();
+            }
+
+            return Positioned.fill(
+              child: ColoredBox(
+                color: Get.theme.colorScheme.surface.withValues(alpha: 0.5),
+                child: Center(child: CircularProgressIndicator()),
               ),
-              SizedBox(height: 8),
-              GetBuilder<AddApplicationController>(
-                builder: (c) {
-                  return SelectableText(c.bunkerUrl?.url ?? "");
-                },
-              ),
-              SizedBox(height: 12),
-              OutlinedButton(
-                onPressed: () => AddApplicationController.to.copyBunkerUrl(),
-                child: Text(AppLocalizations.of(context)!.copyBunkerUrl),
-              ),
-            ],
-          ),
-        ),
-      ],
+            );
+          }),
+        ],
+      ),
     );
   }
 }

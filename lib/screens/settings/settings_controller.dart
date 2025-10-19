@@ -9,7 +9,6 @@ import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/remove_account_dialog.dart';
-import 'package:sembast/sembast.dart';
 
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find();
@@ -118,15 +117,9 @@ class SettingsController extends GetxController {
       return;
     }
 
-    final db = Repository.to.db;
-    final store = stringMapStoreFactory.store('default_bunker_relays');
-
-    await store.record(relay).put(db, {relay: relay});
-
-    if (!Repository.to.bunkerDefaultRelays.contains(relay)) {
-      Repository.to.bunkerDefaultRelays.add(relay);
-    }
-
+    Repository.bunker.defaultBunkerRelays.add(relay);
     newRelayFieldController.clear();
+    update();
+    await Repository.to.saveBunkerState();
   }
 }

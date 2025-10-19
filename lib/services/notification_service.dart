@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/translate_permission.dart';
+import 'package:sembast/sembast.dart';
 
 // Top-level function for background notification handling
 @pragma('vm:entry-point')
@@ -78,10 +80,8 @@ class NotificationService extends GetxService {
 
   Future<void> setNotificationsEnabled(bool enabled) async {
     isNotificationEnabled.value = enabled;
-    await _storage.write(
-      key: 'notifications_enabled',
-      value: enabled.toString(),
-    );
+    var store = StoreRef.main();
+    await store.record("notifications_enabled").put(Repository.to.db, enabled);
   }
 
   void _onNotificationTapped(NotificationResponse response) {

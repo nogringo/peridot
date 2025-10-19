@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:peridot/models/authorized_app.dart';
-import 'package:peridot/models/permission.dart';
-import 'package:sembast/sembast.dart';
 
 class ManageAppController extends GetxController {
-  AuthorizedApp? app;
+  App? app;
   final renameController = TextEditingController();
   final renameFocusNode = FocusNode();
 
@@ -17,20 +15,20 @@ class ManageAppController extends GetxController {
 
     // First try to get the app from arguments (passed directly)
     final args = Get.arguments;
-    if (args != null && args is AuthorizedApp) {
+    if (args != null && args is App) {
       app = args;
     } else {
       // Otherwise, find the app by appPubkey from the route parameter
       final appPubkey = Get.parameters['appPubkey'];
       if (appPubkey != null) {
-        app = Repository.to.authorizedApps.firstWhereOrNull(
+        app = Repository.bunker.apps.firstWhereOrNull(
           (a) => a.appPubkey == appPubkey,
         );
       }
     }
 
     if (app != null) {
-      renameController.text = app!.name;
+      renameController.text = app!.name ?? "Unamed App";
     }
 
     // Listen to focus changes to auto-save
@@ -54,7 +52,7 @@ class ManageAppController extends GetxController {
     if (app == null) return;
 
     permission.isAllowed = !permission.isAllowed;
-    await Repository.to.updateAuthorizedApp(app!);
+    await Repository.to.saveBunkerState();
     update();
   }
 
@@ -63,17 +61,13 @@ class ManageAppController extends GetxController {
 
     final newName = renameController.text.trim();
     if (newName.isEmpty) {
-      renameController.text = app!.name;
+      renameController.text = app!.name ?? "Unamed App";
       return;
     }
 
-    if (newName == app!.name) return;
-
-    await Repository.to.renameAuthorizedApp(app!.appPubkey, newName);
-    app = Repository.to.authorizedApps.firstWhereOrNull(
-      (a) => a.appPubkey == app!.appPubkey,
-    );
+    app!.name = newName;
     update();
+    await Repository.to.saveBunkerState();
   }
 
   void deleteApp() async {
@@ -83,7 +77,7 @@ class ManageAppController extends GetxController {
     final confirmed = await Get.dialog<bool>(
       AlertDialog(
         title: Text(l10n.deleteApplication),
-        content: Text(l10n.deleteApplicationConfirm(app!.name)),
+        content: Text(l10n.deleteApplicationConfirm(app!.name ?? "Unamed App")),
         actions: [
           TextButton(
             onPressed: () => Get.back(result: false),
@@ -98,23 +92,10 @@ class ManageAppController extends GetxController {
     );
 
     if (confirmed == true) {
-      final db = Repository.to.db;
-      final store = intMapStoreFactory.store('authorized_apps');
-      final records = await store.find(db);
-
-      for (final record in records) {
-        final existingApp = AuthorizedApp.fromJson(record.value);
-        if (existingApp.appPubkey == app!.appPubkey &&
-            existingApp.signerPubkey == app!.signerPubkey) {
-          await store.record(record.key).delete(db);
-          break;
-        }
-      }
-
-      await Repository.to.loadAuthorizedApps();
-      await Repository.to.listenSigningRequests();
-
+      Repository.bunker.removeApp(app!);
+      Repository.to.update();
       Get.back();
+      Repository.to.saveBunkerState();
     }
   }
 }
