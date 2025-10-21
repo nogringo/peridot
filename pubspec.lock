@@ -475,7 +475,7 @@ packages:
       path: "../nostr_bunker"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.1.0"
   nostr_widgets:
     dependency: "direct main"
     description:

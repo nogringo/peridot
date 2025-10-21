@@ -13,7 +13,7 @@ class SystemSettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final settingsController = Get.find<SettingsController>();
     final notificationService = NotificationService.to;
-    final controller = Get.put(SystemSettingsController());
+    Get.put(SystemSettingsController());
     final l10n = AppLocalizations.of(context)!;
 
     return BorderAreaView(
@@ -46,14 +46,14 @@ class SystemSettingsView extends StatelessWidget {
               },
             ),
           ),
-          Obx(
-            () => SwitchListTile(
-              title: Text(l10n.useTor),
-              subtitle: Text(l10n.useTorComingSoon),
-              value: controller.isTorEnabled.value,
-              onChanged: null,
-            ),
-          ),
+          // Obx(
+          //   () => SwitchListTile(
+          //     title: Text(l10n.useTor),
+          //     subtitle: Text(l10n.useTorComingSoon),
+          //     value: controller.isTorEnabled.value,
+          //     onChanged: null,
+          //   ),
+          // ),
         ],
       ),
     );

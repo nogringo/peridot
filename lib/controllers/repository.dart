@@ -6,6 +6,7 @@ import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
+import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:sembast/sembast.dart' as sembast;
 
@@ -31,8 +32,12 @@ class Repository extends GetxController {
     bunker.start();
 
     pendingRequestsSub = bunker.pendingRequestsStream.listen((e) {
+      NotificationService.to.showNotification(
+        title: "New pending request",
+        body:
+            "A new request has been received and is waiting for your approval.",
+      );
       update();
-      print("req");
     });
   }
 
