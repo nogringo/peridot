@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/screens/manage_app/switch_account_dialog.dart';
 
 class ManageAppController extends GetxController {
   static ManageAppController get to => Get.find();
@@ -10,6 +11,8 @@ class ManageAppController extends GetxController {
   App? app;
   final renameController = TextEditingController();
   final renameFocusNode = FocusNode();
+
+  RxString selectedPubkey = "".obs;
 
   @override
   void onInit() {
@@ -35,6 +38,8 @@ class ManageAppController extends GetxController {
 
     // Listen to focus changes to auto-save
     renameFocusNode.addListener(_onFocusChange);
+
+    selectedPubkey.value = app!.userPubkey;
   }
 
   @override
@@ -108,6 +113,21 @@ class ManageAppController extends GetxController {
   void appEnableChange(bool value) {
     app!.isEnabled = value;
     update();
+    Repository.to.saveBunkerState();
+  }
+
+  void openSwitchAccountDialog() {
+    Get.dialog(SwitchAccountDialog());
+  }
+
+  void selectAccount(String pubkey) {
+    selectedPubkey.value = pubkey;
+  }
+
+  void switchAccount() {
+    app!.userPubkey = selectedPubkey.value;
+    update();
+    Get.back();
     Repository.to.saveBunkerState();
   }
 }

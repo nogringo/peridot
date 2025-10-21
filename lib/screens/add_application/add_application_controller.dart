@@ -117,12 +117,18 @@ class AddApplicationController extends GetxController {
   }
 
   void finish() {
+    app!.isEnabled = true;
+
     final newName = appNameFieldController.text;
     if (newName.isNotEmpty) {
       app!.name = newName;
     }
 
     app!.authorisationMode = appAuthorisationMode.value;
+
+    for (var req in Repository.bunker.blockedRequests) {
+      Repository.bunker.processNip46Request(req);
+    }
 
     Repository.to.update();
 

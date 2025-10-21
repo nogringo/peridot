@@ -58,6 +58,11 @@ class ManageAppPage extends StatelessWidget {
                       ),
                       title: NName(ndk: Repository.ndk, pubkey: app.userPubkey),
                       subtitle: Text(Nip19.npubFromHex(app.appPubkey)),
+                      trailing: IconButton(
+                        onPressed:
+                            ManageAppController.to.openSwitchAccountDialog,
+                        icon: Icon(Icons.swap_horiz),
+                      ),
                     ),
                   ],
                 ),
