@@ -1,0 +1,116 @@
+import 'package:get/get.dart';
+import 'package:nostr_bunker/nostr_bunker.dart';
+import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/models/bunker_request.dart';
+import 'package:sembast/sembast.dart';
+
+class RequestController extends GetxController {
+  static RequestController get to => Get.find();
+
+  BunkerRequest? request;
+
+  App? get app => Repository.bunker.apps
+      .where((app) => app.appPubkey == request!.originalRequest.appPubkey)
+      .firstOrNull;
+
+  bool get isRequestBlocked =>
+      RequestController.to.request!.status == BunkerRequestStatus.blocked;
+
+  @override
+  void onInit() async {
+    super.onInit();
+
+    final requestId = Get.parameters['requestId']!;
+
+    var store = stringMapStoreFactory.store('requests');
+    final record = await store.record(requestId).get(Repository.to.db);
+
+    request = BunkerRequest.fromJson(record as Map<String, dynamic>);
+
+    update();
+  }
+
+  void allowOnce() {
+    Get.back();
+
+    Repository.bunker.processRequest(request!.originalRequest);
+  }
+
+  void rejectOnce() async {
+    Get.back();
+
+    request!.status = BunkerRequestStatus.blocked;
+    var store = stringMapStoreFactory.store('requests');
+    await store
+        .record(request!.originalRequest.id)
+        .put(Repository.to.db, request!.toJson());
+  }
+
+  void allowForever() async {
+    Get.back();
+
+    Repository.bunker.allowForever(
+      command: request!.originalRequest.commandString,
+      app: app!,
+    );
+
+    var store = stringMapStoreFactory.store('requests');
+    final finder = Finder(
+      filter: Filter.custom((record) {
+        final req = BunkerRequest.fromJson(
+          record.value as Map<String, dynamic>,
+        );
+        return req.status == BunkerRequestStatus.pending &&
+            req.originalRequest.appPubkey ==
+                request!.originalRequest.appPubkey &&
+            req.originalRequest.commandString ==
+                request!.originalRequest.commandString;
+      }),
+    );
+
+    final pendingSnapshots = await store.find(Repository.to.db, finder: finder);
+
+    for (var snapshot in pendingSnapshots) {
+      final pendingRequest = BunkerRequest.fromJson(
+        snapshot.value as Map<String, dynamic>,
+      );
+
+      Repository.bunker.processRequest(pendingRequest.originalRequest);
+    }
+  }
+
+  void rejectForever() async {
+    Get.back();
+
+    Repository.bunker.rejectForever(
+      command: request!.originalRequest.commandString,
+      app: app!,
+    );
+
+    var store = stringMapStoreFactory.store('requests');
+    final finder = Finder(
+      filter: Filter.custom((record) {
+        final req = BunkerRequest.fromJson(
+          record.value as Map<String, dynamic>,
+        );
+        return req.status == BunkerRequestStatus.pending &&
+            req.originalRequest.appPubkey ==
+                request!.originalRequest.appPubkey &&
+            req.originalRequest.commandString ==
+                request!.originalRequest.commandString;
+      }),
+    );
+
+    final pendingSnapshots = await store.find(Repository.to.db, finder: finder);
+
+    for (var snapshot in pendingSnapshots) {
+      final pendingRequest = BunkerRequest.fromJson(
+        snapshot.value as Map<String, dynamic>,
+      );
+      pendingRequest.status = BunkerRequestStatus.blocked;
+      store
+          .record(pendingRequest.originalRequest.id)
+          .put(Repository.to.db, pendingRequest.toJson());
+    }
+  }
+}

@@ -13,7 +13,7 @@ Future<Database> getDatabase([String dbName = "ndk_cache_manager"]) async {
   }
 
   final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
-  return await databaseFactoryIo.openDatabase(
-    p.join(appDocumentsDir.path, '$dbName.db'),
-  );
+  final dbPath = p.join(appDocumentsDir.path, "Peridot", '$dbName.db');
+  await Directory(p.dirname(dbPath)).create(recursive: true);
+  return await databaseFactoryIo.openDatabase(dbPath);
 }

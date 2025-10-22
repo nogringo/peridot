@@ -6,9 +6,15 @@ import 'package:ndk/ndk.dart';
 import 'package:nip01/nip01.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
+import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:sembast/sembast.dart' as sembast;
+
+// TODO show if app leaks metadata
+// TODO show if app use deprecated encryption
+// TODO sort apps by pending permissions
+// TODO show pending permissions on applications page
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
@@ -17,7 +23,10 @@ class Repository extends GetxController {
 
   bool isAppLoaded = false;
   RxSet<String> usersPubkeys = RxSet<String>({});
+
   StreamSubscription<Nip46Request>? pendingRequestsSub;
+  StreamSubscription<Nip46Request>? blockedRequestsSub;
+  StreamSubscription<Nip46Request>? processedRequestsSub;
 
   late sembast.Database db;
 
@@ -31,13 +40,40 @@ class Repository extends GetxController {
 
     bunker.start();
 
-    pendingRequestsSub = bunker.pendingRequestsStream.listen((e) {
+    pendingRequestsSub = bunker.pendingRequestsStream.listen((req) {
+      final reqObj = BunkerRequest(
+        originalRequest: req,
+        status: BunkerRequestStatus.pending,
+      );
+      var store = sembast.stringMapStoreFactory.store('requests');
+      store.record(req.id).put(db, reqObj.toJson());
+
+      final app = bunker.getApp(req);
+
       NotificationService.to.showNotification(
         title: "New pending request",
         body:
-            "A new request has been received and is waiting for your approval.",
+            "A new request from ${app == null ? "Deleted app" : app.name} has been received and is waiting for your approval.",
       );
       update();
+    });
+
+    blockedRequestsSub = bunker.blockedRequestsStream.listen((req) {
+      final reqObj = BunkerRequest(
+        originalRequest: req,
+        status: BunkerRequestStatus.blocked,
+      );
+      var store = sembast.stringMapStoreFactory.store('requests');
+      store.record(req.id).put(db, reqObj.toJson());
+    });
+
+    processedRequestsSub = bunker.processedRequestsStream.listen((req) async {
+      final reqObj = BunkerRequest(
+        originalRequest: req,
+        status: BunkerRequestStatus.processed,
+      );
+      var store = sembast.stringMapStoreFactory.store('requests');
+      await store.record(req.id).put(db, reqObj.toJson());
     });
   }
 

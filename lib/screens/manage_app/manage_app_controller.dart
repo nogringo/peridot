@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/manage_app/switch_account_dialog.dart';
 
 class ManageAppController extends GetxController {
@@ -129,5 +130,9 @@ class ManageAppController extends GetxController {
     update();
     Get.back();
     Repository.to.saveBunkerState();
+  }
+
+  void openReqScreen(Nip46Request reqObj) {
+    Get.toNamed(AppRoutes.request.replaceAll(':requestId', reqObj.id));
   }
 }

@@ -9,11 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_highlight: ^0.7.0
   flutter_local_notifications: ^19.4.2
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^9.2.4
   get: ^4.7.2
+  google_fonts: ^6.3.2
   intl: any
   launch_at_startup: ^0.5.1
   ndk: ^0.5.1

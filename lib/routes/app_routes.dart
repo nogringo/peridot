@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:peridot/screens/applications/applications_page.dart';
 import 'package:peridot/screens/add_privkey/add_privkey_page.dart';
 import 'package:peridot/screens/add_application/add_application_page.dart';
+import 'package:peridot/screens/request/request_page.dart';
 import 'package:peridot/screens/settings/settings_page.dart';
 import 'package:peridot/screens/backup_account/backup_account_page.dart';
 import 'package:peridot/screens/manage_app/manage_app_page.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String settings = '/settings';
   static const String backupAccount = '/backup-account/:pubkey';
   static const String manageApp = '/manage-app/:appPubkey';
+  static const String request = '/request/:requestId';
 
   static List<GetPage> pages = [
     GetPage(
@@ -26,5 +28,6 @@ class AppRoutes {
     GetPage(name: settings, page: () => SettingsPage()),
     GetPage(name: backupAccount, page: () => BackupAccountPage()),
     GetPage(name: manageApp, page: () => ManageAppPage()),
+    GetPage(name: request, page: () => RequestPage()),
   ];
 }

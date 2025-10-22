@@ -82,7 +82,7 @@ class AddApplicationController extends GetxController {
 
   void chooseAccountStepDone() {
     bunkerUrl = Repository.bunker.getBunkerUrl(
-      signerPubkey: selectedPubkey.value,
+      userPubkey: selectedPubkey.value,
       onConnected: (app) {
         this.app = app;
         update();
@@ -96,7 +96,7 @@ class AddApplicationController extends GetxController {
     isNostrConnectConnecting.value = true;
 
     app = await Repository.bunker.connectApp(
-      signerPubkey: selectedPubkey.value,
+      userPubkey: selectedPubkey.value,
       nostrConnect: NostrConnectUrl.fromUrl(
         nostrConnectFieldController.text.trim(),
       ),
@@ -126,9 +126,10 @@ class AddApplicationController extends GetxController {
 
     app!.authorisationMode = appAuthorisationMode.value;
 
-    for (var req in Repository.bunker.blockedRequests) {
-      Repository.bunker.processNip46Request(req);
-    }
+    // TODO
+    // for (var req in Repository.bunker.blockedRequests) {
+    //   Repository.bunker.processNip46Request(req);
+    // }
 
     Repository.to.update();
 
