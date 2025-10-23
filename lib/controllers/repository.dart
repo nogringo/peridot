@@ -86,6 +86,7 @@ class Repository extends GetxController {
   }
 
   Future<void> removeAccount(String pubkey) async {
+    usersPubkeys.remove(pubkey);
     bunker.removePrivateKey(pubkey);
     update();
     await saveBunkerState();

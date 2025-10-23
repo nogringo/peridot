@@ -9,7 +9,7 @@ class AuthMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    final hasAccounts = Repository.ndk.accounts.accounts.isNotEmpty;
+    final hasAccounts = Repository.to.usersPubkeys.isNotEmpty;
 
     if (!hasAccounts && route != AppRoutes.addPrivkey) {
       return RouteSettings(name: AppRoutes.addPrivkey);

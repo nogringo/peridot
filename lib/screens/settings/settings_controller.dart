@@ -93,7 +93,7 @@ class SettingsController extends GetxController {
 
     await Repository.to.removeAccount(pubkey);
 
-    if (Repository.ndk.accounts.accounts.isEmpty) {
+    if (Repository.to.usersPubkeys.isEmpty) {
       Get.offAllNamed(AppRoutes.addPrivkey);
     }
   }
