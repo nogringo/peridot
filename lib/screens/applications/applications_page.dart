@@ -14,6 +14,7 @@ class ApplicationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ApplicationController());
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.applications),
@@ -30,7 +31,7 @@ class ApplicationsPage extends StatelessWidget {
           if (Repository.bunker.apps.isEmpty) return NoAppsView();
 
           return StreamBuilder(
-            stream: ApplicationController.requestsStream,
+            stream: ApplicationController.to.requestsStream,
             builder: (context, snapshot) {
               if (!snapshot.hasData) return Container();
 

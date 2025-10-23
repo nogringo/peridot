@@ -19,18 +19,6 @@ class AppWithRequests {
 class ApplicationController extends GetxController {
   static ApplicationController get to => Get.find();
 
-  static Stream<List<RecordSnapshot<String, Map<String, Object?>>>>
-  requestsStream = stringMapStoreFactory
-      .store('requests')
-      .query(
-        finder: Finder(
-          filter: Filter.not(
-            Filter.equals("status", BunkerRequestStatus.processed.name),
-          ),
-        ),
-      )
-      .onSnapshots(Repository.to.db);
-
   static void allowForever({required String command, required App app}) {
     Repository.bunker.allowForever(command: command, app: app);
     Repository.to.update();
@@ -70,4 +58,16 @@ class ApplicationController extends GetxController {
 
     return result;
   }
+
+  Stream<List<RecordSnapshot<String, Map<String, Object?>>>> requestsStream =
+      stringMapStoreFactory
+          .store('requests')
+          .query(
+            finder: Finder(
+              filter: Filter.not(
+                Filter.equals("status", BunkerRequestStatus.processed.name),
+              ),
+            ),
+          )
+          .onSnapshots(Repository.to.db);
 }
