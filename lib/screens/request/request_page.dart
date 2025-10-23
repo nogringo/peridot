@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -6,6 +8,7 @@ import 'package:peridot/screens/request/widgets/actions_buttons_view.dart';
 import 'package:peridot/screens/request/request_controller.dart';
 import 'package:peridot/screens/request/widgets/json_viewer.dart';
 import 'package:peridot/screens/request/widgets/warning_banner_view.dart';
+import 'package:peridot/utils/nostr_kinds.dart';
 
 class RequestPage extends StatelessWidget {
   const RequestPage({super.key});
@@ -53,6 +56,36 @@ class RequestPage extends StatelessWidget {
                 "Command: ${c.request!.originalRequest.commandString}",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+              if (c.request!.originalRequest.command == Nip46Commands.signEvent)
+                Builder(
+                  builder: (context) {
+                    try {
+                      final eventJson = jsonDecode(
+                        c.request!.originalRequest.params.first,
+                      );
+                      final kind = eventJson['kind'] as int?;
+                      if (kind != null) {
+                        final kindDescription = NostrKinds.getDescription(
+                          context,
+                          kind,
+                        );
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(
+                            "Kind: $kindDescription",
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      // If parsing fails, don't show anything
+                    }
+                    return SizedBox.shrink();
+                  },
+                ),
               SizedBox(height: 8),
               Text("Params", style: Theme.of(context).textTheme.titleLarge),
               if (c.request!.originalRequest.command != Nip46Commands.signEvent)

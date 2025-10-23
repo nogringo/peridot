@@ -13,6 +13,8 @@ import 'package:sembast/sembast.dart' as sembast;
 
 // TODO show if app leaks metadata
 // TODO show if app use deprecated encryption
+// TODO fix error when adding an account
+// TODO update ui when allowing a new perm
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
