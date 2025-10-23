@@ -65,10 +65,10 @@ class BlockedRequestsView extends StatelessWidget {
                   subtitle: Text(
                     DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
                   ),
-                  trailing: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.more_vert), // TODO add popup
-                  ),
+                  // trailing: IconButton(
+                  //   onPressed: () {},
+                  //   icon: Icon(Icons.more_vert), // TODO add popup
+                  // ),
                   onTap: () =>
                       ManageAppController.to.openReqScreen(req.originalRequest),
                 );
