@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/manage_app/switch_account_dialog.dart';
+import 'package:sembast/sembast.dart';
 
 class ManageAppController extends GetxController {
   static ManageAppController get to => Get.find();
@@ -134,5 +136,18 @@ class ManageAppController extends GetxController {
 
   void openReqScreen(Nip46Request reqObj) {
     Get.toNamed(AppRoutes.request.replaceAll(':requestId', reqObj.id));
+  }
+
+  Future<void> deleteBlockedRequest(String requestId) async {
+    final requestsStore = stringMapStoreFactory.store('requests');
+    await requestsStore.record(requestId).delete(Repository.to.db);
+  }
+
+  Future<void> deleteAllBlockedRequests(List<BunkerRequest> requests) async {
+    final requestsStore = stringMapStoreFactory.store('requests');
+    final db = Repository.to.db;
+
+    final recordKeys = requests.map((req) => req.originalRequest.id).toList();
+    await requestsStore.records(recordKeys).delete(db);
   }
 }

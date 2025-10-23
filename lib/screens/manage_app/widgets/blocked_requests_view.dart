@@ -54,9 +54,25 @@ class BlockedRequestsView extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  "${requests.length} Blocked requests",
-                  style: Theme.of(context).textTheme.titleLarge,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "${requests.length} Blocked requests",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                    if (requests.isNotEmpty)
+                      TextButton.icon(
+                        onPressed: () async {
+                          await ManageAppController.to.deleteAllBlockedRequests(
+                            requests,
+                          );
+                        },
+                        icon: Icon(Icons.delete_sweep),
+                        label: Text('Delete All'),
+                      ),
+                  ],
                 ),
               ),
               ...requests.map((req) {
@@ -65,10 +81,14 @@ class BlockedRequestsView extends StatelessWidget {
                   subtitle: Text(
                     DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
                   ),
-                  // trailing: IconButton(
-                  //   onPressed: () {},
-                  //   icon: Icon(Icons.more_vert), // TODO add popup
-                  // ),
+                  trailing: IconButton(
+                    onPressed: () async {
+                      await ManageAppController.to.deleteBlockedRequest(
+                        req.originalRequest.id,
+                      );
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
                   onTap: () =>
                       ManageAppController.to.openReqScreen(req.originalRequest),
                 );
