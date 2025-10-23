@@ -911,4 +911,95 @@ class AppLocalizationsZh extends AppLocalizations {
   String unknownEventKind(int kind) {
     return '事件类型 $kind';
   }
+
+  @override
+  String get selectAccountToUse => '选择要使用的账户';
+
+  @override
+  String get use => '使用';
+
+  @override
+  String get alwaysAskPermission => '总是询问权限';
+
+  @override
+  String get alwaysAskPermissionDescription => '对于应用程序的每个请求，您将选择要做什么';
+
+  @override
+  String get allowCommonActions => '允许常见操作';
+
+  @override
+  String get allowCommonActionsDescription => '常见请求会自动处理，您将选择如何处理其他请求';
+
+  @override
+  String get fullyTrust => '完全信任';
+
+  @override
+  String get fullyTrustDescription => '所有请求都会自动处理';
+
+  @override
+  String get enableThisApp => '启用此应用';
+
+  @override
+  String get enableThisAppDescription => '禁用时，所有请求都会被阻止';
+
+  @override
+  String get appConfiguration => '应用配置';
+
+  @override
+  String get finish => '完成';
+
+  @override
+  String get trustLevel => '信任级别';
+
+  @override
+  String get deletedApp => '已删除的应用';
+
+  @override
+  String get deprecatedEncryptionWarning => '此请求使用已弃用的加密';
+
+  @override
+  String get deprecatedEncryptionWarningMessage => '请联系并告知应用开发者';
+
+  @override
+  String get metadataLeakWarning => '此请求泄露元数据';
+
+  @override
+  String get metadataLeakWarningMessage =>
+      '人们可以知道您使用了bunker以及何时使用它。请联系并告知应用开发者';
+
+  @override
+  String get params => '参数';
+
+  @override
+  String get allowOnce => '允许一次';
+
+  @override
+  String get rejectOnce => '拒绝一次';
+
+  @override
+  String get allowForever => '永久允许';
+
+  @override
+  String get rejectForever => '永久拒绝';
+
+  @override
+  String processedRequestsCount(int count) {
+    return '$count 已处理的请求';
+  }
+
+  @override
+  String blockedRequestsCount(int count) {
+    return '$count 已阻止的请求';
+  }
+
+  @override
+  String get deleteAll => '全部删除';
+
+  @override
+  String get newPendingRequest => '新的待处理请求';
+
+  @override
+  String newPendingRequestBody(String appName) {
+    return '收到来自 $appName 的新请求，正在等待您的批准。';
+  }
 }

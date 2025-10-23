@@ -929,4 +929,101 @@ class AppLocalizationsRu extends AppLocalizations {
   String unknownEventKind(int kind) {
     return 'Тип события $kind';
   }
+
+  @override
+  String get selectAccountToUse => 'Выберите учетную запись для использования';
+
+  @override
+  String get use => 'Использовать';
+
+  @override
+  String get alwaysAskPermission => 'Всегда спрашивать разрешение';
+
+  @override
+  String get alwaysAskPermissionDescription =>
+      'Для каждого запроса от приложения вы будете выбирать, что делать';
+
+  @override
+  String get allowCommonActions => 'Разрешить обычные действия';
+
+  @override
+  String get allowCommonActionsDescription =>
+      'Обычные запросы обрабатываются автоматически, вы будете выбирать, что делать с остальными';
+
+  @override
+  String get fullyTrust => 'Полностью доверять';
+
+  @override
+  String get fullyTrustDescription =>
+      'Все запросы обрабатываются автоматически';
+
+  @override
+  String get enableThisApp => 'Включить это приложение';
+
+  @override
+  String get enableThisAppDescription =>
+      'При отключении все запросы блокируются';
+
+  @override
+  String get appConfiguration => 'Конфигурация приложения';
+
+  @override
+  String get finish => 'Завершить';
+
+  @override
+  String get trustLevel => 'Уровень доверия';
+
+  @override
+  String get deletedApp => 'Удаленное приложение';
+
+  @override
+  String get deprecatedEncryptionWarning =>
+      'Этот запрос использует устаревшее шифрование';
+
+  @override
+  String get deprecatedEncryptionWarningMessage =>
+      'Пожалуйста, свяжитесь и сообщите разработчику приложения';
+
+  @override
+  String get metadataLeakWarning => 'Этот запрос утекает метаданные';
+
+  @override
+  String get metadataLeakWarningMessage =>
+      'Люди могут узнать, что вы используете бункер и когда вы его используете. Пожалуйста, свяжитесь и сообщите разработчику приложения';
+
+  @override
+  String get params => 'Параметры';
+
+  @override
+  String get allowOnce => 'Разрешить один раз';
+
+  @override
+  String get rejectOnce => 'Отклонить один раз';
+
+  @override
+  String get allowForever => 'Разрешить навсегда';
+
+  @override
+  String get rejectForever => 'Отклонить навсегда';
+
+  @override
+  String processedRequestsCount(int count) {
+    return '$count Обработанных запросов';
+  }
+
+  @override
+  String blockedRequestsCount(int count) {
+    return '$count Заблокированных запросов';
+  }
+
+  @override
+  String get deleteAll => 'Удалить все';
+
+  @override
+  String get newPendingRequest => 'Новый ожидающий запрос';
+
+  @override
+  String newPendingRequestBody(String appName) {
+    return 'Получен новый запрос от $appName и ожидает вашего одобрения.';
+  }
 }

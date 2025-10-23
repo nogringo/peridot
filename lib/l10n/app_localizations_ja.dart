@@ -913,4 +913,96 @@ class AppLocalizationsJa extends AppLocalizations {
   String unknownEventKind(int kind) {
     return 'イベント種類 $kind';
   }
+
+  @override
+  String get selectAccountToUse => '使用するアカウントを選択';
+
+  @override
+  String get use => '使用';
+
+  @override
+  String get alwaysAskPermission => '常に許可を求める';
+
+  @override
+  String get alwaysAskPermissionDescription => 'アプリからの各リクエストに対して、何をするか選択します';
+
+  @override
+  String get allowCommonActions => '一般的なアクションを許可';
+
+  @override
+  String get allowCommonActionsDescription =>
+      '一般的なリクエストは自動的に処理され、その他については選択します';
+
+  @override
+  String get fullyTrust => '完全に信頼';
+
+  @override
+  String get fullyTrustDescription => 'すべてのリクエストが自動的に処理されます';
+
+  @override
+  String get enableThisApp => 'このアプリを有効化';
+
+  @override
+  String get enableThisAppDescription => '無効にすると、すべてのリクエストがブロックされます';
+
+  @override
+  String get appConfiguration => 'アプリ設定';
+
+  @override
+  String get finish => '完了';
+
+  @override
+  String get trustLevel => '信頼レベル';
+
+  @override
+  String get deletedApp => '削除されたアプリ';
+
+  @override
+  String get deprecatedEncryptionWarning => 'このリクエストは非推奨の暗号化を使用しています';
+
+  @override
+  String get deprecatedEncryptionWarningMessage => 'アプリ開発者に連絡してお知らせください';
+
+  @override
+  String get metadataLeakWarning => 'このリクエストはメタデータを漏洩しています';
+
+  @override
+  String get metadataLeakWarningMessage =>
+      'バンカーを使用していることと使用時期が他の人に知られる可能性があります。アプリ開発者に連絡してお知らせください';
+
+  @override
+  String get params => 'パラメータ';
+
+  @override
+  String get allowOnce => '1回許可';
+
+  @override
+  String get rejectOnce => '1回拒否';
+
+  @override
+  String get allowForever => '常に許可';
+
+  @override
+  String get rejectForever => '常に拒否';
+
+  @override
+  String processedRequestsCount(int count) {
+    return '$count 処理済みリクエスト';
+  }
+
+  @override
+  String blockedRequestsCount(int count) {
+    return '$count ブロック済みリクエスト';
+  }
+
+  @override
+  String get deleteAll => 'すべて削除';
+
+  @override
+  String get newPendingRequest => '新しい保留中のリクエスト';
+
+  @override
+  String newPendingRequestBody(String appName) {
+    return '$appNameから新しいリクエストを受信しました。承認をお待ちしています。';
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/request/request_controller.dart';
 
 class ActionsButtonsView extends StatelessWidget {
@@ -6,25 +7,31 @@ class ActionsButtonsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     final allowOnceButton = OutlinedButton(
       onPressed: RequestController.to.allowOnce,
       child: Text(
-        RequestController.to.isRequestBlocked ? "Allow" : "Allow once",
+        RequestController.to.isRequestBlocked ? l10n.allow : l10n.allowOnce,
       ),
     );
     final rejectOnceButton = OutlinedButton(
       onPressed: RequestController.to.rejectOnce,
       child: Text(
-        RequestController.to.isRequestBlocked ? "Reject" : "Reject once",
+        RequestController.to.isRequestBlocked ? l10n.reject : l10n.rejectOnce,
       ),
     );
     final allowForeverButton = OutlinedButton(
       onPressed: RequestController.to.allowForever,
-      child: Text("Allow forever"),
+      child: Text(l10n.allowForever),
     );
     final rejectForeverButton = OutlinedButton(
       onPressed: RequestController.to.rejectForever,
-      child: Text("Reject forever"),
+      child: Text(l10n.rejectForever),
+    );
+    final deleteButton = OutlinedButton(
+      onPressed: RequestController.to.deleteRequest,
+      child: Text(l10n.delete),
     );
 
     return LayoutBuilder(
@@ -37,7 +44,8 @@ class ActionsButtonsView extends StatelessWidget {
             spacing: 8,
             children: [
               allowOnceButton,
-              rejectOnceButton,
+              if (!RequestController.to.isRequestBlocked) rejectOnceButton,
+              if (RequestController.to.isRequestBlocked) deleteButton,
               if (!RequestController.to.isRequestBlocked) allowForeverButton,
               if (!RequestController.to.isRequestBlocked) rejectForeverButton,
             ],
@@ -51,7 +59,10 @@ class ActionsButtonsView extends StatelessWidget {
               spacing: 8,
               children: [
                 Expanded(child: allowOnceButton),
-                Expanded(child: rejectOnceButton),
+                if (!RequestController.to.isRequestBlocked)
+                  Expanded(child: rejectOnceButton),
+                if (RequestController.to.isRequestBlocked)
+                  Expanded(child: deleteButton),
               ],
             ),
             if (!RequestController.to.isRequestBlocked)

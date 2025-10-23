@@ -924,4 +924,101 @@ class AppLocalizationsEn extends AppLocalizations {
   String unknownEventKind(int kind) {
     return 'Event Kind $kind';
   }
+
+  @override
+  String get selectAccountToUse => 'Select the account to use';
+
+  @override
+  String get use => 'Use';
+
+  @override
+  String get alwaysAskPermission => 'Always ask permission';
+
+  @override
+  String get alwaysAskPermissionDescription =>
+      'For each request from the app, you will choose what to do';
+
+  @override
+  String get allowCommonActions => 'Allow common actions';
+
+  @override
+  String get allowCommonActionsDescription =>
+      'Common requests are automatically processed, you will choose what to do with the others';
+
+  @override
+  String get fullyTrust => 'Fully trust';
+
+  @override
+  String get fullyTrustDescription =>
+      'Every requests are automatically processed';
+
+  @override
+  String get enableThisApp => 'Enable this app';
+
+  @override
+  String get enableThisAppDescription =>
+      'When disabled, every requests are blocked';
+
+  @override
+  String get appConfiguration => 'App configuration';
+
+  @override
+  String get finish => 'Finish';
+
+  @override
+  String get trustLevel => 'Trust level';
+
+  @override
+  String get deletedApp => 'Deleted app';
+
+  @override
+  String get deprecatedEncryptionWarning =>
+      'This request uses deprecated encryption';
+
+  @override
+  String get deprecatedEncryptionWarningMessage =>
+      'Please contact and inform the app developer';
+
+  @override
+  String get metadataLeakWarning => 'This request leaks metadata';
+
+  @override
+  String get metadataLeakWarningMessage =>
+      'People can know that you use a bunker and when you use it. Please contact and inform the app developer';
+
+  @override
+  String get params => 'Params';
+
+  @override
+  String get allowOnce => 'Allow once';
+
+  @override
+  String get rejectOnce => 'Reject once';
+
+  @override
+  String get allowForever => 'Allow forever';
+
+  @override
+  String get rejectForever => 'Reject forever';
+
+  @override
+  String processedRequestsCount(int count) {
+    return '$count Processed requests';
+  }
+
+  @override
+  String blockedRequestsCount(int count) {
+    return '$count Blocked requests';
+  }
+
+  @override
+  String get deleteAll => 'Delete All';
+
+  @override
+  String get newPendingRequest => 'New pending request';
+
+  @override
+  String newPendingRequestBody(String appName) {
+    return 'A new request from $appName has been received and is waiting for your approval.';
+  }
 }

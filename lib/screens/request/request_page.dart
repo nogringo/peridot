@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
@@ -15,13 +16,14 @@ class RequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GetBuilder(
       init: RequestController(),
       builder: (c) {
         if (c.request == null) return Scaffold();
 
         return Scaffold(
-          appBar: AppBar(title: Text(c.app?.name ?? "Deleted app")),
+          appBar: AppBar(title: Text(c.app?.name ?? l10n.deletedApp)),
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
@@ -29,17 +31,16 @@ class RequestPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: WarningBannerView(
-                    title: "This request use a deprecated encryption",
-                    subtitle: "Please, contact and inform the app developper",
+                    title: l10n.deprecatedEncryptionWarning,
+                    subtitle: l10n.deprecatedEncryptionWarningMessage,
                   ),
                 ),
               if (c.request!.originalRequest.bunkerPubkey == c.app!.userPubkey)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: WarningBannerView(
-                    title: "This request leak metadata",
-                    subtitle:
-                        "People can know that you use a bunker and when you use it. Please, contact and inform the app developper",
+                    title: l10n.metadataLeakWarning,
+                    subtitle: l10n.metadataLeakWarningMessage,
                   ),
                 ),
               Align(
@@ -87,7 +88,7 @@ class RequestPage extends StatelessWidget {
                   },
                 ),
               SizedBox(height: 8),
-              Text("Params", style: Theme.of(context).textTheme.titleLarge),
+              Text(l10n.params, style: Theme.of(context).textTheme.titleLarge),
               if (c.request!.originalRequest.command != Nip46Commands.signEvent)
                 ...c.request!.originalRequest.params.map(
                   (param) => SelectableText(param),

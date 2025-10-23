@@ -43,7 +43,7 @@ class AppConfigurationView extends StatelessWidget {
         SizedBox(height: 32),
         GetBuilder<AddApplicationController>(
           builder: (c) {
-            return FilledButton(onPressed: c.finish, child: Text("Finish"));
+            return FilledButton(onPressed: c.finish, child: Text(l10n.finish));
           },
         ),
       ],
@@ -56,10 +56,11 @@ class TrustLevelView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("Trust level", style: Get.textTheme.titleMedium),
+        Text(l10n.trustLevel, style: Get.textTheme.titleMedium),
         Obx(() {
           final selectedAuthorisationMode =
               AddApplicationController.to.appAuthorisationMode.value;

@@ -927,4 +927,101 @@ class AppLocalizationsEs extends AppLocalizations {
   String unknownEventKind(int kind) {
     return 'Tipo de Evento $kind';
   }
+
+  @override
+  String get selectAccountToUse => 'Selecciona la cuenta a usar';
+
+  @override
+  String get use => 'Usar';
+
+  @override
+  String get alwaysAskPermission => 'Siempre pedir permiso';
+
+  @override
+  String get alwaysAskPermissionDescription =>
+      'Para cada solicitud de la aplicación, elegirás qué hacer';
+
+  @override
+  String get allowCommonActions => 'Permitir acciones comunes';
+
+  @override
+  String get allowCommonActionsDescription =>
+      'Las solicitudes comunes se procesan automáticamente, elegirás qué hacer con las demás';
+
+  @override
+  String get fullyTrust => 'Confiar completamente';
+
+  @override
+  String get fullyTrustDescription =>
+      'Todas las solicitudes se procesan automáticamente';
+
+  @override
+  String get enableThisApp => 'Habilitar esta aplicación';
+
+  @override
+  String get enableThisAppDescription =>
+      'Cuando está deshabilitada, todas las solicitudes se bloquean';
+
+  @override
+  String get appConfiguration => 'Configuración de la aplicación';
+
+  @override
+  String get finish => 'Finalizar';
+
+  @override
+  String get trustLevel => 'Nivel de confianza';
+
+  @override
+  String get deletedApp => 'Aplicación eliminada';
+
+  @override
+  String get deprecatedEncryptionWarning =>
+      'Esta solicitud usa cifrado obsoleto';
+
+  @override
+  String get deprecatedEncryptionWarningMessage =>
+      'Por favor, contacta e informa al desarrollador de la aplicación';
+
+  @override
+  String get metadataLeakWarning => 'Esta solicitud filtra metadatos';
+
+  @override
+  String get metadataLeakWarningMessage =>
+      'Las personas pueden saber que usas un búnker y cuándo lo usas. Por favor, contacta e informa al desarrollador de la aplicación';
+
+  @override
+  String get params => 'Parámetros';
+
+  @override
+  String get allowOnce => 'Permitir una vez';
+
+  @override
+  String get rejectOnce => 'Rechazar una vez';
+
+  @override
+  String get allowForever => 'Permitir siempre';
+
+  @override
+  String get rejectForever => 'Rechazar siempre';
+
+  @override
+  String processedRequestsCount(int count) {
+    return '$count Solicitudes procesadas';
+  }
+
+  @override
+  String blockedRequestsCount(int count) {
+    return '$count Solicitudes bloqueadas';
+  }
+
+  @override
+  String get deleteAll => 'Eliminar todo';
+
+  @override
+  String get newPendingRequest => 'Nueva solicitud pendiente';
+
+  @override
+  String newPendingRequestBody(String appName) {
+    return 'Se ha recibido una nueva solicitud de $appName y está esperando tu aprobación.';
+  }
 }

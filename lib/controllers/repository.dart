@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
@@ -50,11 +51,15 @@ class Repository extends GetxController {
 
       final app = bunker.getApp(req);
 
-      NotificationService.to.showNotification(
-        title: "New pending request",
-        body:
-            "A new request from ${app == null ? "Deleted app" : app.name} has been received and is waiting for your approval.",
-      );
+      final context = Get.context;
+      if (context != null) {
+        final l10n = AppLocalizations.of(context)!;
+        final appName = app?.name ?? l10n.deletedApp;
+        NotificationService.to.showNotification(
+          title: l10n.newPendingRequest,
+          body: l10n.newPendingRequestBody(appName),
+        );
+      }
       update();
     });
 

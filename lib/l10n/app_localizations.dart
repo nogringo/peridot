@@ -1869,6 +1869,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Event Kind {kind}'**
   String unknownEventKind(int kind);
+
+  /// Title for account selection dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Select the account to use'**
+  String get selectAccountToUse;
+
+  /// Use button text in account selection
+  ///
+  /// In en, this message translates to:
+  /// **'Use'**
+  String get use;
+
+  /// Trust level option title
+  ///
+  /// In en, this message translates to:
+  /// **'Always ask permission'**
+  String get alwaysAskPermission;
+
+  /// Trust level option description
+  ///
+  /// In en, this message translates to:
+  /// **'For each request from the app, you will choose what to do'**
+  String get alwaysAskPermissionDescription;
+
+  /// Trust level option title
+  ///
+  /// In en, this message translates to:
+  /// **'Allow common actions'**
+  String get allowCommonActions;
+
+  /// Trust level option description
+  ///
+  /// In en, this message translates to:
+  /// **'Common requests are automatically processed, you will choose what to do with the others'**
+  String get allowCommonActionsDescription;
+
+  /// Trust level option title
+  ///
+  /// In en, this message translates to:
+  /// **'Fully trust'**
+  String get fullyTrust;
+
+  /// Trust level option description
+  ///
+  /// In en, this message translates to:
+  /// **'Every requests are automatically processed'**
+  String get fullyTrustDescription;
+
+  /// Enable app toggle title
+  ///
+  /// In en, this message translates to:
+  /// **'Enable this app'**
+  String get enableThisApp;
+
+  /// Enable app toggle description
+  ///
+  /// In en, this message translates to:
+  /// **'When disabled, every requests are blocked'**
+  String get enableThisAppDescription;
+
+  /// Stepper step title for app configuration
+  ///
+  /// In en, this message translates to:
+  /// **'App configuration'**
+  String get appConfiguration;
+
+  /// Finish button text
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish;
+
+  /// Trust level section title
+  ///
+  /// In en, this message translates to:
+  /// **'Trust level'**
+  String get trustLevel;
+
+  /// Placeholder text when app is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted app'**
+  String get deletedApp;
+
+  /// Warning message for deprecated encryption
+  ///
+  /// In en, this message translates to:
+  /// **'This request uses deprecated encryption'**
+  String get deprecatedEncryptionWarning;
+
+  /// Warning message detail for deprecated encryption
+  ///
+  /// In en, this message translates to:
+  /// **'Please contact and inform the app developer'**
+  String get deprecatedEncryptionWarningMessage;
+
+  /// Warning message for metadata leak
+  ///
+  /// In en, this message translates to:
+  /// **'This request leaks metadata'**
+  String get metadataLeakWarning;
+
+  /// Warning message detail for metadata leak
+  ///
+  /// In en, this message translates to:
+  /// **'People can know that you use a bunker and when you use it. Please contact and inform the app developer'**
+  String get metadataLeakWarningMessage;
+
+  /// Parameters section title
+  ///
+  /// In en, this message translates to:
+  /// **'Params'**
+  String get params;
+
+  /// Button text to allow permission once
+  ///
+  /// In en, this message translates to:
+  /// **'Allow once'**
+  String get allowOnce;
+
+  /// Button text to reject permission once
+  ///
+  /// In en, this message translates to:
+  /// **'Reject once'**
+  String get rejectOnce;
+
+  /// Button text to allow permission forever
+  ///
+  /// In en, this message translates to:
+  /// **'Allow forever'**
+  String get allowForever;
+
+  /// Button text to reject permission forever
+  ///
+  /// In en, this message translates to:
+  /// **'Reject forever'**
+  String get rejectForever;
+
+  /// Processed requests count label
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Processed requests'**
+  String processedRequestsCount(int count);
+
+  /// Blocked requests count label
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Blocked requests'**
+  String blockedRequestsCount(int count);
+
+  /// Delete all button text
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All'**
+  String get deleteAll;
+
+  /// Notification title for new request
+  ///
+  /// In en, this message translates to:
+  /// **'New pending request'**
+  String get newPendingRequest;
+
+  /// Notification body for new request
+  ///
+  /// In en, this message translates to:
+  /// **'A new request from {appName} has been received and is waiting for your approval.'**
+  String newPendingRequestBody(String appName);
 }
 
 class _AppLocalizationsDelegate

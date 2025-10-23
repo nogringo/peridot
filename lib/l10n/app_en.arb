@@ -1244,5 +1244,136 @@
         "description": "The numeric kind identifier"
       }
     }
+  },
+
+  "selectAccountToUse": "Select the account to use",
+  "@selectAccountToUse": {
+    "description": "Title for account selection dialog"
+  },
+  "use": "Use",
+  "@use": {
+    "description": "Use button text in account selection"
+  },
+  "alwaysAskPermission": "Always ask permission",
+  "@alwaysAskPermission": {
+    "description": "Trust level option title"
+  },
+  "alwaysAskPermissionDescription": "For each request from the app, you will choose what to do",
+  "@alwaysAskPermissionDescription": {
+    "description": "Trust level option description"
+  },
+  "allowCommonActions": "Allow common actions",
+  "@allowCommonActions": {
+    "description": "Trust level option title"
+  },
+  "allowCommonActionsDescription": "Common requests are automatically processed, you will choose what to do with the others",
+  "@allowCommonActionsDescription": {
+    "description": "Trust level option description"
+  },
+  "fullyTrust": "Fully trust",
+  "@fullyTrust": {
+    "description": "Trust level option title"
+  },
+  "fullyTrustDescription": "Every requests are automatically processed",
+  "@fullyTrustDescription": {
+    "description": "Trust level option description"
+  },
+  "enableThisApp": "Enable this app",
+  "@enableThisApp": {
+    "description": "Enable app toggle title"
+  },
+  "enableThisAppDescription": "When disabled, every requests are blocked",
+  "@enableThisAppDescription": {
+    "description": "Enable app toggle description"
+  },
+  "appConfiguration": "App configuration",
+  "@appConfiguration": {
+    "description": "Stepper step title for app configuration"
+  },
+  "finish": "Finish",
+  "@finish": {
+    "description": "Finish button text"
+  },
+  "trustLevel": "Trust level",
+  "@trustLevel": {
+    "description": "Trust level section title"
+  },
+  "deletedApp": "Deleted app",
+  "@deletedApp": {
+    "description": "Placeholder text when app is not found"
+  },
+  "deprecatedEncryptionWarning": "This request uses deprecated encryption",
+  "@deprecatedEncryptionWarning": {
+    "description": "Warning message for deprecated encryption"
+  },
+  "deprecatedEncryptionWarningMessage": "Please contact and inform the app developer",
+  "@deprecatedEncryptionWarningMessage": {
+    "description": "Warning message detail for deprecated encryption"
+  },
+  "metadataLeakWarning": "This request leaks metadata",
+  "@metadataLeakWarning": {
+    "description": "Warning message for metadata leak"
+  },
+  "metadataLeakWarningMessage": "People can know that you use a bunker and when you use it. Please contact and inform the app developer",
+  "@metadataLeakWarningMessage": {
+    "description": "Warning message detail for metadata leak"
+  },
+  "params": "Params",
+  "@params": {
+    "description": "Parameters section title"
+  },
+  "allowOnce": "Allow once",
+  "@allowOnce": {
+    "description": "Button text to allow permission once"
+  },
+  "rejectOnce": "Reject once",
+  "@rejectOnce": {
+    "description": "Button text to reject permission once"
+  },
+  "allowForever": "Allow forever",
+  "@allowForever": {
+    "description": "Button text to allow permission forever"
+  },
+  "rejectForever": "Reject forever",
+  "@rejectForever": {
+    "description": "Button text to reject permission forever"
+  },
+  "processedRequestsCount": "{count} Processed requests",
+  "@processedRequestsCount": {
+    "description": "Processed requests count label",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of processed requests"
+      }
+    }
+  },
+  "blockedRequestsCount": "{count} Blocked requests",
+  "@blockedRequestsCount": {
+    "description": "Blocked requests count label",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of blocked requests"
+      }
+    }
+  },
+  "deleteAll": "Delete All",
+  "@deleteAll": {
+    "description": "Delete all button text"
+  },
+  "newPendingRequest": "New pending request",
+  "@newPendingRequest": {
+    "description": "Notification title for new request"
+  },
+  "newPendingRequestBody": "A new request from {appName} has been received and is waiting for your approval.",
+  "@newPendingRequestBody": {
+    "description": "Notification body for new request",
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "description": "Name of the requesting application"
+      }
+    }
   }
 }

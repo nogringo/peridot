@@ -52,7 +52,7 @@ class AddApplicationPage extends StatelessWidget {
               ),
               Step(
                 isActive: c.currentStep == 2,
-                title: Text("App configuration"),
+                title: Text(l10n.appConfiguration),
                 content: AppConfigurationView(),
               ),
             ],

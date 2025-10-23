@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 
@@ -18,6 +19,7 @@ class TrustLevelOptionsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final child = Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -32,20 +34,16 @@ class TrustLevelOptionsView extends StatelessWidget {
       ),
       child: {
         AuthorisationMode.allwaysAsk: ListTile(
-          title: Text("Allways ask permission"),
-          subtitle: Text(
-            "For each request from the app, you will chose what to do",
-          ),
+          title: Text(l10n.alwaysAskPermission),
+          subtitle: Text(l10n.alwaysAskPermissionDescription),
         ),
         AuthorisationMode.allowCommonRequests: ListTile(
-          title: Text("Allow common actions"),
-          subtitle: Text(
-            "Common requests are automatically processed, you will chose what to do with the others",
-          ),
+          title: Text(l10n.allowCommonActions),
+          subtitle: Text(l10n.allowCommonActionsDescription),
         ),
         AuthorisationMode.fullyTrust: ListTile(
-          title: Text("Fully trust"),
-          subtitle: Text("Every requests are automatically processed"),
+          title: Text(l10n.fullyTrust),
+          subtitle: Text(l10n.fullyTrustDescription),
         ),
       }[optionMode],
     );

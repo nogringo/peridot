@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -12,6 +13,7 @@ class BlockedRequestsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final requestsStore = stringMapStoreFactory.store('requests');
 
     final finder = Finder(
@@ -58,7 +60,7 @@ class BlockedRequestsView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "${requests.length} Blocked requests",
+                        l10n.blockedRequestsCount(requests.length),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -70,7 +72,7 @@ class BlockedRequestsView extends StatelessWidget {
                           );
                         },
                         icon: Icon(Icons.delete_sweep),
-                        label: Text('Delete All'),
+                        label: Text(l10n.deleteAll),
                       ),
                   ],
                 ),

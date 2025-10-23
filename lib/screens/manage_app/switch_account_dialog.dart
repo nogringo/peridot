@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -9,9 +10,10 @@ class SwitchAccountDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
       contentPadding: EdgeInsets.symmetric(vertical: 16),
-      title: Text("Select the account to use"),
+      title: Text(l10n.selectAccountToUse),
       content: Obx(() {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -35,10 +37,10 @@ class SwitchAccountDialog extends StatelessWidget {
         );
       }),
       actions: [
-        TextButton(onPressed: Get.back, child: Text("Cancel")),
+        TextButton(onPressed: Get.back, child: Text(l10n.cancel)),
         FilledButton(
           onPressed: ManageAppController.to.switchAccount,
-          child: Text("Use"),
+          child: Text(l10n.use),
         ),
       ],
     );

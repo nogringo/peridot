@@ -113,4 +113,11 @@ class RequestController extends GetxController {
           .put(Repository.to.db, pendingRequest.toJson());
     }
   }
+
+  Future<void> deleteRequest() async {
+    Get.back();
+
+    var store = stringMapStoreFactory.store('requests');
+    await store.record(request!.originalRequest.id).delete(Repository.to.db);
+  }
 }

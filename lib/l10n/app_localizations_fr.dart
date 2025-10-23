@@ -932,4 +932,101 @@ class AppLocalizationsFr extends AppLocalizations {
   String unknownEventKind(int kind) {
     return 'Type d\'Événement $kind';
   }
+
+  @override
+  String get selectAccountToUse => 'Sélectionnez le compte à utiliser';
+
+  @override
+  String get use => 'Utiliser';
+
+  @override
+  String get alwaysAskPermission => 'Toujours demander la permission';
+
+  @override
+  String get alwaysAskPermissionDescription =>
+      'Pour chaque requête de l\'application, vous choisirez quoi faire';
+
+  @override
+  String get allowCommonActions => 'Autoriser les actions courantes';
+
+  @override
+  String get allowCommonActionsDescription =>
+      'Les requêtes courantes sont automatiquement traitées, vous choisirez quoi faire avec les autres';
+
+  @override
+  String get fullyTrust => 'Confiance totale';
+
+  @override
+  String get fullyTrustDescription =>
+      'Toutes les requêtes sont automatiquement traitées';
+
+  @override
+  String get enableThisApp => 'Activer cette application';
+
+  @override
+  String get enableThisAppDescription =>
+      'Lorsque désactivée, toutes les requêtes sont bloquées';
+
+  @override
+  String get appConfiguration => 'Configuration de l\'application';
+
+  @override
+  String get finish => 'Terminer';
+
+  @override
+  String get trustLevel => 'Niveau de confiance';
+
+  @override
+  String get deletedApp => 'Application supprimée';
+
+  @override
+  String get deprecatedEncryptionWarning =>
+      'Cette requête utilise un chiffrement obsolète';
+
+  @override
+  String get deprecatedEncryptionWarningMessage =>
+      'Veuillez contacter et informer le développeur de l\'application';
+
+  @override
+  String get metadataLeakWarning => 'Cette requête fuit des métadonnées';
+
+  @override
+  String get metadataLeakWarningMessage =>
+      'Les gens peuvent savoir que vous utilisez un bunker et quand vous l\'utilisez. Veuillez contacter et informer le développeur de l\'application';
+
+  @override
+  String get params => 'Paramètres';
+
+  @override
+  String get allowOnce => 'Autoriser une fois';
+
+  @override
+  String get rejectOnce => 'Rejeter une fois';
+
+  @override
+  String get allowForever => 'Autoriser pour toujours';
+
+  @override
+  String get rejectForever => 'Rejeter pour toujours';
+
+  @override
+  String processedRequestsCount(int count) {
+    return '$count Requêtes traitées';
+  }
+
+  @override
+  String blockedRequestsCount(int count) {
+    return '$count Requêtes bloquées';
+  }
+
+  @override
+  String get deleteAll => 'Tout supprimer';
+
+  @override
+  String get newPendingRequest => 'Nouvelle requête en attente';
+
+  @override
+  String newPendingRequestBody(String appName) {
+    return 'Une nouvelle requête de $appName a été reçue et attend votre approbation.';
+  }
 }
