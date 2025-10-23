@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/routes/app_routes.dart';
+import 'package:peridot/screens/applications/application_controller.dart';
+import 'package:peridot/screens/applications/widgets/no_apps_view.dart';
+import 'package:sembast/sembast.dart';
 
 class ApplicationsPage extends StatelessWidget {
   const ApplicationsPage({super.key});
@@ -23,59 +27,62 @@ class ApplicationsPage extends StatelessWidget {
       ),
       body: GetBuilder<Repository>(
         builder: (_) {
-          final apps = Repository.bunker.apps;
+          if (Repository.bunker.apps.isEmpty) return NoAppsView();
 
-          if (apps.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.apps_outlined,
-                    size: 64,
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.3),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    AppLocalizations.of(context)!.noApplicationsConnected,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withValues(alpha: 0.6),
+          return StreamBuilder(
+            stream: ApplicationController.requestsStream,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return Container();
+
+              final appsWithRequests = ApplicationController.getSortedApps(
+                snapshot.data!.values
+                    .map(
+                      (e) => BunkerRequest.fromJson(e as Map<String, dynamic>),
+                    )
+                    .toList(),
+              );
+
+              return ListView.builder(
+                padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
+                itemCount: appsWithRequests.length,
+                itemBuilder: (context, index) {
+                  final app = appsWithRequests[index];
+
+                  return ListTile(
+                    leading: NPicture(
+                      ndk: Repository.ndk,
+                      pubkey: app.app.userPubkey,
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    AppLocalizations.of(context)!.tapPlusToAddApplication,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withValues(alpha: 0.5),
+                    title: Text(
+                      app.app.name ?? "Unamed App",
+                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          return ListView.builder(
-            padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
-            itemCount: apps.length,
-            itemBuilder: (context, index) {
-              final app = apps[index];
-
-              return ListTile(
-                leading: NPicture(ndk: Repository.ndk, pubkey: app.userPubkey),
-                title: Text(
-                  app.name ?? "Unamed App",
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                onTap: () => Get.toNamed(
-                  AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey),
-                  arguments: app,
-                ),
+                    subtitle: app.pending.isEmpty && app.blocked.isEmpty
+                        ? null
+                        : Row(
+                            spacing: 8,
+                            children: [
+                              if (app.pending.isNotEmpty)
+                                Chip(
+                                  avatar: Icon(Icons.access_time),
+                                  label: Text(app.pending.length.toString()),
+                                ),
+                              if (app.blocked.isNotEmpty)
+                                Chip(
+                                  avatar: Icon(Icons.dangerous),
+                                  label: Text(app.blocked.length.toString()),
+                                ),
+                            ],
+                          ),
+                    onTap: () => Get.toNamed(
+                      AppRoutes.manageApp.replaceAll(
+                        ':appPubkey',
+                        app.app.appPubkey,
+                      ),
+                      arguments: app,
+                    ),
+                  );
+                },
               );
             },
           );

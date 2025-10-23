@@ -13,8 +13,6 @@ import 'package:sembast/sembast.dart' as sembast;
 
 // TODO show if app leaks metadata
 // TODO show if app use deprecated encryption
-// TODO sort apps by pending permissions
-// TODO show pending permissions on applications page
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
