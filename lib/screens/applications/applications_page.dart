@@ -26,64 +26,58 @@ class ApplicationsPage extends StatelessWidget {
           SizedBox(width: 12),
         ],
       ),
-      body: GetBuilder<Repository>(
-        builder: (_) {
+      body: StreamBuilder(
+        stream: ApplicationController.to.requestsStream,
+        builder: (context, snapshot) {
           if (Repository.bunker.apps.isEmpty) return NoAppsView();
 
-          return StreamBuilder(
-            stream: ApplicationController.to.requestsStream,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return Container();
+          if (!snapshot.hasData) return Container();
 
-              final appsWithRequests = ApplicationController.getSortedApps(
-                snapshot.data!.values
-                    .map(
-                      (e) => BunkerRequest.fromJson(e as Map<String, dynamic>),
-                    )
-                    .toList(),
-              );
+          final appsWithRequests = ApplicationController.getSortedApps(
+            snapshot.data!.values
+                .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))
+                .toList(),
+          );
 
-              return ListView.builder(
-                padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
-                itemCount: appsWithRequests.length,
-                itemBuilder: (context, index) {
-                  final app = appsWithRequests[index];
+          return ListView.builder(
+            padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
+            itemCount: appsWithRequests.length,
+            itemBuilder: (context, index) {
+              final app = appsWithRequests[index];
 
-                  return ListTile(
-                    leading: NPicture(
-                      ndk: Repository.ndk,
-                      pubkey: app.app.userPubkey,
-                    ),
-                    title: Text(
-                      app.app.name ?? "Unamed App",
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    subtitle: app.pending.isEmpty && app.blocked.isEmpty
-                        ? null
-                        : Row(
-                            spacing: 8,
-                            children: [
-                              if (app.pending.isNotEmpty)
-                                Chip(
-                                  avatar: Icon(Icons.access_time),
-                                  label: Text(app.pending.length.toString()),
-                                ),
-                              if (app.blocked.isNotEmpty)
-                                Chip(
-                                  avatar: Icon(Icons.dangerous),
-                                  label: Text(app.blocked.length.toString()),
-                                ),
-                            ],
-                          ),
-                    onTap: () => Get.toNamed(
-                      AppRoutes.manageApp.replaceAll(
-                        ':appPubkey',
-                        app.app.appPubkey,
+              return ListTile(
+                leading: NPicture(
+                  ndk: Repository.ndk,
+                  pubkey: app.app.userPubkey,
+                ),
+                title: Text(
+                  app.app.name ?? "Unamed App",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+                subtitle: app.pending.isEmpty && app.blocked.isEmpty
+                    ? null
+                    : Row(
+                        spacing: 8,
+                        children: [
+                          if (app.pending.isNotEmpty)
+                            Chip(
+                              avatar: Icon(Icons.access_time),
+                              label: Text(app.pending.length.toString()),
+                            ),
+                          if (app.blocked.isNotEmpty)
+                            Chip(
+                              avatar: Icon(Icons.dangerous),
+                              label: Text(app.blocked.length.toString()),
+                            ),
+                        ],
                       ),
-                      arguments: app,
-                    ),
-                  );
-                },
+                onTap: () => Get.toNamed(
+                  AppRoutes.manageApp.replaceAll(
+                    ':appPubkey',
+                    app.app.appPubkey,
+                  ),
+                  arguments: app,
+                ),
               );
             },
           );

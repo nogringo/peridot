@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/models/bunker_request.dart';
+import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:sembast/sembast.dart';
 
 class RequestController extends GetxController {
@@ -54,6 +55,8 @@ class RequestController extends GetxController {
       app: app!,
     );
 
+    ManageAppController.to.update();
+
     var store = stringMapStoreFactory.store('requests');
     final finder = Finder(
       filter: Filter.custom((record) {
@@ -86,6 +89,8 @@ class RequestController extends GetxController {
       command: request!.originalRequest.commandString,
       app: app!,
     );
+
+    ManageAppController.to.update();
 
     var store = stringMapStoreFactory.store('requests');
     final finder = Finder(
