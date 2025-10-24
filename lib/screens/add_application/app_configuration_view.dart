@@ -29,11 +29,23 @@ class AppConfigurationView extends StatelessWidget {
         Text(l10n.requestedPermissions, style: Get.textTheme.titleMedium),
         SizedBox(height: 8),
         if (app != null && app.permissions.isNotEmpty)
-          ...app.permissions.map(
-            (permission) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Text(translatePermission(context, permission.command)),
-            ),
+          GetBuilder<AddApplicationController>(
+            builder: (c) {
+              return Column(
+                children: app.permissions
+                    .map(
+                      (permission) => SwitchListTile(
+                        title: Text(
+                          translatePermission(context, permission.command),
+                        ),
+                        value: permission.isAllowed,
+                        onChanged: (_) => AddApplicationController.to
+                            .togglePermission(permission),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
           )
         else
           Text(

@@ -116,6 +116,12 @@ class AddApplicationController extends GetxController {
     update();
   }
 
+  void togglePermission(Permission permission) {
+    if (app == null) return;
+    permission.isAllowed = !permission.isAllowed;
+    update();
+  }
+
   void finish() {
     app!.isEnabled = true;
 

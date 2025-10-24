@@ -14,8 +14,9 @@ import 'package:sembast/sembast.dart' as sembast;
 
 // TODO show if app leaks metadata
 // TODO show if app use deprecated encryption
-// TODO be able to toggle perm in nostrconnect
 // TODO add an option on the settings page to remove the client tag
+// TODO be able to edit the json
+// TODO be able to view processed requests
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
