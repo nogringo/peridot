@@ -294,6 +294,13 @@ class AppLocalizationsEs extends AppLocalizations {
       'Enrutar conexiones a través de la red Tor para mayor privacidad (Próximamente)';
 
   @override
+  String get removeClientTag => 'Eliminar etiqueta de cliente';
+
+  @override
+  String get removeClientTagDescription =>
+      'Eliminar automáticamente la etiqueta de cliente de los eventos antes de firmar para esta aplicación';
+
+  @override
   String get continueButton => 'Continuar';
 
   @override

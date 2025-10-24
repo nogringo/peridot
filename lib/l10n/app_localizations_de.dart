@@ -297,6 +297,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Verbindungen über Tor-Netzwerk für erhöhte Privatsphäre leiten (Demnächst)';
 
   @override
+  String get removeClientTag => 'Client-Tag entfernen';
+
+  @override
+  String get removeClientTagDescription =>
+      'Client-Tag automatisch aus Ereignissen vor dem Signieren für diese Anwendung entfernen';
+
+  @override
   String get continueButton => 'Weiter';
 
   @override

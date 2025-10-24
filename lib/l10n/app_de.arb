@@ -101,6 +101,8 @@
   "useTor": "Tor verwenden",
   "useTorDescription": "Verbindungen über Tor-Netzwerk für erhöhte Privatsphäre leiten",
   "useTorComingSoon": "Verbindungen über Tor-Netzwerk für erhöhte Privatsphäre leiten (Demnächst)",
+  "removeClientTag": "Client-Tag entfernen",
+  "removeClientTagDescription": "Client-Tag automatisch aus Ereignissen vor dem Signieren für diese Anwendung entfernen",
 
   "continueButton": "Weiter",
   "bunkerUrlCopiedSuccessfully": "Bunker-URL erfolgreich kopiert",

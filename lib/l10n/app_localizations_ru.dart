@@ -295,6 +295,13 @@ class AppLocalizationsRu extends AppLocalizations {
       'Маршрутизировать соединения через сеть Tor для повышения конфиденциальности (Скоро)';
 
   @override
+  String get removeClientTag => 'Удалить тег клиента';
+
+  @override
+  String get removeClientTagDescription =>
+      'Автоматически удалять тег клиента из событий перед подписанием для этого приложения';
+
+  @override
   String get continueButton => 'Продолжить';
 
   @override

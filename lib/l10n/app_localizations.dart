@@ -616,6 +616,18 @@ abstract class AppLocalizations {
   /// **'Route connections through Tor network for enhanced privacy (Coming soon)'**
   String get useTorComingSoon;
 
+  /// Setting to remove client tag from signing requests for this app
+  ///
+  /// In en, this message translates to:
+  /// **'Remove client tag'**
+  String get removeClientTag;
+
+  /// Description for remove client tag setting for this app
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically remove the client tag from events before signing for this app'**
+  String get removeClientTagDescription;
+
   /// Continue button text
   ///
   /// In en, this message translates to:

@@ -284,6 +284,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get useTorComingSoon => '通过 Tor 网络路由连接以增强隐私（即将推出）';
 
   @override
+  String get removeClientTag => '删除客户端标签';
+
+  @override
+  String get removeClientTagDescription => '在为此应用签名前自动从事件中删除客户端标签';
+
+  @override
   String get continueButton => '继续';
 
   @override

@@ -99,6 +99,8 @@
   "useTor": "Torを使用",
   "useTorDescription": "プライバシー強化のためTorネットワーク経由で接続をルーティング",
   "useTorComingSoon": "プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）",
+  "removeClientTag": "クライアントタグを削除",
+  "removeClientTagDescription": "このアプリの署名前にイベントからクライアントタグを自動的に削除",
 
   "continueButton": "続ける",
   "bunkerUrlCopiedSuccessfully": "Bunker URLを正常にコピーしました",

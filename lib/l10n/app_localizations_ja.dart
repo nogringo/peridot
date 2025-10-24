@@ -285,6 +285,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get useTorComingSoon => 'プライバシー強化のためTorネットワーク経由で接続をルーティング（近日公開）';
 
   @override
+  String get removeClientTag => 'クライアントタグを削除';
+
+  @override
+  String get removeClientTagDescription => 'このアプリの署名前にイベントからクライアントタグを自動的に削除';
+
+  @override
   String get continueButton => '続ける';
 
   @override

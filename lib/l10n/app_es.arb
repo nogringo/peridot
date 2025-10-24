@@ -100,6 +100,8 @@
   "useTor": "Usar Tor",
   "useTorDescription": "Enrutar conexiones a través de la red Tor para mayor privacidad",
   "useTorComingSoon": "Enrutar conexiones a través de la red Tor para mayor privacidad (Próximamente)",
+  "removeClientTag": "Eliminar etiqueta de cliente",
+  "removeClientTagDescription": "Eliminar automáticamente la etiqueta de cliente de los eventos antes de firmar para esta aplicación",
 
   "continueButton": "Continuar",
   "bunkerUrlCopiedSuccessfully": "URL Bunker copiada exitosamente",

@@ -41,9 +41,9 @@ class ManageAppPage extends StatelessWidget {
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
-              ConnectedAccountView(),
-              SizedBox(height: 16),
               EnabledView(),
+              SizedBox(height: 16),
+              ConnectedAccountView(),
               SizedBox(height: 16),
               TrustLevelView(),
               SizedBox(height: 16),

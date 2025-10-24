@@ -99,6 +99,8 @@
   "useTor": "使用 Tor",
   "useTorDescription": "通过 Tor 网络路由连接以增强隐私",
   "useTorComingSoon": "通过 Tor 网络路由连接以增强隐私（即将推出）",
+  "removeClientTag": "删除客户端标签",
+  "removeClientTagDescription": "在为此应用签名前自动从事件中删除客户端标签",
 
   "continueButton": "继续",
   "bunkerUrlCopiedSuccessfully": "Bunker URL 复制成功",

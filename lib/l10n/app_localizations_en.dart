@@ -294,6 +294,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Route connections through Tor network for enhanced privacy (Coming soon)';
 
   @override
+  String get removeClientTag => 'Remove client tag';
+
+  @override
+  String get removeClientTagDescription =>
+      'Automatically remove the client tag from events before signing for this app';
+
+  @override
   String get continueButton => 'Continue';
 
   @override

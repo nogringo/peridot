@@ -101,6 +101,8 @@
   "useTor": "Utiliser Tor",
   "useTorDescription": "Router les connexions via le réseau Tor pour une confidentialité accrue",
   "useTorComingSoon": "Router les connexions via le réseau Tor pour une confidentialité accrue (Bientôt disponible)",
+  "removeClientTag": "Supprimer la balise client",
+  "removeClientTagDescription": "Supprimer automatiquement la balise client des événements avant la signature pour cette application",
 
   "continueButton": "Continuer",
   "bunkerUrlCopiedSuccessfully": "URL Bunker copiée avec succès",

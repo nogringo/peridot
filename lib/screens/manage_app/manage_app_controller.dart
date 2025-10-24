@@ -119,6 +119,12 @@ class ManageAppController extends GetxController {
     Repository.to.saveBunkerState();
   }
 
+  void removeClientTagChange(bool value) {
+    app!.removeClientTag = value;
+    update();
+    Repository.to.saveBunkerState();
+  }
+
   void openSwitchAccountDialog() {
     Get.dialog(SwitchAccountDialog());
   }

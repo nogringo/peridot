@@ -296,6 +296,13 @@ class AppLocalizationsFr extends AppLocalizations {
       'Router les connexions via le réseau Tor pour une confidentialité accrue (Bientôt disponible)';
 
   @override
+  String get removeClientTag => 'Supprimer la balise client';
+
+  @override
+  String get removeClientTagDescription =>
+      'Supprimer automatiquement la balise client des événements avant la signature pour cette application';
+
+  @override
   String get continueButton => 'Continuer';
 
   @override
