@@ -60,6 +60,7 @@ class SystemSettingsView extends StatelessWidget {
   }
 }
 
+// TODO move it in a dedicated file
 class SystemSettingsController extends GetxController {
   final _storage = const FlutterSecureStorage();
   final RxBool isTorEnabled = false.obs;

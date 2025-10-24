@@ -14,8 +14,9 @@ import 'package:sembast/sembast.dart' as sembast;
 
 // TODO show if app leaks metadata
 // TODO show if app use deprecated encryption
-// TODO fix error when adding an account
 // TODO update ui when allowing a new perm
+// TODO be able to toggle perm in nostrconnect
+// TODO add an option on every app page and on the settings page to remove the client tag
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
@@ -51,9 +52,8 @@ class Repository extends GetxController {
 
       final app = bunker.getApp(req);
 
-      final context = Get.context;
-      if (context != null) {
-        final l10n = AppLocalizations.of(context)!;
+      if (Get.context != null) {
+        final l10n = AppLocalizations.of(Get.context!)!;
         final appName = app?.name ?? l10n.deletedApp;
         NotificationService.to.showNotification(
           title: l10n.newPendingRequest,
