@@ -59,15 +59,16 @@ class ApplicationController extends GetxController {
     return result;
   }
 
-  Stream<List<RecordSnapshot<String, Map<String, Object?>>>> requestsStream =
-      stringMapStoreFactory
-          .store('requests')
-          .query(
-            finder: Finder(
-              filter: Filter.not(
-                Filter.equals("status", BunkerRequestStatus.processed.name),
-              ),
-            ),
-          )
-          .onSnapshots(Repository.to.db);
+  final Stream<List<RecordSnapshot<String, Map<String, Object?>>>>
+  requestsStream = stringMapStoreFactory
+      .store('requests')
+      .query(
+        finder: Finder(
+          filter: Filter.not(
+            Filter.equals("status", BunkerRequestStatus.processed.name),
+          ),
+        ),
+      )
+      .onSnapshots(Repository.to.db)
+      .asBroadcastStream();
 }
