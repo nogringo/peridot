@@ -56,6 +56,7 @@ class RequestController extends GetxController {
     );
 
     ManageAppController.to.update();
+    Repository.to.saveBunkerState();
 
     var store = stringMapStoreFactory.store('requests');
     final finder = Finder(
@@ -91,6 +92,7 @@ class RequestController extends GetxController {
     );
 
     ManageAppController.to.update();
+    Repository.to.saveBunkerState();
 
     var store = stringMapStoreFactory.store('requests');
     final finder = Finder(
