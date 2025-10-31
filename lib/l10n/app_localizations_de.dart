@@ -22,6 +22,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Tippen Sie auf +, um eine Anwendung hinzuzufügen';
 
   @override
+  String get noRequests => 'No requests';
+
+  @override
+  String get whenYouReceiveRequests =>
+      'When you receive new requests, they will appear here';
+
+  @override
   String get manageApplication => 'Anwendung verwalten';
 
   @override

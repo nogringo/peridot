@@ -21,6 +21,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get tapPlusToAddApplication => 'Toca + para añadir una aplicación';
 
   @override
+  String get noRequests => 'No requests';
+
+  @override
+  String get whenYouReceiveRequests =>
+      'When you receive new requests, they will appear here';
+
+  @override
   String get manageApplication => 'Gestionar Aplicación';
 
   @override

@@ -62,7 +62,7 @@ class HomeController extends GetxController {
   }
 
   late StreamSubscription requestsSub;
-  List<RecordSnapshot<String, Map<String, Object?>>> requests = [];
+  List<BunkerRequest> requests = [];
   List<AppWithRequests> appsWithRequests = [];
 
   RxInt selectedIndex = 0.obs;
@@ -72,6 +72,7 @@ class HomeController extends GetxController {
         .store('requests')
         .query(
           finder: Finder(
+            sortOrders: [SortOrder('date', false)],
             filter: Filter.not(
               Filter.equals("status", BunkerRequestStatus.processed.name),
             ),
@@ -79,7 +80,9 @@ class HomeController extends GetxController {
         )
         .onSnapshots(Repository.to.db)
         .listen((requests) {
-          this.requests = requests;
+          this.requests = requests
+              .map((e) => BunkerRequest.fromJson(e.value))
+              .toList();
           appsWithRequests = getSortedApps(
             requests.values
                 .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))

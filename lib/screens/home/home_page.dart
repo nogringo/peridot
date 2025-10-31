@@ -16,37 +16,51 @@ class HomePage extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 600;
+        final isExtraWide = constraints.maxWidth > 1200;
 
-        final appBarWidget = AppBar(
-          title: Text(
-            [
-              AppLocalizations.of(context)!.applications,
-              "Requests",
-            ][HomeController.to.selectedIndex.value],
-          ),
-          actions: [
-            IconButton(
-              onPressed: () => Get.toNamed(AppRoutes.settings),
-              icon: Icon(Icons.settings),
-            ),
-            SizedBox(width: 12),
-          ],
+        final requestsIconWidget = GetBuilder<HomeController>(
+          builder: (c) {
+            final child = Icon(Icons.inbox);
+
+            if (c.requests.isEmpty) return child;
+
+            return Badge(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              label: Text(c.requests.length.toString()),
+              child: child,
+            );
+          },
         );
 
         return Obx(() {
           if (isWide) {
             return Scaffold(
-              appBar: appBarWidget,
+              appBar: AppBar(
+                title: Text(
+                  [
+                    AppLocalizations.of(context)!.applications,
+                    "Requests",
+                  ][HomeController.to.selectedIndex.value],
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () => Get.toNamed(AppRoutes.settings),
+                    icon: Icon(Icons.settings),
+                  ),
+                  SizedBox(width: 12),
+                ],
+              ),
               body: Row(
                 children: [
                   NavigationRail(
+                    extended: isExtraWide,
                     destinations: [
                       NavigationRailDestination(
                         icon: Icon(Icons.apps),
                         label: Text(AppLocalizations.of(context)!.applications),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.inbox),
+                        icon: requestsIconWidget,
                         label: Text("Requests"),
                       ),
                     ],
@@ -54,10 +68,12 @@ class HomePage extends StatelessWidget {
                     onDestinationSelected:
                         HomeController.to.onDestinationSelected,
                   ),
-                  [
-                    ApplicationsView(),
-                    RequestsView(),
-                  ][HomeController.to.selectedIndex.value],
+                  Expanded(
+                    child: [
+                      ApplicationsView(),
+                      RequestsView(),
+                    ][HomeController.to.selectedIndex.value],
+                  ),
                 ],
               ),
               floatingActionButton: HomeController.to.selectedIndex.value == 0
@@ -72,7 +88,21 @@ class HomePage extends StatelessWidget {
           }
 
           return Scaffold(
-            appBar: appBarWidget,
+            appBar: AppBar(
+              title: Text(
+                [
+                  AppLocalizations.of(context)!.applications,
+                  "Requests",
+                ][HomeController.to.selectedIndex.value],
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => Get.toNamed(AppRoutes.settings),
+                  icon: Icon(Icons.settings),
+                ),
+                SizedBox(width: 12),
+              ],
+            ),
             body: [
               ApplicationsView(),
               RequestsView(),
@@ -85,12 +115,20 @@ class HomePage extends StatelessWidget {
                   label: AppLocalizations.of(context)!.applications,
                 ),
                 NavigationDestination(
-                  icon: Icon(Icons.inbox),
+                  icon: requestsIconWidget,
                   label: "Requests",
                 ),
               ],
               onDestinationSelected: HomeController.to.onDestinationSelected,
             ),
+            floatingActionButton: HomeController.to.selectedIndex.value == 0
+                ? FloatingActionButton(
+                    onPressed: () async {
+                      Get.toNamed(AppRoutes.addApplication);
+                    },
+                    child: Icon(Icons.add),
+                  )
+                : null,
           );
         });
       },

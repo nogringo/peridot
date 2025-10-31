@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
-class NoAppsView extends StatelessWidget {
-  const NoAppsView({super.key});
+class NoRequestsView extends StatelessWidget {
+  const NoRequestsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,28 +13,22 @@ class NoAppsView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.apps_outlined,
+              Icons.inbox_outlined,
               size: 64,
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.3),
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(77),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.noApplicationsConnected,
+              AppLocalizations.of(context)!.noRequests,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.6),
+                color: Theme.of(context).colorScheme.onSurface.withAlpha(153),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.tapPlusToAddApplication,
+              AppLocalizations.of(context)!.whenYouReceiveRequests,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.5),
+                color: Theme.of(context).colorScheme.onSurface.withAlpha(128),
               ),
               textAlign: TextAlign.center,
             ),

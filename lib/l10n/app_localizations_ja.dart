@@ -21,6 +21,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tapPlusToAddApplication => '+ をタップしてアプリケーションを追加';
 
   @override
+  String get noRequests => 'No requests';
+
+  @override
+  String get whenYouReceiveRequests =>
+      'When you receive new requests, they will appear here';
+
+  @override
   String get manageApplication => 'アプリケーション管理';
 
   @override

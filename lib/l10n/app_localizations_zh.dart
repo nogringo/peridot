@@ -21,6 +21,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tapPlusToAddApplication => '点击 + 添加应用程序';
 
   @override
+  String get noRequests => 'No requests';
+
+  @override
+  String get whenYouReceiveRequests =>
+      'When you receive new requests, they will appear here';
+
+  @override
   String get manageApplication => '管理应用程序';
 
   @override

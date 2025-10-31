@@ -18,6 +18,15 @@
     "description": "Instruction to add a new application"
   },
 
+  "noRequests": "No requests",
+  "@noRequests": {
+    "description": "Message shown when there are no requests"
+  },
+  "whenYouReceiveRequests": "When you receive new requests, they will appear here",
+  "@whenYouReceiveRequests": {
+    "description": "Message shown when there are no requests"
+  },
+
   "manageApplication": "Manage Application",
   "@manageApplication": {
     "description": "Title for the manage application screen"

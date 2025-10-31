@@ -15,6 +15,7 @@ import 'package:sembast/sembast.dart' as sembast;
 // TODO add an option on the settings page to remove the client tag for new apps
 // TODO be able to edit the json
 // TODO show a diferent request screeen for know kinds like 0, 3, 5
+// TODO sort apps (ui selector)
 
 class Repository extends GetxController {
   static Repository get to => Get.find();

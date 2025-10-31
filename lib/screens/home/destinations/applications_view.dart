@@ -34,9 +34,9 @@ class ApplicationsView extends StatelessWidget {
                     app.app.name ?? "Unamed App",
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
-                  subtitle: app.pending.isEmpty && app.blocked.isEmpty
+                  trailing: app.pending.isEmpty && app.blocked.isEmpty
                       ? null
-                      : Row(
+                      : Wrap(
                           spacing: 8,
                           children: [
                             if (app.pending.isNotEmpty)

@@ -132,6 +132,18 @@ abstract class AppLocalizations {
   /// **'Tap + to add an application'**
   String get tapPlusToAddApplication;
 
+  /// Message shown when there are no requests
+  ///
+  /// In en, this message translates to:
+  /// **'No requests'**
+  String get noRequests;
+
+  /// Message shown when there are no requests
+  ///
+  /// In en, this message translates to:
+  /// **'When you receive new requests, they will appear here'**
+  String get whenYouReceiveRequests;
+
   /// Title for the manage application screen
   ///
   /// In en, this message translates to:
