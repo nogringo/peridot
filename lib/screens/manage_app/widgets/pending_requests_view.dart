@@ -15,6 +15,7 @@ class PendingRequestsView extends StatelessWidget {
     final requestsStore = stringMapStoreFactory.store('requests');
 
     final finder = Finder(
+      sortOrders: [SortOrder('date', false)],
       filter: Filter.custom((record) {
         final req = BunkerRequest.fromJson(
           record.value as Map<String, dynamic>,
@@ -36,48 +37,54 @@ class PendingRequestsView extends StatelessWidget {
         .query(finder: finder)
         .onSnapshots(Repository.to.db);
 
-    return BorderAreaView(
-      padding: EdgeInsets.zero,
-      child: StreamBuilder(
-        stream: pendingRequestsStream,
-        builder: (context, snapshot) {
-          List<BunkerRequest> requests = [];
+    return StreamBuilder(
+      stream: pendingRequestsStream,
+      builder: (context, snapshot) {
+        List<BunkerRequest> requests = [];
 
-          if (snapshot.hasData) {
-            requests.addAll(
-              snapshot.data!.values.map((e) => BunkerRequest.fromJson(e)),
-            );
-          }
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  "${requests.length} Pending requests",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-              ...requests.map((req) {
-                return ListTile(
-                  title: Text(req.originalRequest.commandString),
-                  subtitle: Text(
-                    DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
-                  ),
-                  // trailing: IconButton(
-                  //   onPressed: () {},
-                  //   icon: Icon(Icons.more_vert), // TODO add popup
-                  // ),
-                  onTap: () =>
-                      ManageAppController.to.openReqScreen(req.originalRequest),
-                );
-              }),
-              if (requests.isNotEmpty) SizedBox(height: 16),
-            ],
+        if (snapshot.hasData) {
+          requests.addAll(
+            snapshot.data!.values.map((e) => BunkerRequest.fromJson(e)),
           );
-        },
-      ),
+        }
+
+        if (requests.isEmpty) return Container();
+
+        return Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: BorderAreaView(
+            padding: EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "${requests.length} Pending requests",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                ...requests.map((req) {
+                  return ListTile(
+                    title: Text(req.originalRequest.commandString),
+                    subtitle: Text(
+                      DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
+                    ),
+                    // trailing: IconButton(
+                    //   onPressed: () {},
+                    //   icon: Icon(Icons.more_vert), // TODO add popup
+                    // ),
+                    onTap: () => ManageAppController.to.openReqScreen(
+                      req.originalRequest,
+                    ),
+                  );
+                }),
+                if (requests.isNotEmpty) SizedBox(height: 16),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

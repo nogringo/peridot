@@ -36,36 +36,48 @@ class ActionsButtonsView extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        if (RequestController.to.isRequestBlocked) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8,
+            children: [allowOnceButton, deleteButton],
+          );
+        }
+
         final isWide = constraints.maxWidth > 600;
 
-        if (isWide) {
+        if (isWide && RequestController.to.isRequestPending) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 8,
             children: [
               allowOnceButton,
-              if (!RequestController.to.isRequestBlocked) rejectOnceButton,
-              if (RequestController.to.isRequestBlocked) deleteButton,
-              if (!RequestController.to.isRequestBlocked) allowForeverButton,
-              if (!RequestController.to.isRequestBlocked) rejectForeverButton,
+              rejectOnceButton,
+              allowForeverButton,
+              rejectForeverButton,
             ],
           );
         }
 
-        return Column(
-          spacing: 8,
-          children: [
-            Row(
-              spacing: 8,
-              children: [
-                Expanded(child: allowOnceButton),
-                if (!RequestController.to.isRequestBlocked)
+        if (isWide && RequestController.to.isRequestProcessed) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8,
+            children: [allowForeverButton, rejectForeverButton, deleteButton],
+          );
+        }
+
+        if (RequestController.to.isRequestPending) {
+          return Column(
+            spacing: 8,
+            children: [
+              Row(
+                spacing: 8,
+                children: [
+                  Expanded(child: allowOnceButton),
                   Expanded(child: rejectOnceButton),
-                if (RequestController.to.isRequestBlocked)
-                  Expanded(child: deleteButton),
-              ],
-            ),
-            if (!RequestController.to.isRequestBlocked)
+                ],
+              ),
               Row(
                 spacing: 8,
                 children: [
@@ -73,8 +85,27 @@ class ActionsButtonsView extends StatelessWidget {
                   Expanded(child: rejectForeverButton),
                 ],
               ),
-          ],
-        );
+            ],
+          );
+        }
+
+        if (RequestController.to.isRequestProcessed) {
+          return Column(
+            spacing: 8,
+            children: [
+              Row(
+                spacing: 8,
+                children: [
+                  Expanded(child: allowForeverButton),
+                  Expanded(child: rejectForeverButton),
+                ],
+              ),
+              Row(children: [Expanded(child: deleteButton)]),
+            ],
+          );
+        }
+
+        return Container();
       },
     );
   }

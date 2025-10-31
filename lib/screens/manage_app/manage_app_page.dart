@@ -4,10 +4,10 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/screens/manage_app/widgets/blocked_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/connected_account_view.dart';
-import 'package:peridot/screens/manage_app/widgets/delete_button_view.dart';
 import 'package:peridot/screens/manage_app/widgets/enabled_view.dart';
 import 'package:peridot/screens/manage_app/widgets/pending_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/permissions_view.dart';
+import 'package:peridot/screens/manage_app/widgets/processed_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/trust_level_view.dart';
 
 class ManageAppPage extends StatelessWidget {
@@ -37,6 +37,14 @@ class ManageAppPage extends StatelessWidget {
               ),
               onSubmitted: (_) => controller.saveRename(),
             ),
+            actions: [
+              TextButton.icon(
+                onPressed: ManageAppController.to.deleteApp,
+                label: Text(l10n.delete),
+                icon: Icon(Icons.delete_outline),
+              ),
+              SizedBox(width: 12),
+            ],
           ),
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
@@ -48,14 +56,9 @@ class ManageAppPage extends StatelessWidget {
               TrustLevelView(),
               SizedBox(height: 16),
               PermissionsView(),
-              SizedBox(height: 16),
               PendingRequestsView(),
-              SizedBox(height: 16),
               BlockedRequestsView(),
-              // SizedBox(height: 16),
-              // ProcessedRequestsView(),
-              SizedBox(height: 16),
-              DeleteButtonView(),
+              ProcessedRequestsView(),
               SizedBox(height: kToolbarHeight),
             ],
           ),

@@ -16,8 +16,12 @@ class RequestController extends GetxController {
       .firstOrNull;
   RxBool isJsonCopied = false.obs;
 
+  bool get isRequestPending =>
+      RequestController.to.request!.status == BunkerRequestStatus.pending;
   bool get isRequestBlocked =>
       RequestController.to.request!.status == BunkerRequestStatus.blocked;
+  bool get isRequestProcessed =>
+      RequestController.to.request!.status == BunkerRequestStatus.processed;
 
   @override
   void onInit() async {

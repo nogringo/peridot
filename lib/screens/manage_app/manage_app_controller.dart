@@ -144,12 +144,12 @@ class ManageAppController extends GetxController {
     Get.toNamed(AppRoutes.request.replaceAll(':requestId', reqObj.id));
   }
 
-  Future<void> deleteBlockedRequest(String requestId) async {
+  Future<void> deleteRequest(String requestId) async {
     final requestsStore = stringMapStoreFactory.store('requests');
     await requestsStore.record(requestId).delete(Repository.to.db);
   }
 
-  Future<void> deleteAllBlockedRequests(List<BunkerRequest> requests) async {
+  Future<void> deleteAllRequests(List<BunkerRequest> requests) async {
     final requestsStore = stringMapStoreFactory.store('requests');
     final db = Repository.to.db;
 

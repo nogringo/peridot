@@ -12,11 +12,9 @@ import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:sembast/sembast.dart' as sembast;
 
-// TODO add an option on the settings page to remove the client tag
+// TODO add an option on the settings page to remove the client tag for new apps
 // TODO be able to edit the json
-// TODO be able to view processed requests
 // TODO show a diferent request screeen for know kinds like 0, 3, 5
-// TODO floating buttons on requests
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
