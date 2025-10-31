@@ -14,49 +14,58 @@ class RequestsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (c) {
-        if (c.requests.isEmpty) return NoRequestsView();
+    return GetBuilder<Repository>(
+      builder: (_) {
+        return GetBuilder<HomeController>(
+          builder: (c) {
+            if (c.requests.isEmpty) return NoRequestsView();
 
-        return ListView(
-          children: [
-            ...c.requests.map((req) {
-              final app = Repository.bunker.getApp(req.originalRequest)!;
-              return ListTile(
-                leading: NPicture(ndk: Repository.ndk, pubkey: app.userPubkey),
-                title: Text(
-                  app.name ?? AppLocalizations.of(context)!.unnamedApp,
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(req.originalRequest.commandString),
-                    Text(
-                      DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
-                      style: Theme.of(context).textTheme.labelSmall,
+            return ListView(
+              children: [
+                ...c.requests.map((req) {
+                  final app = Repository.bunker.getApp(req.originalRequest)!;
+                  return ListTile(
+                    leading: NPicture(
+                      ndk: Repository.ndk,
+                      pubkey: app.userPubkey,
                     ),
-                  ],
-                ),
-                trailing: Chip(
-                  label: Text(
-                    // TODO translate
-                    req.status == BunkerRequestStatus.pending
-                        ? "Pending"
-                        : "Blocked",
-                  ),
-                  shape: StadiumBorder(),
-                ),
-                onTap: () {
-                  Get.toNamed(
-                    AppRoutes.request.replaceAll(
-                      ':requestId',
-                      req.originalRequest.id,
+                    title: Text(
+                      app.name ?? AppLocalizations.of(context)!.unnamedApp,
                     ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(req.originalRequest.commandString),
+                        Text(
+                          DateFormat.yMMMMd(
+                            Get.locale,
+                          ).add_Hms().format(req.date),
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ],
+                    ),
+                    trailing: Chip(
+                      label: Text(
+                        // TODO translate
+                        req.status == BunkerRequestStatus.pending
+                            ? "Pending"
+                            : "Blocked",
+                      ),
+                      shape: StadiumBorder(),
+                    ),
+                    onTap: () {
+                      Get.toNamed(
+                        AppRoutes.request.replaceAll(
+                          ':requestId',
+                          req.originalRequest.id,
+                        ),
+                      );
+                    },
                   );
-                },
-              );
-            }),
-          ],
+                }),
+              ],
+            );
+          },
         );
       },
     );

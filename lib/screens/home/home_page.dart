@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/destinations/applications_view.dart';
@@ -18,16 +19,20 @@ class HomePage extends StatelessWidget {
         final isWide = constraints.maxWidth > 600;
         final isExtraWide = constraints.maxWidth > 1200;
 
-        final requestsIconWidget = GetBuilder<HomeController>(
-          builder: (c) {
-            final child = Icon(Icons.inbox);
+        final requestsIconWidget = GetBuilder<Repository>(
+          builder: (_) {
+            return GetBuilder<HomeController>(
+              builder: (c) {
+                final child = Icon(Icons.inbox);
 
-            if (c.requests.isEmpty) return child;
+                if (c.requests.isEmpty) return child;
 
-            return Badge(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              label: Text(c.requests.length.toString()),
-              child: child,
+                return Badge(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  label: Text(c.requests.length.toString()),
+                  child: child,
+                );
+              },
             );
           },
         );
@@ -70,7 +75,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      margin: EdgeInsets.only(top: 4),
                       decoration: BoxDecoration(
                         color: Theme.of(
                           context,

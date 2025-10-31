@@ -69,7 +69,11 @@ class RequestController extends GetxController {
       app: app!,
     );
 
-    ManageAppController.to.update();
+    try {
+      ManageAppController.to.update();
+    } catch (e) {
+      //
+    }
     Repository.to.saveBunkerState();
 
     var store = stringMapStoreFactory.store('requests');
@@ -105,7 +109,11 @@ class RequestController extends GetxController {
       app: app!,
     );
 
-    ManageAppController.to.update();
+    try {
+      ManageAppController.to.update();
+    } catch (e) {
+      //
+    }
     Repository.to.saveBunkerState();
 
     var store = stringMapStoreFactory.store('requests');

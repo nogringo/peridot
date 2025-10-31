@@ -17,6 +17,7 @@ import 'package:sembast/sembast.dart' as sembast;
 // TODO show a diferent request screeen for know kinds like 0, 3, 5
 // TODO sort apps (ui selector)
 // TODO check cascading delete
+// TODO import export apps
 
 class Repository extends GetxController {
   static Repository get to => Get.find();
@@ -100,8 +101,18 @@ class Repository extends GetxController {
   Future<void> removeApp(App app) async {
     bunker.removeApp(app);
     update();
-    var store = sembast.stringMapStoreFactory.store('apps');
-    await store.record(app.bunkerPubkey).delete(db);
+
+    var appsStore = sembast.stringMapStoreFactory.store('apps');
+    var requestsStore = sembast.stringMapStoreFactory.store('requests');
+
+    final finder = sembast.Finder(
+      filter: sembast.Filter.equals('originalRequest.appPubkey', app.appPubkey),
+    );
+
+    await Future.wait([
+      appsStore.record(app.bunkerPubkey).delete(db),
+      requestsStore.delete(db, finder: finder),
+    ]);
   }
 
   Future<void> saveApp(App app) async {
