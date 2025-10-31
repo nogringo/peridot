@@ -42,12 +42,14 @@ class ApplicationsView extends StatelessWidget {
                           children: [
                             if (app.pending.isNotEmpty)
                               Chip(
+                                shape: StadiumBorder(),
                                 avatar: Icon(Icons.access_time),
                                 label: Text(app.pending.length.toString()),
                               ),
                             if (app.blocked.isNotEmpty)
                               Chip(
-                                avatar: Icon(Icons.dangerous),
+                                shape: StadiumBorder(),
+                                avatar: Icon(Icons.cancel),
                                 label: Text(app.blocked.length.toString()),
                               ),
                           ],

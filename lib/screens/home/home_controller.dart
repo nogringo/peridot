@@ -82,6 +82,9 @@ class HomeController extends GetxController {
         .listen((requests) {
           this.requests = requests
               .map((e) => BunkerRequest.fromJson(e.value))
+              .where(
+                (req) => Repository.bunker.getApp(req.originalRequest) != null,
+              )
               .toList();
           appsWithRequests = getSortedApps(
             requests.values
