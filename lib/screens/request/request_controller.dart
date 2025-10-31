@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -13,6 +14,7 @@ class RequestController extends GetxController {
   App? get app => Repository.bunker.apps
       .where((app) => app.appPubkey == request!.originalRequest.appPubkey)
       .firstOrNull;
+  RxBool isJsonCopied = false.obs;
 
   bool get isRequestBlocked =>
       RequestController.to.request!.status == BunkerRequestStatus.blocked;
@@ -29,6 +31,14 @@ class RequestController extends GetxController {
     request = BunkerRequest.fromJson(record as Map<String, dynamic>);
 
     update();
+  }
+
+  void copyJson(String json) async {
+    if (isJsonCopied.value) return;
+    Clipboard.setData(ClipboardData(text: json));
+    isJsonCopied.value = true;
+    await Future.delayed(Duration(seconds: 2));
+    isJsonCopied.value = false;
   }
 
   void allowOnce() {
