@@ -69,10 +69,35 @@ class HomePage extends StatelessWidget {
                         HomeController.to.onDestinationSelected,
                   ),
                   Expanded(
-                    child: [
-                      ApplicationsView(),
-                      RequestsView(),
-                    ][HomeController.to.selectedIndex.value],
+                    child: Container(
+                      padding: EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primaryContainer.withValues(alpha: 0.1),
+                        border: Border(
+                          top: BorderSide(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.1),
+                            width: 1.5,
+                          ),
+                          left: BorderSide(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.1),
+                            width: 1.5,
+                          ),
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                        ),
+                      ),
+                      child: [
+                        ApplicationsView(),
+                        RequestsView(),
+                      ][HomeController.to.selectedIndex.value],
+                    ),
                   ),
                 ],
               ),
