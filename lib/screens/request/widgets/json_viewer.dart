@@ -22,48 +22,54 @@ class JsonViewer extends StatelessWidget {
         final formattedJson = encoder.convert(decodedObject);
         return Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: ColoredBox(
-              color:
-                  (Theme.of(context).brightness == Brightness.light
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).dividerColor),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: ColoredBox(
+                color:
+                    (Theme.of(context).brightness == Brightness.light
+                            ? a11yLightTheme
+                            : a11yDarkTheme)["root"]!
+                        .backgroundColor!,
+                child: Stack(
+                  children: [
+                    HighlightView(
+                      formattedJson,
+                      language: 'json',
+                      theme: Theme.of(context).brightness == Brightness.light
                           ? a11yLightTheme
-                          : a11yDarkTheme)["root"]!
-                      .backgroundColor!,
-              child: Stack(
-                children: [
-                  HighlightView(
-                    formattedJson,
-                    language: 'json',
-                    theme: Theme.of(context).brightness == Brightness.light
-                        ? a11yLightTheme
-                        : a11yDarkTheme,
-                    padding: EdgeInsets.all(12),
-                    textStyle: GoogleFonts.sourceCodePro(),
-                  ),
-                  Positioned(
-                    top: 4,
-                    right: 4,
-                    child: IconButton(
-                      onPressed: () {
-                        RequestController.to.copyJson(formattedJson);
-                      },
-                      icon: Obx(() {
-                        return AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 100),
-                          child: Icon(
-                            RequestController.to.isJsonCopied.value
-                                ? Icons.check
-                                : Icons.copy,
-                            key: ValueKey<bool>(
-                              RequestController.to.isJsonCopied.value,
-                            ),
-                          ),
-                        );
-                      }),
+                          : a11yDarkTheme,
+                      padding: EdgeInsets.all(12),
+                      textStyle: GoogleFonts.sourceCodePro(),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      top: 4,
+                      right: 4,
+                      child: IconButton(
+                        onPressed: () {
+                          RequestController.to.copyJson(formattedJson);
+                        },
+                        icon: Obx(() {
+                          return AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 100),
+                            child: Icon(
+                              RequestController.to.isJsonCopied.value
+                                  ? Icons.check
+                                  : Icons.copy,
+                              key: ValueKey<bool>(
+                                RequestController.to.isJsonCopied.value,
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

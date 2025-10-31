@@ -9,27 +9,27 @@ class ActionsButtonsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    final allowOnceButton = OutlinedButton(
+    final allowOnceButton = FilledButton(
       onPressed: RequestController.to.allowOnce,
       child: Text(
         RequestController.to.isRequestBlocked ? l10n.allow : l10n.allowOnce,
       ),
     );
-    final rejectOnceButton = OutlinedButton(
+    final rejectOnceButton = FilledButton(
       onPressed: RequestController.to.rejectOnce,
       child: Text(
         RequestController.to.isRequestBlocked ? l10n.reject : l10n.rejectOnce,
       ),
     );
-    final allowForeverButton = OutlinedButton(
+    final allowForeverButton = FilledButton(
       onPressed: RequestController.to.allowForever,
       child: Text(l10n.allowForever),
     );
-    final rejectForeverButton = OutlinedButton(
+    final rejectForeverButton = FilledButton(
       onPressed: RequestController.to.rejectForever,
       child: Text(l10n.rejectForever),
     );
-    final deleteButton = OutlinedButton(
+    final deleteButton = FilledButton(
       onPressed: RequestController.to.deleteRequest,
       child: Text(l10n.delete),
     );
