@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -16,8 +18,8 @@ class AppWithRequests {
   });
 }
 
-class ApplicationController extends GetxController {
-  static ApplicationController get to => Get.find();
+class HomeController extends GetxController {
+  static HomeController get to => Get.find();
 
   static void allowForever({required String command, required App app}) {
     Repository.bunker.allowForever(command: command, app: app);
@@ -59,16 +61,41 @@ class ApplicationController extends GetxController {
     return result;
   }
 
-  final Stream<List<RecordSnapshot<String, Map<String, Object?>>>>
-  requestsStream = stringMapStoreFactory
-      .store('requests')
-      .query(
-        finder: Finder(
-          filter: Filter.not(
-            Filter.equals("status", BunkerRequestStatus.processed.name),
+  late StreamSubscription requestsSub;
+  List<RecordSnapshot<String, Map<String, Object?>>> requests = [];
+  List<AppWithRequests> appsWithRequests = [];
+
+  RxInt selectedIndex = 0.obs;
+
+  void init() {
+    requestsSub = stringMapStoreFactory
+        .store('requests')
+        .query(
+          finder: Finder(
+            filter: Filter.not(
+              Filter.equals("status", BunkerRequestStatus.processed.name),
+            ),
           ),
-        ),
-      )
-      .onSnapshots(Repository.to.db)
-      .asBroadcastStream();
+        )
+        .onSnapshots(Repository.to.db)
+        .listen((requests) {
+          this.requests = requests;
+          appsWithRequests = getSortedApps(
+            requests.values
+                .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))
+                .toList(),
+          );
+          update();
+        });
+  }
+
+  @override
+  void dispose() {
+    requestsSub.cancel();
+    super.dispose();
+  }
+
+  void onDestinationSelected(int value) {
+    selectedIndex.value = value;
+  }
 }

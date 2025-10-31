@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:peridot/screens/applications/applications_page.dart';
 import 'package:peridot/screens/add_privkey/add_privkey_page.dart';
 import 'package:peridot/screens/add_application/add_application_page.dart';
+import 'package:peridot/screens/home/home_page.dart';
 import 'package:peridot/screens/request/request_page.dart';
 import 'package:peridot/screens/settings/settings_page.dart';
 import 'package:peridot/screens/backup_account/backup_account_page.dart';
@@ -20,7 +20,7 @@ class AppRoutes {
   static List<GetPage> pages = [
     GetPage(
       name: applications,
-      page: () => ApplicationsPage(),
+      page: () => HomePage(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(name: addPrivkey, page: () => AddPrivkeyPage()),
