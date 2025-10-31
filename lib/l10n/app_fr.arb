@@ -3,6 +3,10 @@
   
   "applications": "Applications",
   "settings": "Paramètres",
+  "requests": "Demandes",
+  "unnamedApp": "Application sans nom",
+  "noRequests": "Aucune demande",
+  "whenYouReceiveRequests": "Lorsque vous recevrez de nouvelles demandes, elles apparaîtront ici.",
   "noApplicationsConnected": "Aucune application connectée",
   "tapPlusToAddApplication": "Appuyez sur + pour ajouter une application",
   
@@ -47,7 +51,6 @@
   
   "addPrivateKey": "Ajouter une Clé Privée",
   "enterPrivateKey": "Entrez votre clé privée (nsec ou hex)",
-  "invalidPrivateKey": "Clé privée invalide",
   "accountAddedSuccessfully": "Compte ajouté avec succès",
   
   "backupAccount": "Sauvegarder le Compte",

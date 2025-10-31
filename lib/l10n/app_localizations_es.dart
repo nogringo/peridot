@@ -15,17 +15,23 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settings => 'Configuración';
 
   @override
+  String get requests => 'Solicitudes';
+
+  @override
+  String get unnamedApp => 'Aplicación sin nombre';
+
+  @override
   String get noApplicationsConnected => 'No hay aplicaciones conectadas';
 
   @override
   String get tapPlusToAddApplication => 'Toca + para añadir una aplicación';
 
   @override
-  String get noRequests => 'No requests';
+  String get noRequests => 'No hay solicitudes';
 
   @override
   String get whenYouReceiveRequests =>
-      'When you receive new requests, they will appear here';
+      'Cuando reciba nuevas solicitudes, aparecerán aquí';
 
   @override
   String get manageApplication => 'Gestionar Aplicación';
@@ -148,10 +154,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get enterPrivateKey => 'Ingresa tu clave privada (nsec o hex)';
-
-  @override
-  String get invalidPrivateKey =>
-      'Lo sentimos, parece que esa clave privada no es válida.';
 
   @override
   String get accountAddedSuccessfully => 'Cuenta añadida exitosamente';
@@ -415,6 +417,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get decryptionFailed =>
       'Lo sentimos, no pudimos descifrar tu clave privada con esa contraseña.';
+
+  @override
+  String get invalidPrivateKey =>
+      'Lo sentimos, parece que esa clave privada no es válida.';
 
   @override
   String get userMetadata => 'Metadatos de Usuario';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nostr_widgets/widgets/n_picture.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/no_apps_view.dart';
@@ -31,7 +32,7 @@ class ApplicationsView extends StatelessWidget {
                     pubkey: app.app.userPubkey,
                   ),
                   title: Text(
-                    app.app.name ?? "Unamed App",
+                    app.app.name ?? AppLocalizations.of(context)!.unnamedApp,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   trailing: app.pending.isEmpty && app.blocked.isEmpty

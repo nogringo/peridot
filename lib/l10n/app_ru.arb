@@ -3,6 +3,10 @@
   
   "applications": "Приложения",
   "settings": "Настройки",
+  "requests": "Запросы",
+  "unnamedApp": "Безымянное приложение",
+  "noRequests": "Нет запросов",
+  "whenYouReceiveRequests": "Когда вы получите новые запросы, они появятся здесь",
   "noApplicationsConnected": "Нет подключенных приложений",
   "tapPlusToAddApplication": "Нажмите + чтобы добавить приложение",
   
@@ -47,8 +51,7 @@
   
   "addPrivateKey": "Добавить приватный ключ",
   "enterPrivateKey": "Введите ваш приватный ключ (nsec или hex)",
-  "invalidPrivateKey": "Недействительный приватный ключ",
-  "accountAddedSuccessfully": "Учетная запись успешно добавлена",
+  "accountAddedSuccessfully": "Аккаунт успешно добавлен",
   
   "backupAccount": "Резервная копия учетной записи",
   "showPrivateKey": "Показать приватный ключ",

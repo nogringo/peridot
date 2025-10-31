@@ -15,17 +15,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settings => '设置';
 
   @override
+  String get requests => '请求';
+
+  @override
+  String get unnamedApp => '未命名应用';
+
+  @override
   String get noApplicationsConnected => '没有连接的应用程序';
 
   @override
   String get tapPlusToAddApplication => '点击 + 添加应用程序';
 
   @override
-  String get noRequests => 'No requests';
+  String get noRequests => '没有请求';
 
   @override
-  String get whenYouReceiveRequests =>
-      'When you receive new requests, they will appear here';
+  String get whenYouReceiveRequests => '当您收到新请求时，它们将显示在此处';
 
   @override
   String get manageApplication => '管理应用程序';
@@ -146,13 +151,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get addPrivateKey => '添加私钥';
 
   @override
-  String get enterPrivateKey => '输入您的私钥（nsec 或 hex）';
+  String get enterPrivateKey => '输入您的私钥（nsec或hex）';
 
   @override
-  String get invalidPrivateKey => '抱歉，该私钥似乎无效。';
-
-  @override
-  String get accountAddedSuccessfully => '账户添加成功';
+  String get accountAddedSuccessfully => '帐户已成功添加';
 
   @override
   String get backupAccount => '备份账户';
@@ -400,6 +402,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get decryptionFailed => '抱歉，我们无法使用该密码解密您的私钥。';
+
+  @override
+  String get invalidPrivateKey => '抱歉，该私钥似乎无效。';
 
   @override
   String get userMetadata => '用户元数据';

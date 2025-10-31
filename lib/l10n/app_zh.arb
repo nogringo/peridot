@@ -3,6 +3,10 @@
   
   "applications": "应用程序",
   "settings": "设置",
+  "requests": "请求",
+  "unnamedApp": "未命名应用",
+  "noRequests": "没有请求",
+  "whenYouReceiveRequests": "当您收到新请求时，它们将显示在此处",
   "noApplicationsConnected": "没有连接的应用程序",
   "tapPlusToAddApplication": "点击 + 添加应用程序",
   
@@ -46,9 +50,8 @@
   "enterRelayUrl": "输入中继 URL",
   
   "addPrivateKey": "添加私钥",
-  "enterPrivateKey": "输入您的私钥（nsec 或 hex）",
-  "invalidPrivateKey": "无效的私钥",
-  "accountAddedSuccessfully": "账户添加成功",
+  "enterPrivateKey": "输入您的私钥（nsec或hex）",
+  "accountAddedSuccessfully": "帐户已成功添加",
   
   "backupAccount": "备份账户",
   "showPrivateKey": "显示私钥",

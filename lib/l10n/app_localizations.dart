@@ -120,6 +120,18 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
+  /// Title for the requests screen
+  ///
+  /// In en, this message translates to:
+  /// **'Requests'**
+  String get requests;
+
+  /// Default name for an app if not specified
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed App'**
+  String get unnamedApp;
+
   /// Message shown when no applications are connected
   ///
   /// In en, this message translates to:
@@ -351,12 +363,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter your private key (nsec or hex)'**
   String get enterPrivateKey;
-
-  /// Error message when private key is invalid
-  ///
-  /// In en, this message translates to:
-  /// **'Sorry, it looks like that private key is invalid.'**
-  String get invalidPrivateKey;
 
   /// Success message when account is added
   ///
@@ -849,6 +855,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, we weren\'t able to decrypt your private key with that password.'**
   String get decryptionFailed;
+
+  /// Error message when private key is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, it looks like that private key is invalid.'**
+  String get invalidPrivateKey;
 
   /// Nostr event kind 0
   ///

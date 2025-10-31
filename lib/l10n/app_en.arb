@@ -9,6 +9,14 @@
   "@settings": {
     "description": "Title for the settings screen"
   },
+  "requests": "Requests",
+  "@requests": {
+    "description": "Title for the requests screen"
+  },
+  "unnamedApp": "Unnamed App",
+  "@unnamedApp": {
+    "description": "Default name for an app if not specified"
+  },
   "noApplicationsConnected": "No applications connected",
   "@noApplicationsConnected": {
     "description": "Message shown when no applications are connected"
@@ -202,10 +210,7 @@
   "@enterPrivateKey": {
     "description": "Placeholder text for private key input"
   },
-  "invalidPrivateKey": "Invalid private key",
-  "@invalidPrivateKey": {
-    "description": "Error message for invalid private key"
-  },
+
   "accountAddedSuccessfully": "Account added successfully",
   "@accountAddedSuccessfully": {
     "description": "Success message when account is added"

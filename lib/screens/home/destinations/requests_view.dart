@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/no_requests_view.dart';
@@ -22,7 +23,9 @@ class RequestsView extends StatelessWidget {
               final app = Repository.bunker.getApp(req.originalRequest)!;
               return ListTile(
                 leading: NPicture(ndk: Repository.ndk, pubkey: app.userPubkey),
-                title: Text(app.name ?? "Unamed app"),
+                title: Text(
+                  app.name ?? AppLocalizations.of(context)!.unnamedApp,
+                ),
                 subtitle: Text(req.originalRequest.commandString),
                 trailing: Text(
                   DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),

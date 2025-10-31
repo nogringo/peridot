@@ -15,17 +15,22 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settings => '設定';
 
   @override
+  String get requests => 'リクエスト';
+
+  @override
+  String get unnamedApp => '名無しアプリ';
+
+  @override
   String get noApplicationsConnected => '接続されているアプリケーションはありません';
 
   @override
   String get tapPlusToAddApplication => '+ をタップしてアプリケーションを追加';
 
   @override
-  String get noRequests => 'No requests';
+  String get noRequests => 'リクエストなし';
 
   @override
-  String get whenYouReceiveRequests =>
-      'When you receive new requests, they will appear here';
+  String get whenYouReceiveRequests => '新しいリクエストを受信すると、ここに表示されます';
 
   @override
   String get manageApplication => 'アプリケーション管理';
@@ -146,13 +151,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get addPrivateKey => '秘密鍵を追加';
 
   @override
-  String get enterPrivateKey => '秘密鍵を入力（nsec または hex）';
+  String get enterPrivateKey => '秘密鍵（nsecまたはhex）を入力してください';
 
   @override
-  String get invalidPrivateKey => '申し訳ありませんが、その秘密鍵は無効のようです。';
-
-  @override
-  String get accountAddedSuccessfully => 'アカウントを正常に追加しました';
+  String get accountAddedSuccessfully => 'アカウントが正常に追加されました';
 
   @override
   String get backupAccount => 'アカウントをバックアップ';
@@ -402,6 +404,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get decryptionFailed => '申し訳ありませんが、そのパスワードで秘密鍵を復号化できませんでした。';
+
+  @override
+  String get invalidPrivateKey => '申し訳ありませんが、その秘密鍵は無効のようです。';
 
   @override
   String get userMetadata => 'ユーザーメタデータ';

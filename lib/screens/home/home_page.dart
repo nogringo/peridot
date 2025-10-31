@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                 title: Text(
                   [
                     AppLocalizations.of(context)!.applications,
-                    "Requests",
+                    AppLocalizations.of(context)!.requests,
                   ][HomeController.to.selectedIndex.value],
                 ),
                 actions: [
@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
                       ),
                       NavigationRailDestination(
                         icon: requestsIconWidget,
-                        label: Text("Requests"),
+                        label: Text(AppLocalizations.of(context)!.requests),
                       ),
                     ],
                     selectedIndex: HomeController.to.selectedIndex.value,
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
               title: Text(
                 [
                   AppLocalizations.of(context)!.applications,
-                  "Requests",
+                  AppLocalizations.of(context)!.requests,
                 ][HomeController.to.selectedIndex.value],
               ),
               actions: [
@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
                 ),
                 NavigationDestination(
                   icon: requestsIconWidget,
-                  label: "Requests",
+                  label: AppLocalizations.of(context)!.requests,
                 ),
               ],
               onDestinationSelected: HomeController.to.onDestinationSelected,

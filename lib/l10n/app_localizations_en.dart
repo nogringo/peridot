@@ -15,6 +15,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get requests => 'Requests';
+
+  @override
+  String get unnamedApp => 'Unnamed App';
+
+  @override
   String get noApplicationsConnected => 'No applications connected';
 
   @override
@@ -148,10 +154,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterPrivateKey => 'Enter your private key (nsec or hex)';
-
-  @override
-  String get invalidPrivateKey =>
-      'Sorry, it looks like that private key is invalid.';
 
   @override
   String get accountAddedSuccessfully => 'Account added successfully';
@@ -414,6 +416,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get decryptionFailed =>
       'Sorry, we weren\'t able to decrypt your private key with that password.';
+
+  @override
+  String get invalidPrivateKey =>
+      'Sorry, it looks like that private key is invalid.';
 
   @override
   String get userMetadata => 'User Metadata';

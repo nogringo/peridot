@@ -3,6 +3,10 @@
 
   "applications": "Anwendungen",
   "settings": "Einstellungen",
+  "requests": "Anfragen",
+  "unnamedApp": "Unbenannte App",
+  "noRequests": "Keine Anfragen",
+  "whenYouReceiveRequests": "Wenn Sie neue Anfragen erhalten, werden diese hier angezeigt",
   "noApplicationsConnected": "Keine Anwendungen verbunden",
   "tapPlusToAddApplication": "Tippen Sie auf +, um eine Anwendung hinzuzufügen",
 
@@ -47,7 +51,6 @@
 
   "addPrivateKey": "Privaten Schlüssel hinzufügen",
   "enterPrivateKey": "Geben Sie Ihren privaten Schlüssel ein (nsec oder hex)",
-  "invalidPrivateKey": "Ungültiger privater Schlüssel",
   "accountAddedSuccessfully": "Konto erfolgreich hinzugefügt",
 
   "backupAccount": "Konto sichern",

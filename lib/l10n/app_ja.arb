@@ -3,6 +3,10 @@
   
   "applications": "アプリケーション",
   "settings": "設定",
+  "requests": "リクエスト",
+  "unnamedApp": "名無しアプリ",
+  "noRequests": "リクエストなし",
+  "whenYouReceiveRequests": "新しいリクエストを受信すると、ここに表示されます",
   "noApplicationsConnected": "接続されているアプリケーションはありません",
   "tapPlusToAddApplication": "+ をタップしてアプリケーションを追加",
   
@@ -46,9 +50,8 @@
   "enterRelayUrl": "リレー URL を入力",
   
   "addPrivateKey": "秘密鍵を追加",
-  "enterPrivateKey": "秘密鍵を入力（nsec または hex）",
-  "invalidPrivateKey": "無効な秘密鍵",
-  "accountAddedSuccessfully": "アカウントを正常に追加しました",
+  "enterPrivateKey": "秘密鍵（nsecまたはhex）を入力してください",
+  "accountAddedSuccessfully": "アカウントが正常に追加されました",
   
   "backupAccount": "アカウントをバックアップ",
   "showPrivateKey": "秘密鍵を表示",

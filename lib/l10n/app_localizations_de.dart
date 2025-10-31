@@ -15,6 +15,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settings => 'Einstellungen';
 
   @override
+  String get requests => 'Anfragen';
+
+  @override
+  String get unnamedApp => 'Unbenannte App';
+
+  @override
   String get noApplicationsConnected => 'Keine Anwendungen verbunden';
 
   @override
@@ -22,11 +28,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Tippen Sie auf +, um eine Anwendung hinzuzufügen';
 
   @override
-  String get noRequests => 'No requests';
+  String get noRequests => 'Keine Anfragen';
 
   @override
   String get whenYouReceiveRequests =>
-      'When you receive new requests, they will appear here';
+      'Wenn Sie neue Anfragen erhalten, werden diese hier angezeigt';
 
   @override
   String get manageApplication => 'Anwendung verwalten';
@@ -150,10 +156,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get enterPrivateKey =>
       'Geben Sie Ihren privaten Schlüssel ein (nsec oder hex)';
-
-  @override
-  String get invalidPrivateKey =>
-      'Entschuldigung, dieser private Schlüssel scheint ungültig zu sein.';
 
   @override
   String get accountAddedSuccessfully => 'Konto erfolgreich hinzugefügt';
@@ -418,6 +420,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get decryptionFailed =>
       'Entschuldigung, wir konnten Ihren privaten Schlüssel mit diesem Passwort nicht entschlüsseln.';
+
+  @override
+  String get invalidPrivateKey =>
+      'Entschuldigung, dieser private Schlüssel scheint ungültig zu sein.';
 
   @override
   String get userMetadata => 'Benutzermetadaten';

@@ -24,7 +24,7 @@ class UnknownPermissionDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l10n.appRequestingPermission(app.name ?? "Unamed App")),
+          Text(l10n.appRequestingPermission(app.name ?? l10n.unnamedApp)),
           SizedBox(height: 12),
           Container(
             padding: EdgeInsets.all(8),

@@ -15,17 +15,23 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settings => 'Настройки';
 
   @override
+  String get requests => 'Запросы';
+
+  @override
+  String get unnamedApp => 'Безымянное приложение';
+
+  @override
   String get noApplicationsConnected => 'Нет подключенных приложений';
 
   @override
   String get tapPlusToAddApplication => 'Нажмите + чтобы добавить приложение';
 
   @override
-  String get noRequests => 'No requests';
+  String get noRequests => 'Нет запросов';
 
   @override
   String get whenYouReceiveRequests =>
-      'When you receive new requests, they will appear here';
+      'Когда вы получите новые запросы, они появятся здесь';
 
   @override
   String get manageApplication => 'Управление приложением';
@@ -151,11 +157,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get enterPrivateKey => 'Введите ваш приватный ключ (nsec или hex)';
 
   @override
-  String get invalidPrivateKey =>
-      'Извините, похоже, что этот приватный ключ недействителен.';
-
-  @override
-  String get accountAddedSuccessfully => 'Учетная запись успешно добавлена';
+  String get accountAddedSuccessfully => 'Аккаунт успешно добавлен';
 
   @override
   String get backupAccount => 'Резервная копия учетной записи';
@@ -417,6 +419,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get decryptionFailed =>
       'Извините, мы не смогли расшифровать ваш приватный ключ с этим паролем.';
+
+  @override
+  String get invalidPrivateKey =>
+      'Извините, похоже, что этот приватный ключ недействителен.';
 
   @override
   String get userMetadata => 'Метаданные пользователя';

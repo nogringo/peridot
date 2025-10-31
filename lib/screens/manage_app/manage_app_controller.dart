@@ -36,7 +36,8 @@ class ManageAppController extends GetxController {
     }
 
     if (app != null) {
-      renameController.text = app!.name ?? "Unamed App";
+      renameController.text =
+          app!.name ?? AppLocalizations.of(Get.context!)!.unnamedApp;
     }
 
     // Listen to focus changes to auto-save
@@ -71,7 +72,8 @@ class ManageAppController extends GetxController {
 
     final newName = renameController.text.trim();
     if (newName.isEmpty) {
-      renameController.text = app!.name ?? "Unamed App";
+      renameController.text =
+          app!.name ?? AppLocalizations.of(Get.context!)!.unnamedApp;
       return;
     }
 
@@ -87,7 +89,11 @@ class ManageAppController extends GetxController {
     final confirmed = await Get.dialog<bool>(
       AlertDialog(
         title: Text(l10n.deleteApplication),
-        content: Text(l10n.deleteApplicationConfirm(app!.name ?? "Unamed App")),
+        content: Text(
+          l10n.deleteApplicationConfirm(
+            app!.name ?? AppLocalizations.of(Get.context!)!.unnamedApp,
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () => Get.back(result: false),
