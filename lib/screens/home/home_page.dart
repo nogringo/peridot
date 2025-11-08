@@ -41,6 +41,8 @@ class HomePage extends StatelessWidget {
           if (isWide) {
             return Scaffold(
               appBar: AppBar(
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 title: Text(
                   [
                     AppLocalizations.of(context)!.applications,
