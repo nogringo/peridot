@@ -108,7 +108,7 @@ class ManageAppController extends GetxController {
     );
 
     if (confirmed == true) {
-      Repository.to.removeApp(app!);
+      await Repository.to.removeApp(app!);
       Get.back();
       await Repository.to.saveBunkerState();
     }
