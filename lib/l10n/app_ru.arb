@@ -317,6 +317,8 @@
   "starterPacks": "Стартовые паки",
   "mediaStarterPacks": "Медиа стартовые паки",
   "webBookmarks": "Веб-закладки",
+  "videoView": "Видеопросмотр",
+
   "unknownEventKind": "Тип события {kind}",
 
   "selectAccountToUse": "Выберите учетную запись для использования",

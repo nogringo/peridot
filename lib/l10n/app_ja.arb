@@ -317,6 +317,7 @@
   "starterPacks": "スターターパック",
   "mediaStarterPacks": "メディアスターターパック",
   "webBookmarks": "Webブックマーク",
+  "videoView": "ビデオビュー",
   "unknownEventKind": "イベント種類 {kind}",
 
   "selectAccountToUse": "使用するアカウントを選択",

@@ -317,6 +317,7 @@
   "starterPacks": "Packs de Démarrage",
   "mediaStarterPacks": "Packs de Démarrage Médias",
   "webBookmarks": "Favoris Web",
+  "videoView": "Vue vidéo",
   "unknownEventKind": "Type d'Événement {kind}",
 
   "selectAccountToUse": "Sélectionnez le compte à utiliser",

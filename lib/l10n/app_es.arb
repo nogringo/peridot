@@ -317,6 +317,7 @@
   "starterPacks": "Paquetes Iniciales",
   "mediaStarterPacks": "Paquetes Iniciales de Medios",
   "webBookmarks": "Marcadores Web",
+  "videoView": "Vista de video",
   "unknownEventKind": "Tipo de Evento {kind}",
 
   "selectAccountToUse": "Selecciona la cuenta a usar",

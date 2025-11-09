@@ -944,6 +944,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get webBookmarks => 'Marcadores Web';
 
   @override
+  String get videoView => 'Vista de video';
+
+  @override
   String unknownEventKind(int kind) {
     return 'Tipo de Evento $kind';
   }

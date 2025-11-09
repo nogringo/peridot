@@ -317,6 +317,7 @@
   "starterPacks": "Starter-Packs",
   "mediaStarterPacks": "Medien-Starter-Packs",
   "webBookmarks": "Web-Lesezeichen",
+  "videoView": "Videoansicht",
   "unknownEventKind": "Ereignistyp {kind}",
 
   "selectAccountToUse": "Wählen Sie das zu verwendende Konto aus",

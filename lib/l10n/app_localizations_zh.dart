@@ -926,6 +926,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get webBookmarks => '网页书签';
 
   @override
+  String get videoView => '视频视图';
+
+  @override
   String unknownEventKind(int kind) {
     return '事件类型 $kind';
   }

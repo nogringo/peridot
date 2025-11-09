@@ -1257,6 +1257,10 @@
   "@webBookmarks": {
     "description": "Nostr event kind 39701"
   },
+  "videoView": "Video View",
+  "@videoView": {
+    "description": "Nostr event kind 34237"
+  },
   "unknownEventKind": "Event Kind {kind}",
   "@unknownEventKind": {
     "description": "Fallback for unknown event kinds",

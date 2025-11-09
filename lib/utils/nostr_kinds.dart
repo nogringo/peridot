@@ -324,6 +324,8 @@ class NostrKinds {
         return l10n.handlerInformation;
       case 32267:
         return l10n.softwareApplication;
+      case 34237:
+        return l10n.videoView;
       case 34550:
         return l10n.communityDefinition;
       case 37516:

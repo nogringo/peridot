@@ -946,6 +946,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get webBookmarks => 'Веб-закладки';
 
   @override
+  String get videoView => 'Видеопросмотр';
+
+  @override
   String unknownEventKind(int kind) {
     return 'Тип события $kind';
   }

@@ -1900,6 +1900,12 @@ abstract class AppLocalizations {
   /// **'Web Bookmarks'**
   String get webBookmarks;
 
+  /// Nostr event kind 34237
+  ///
+  /// In en, this message translates to:
+  /// **'Video View'**
+  String get videoView;
+
   /// Fallback for unknown event kinds
   ///
   /// In en, this message translates to:

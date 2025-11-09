@@ -949,6 +949,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get webBookmarks => 'Favoris Web';
 
   @override
+  String get videoView => 'Vue vidéo';
+
+  @override
   String unknownEventKind(int kind) {
     return 'Type d\'Événement $kind';
   }

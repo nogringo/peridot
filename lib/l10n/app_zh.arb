@@ -317,6 +317,8 @@
   "starterPacks": "入门包",
   "mediaStarterPacks": "媒体入门包",
   "webBookmarks": "网页书签",
+  "videoView": "视频视图",
+
   "unknownEventKind": "事件类型 {kind}",
 
   "selectAccountToUse": "选择要使用的账户",
