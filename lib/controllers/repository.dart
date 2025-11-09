@@ -118,6 +118,30 @@ class Repository extends GetxController {
     ]);
   }
 
+  Future<List<BunkerRequest>> getPendingAndBlockedRequests({
+    String? appPubkey,
+  }) async {
+    var store = sembast.stringMapStoreFactory.store('requests');
+    List<sembast.Filter> filters = [
+      sembast.Filter.or([
+        sembast.Filter.equals('status', BunkerRequestStatus.pending.name),
+        sembast.Filter.equals('status', BunkerRequestStatus.blocked.name),
+      ]),
+    ];
+
+    if (appPubkey != null) {
+      filters.add(
+        sembast.Filter.equals('originalRequest.appPubkey', appPubkey),
+      );
+    }
+
+    final finder = sembast.Finder(filter: sembast.Filter.and(filters));
+    final records = await store.find(db, finder: finder);
+    return records
+        .map((record) => BunkerRequest.fromJson(record.value))
+        .toList();
+  }
+
   Future<void> saveApp(App app) async {
     var store = sembast.stringMapStoreFactory.store('apps');
     await store.record(app.bunkerPubkey).put(db, app.toJson());

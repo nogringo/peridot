@@ -122,7 +122,7 @@ class AddApplicationController extends GetxController {
     update();
   }
 
-  void finish() {
+  void finish() async {
     app!.isEnabled = true;
 
     final newName = appNameFieldController.text;
@@ -132,10 +132,13 @@ class AddApplicationController extends GetxController {
 
     app!.authorisationMode = appAuthorisationMode.value;
 
-    // TODO
-    // for (var req in Repository.bunker.blockedRequests) {
-    //   Repository.bunker.processNip46Request(req);
-    // }
+    final requests = await Repository.to.getPendingAndBlockedRequests(
+      appPubkey: app!.appPubkey,
+    );
+    for (var req in requests) {
+      if (!app!.canAutoProcess(req.originalRequest.commandString)) continue;
+      Repository.bunker.processRequest(req.originalRequest);
+    }
 
     Repository.to.update();
 
