@@ -7,6 +7,7 @@ import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 import 'package:sembast/sembast.dart';
+import 'package:peridot/utils/translate_permission.dart';
 
 class BlockedRequestsView extends StatelessWidget {
   const BlockedRequestsView({super.key});
@@ -83,7 +84,12 @@ class BlockedRequestsView extends StatelessWidget {
                 ),
                 ...requests.map((req) {
                   return ListTile(
-                    title: Text(req.originalRequest.commandString),
+                    title: Text(
+                      translatePermission(
+                        context,
+                        req.originalRequest.commandString,
+                      ),
+                    ),
                     subtitle: Text(
                       DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
                     ),

@@ -8,6 +8,7 @@ import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/no_requests_view.dart';
+import 'package:peridot/utils/translate_permission.dart';
 
 class RequestsView extends StatelessWidget {
   const RequestsView({super.key});
@@ -35,7 +36,12 @@ class RequestsView extends StatelessWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(req.originalRequest.commandString),
+                        Text(
+                          translatePermission(
+                            context,
+                            req.originalRequest.commandString,
+                          ),
+                        ),
                         Text(
                           DateFormat.yMMMMd(
                             Get.locale,
