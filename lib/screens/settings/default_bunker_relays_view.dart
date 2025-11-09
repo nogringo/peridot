@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:peridot/screens/settings/settings_controller.dart';
+import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
 class DefaultBunkerRelaysView extends StatelessWidget {

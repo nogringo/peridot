@@ -23,7 +23,6 @@ class PendingRequestsView extends StatelessWidget {
 
         if (req.status != BunkerRequestStatus.pending) return false;
 
-        // TODO for security, also check the bunker pubkey
         final appPubkey = req.originalRequest.appPubkey;
 
         final currentApp = ManageAppController.to.app;

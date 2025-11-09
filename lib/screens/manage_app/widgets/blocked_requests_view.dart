@@ -25,7 +25,6 @@ class BlockedRequestsView extends StatelessWidget {
 
         if (req.status != BunkerRequestStatus.blocked) return false;
 
-        // TODO for security, also check the bunker pubkey
         final appPubkey = req.originalRequest.appPubkey;
 
         final currentApp = ManageAppController.to.app;

@@ -4,7 +4,7 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/screens/manage_app/widgets/blocked_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/connected_account_view.dart';
-import 'package:peridot/screens/manage_app/widgets/enabled_view.dart';
+import 'package:peridot/screens/manage_app/widgets/enabled_app_view.dart';
 import 'package:peridot/screens/manage_app/widgets/pending_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/permissions_view.dart';
 import 'package:peridot/screens/manage_app/widgets/processed_requests_view.dart';
@@ -49,7 +49,7 @@ class ManageAppPage extends StatelessWidget {
           body: ListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
-              EnabledView(),
+              EnabledAppView(),
               SizedBox(height: 16),
               ConnectedAccountView(),
               SizedBox(height: 16),

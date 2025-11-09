@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/default_bunker_relays_view.dart';
 import 'package:peridot/screens/settings/logged_accounts_view.dart';
-import 'package:peridot/screens/settings/settings_controller.dart';
+import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/screens/settings/system_settings_view.dart';
 
 class SettingsPage extends StatelessWidget {

@@ -20,7 +20,6 @@ import 'package:sembast/sembast.dart' as sembast;
 // TODO import export apps
 // TODO kind 34237 => video view
 // TODO add a global delete button on the requests page
-// TODO auto login when finish (actually the user need to allow blocked requests)
 
 class Repository extends GetxController {
   static Repository get to => Get.find();

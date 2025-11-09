@@ -4,7 +4,7 @@ import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:peridot/screens/settings/settings_controller.dart';
+import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
 class LoggedAccountsView extends StatelessWidget {

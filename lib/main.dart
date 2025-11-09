@@ -6,7 +6,7 @@ import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
-import 'package:peridot/screens/settings/settings_controller.dart';
+import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/services/notification_service.dart';
 import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
 import 'package:toastification/toastification.dart';

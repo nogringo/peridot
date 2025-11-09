@@ -3,9 +3,8 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
-// TODO rename this class
-class EnabledView extends StatelessWidget {
-  const EnabledView({super.key});
+class EnabledAppView extends StatelessWidget {
+  const EnabledAppView({super.key});
 
   @override
   Widget build(BuildContext context) {
