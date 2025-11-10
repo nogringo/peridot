@@ -14,13 +14,10 @@ class HomePage extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 600;
-        return Obx(() {
-          if (isWide) {
-            return HomeLargeLayout();
-          }
-
-          return HomeSmallLayout();
-        });
+        if (isWide) {
+          return HomeLargeLayout();
+        }
+        return HomeSmallLayout();
       },
     );
   }
