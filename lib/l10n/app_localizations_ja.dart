@@ -33,6 +33,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get whenYouReceiveRequests => '新しいリクエストを受信すると、ここに表示されます';
 
   @override
+  String get pending => '未処理';
+
+  @override
   String get manageApplication => 'アプリケーション管理';
 
   @override

@@ -35,6 +35,11 @@
     "description": "Message shown when there are no requests"
   },
 
+  "pending": "Pending",
+  "@pending": {
+    "description": "Label for pending requests"
+  },
+
   "manageApplication": "Manage Application",
   "@manageApplication": {
     "description": "Title for the manage application screen"

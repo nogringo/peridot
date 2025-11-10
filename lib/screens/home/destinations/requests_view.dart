@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/no_requests_view.dart';
@@ -51,12 +50,7 @@ class RequestsView extends StatelessWidget {
                       ],
                     ),
                     trailing: Chip(
-                      label: Text(
-                        // TODO translate
-                        req.status == BunkerRequestStatus.pending
-                            ? "Pending"
-                            : "Blocked",
-                      ),
+                      label: Text(AppLocalizations.of(context)!.pending),
                       shape: StadiumBorder(),
                     ),
                     onTap: () {

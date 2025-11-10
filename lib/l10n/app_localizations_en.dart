@@ -34,6 +34,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'When you receive new requests, they will appear here';
 
   @override
+  String get pending => 'Pending';
+
+  @override
   String get manageApplication => 'Manage Application';
 
   @override

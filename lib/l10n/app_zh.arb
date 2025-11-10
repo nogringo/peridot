@@ -7,6 +7,7 @@
   "unnamedApp": "未命名应用",
   "noRequests": "没有请求",
   "whenYouReceiveRequests": "当您收到新请求时，它们将显示在此处",
+  "pending": "待处理",
   "noApplicationsConnected": "没有连接的应用程序",
   "tapPlusToAddApplication": "点击 + 添加应用程序",
   

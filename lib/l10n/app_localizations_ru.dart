@@ -34,6 +34,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Когда вы получите новые запросы, они появятся здесь';
 
   @override
+  String get pending => 'В ожидании';
+
+  @override
   String get manageApplication => 'Управление приложением';
 
   @override

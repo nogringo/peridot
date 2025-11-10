@@ -7,6 +7,7 @@
   "unnamedApp": "Application sans nom",
   "noRequests": "Aucune demande",
   "whenYouReceiveRequests": "Lorsque vous recevrez de nouvelles demandes, elles apparaîtront ici.",
+  "pending": "En attente",
   "noApplicationsConnected": "Aucune application connectée",
   "tapPlusToAddApplication": "Appuyez sur + pour ajouter une application",
   

@@ -33,6 +33,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get whenYouReceiveRequests => '当您收到新请求时，它们将显示在此处';
 
   @override
+  String get pending => '待处理';
+
+  @override
   String get manageApplication => '管理应用程序';
 
   @override

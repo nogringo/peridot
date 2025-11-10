@@ -156,6 +156,12 @@ abstract class AppLocalizations {
   /// **'When you receive new requests, they will appear here'**
   String get whenYouReceiveRequests;
 
+  /// Label for pending requests
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pending;
+
   /// Title for the manage application screen
   ///
   /// In en, this message translates to:

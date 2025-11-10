@@ -7,6 +7,7 @@
   "unnamedApp": "名無しアプリ",
   "noRequests": "リクエストなし",
   "whenYouReceiveRequests": "新しいリクエストを受信すると、ここに表示されます",
+  "pending": "未処理",
   "noApplicationsConnected": "接続されているアプリケーションはありません",
   "tapPlusToAddApplication": "+ をタップしてアプリケーションを追加",
   

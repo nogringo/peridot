@@ -34,6 +34,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'Cuando reciba nuevas solicitudes, aparecerán aquí';
 
   @override
+  String get pending => 'Pendiente';
+
+  @override
   String get manageApplication => 'Gestionar Aplicación';
 
   @override

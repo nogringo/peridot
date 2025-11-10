@@ -35,6 +35,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Lorsque vous recevrez de nouvelles demandes, elles apparaîtront ici.';
 
   @override
+  String get pending => 'En attente';
+
+  @override
   String get manageApplication => 'Gérer l\'Application';
 
   @override
