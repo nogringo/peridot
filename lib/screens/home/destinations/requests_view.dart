@@ -23,7 +23,7 @@ class RequestsView extends StatelessWidget {
 
             return ListView(
               children: [
-                ...c.requests.map((req) {
+                ...c.pendingRequests.map((req) {
                   final app = Repository.bunker.getApp(req.originalRequest)!;
                   return ListTile(
                     leading: NPicture(

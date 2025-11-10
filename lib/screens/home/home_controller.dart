@@ -67,6 +67,10 @@ class HomeController extends GetxController {
 
   RxInt selectedIndex = 0.obs;
 
+  List<BunkerRequest> get pendingRequests => requests
+      .where((req) => req.status == BunkerRequestStatus.pending)
+      .toList();
+
   void init() {
     requestsSub = stringMapStoreFactory
         .store('requests')

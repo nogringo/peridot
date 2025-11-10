@@ -25,11 +25,11 @@ class HomePage extends StatelessWidget {
               builder: (c) {
                 final child = Icon(Icons.inbox);
 
-                if (c.requests.isEmpty) return child;
+                if (c.pendingRequests.isEmpty) return child;
 
                 return Badge(
                   backgroundColor: Theme.of(context).colorScheme.primary,
-                  label: Text(c.requests.length.toString()),
+                  label: Text(c.pendingRequests.length.toString()),
                   child: child,
                 );
               },
