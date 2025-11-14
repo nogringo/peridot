@@ -10,6 +10,7 @@ import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/screens/request/widgets/actions_buttons_view.dart';
 import 'package:peridot/screens/request/request_controller.dart';
 import 'package:peridot/screens/request/widgets/json_viewer.dart';
+import 'package:peridot/screens/request/widgets/kind_3_widget.dart';
 import 'package:peridot/screens/request/widgets/warning_banner_view.dart';
 import 'package:peridot/utils/nostr_kinds.dart';
 
@@ -102,6 +103,22 @@ class RequestPage extends StatelessWidget {
                       },
                     ),
                   SizedBox(height: 8),
+                  if (c.request!.originalRequest.command ==
+                          Nip46Commands.signEvent &&
+                      (() {
+                        try {
+                          final eventJson = jsonDecode(
+                            c.request!.originalRequest.params.first,
+                          );
+                          return eventJson['kind'] == 3;
+                        } catch (e) {
+                          return false;
+                        }
+                      })())
+                    Kind3Widget(
+                      eventJson: c.request!.originalRequest.params.first,
+                      userPubkey: c.app!.userPubkey,
+                    ),
                   Text(
                     l10n.params,
                     style: Theme.of(context).textTheme.titleLarge,
