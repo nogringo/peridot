@@ -5,6 +5,7 @@ import 'package:ndk/ndk.dart';
 import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 
 class Kind3Widget extends StatefulWidget {
   final String eventJson;
@@ -86,6 +87,8 @@ class _Kind3WidgetState extends State<Kind3Widget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (isLoading) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 24),
@@ -97,7 +100,7 @@ class _Kind3WidgetState extends State<Kind3Widget> {
       return Padding(
         padding: const EdgeInsets.all(16),
         child: Text(
-          'Unable to load current follows for comparison',
+          l10n.unableToLoadFollows,
           style: TextStyle(color: Theme.of(context).colorScheme.error),
         ),
       );
@@ -107,7 +110,7 @@ class _Kind3WidgetState extends State<Kind3Widget> {
       return Padding(
         padding: const EdgeInsets.all(16),
         child: Text(
-          'No changes to your follow list',
+          l10n.noFollowChanges,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       );
@@ -124,7 +127,7 @@ class _Kind3WidgetState extends State<Kind3Widget> {
                 Icon(Icons.person_add, color: Colors.green, size: 20),
                 SizedBox(width: 8),
                 Text(
-                  'Adding ${addedFollows.length} ${addedFollows.length == 1 ? 'follow' : 'follows'}',
+                  l10n.addingFollowsCount(addedFollows.length),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
@@ -148,7 +151,7 @@ class _Kind3WidgetState extends State<Kind3Widget> {
                 Icon(Icons.person_remove, color: Colors.red, size: 20),
                 SizedBox(width: 8),
                 Text(
-                  'Removing ${removedFollows.length} ${removedFollows.length == 1 ? 'follow' : 'follows'}',
+                  l10n.removingFollowsCount(removedFollows.length),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,

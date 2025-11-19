@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 import 'package:peridot/widgets/trust_level_options_view.dart';
@@ -10,6 +11,7 @@ class TrustLevelView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BorderAreaView(
       padding: EdgeInsets.zero,
       child: Column(
@@ -18,7 +20,7 @@ class TrustLevelView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "Trust level",
+              l10n.trustLevel,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

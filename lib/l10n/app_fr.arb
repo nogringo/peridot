@@ -348,5 +348,20 @@
   "blockedRequestsCount": "{count} Requêtes bloquées",
   "deleteAll": "Tout supprimer",
   "newPendingRequest": "Nouvelle requête en attente",
-  "newPendingRequestBody": "Une nouvelle requête de {appName} a été reçue et attend votre approbation."
+  "newPendingRequestBody": "Une nouvelle requête de {appName} a été reçue et attend votre approbation.",
+
+  "commandLabel": "Commande : {command}",
+  "unableToLoadFollows": "Impossible de charger les abonnements actuels pour comparaison",
+  "noFollowChanges": "Aucun changement dans votre liste d'abonnements",
+  "addingFollowsCount": "{count, plural, =1{Ajout de 1 abonnement} other{Ajout de {count} abonnements}}",
+  "removingFollowsCount": "{count, plural, =1{Suppression de 1 abonnement} other{Suppression de {count} abonnements}}",
+  "pendingRequestsCount": "{count, plural, =1{1 Requête en attente} other{{count} Requêtes en attente}}",
+  "kindLabel": "Type : {kind}",
+  "openNotification": "Ouvrir la notification",
+  "permissionNotifications": "Notifications de permissions",
+  "permissionNotificationsDescription": "Notifications pour les demandes de permissions",
+  "appBrandName": "Peridot",
+  "relayUrlProtocolError": "L'URL du relais doit utiliser le protocole wss:// ou ws://",
+  "invalidRelayUrlFormat": "Format d'URL de relais invalide",
+  "invalidRelayUrl": "URL de relais invalide"
 }

@@ -28,6 +28,13 @@ class NotificationService extends GetxService {
   final FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
 
+  // Notification channel constants (system-level, not user-facing in app)
+  static const String _permissionChannelId = 'permission_channel';
+  static const String _permissionChannelName = 'Permission Notifications';
+  static const String _permissionChannelDescription =
+      'Notifications for permission requests';
+  static const String _defaultActionName = 'Open notification';
+
   final _storage = const FlutterSecureStorage();
 
   // Store callbacks for permission requests
@@ -52,7 +59,7 @@ class NotificationService extends GetxService {
     );
 
     const linuxSettings = LinuxInitializationSettings(
-      defaultActionName: 'Open notification',
+      defaultActionName: _defaultActionName,
     );
 
     const windowsSettings = WindowsInitializationSettings(
@@ -196,9 +203,9 @@ class NotificationService extends GetxService {
   }) async {
     // Android notification with actions
     final androidDetails = AndroidNotificationDetails(
-      'permission_channel',
-      'Permission Notifications',
-      channelDescription: 'Notifications for permission requests',
+      _permissionChannelId,
+      _permissionChannelName,
+      channelDescription: _permissionChannelDescription,
       importance: Importance.high,
       priority: Priority.high,
       actions: actions
@@ -256,9 +263,9 @@ class NotificationService extends GetxService {
     String? payload,
   }) async {
     const androidDetails = AndroidNotificationDetails(
-      'permission_channel',
-      'Permission Notifications',
-      channelDescription: 'Notifications for permission requests',
+      _permissionChannelId,
+      _permissionChannelName,
+      channelDescription: _permissionChannelDescription,
       importance: Importance.high,
       priority: Priority.high,
     );

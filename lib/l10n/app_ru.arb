@@ -349,5 +349,20 @@
   "blockedRequestsCount": "{count} Заблокированных запросов",
   "deleteAll": "Удалить все",
   "newPendingRequest": "Новый ожидающий запрос",
-  "newPendingRequestBody": "Получен новый запрос от {appName} и ожидает вашего одобрения."
+  "newPendingRequestBody": "Получен новый запрос от {appName} и ожидает вашего одобрения.",
+
+  "commandLabel": "Команда: {command}",
+  "unableToLoadFollows": "Невозможно загрузить текущие подписки для сравнения",
+  "noFollowChanges": "Нет изменений в списке подписок",
+  "addingFollowsCount": "{count, plural, =1{Добавление 1 подписки} few{Добавление {count} подписок} many{Добавление {count} подписок} other{Добавление {count} подписки}}",
+  "removingFollowsCount": "{count, plural, =1{Удаление 1 подписки} few{Удаление {count} подписок} many{Удаление {count} подписок} other{Удаление {count} подписки}}",
+  "pendingRequestsCount": "{count, plural, =1{1 Ожидающий запрос} few{{count} Ожидающих запроса} many{{count} Ожидающих запросов} other{{count} Ожидающих запроса}}",
+  "kindLabel": "Тип: {kind}",
+  "openNotification": "Открыть уведомление",
+  "permissionNotifications": "Уведомления о разрешениях",
+  "permissionNotificationsDescription": "Уведомления о запросах разрешений",
+  "appBrandName": "Перидот",
+  "relayUrlProtocolError": "URL ретранслятора должен использовать протокол wss:// или ws://",
+  "invalidRelayUrlFormat": "Неверный формат URL ретранслятора",
+  "invalidRelayUrl": "Неверный URL ретранслятора"
 }

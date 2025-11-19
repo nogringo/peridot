@@ -348,5 +348,20 @@
   "blockedRequestsCount": "{count} Solicitudes bloqueadas",
   "deleteAll": "Eliminar todo",
   "newPendingRequest": "Nueva solicitud pendiente",
-  "newPendingRequestBody": "Se ha recibido una nueva solicitud de {appName} y está esperando tu aprobación."
+  "newPendingRequestBody": "Se ha recibido una nueva solicitud de {appName} y está esperando tu aprobación.",
+
+  "commandLabel": "Comando: {command}",
+  "unableToLoadFollows": "No se pueden cargar los seguimientos actuales para comparar",
+  "noFollowChanges": "No hay cambios en tu lista de seguidos",
+  "addingFollowsCount": "{count, plural, =1{Agregando 1 seguimiento} other{Agregando {count} seguimientos}}",
+  "removingFollowsCount": "{count, plural, =1{Eliminando 1 seguimiento} other{Eliminando {count} seguimientos}}",
+  "pendingRequestsCount": "{count, plural, =1{1 Solicitud pendiente} other{{count} Solicitudes pendientes}}",
+  "kindLabel": "Tipo: {kind}",
+  "openNotification": "Abrir notificación",
+  "permissionNotifications": "Notificaciones de permisos",
+  "permissionNotificationsDescription": "Notificaciones para solicitudes de permisos",
+  "appBrandName": "Peridot",
+  "relayUrlProtocolError": "La URL del relay debe usar el protocolo wss:// o ws://",
+  "invalidRelayUrlFormat": "Formato de URL de relay inválido",
+  "invalidRelayUrl": "URL de relay inválida"
 }

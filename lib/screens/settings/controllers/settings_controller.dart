@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/toast_utils.dart';
 import 'package:get/get.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
@@ -102,18 +103,19 @@ class SettingsController extends GetxController {
     final relay = newRelayFieldController.text.trim();
     if (relay.isEmpty) return;
 
+    final l10n = AppLocalizations.of(Get.context!)!;
     try {
       final uri = Uri.parse(relay);
       if (uri.scheme != 'wss' && uri.scheme != 'ws') {
-        showErrorToast('Relay URL must use wss:// or ws:// protocol');
+        showErrorToast(l10n.relayUrlProtocolError);
         return;
       }
       if (!uri.hasAuthority) {
-        showErrorToast('Invalid relay URL format');
+        showErrorToast(l10n.invalidRelayUrlFormat);
         return;
       }
     } catch (e) {
-      showErrorToast('Invalid relay URL');
+      showErrorToast(l10n.invalidRelayUrl);
       return;
     }
 

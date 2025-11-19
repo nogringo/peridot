@@ -1406,5 +1406,105 @@
         "description": "Name of the requesting application"
       }
     }
+  },
+
+  "commandLabel": "Command: {command}",
+  "@commandLabel": {
+    "description": "Label showing the command being executed",
+    "placeholders": {
+      "command": {
+        "type": "String",
+        "description": "The command string"
+      }
+    }
+  },
+
+  "unableToLoadFollows": "Unable to load current follows for comparison",
+  "@unableToLoadFollows": {
+    "description": "Error message when follows cannot be loaded"
+  },
+
+  "noFollowChanges": "No changes to your follow list",
+  "@noFollowChanges": {
+    "description": "Message when there are no changes to follows"
+  },
+
+  "addingFollowsCount": "{count, plural, =1{Adding 1 follow} other{Adding {count} follows}}",
+  "@addingFollowsCount": {
+    "description": "Message showing number of follows being added",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of follows being added"
+      }
+    }
+  },
+
+  "removingFollowsCount": "{count, plural, =1{Removing 1 follow} other{Removing {count} follows}}",
+  "@removingFollowsCount": {
+    "description": "Message showing number of follows being removed",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of follows being removed"
+      }
+    }
+  },
+
+  "pendingRequestsCount": "{count, plural, =1{1 Pending request} other{{count} Pending requests}}",
+  "@pendingRequestsCount": {
+    "description": "Count of pending requests",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of pending requests"
+      }
+    }
+  },
+
+  "kindLabel": "Kind: {kind}",
+  "@kindLabel": {
+    "description": "Label showing the event kind",
+    "placeholders": {
+      "kind": {
+        "type": "String",
+        "description": "The kind description"
+      }
+    }
+  },
+
+  "openNotification": "Open notification",
+  "@openNotification": {
+    "description": "Default action name for opening notifications"
+  },
+
+  "permissionNotifications": "Permission Notifications",
+  "@permissionNotifications": {
+    "description": "Notification channel name for permission requests"
+  },
+
+  "permissionNotificationsDescription": "Notifications for permission requests",
+  "@permissionNotificationsDescription": {
+    "description": "Description for permission notification channel"
+  },
+
+  "appBrandName": "Peridot",
+  "@appBrandName": {
+    "description": "Application brand name (not translated)"
+  },
+
+  "relayUrlProtocolError": "Relay URL must use wss:// or ws:// protocol",
+  "@relayUrlProtocolError": {
+    "description": "Error message when relay URL uses wrong protocol"
+  },
+
+  "invalidRelayUrlFormat": "Invalid relay URL format",
+  "@invalidRelayUrlFormat": {
+    "description": "Error message when relay URL format is invalid"
+  },
+
+  "invalidRelayUrl": "Invalid relay URL",
+  "@invalidRelayUrl": {
+    "description": "Error message when relay URL is invalid"
   }
 }

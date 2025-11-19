@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:peridot/controllers/repository.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/bunker_request.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
@@ -13,6 +14,7 @@ class PendingRequestsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final requestsStore = stringMapStoreFactory.store('requests');
 
     final finder = Finder(
@@ -60,7 +62,7 @@ class PendingRequestsView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "${requests.length} Pending requests",
+                    l10n.pendingRequestsCount(requests.length),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),

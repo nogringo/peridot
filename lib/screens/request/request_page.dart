@@ -66,7 +66,7 @@ class RequestPage extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "Command: ${c.request!.originalRequest.commandString}",
+                    l10n.commandLabel(c.request!.originalRequest.commandString),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   if (c.request!.originalRequest.command ==
@@ -86,7 +86,7 @@ class RequestPage extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
-                                "Kind: $kindDescription",
+                                l10n.kindLabel(kindDescription),
                                 style: Theme.of(context).textTheme.bodyLarge
                                     ?.copyWith(
                                       color: Theme.of(

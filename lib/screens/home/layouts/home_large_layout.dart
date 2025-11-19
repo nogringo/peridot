@@ -12,6 +12,7 @@ class HomeLargeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return ColoredBox(
       color: Theme.of(context).colorScheme.surface,
       child: Center(
@@ -48,7 +49,7 @@ class HomeLargeLayout extends StatelessWidget {
                                       icon,
                                       SizedBox(width: 24),
                                       Text(
-                                        "Peridot",
+                                        l10n.appBrandName,
                                         style: Theme.of(
                                           context,
                                         ).textTheme.titleLarge,

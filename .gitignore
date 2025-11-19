@@ -46,3 +46,5 @@ app.*.map.json
 
 /untranslated_messages.txt
 pubspec_overrides.yaml
+
+/lib/l10n/*.dart

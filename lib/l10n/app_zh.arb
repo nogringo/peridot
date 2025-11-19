@@ -349,5 +349,20 @@
   "blockedRequestsCount": "{count} 已阻止的请求",
   "deleteAll": "全部删除",
   "newPendingRequest": "新的待处理请求",
-  "newPendingRequestBody": "收到来自 {appName} 的新请求，正在等待您的批准。"
+  "newPendingRequestBody": "收到来自 {appName} 的新请求，正在等待您的批准。",
+
+  "commandLabel": "命令：{command}",
+  "unableToLoadFollows": "无法加载当前关注以进行比较",
+  "noFollowChanges": "关注列表没有变化",
+  "addingFollowsCount": "{count, plural, other{添加 {count} 个关注}}",
+  "removingFollowsCount": "{count, plural, other{移除 {count} 个关注}}",
+  "pendingRequestsCount": "{count, plural, other{{count} 个待处理请求}}",
+  "kindLabel": "类型：{kind}",
+  "openNotification": "打开通知",
+  "permissionNotifications": "权限通知",
+  "permissionNotificationsDescription": "权限请求通知",
+  "appBrandName": "Peridot",
+  "relayUrlProtocolError": "中继 URL 必须使用 wss:// 或 ws:// 协议",
+  "invalidRelayUrlFormat": "无效的中继 URL 格式",
+  "invalidRelayUrl": "无效的中继 URL"
 }

@@ -348,5 +348,20 @@
   "blockedRequestsCount": "{count} ブロック済みリクエスト",
   "deleteAll": "すべて削除",
   "newPendingRequest": "新しい保留中のリクエスト",
-  "newPendingRequestBody": "{appName}から新しいリクエストを受信しました。承認をお待ちしています。"
+  "newPendingRequestBody": "{appName}から新しいリクエストを受信しました。承認をお待ちしています。",
+
+  "commandLabel": "コマンド：{command}",
+  "unableToLoadFollows": "比較のため現在のフォローを読み込めません",
+  "noFollowChanges": "フォローリストに変更はありません",
+  "addingFollowsCount": "{count, plural, other{{count}人のフォローを追加}}",
+  "removingFollowsCount": "{count, plural, other{{count}人のフォローを削除}}",
+  "pendingRequestsCount": "{count, plural, other{{count}件の保留中リクエスト}}",
+  "kindLabel": "種類：{kind}",
+  "openNotification": "通知を開く",
+  "permissionNotifications": "権限通知",
+  "permissionNotificationsDescription": "権限リクエストの通知",
+  "appBrandName": "Peridot",
+  "relayUrlProtocolError": "リレーURLはwss://またはws://プロトコルを使用する必要があります",
+  "invalidRelayUrlFormat": "無効なリレーURL形式",
+  "invalidRelayUrl": "無効なリレーURL"
 }
