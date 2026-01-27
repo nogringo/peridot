@@ -363,5 +363,10 @@
   "appBrandName": "Peridot",
   "relayUrlProtocolError": "L'URL du relais doit utiliser le protocole wss:// ou ws://",
   "invalidRelayUrlFormat": "Format d'URL de relais invalide",
-  "invalidRelayUrl": "URL de relais invalide"
+  "invalidRelayUrl": "URL de relais invalide",
+
+  "sortByName": "Nom",
+  "sortByLastUsed": "Dernière utilisation",
+  "allAccounts": "Tous les comptes",
+  "filterByAccount": "Filtrer par compte"
 }

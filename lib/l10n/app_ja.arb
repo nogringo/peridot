@@ -363,5 +363,10 @@
   "appBrandName": "Peridot",
   "relayUrlProtocolError": "リレーURLはwss://またはws://プロトコルを使用する必要があります",
   "invalidRelayUrlFormat": "無効なリレーURL形式",
-  "invalidRelayUrl": "無効なリレーURL"
+  "invalidRelayUrl": "無効なリレーURL",
+
+  "sortByName": "名前",
+  "sortByLastUsed": "最終使用",
+  "allAccounts": "すべてのアカウント",
+  "filterByAccount": "アカウントでフィルター"
 }

@@ -6,6 +6,10 @@ import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/models/bunker_request.dart';
 import 'package:sembast/sembast.dart';
 
+enum AppSortOption { name, lastUsed }
+
+enum AppSortOrder { ascending, descending }
+
 class AppWithRequests {
   App app;
   List<BunkerRequest> pending;
@@ -33,8 +37,18 @@ class HomeController extends GetxController {
     Repository.to.saveBunkerState();
   }
 
-  static List<AppWithRequests> getSortedApps(List<BunkerRequest> requests) {
+  static List<AppWithRequests> getSortedApps(
+    List<BunkerRequest> requests, {
+    AppSortOption sortOption = AppSortOption.name,
+    AppSortOrder sortOrder = AppSortOrder.ascending,
+    String? filterByAccount,
+  }) {
     var apps = Repository.bunker.apps;
+
+    if (filterByAccount != null) {
+      apps = apps.where((app) => app.userPubkey == filterByAccount).toList();
+    }
+
     List<AppWithRequests> result = [];
 
     for (var app in apps) {
@@ -56,7 +70,29 @@ class HomeController extends GetxController {
       result.add(AppWithRequests(app: app, pending: pending, blocked: blocked));
     }
 
-    result.sort((a, b) => b.pending.length.compareTo(a.pending.length));
+    final isAscending = sortOrder == AppSortOrder.ascending;
+
+    switch (sortOption) {
+      case AppSortOption.name:
+        result.sort((a, b) {
+          final nameA = a.app.name?.toLowerCase() ?? '';
+          final nameB = b.app.name?.toLowerCase() ?? '';
+          return isAscending
+              ? nameA.compareTo(nameB)
+              : nameB.compareTo(nameA);
+        });
+        break;
+      case AppSortOption.lastUsed:
+        final lastUsedMap = Repository.to.appLastUsed;
+        result.sort((a, b) {
+          final lastUsedA = lastUsedMap[a.app.appPubkey] ?? 0;
+          final lastUsedB = lastUsedMap[b.app.appPubkey] ?? 0;
+          return isAscending
+              ? lastUsedA.compareTo(lastUsedB)
+              : lastUsedB.compareTo(lastUsedA);
+        });
+        break;
+    }
 
     return result;
   }
@@ -66,6 +102,9 @@ class HomeController extends GetxController {
   List<AppWithRequests> appsWithRequests = [];
 
   RxInt selectedIndex = 0.obs;
+  Rx<AppSortOption> sortOption = AppSortOption.name.obs;
+  Rx<AppSortOrder> sortOrder = AppSortOrder.ascending.obs;
+  RxnString filterByAccount = RxnString(null);
 
   List<BunkerRequest> get pendingRequests => requests
       .where((req) => req.status == BunkerRequestStatus.pending)
@@ -90,13 +129,41 @@ class HomeController extends GetxController {
                 (req) => Repository.bunker.getApp(req.originalRequest) != null,
               )
               .toList();
-          appsWithRequests = getSortedApps(
-            requests.values
-                .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))
-                .toList(),
-          );
+          _updateAppsWithRequests(requests.values
+              .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))
+              .toList());
           update();
         });
+  }
+
+  void _updateAppsWithRequests(List<BunkerRequest> requests) {
+    appsWithRequests = getSortedApps(
+      requests,
+      sortOption: sortOption.value,
+      sortOrder: sortOrder.value,
+      filterByAccount: filterByAccount.value,
+    );
+  }
+
+  void toggleSort(AppSortOption option) {
+    if (sortOption.value == option) {
+      // Toggle order if same column clicked
+      sortOrder.value = sortOrder.value == AppSortOrder.ascending
+          ? AppSortOrder.descending
+          : AppSortOrder.ascending;
+    } else {
+      // New column, reset to ascending
+      sortOption.value = option;
+      sortOrder.value = AppSortOrder.ascending;
+    }
+    _updateAppsWithRequests(requests);
+    update();
+  }
+
+  void setFilterByAccount(String? pubkey) {
+    filterByAccount.value = pubkey;
+    _updateAppsWithRequests(requests);
+    update();
   }
 
   @override

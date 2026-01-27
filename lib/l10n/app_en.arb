@@ -1506,5 +1506,22 @@
   "invalidRelayUrl": "Invalid relay URL",
   "@invalidRelayUrl": {
     "description": "Error message when relay URL is invalid"
+  },
+
+  "sortByName": "Name",
+  "@sortByName": {
+    "description": "Sort option: sort by app name"
+  },
+  "sortByLastUsed": "Last used",
+  "@sortByLastUsed": {
+    "description": "Sort option: sort by last used time"
+  },
+  "allAccounts": "All accounts",
+  "@allAccounts": {
+    "description": "Filter option: show apps for all accounts"
+  },
+  "filterByAccount": "Filter by account",
+  "@filterByAccount": {
+    "description": "Tooltip for account filter"
   }
 }

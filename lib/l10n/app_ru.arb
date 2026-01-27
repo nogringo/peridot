@@ -364,5 +364,10 @@
   "appBrandName": "Перидот",
   "relayUrlProtocolError": "URL ретранслятора должен использовать протокол wss:// или ws://",
   "invalidRelayUrlFormat": "Неверный формат URL ретранслятора",
-  "invalidRelayUrl": "Неверный URL ретранслятора"
+  "invalidRelayUrl": "Неверный URL ретранслятора",
+
+  "sortByName": "Имя",
+  "sortByLastUsed": "Последнее использование",
+  "allAccounts": "Все аккаунты",
+  "filterByAccount": "Фильтр по аккаунту"
 }

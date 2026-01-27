@@ -364,5 +364,10 @@
   "appBrandName": "Peridot",
   "relayUrlProtocolError": "中继 URL 必须使用 wss:// 或 ws:// 协议",
   "invalidRelayUrlFormat": "无效的中继 URL 格式",
-  "invalidRelayUrl": "无效的中继 URL"
+  "invalidRelayUrl": "无效的中继 URL",
+
+  "sortByName": "名称",
+  "sortByLastUsed": "最近使用",
+  "allAccounts": "所有账户",
+  "filterByAccount": "按账户筛选"
 }

@@ -15,7 +15,6 @@ import 'package:sembast/sembast.dart' as sembast;
 // TODO add an option on the settings page to remove the client tag for new apps
 // TODO be able to edit the json
 // TODO show a diferent request screeen for know kinds like 0, 5
-// TODO sort apps (ui selector)
 // TODO check cascading delete
 // TODO import export apps
 
@@ -26,6 +25,7 @@ class Repository extends GetxController {
 
   bool isAppLoaded = false;
   RxSet<String> usersPubkeys = RxSet<String>({});
+  Map<String, int> appLastUsed = {};
 
   StreamSubscription<Nip46Request>? pendingRequestsSub;
   StreamSubscription<Nip46Request>? blockedRequestsSub;
@@ -80,6 +80,10 @@ class Repository extends GetxController {
       );
       var store = sembast.stringMapStoreFactory.store('requests');
       await store.record(req.id).put(db, reqObj.toJson());
+
+      // Update last used timestamp for the app
+      appLastUsed[req.appPubkey] = DateTime.now().millisecondsSinceEpoch;
+      await saveAppLastUsed();
     });
   }
 
@@ -180,6 +184,18 @@ class Repository extends GetxController {
     usersPubkeys.addAll(List<String>.from(storedUsersPubkeys as List));
   }
 
+  Future<void> saveAppLastUsed() async {
+    var store = sembast.StoreRef.main();
+    await store.record("app_last_used").put(db, appLastUsed);
+  }
+
+  Future<void> loadAppLastUsed() async {
+    var store = sembast.StoreRef.main();
+    final storedAppLastUsed = await store.record("app_last_used").get(db);
+    if (storedAppLastUsed == null) return;
+    appLastUsed = Map<String, int>.from(storedAppLastUsed as Map);
+  }
+
   Future<void> saveBunkerState() async {
     final storage = FlutterSecureStorage();
 
@@ -204,6 +220,11 @@ class Repository extends GetxController {
       bunker.addPrivateKey(privateKey);
     }
 
-    await Future.wait([loadApps(), loadRelays(), loadUsersPubkeys()]);
+    await Future.wait([
+      loadApps(),
+      loadRelays(),
+      loadUsersPubkeys(),
+      loadAppLastUsed(),
+    ]);
   }
 }
