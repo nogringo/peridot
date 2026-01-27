@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nip19/nip19.dart';
+import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:nostr_widgets/widgets/n_picture.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -258,7 +258,7 @@ class ApplicationsView extends StatelessWidget {
                   circleAvatarRadius: 12,
                 ),
                 SizedBox(width: 8),
-                Text('${Nip19.npubFromHex(pubkey).substring(0, 16)}...'),
+                Text('${Nip19.encodePubKey(pubkey).substring(0, 16)}...'),
               ],
             ),
           ),
@@ -268,7 +268,7 @@ class ApplicationsView extends StatelessWidget {
   }
 
   String _shortenPubkey(String pubkey) {
-    final npub = Nip19.npubFromHex(pubkey);
+    final npub = Nip19.encodePubKey(pubkey);
     return '${npub.substring(0, 12)}...';
   }
 }

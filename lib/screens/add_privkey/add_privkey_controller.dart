@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:nip01/nip01.dart';
-import 'package:nip19/nip19.dart';
+import 'package:ndk/shared/nips/nip01/bip340.dart';
+import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:nip49/nip49.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/toast_utils.dart';
@@ -36,7 +36,7 @@ class AddPrivkeyController extends GetxController {
     } else if (privkey.startsWith("nsec1")) {
       final nsec = privkey;
       try {
-        final privateKey = Nip19.nsecToHex(nsec);
+        final privateKey = Nip19.decode(nsec);
         addAccount(privateKey);
       } catch (e) {
         final l10n = AppLocalizations.of(Get.context!)!;
@@ -58,6 +58,6 @@ class AddPrivkeyController extends GetxController {
   }
 
   void createAccount() {
-    addAccount(KeyPair.generate().privateKey);
+    addAccount(Bip340.generatePrivateKey().privateKey!);
   }
 }

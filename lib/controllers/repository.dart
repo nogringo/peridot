@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ndk/shared/nips/nip01/bip340.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
-import 'package:nip01/nip01.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/models/bunker_request.dart';
@@ -88,8 +88,8 @@ class Repository extends GetxController {
   }
 
   Future<void> addAccount(String privateKey) async {
-    final keyPair = KeyPair.fromPrivateKey(privateKey: privateKey);
-    usersPubkeys.add(keyPair.publicKey);
+    final pubkey = Bip340.getPublicKey(privateKey);
+    usersPubkeys.add(pubkey);
     bunker.addPrivateKey(privateKey);
     update();
     await saveBunkerState();

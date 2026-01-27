@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:ndk/ndk.dart';
-import 'package:nip19/nip19.dart';
 import 'package:nostr_widgets/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -54,7 +53,7 @@ class _Kind3WidgetState extends State<Kind3Widget> {
       final filter = Filter(kinds: [3], authors: [widget.userPubkey], limit: 1);
 
       final ndk = Repository.ndk;
-      final response = ndk.requests.query(filters: [filter]);
+      final response = ndk.requests.query(filter: filter);
 
       await for (final event in response.stream) {
         final currentTags = event.tags;
@@ -204,7 +203,7 @@ class _FollowCard extends StatelessWidget {
           ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
-          Nip19.npubFromHex(pubkey),
+          Nip19.encodePubKey(pubkey),
           overflow: TextOverflow.ellipsis,
         ),
       ),

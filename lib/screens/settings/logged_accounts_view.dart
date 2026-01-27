@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nip19/nip19.dart';
+import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -28,7 +28,7 @@ class LoggedAccountsView extends StatelessWidget {
                   leading: NPicture(ndk: Repository.ndk, pubkey: pubkey),
                   title: NName(ndk: Repository.ndk, pubkey: pubkey),
                   subtitle: Text(
-                    Nip19.npubFromHex(pubkey),
+                    Nip19.encodePubKey(pubkey),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nip19/nip19.dart';
+import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -12,7 +12,7 @@ class RemoveAccountDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final npub = Nip19.npubFromHex(pubkey);
+    final npub = Nip19.encodePubKey(pubkey);
     final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog(

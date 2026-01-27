@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:toastification/toastification.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
-import 'package:nip19/nip19.dart';
 import 'package:nip49/nip49.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -81,7 +80,7 @@ class BackupAccountController extends GetxController {
       final privateKey = signer.privateKey;
 
       // Convert to nsec format
-      final nsec = Nip19.nsecFromHex(privateKey!);
+      final nsec = Nip19.encodePrivateKey(privateKey!);
 
       // Copy to clipboard
       await Clipboard.setData(ClipboardData(text: nsec));

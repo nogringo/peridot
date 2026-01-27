@@ -77,7 +77,7 @@ class NotificationService extends GetxService {
     );
 
     await _notifications.initialize(
-      initSettings,
+      settings: initSettings,
       onDidReceiveNotificationResponse: _onNotificationTapped,
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
@@ -249,10 +249,10 @@ class NotificationService extends GetxService {
     );
 
     await _notifications.show(
-      id,
-      title,
-      body,
-      notificationDetails,
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: notificationDetails,
       payload: payload,
     );
   }
@@ -289,16 +289,16 @@ class NotificationService extends GetxService {
     );
 
     await _notifications.show(
-      DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      title,
-      body,
-      notificationDetails,
+      id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+      title: title,
+      body: body,
+      notificationDetails: notificationDetails,
       payload: payload,
     );
   }
 
   Future<void> cancelNotification(int id) async {
-    await _notifications.cancel(id);
+    await _notifications.cancel(id: id);
     // Also remove any stored callback for this notification
     _permissionCallbacks.remove(id);
   }

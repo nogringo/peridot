@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nip19/nip19.dart';
+import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:nostr_widgets/nostr_widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -32,7 +32,7 @@ class ConnectedAccountView extends StatelessWidget {
               pubkey: ManageAppController.to.app!.userPubkey,
             ),
             subtitle: Text(
-              Nip19.npubFromHex(ManageAppController.to.app!.appPubkey),
+              Nip19.encodePubKey(ManageAppController.to.app!.appPubkey),
             ),
             trailing: IconButton(
               onPressed: ManageAppController.to.openSwitchAccountDialog,

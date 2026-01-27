@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/toast_utils.dart';
 import 'package:get/get.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
-import 'package:nip19/nip19.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
@@ -76,7 +76,7 @@ class SettingsController extends GetxController {
   }
 
   void copyNpubToClipboard(String pubkey) {
-    final npub = Nip19.npubFromHex(pubkey);
+    final npub = Nip19.encodePubKey(pubkey);
     Clipboard.setData(ClipboardData(text: npub));
     showCopyToast();
   }
