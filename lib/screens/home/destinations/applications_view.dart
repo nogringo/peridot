@@ -96,30 +96,69 @@ class ApplicationsView extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: Obx(
-        () => Row(
-          children: [
-            _buildSortButton(
-              context: context,
-              label: l10n.sortByName,
-              option: AppSortOption.name,
-              currentOption: c.sortOption.value,
-              currentOrder: c.sortOrder.value,
-              onTap: () => c.toggleSort(AppSortOption.name),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isNarrow = constraints.maxWidth < 400;
+
+          if (isNarrow) {
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Obx(
+                () => Row(
+                  children: [
+                    _buildSortButton(
+                      context: context,
+                      label: l10n.sortByName,
+                      option: AppSortOption.name,
+                      currentOption: c.sortOption.value,
+                      currentOrder: c.sortOrder.value,
+                      onTap: () => c.toggleSort(AppSortOption.name),
+                    ),
+                    SizedBox(width: 8),
+                    _buildSortButton(
+                      context: context,
+                      label: l10n.sortByLastUsed,
+                      option: AppSortOption.lastUsed,
+                      currentOption: c.sortOption.value,
+                      currentOrder: c.sortOrder.value,
+                      onTap: () => c.toggleSort(AppSortOption.lastUsed),
+                    ),
+                    if (hasMultipleAccounts) ...[
+                      SizedBox(width: 8),
+                      _buildAccountFilter(context, c, l10n),
+                    ],
+                  ],
+                ),
+              ),
+            );
+          }
+
+          return Obx(
+            () => Row(
+              children: [
+                _buildSortButton(
+                  context: context,
+                  label: l10n.sortByName,
+                  option: AppSortOption.name,
+                  currentOption: c.sortOption.value,
+                  currentOrder: c.sortOrder.value,
+                  onTap: () => c.toggleSort(AppSortOption.name),
+                ),
+                SizedBox(width: 8),
+                _buildSortButton(
+                  context: context,
+                  label: l10n.sortByLastUsed,
+                  option: AppSortOption.lastUsed,
+                  currentOption: c.sortOption.value,
+                  currentOrder: c.sortOrder.value,
+                  onTap: () => c.toggleSort(AppSortOption.lastUsed),
+                ),
+                Spacer(),
+                if (hasMultipleAccounts) _buildAccountFilter(context, c, l10n),
+              ],
             ),
-            SizedBox(width: 8),
-            _buildSortButton(
-              context: context,
-              label: l10n.sortByLastUsed,
-              option: AppSortOption.lastUsed,
-              currentOption: c.sortOption.value,
-              currentOrder: c.sortOrder.value,
-              onTap: () => c.toggleSort(AppSortOption.lastUsed),
-            ),
-            Spacer(),
-            if (hasMultipleAccounts) _buildAccountFilter(context, c, l10n),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

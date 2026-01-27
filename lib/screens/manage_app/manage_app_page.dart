@@ -9,6 +9,7 @@ import 'package:peridot/screens/manage_app/widgets/pending_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/permissions_view.dart';
 import 'package:peridot/screens/manage_app/widgets/processed_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/trust_level_view.dart';
+import 'package:peridot/widgets/responsive_list_view.dart';
 
 class ManageAppPage extends StatelessWidget {
   const ManageAppPage({super.key});
@@ -46,7 +47,7 @@ class ManageAppPage extends StatelessWidget {
               SizedBox(width: 12),
             ],
           ),
-          body: ListView(
+          body: ResponsiveListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
               EnabledAppView(),

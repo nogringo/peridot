@@ -61,25 +61,50 @@ class BlockedRequestsView extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          l10n.blockedRequestsCount(requests.length),
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
-                      if (requests.isNotEmpty)
-                        TextButton.icon(
-                          onPressed: () async {
-                            await ManageAppController.to.deleteAllRequests(
-                              requests,
-                            );
-                          },
-                          icon: Icon(Icons.delete_sweep),
-                          label: Text(l10n.deleteAll),
-                        ),
-                    ],
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isNarrow = constraints.maxWidth < 300;
+                      if (isNarrow) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.blockedRequestsCount(requests.length),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            if (requests.isNotEmpty)
+                              TextButton.icon(
+                                onPressed: () async {
+                                  await ManageAppController.to
+                                      .deleteAllRequests(requests);
+                                },
+                                icon: Icon(Icons.delete_sweep),
+                                label: Text(l10n.deleteAll),
+                              ),
+                          ],
+                        );
+                      }
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              l10n.blockedRequestsCount(requests.length),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ),
+                          if (requests.isNotEmpty)
+                            TextButton.icon(
+                              onPressed: () async {
+                                await ManageAppController.to.deleteAllRequests(
+                                  requests,
+                                );
+                              },
+                              icon: Icon(Icons.delete_sweep),
+                              label: Text(l10n.deleteAll),
+                            ),
+                        ],
+                      );
+                    },
                   ),
                 ),
                 ...requests.map((req) {

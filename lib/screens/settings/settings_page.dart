@@ -5,6 +5,7 @@ import 'package:peridot/screens/settings/default_bunker_relays_view.dart';
 import 'package:peridot/screens/settings/logged_accounts_view.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/screens/settings/system_settings_view.dart';
+import 'package:peridot/widgets/responsive_list_view.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -16,7 +17,7 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settings)),
-      body: ListView(
+      body: ResponsiveListView(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         children: const [
           LoggedAccountsView(),

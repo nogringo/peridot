@@ -14,6 +14,8 @@ import 'package:peridot/screens/request/widgets/kind_3_widget.dart';
 import 'package:peridot/screens/request/widgets/warning_banner_view.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/utils/nostr_kinds.dart';
+import 'package:peridot/widgets/responsive_list_view.dart'
+    show responsiveHorizontalPadding;
 import 'package:peridot/widgets/status_chip.dart';
 
 class RequestPage extends StatelessWidget {
@@ -64,115 +66,128 @@ class RequestPage extends StatelessWidget {
               SizedBox(width: 12),
             ],
           ),
-          body: Stack(
-            children: [
-              ListView(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              final horizontalPadding = responsiveHorizontalPadding(
+                constraints.maxWidth,
+              );
+              return Stack(
                 children: [
-                  if (!c.request!.originalRequest.useNip44)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: WarningBannerView(
-                        title: l10n.deprecatedEncryptionWarning,
-                        subtitle: l10n.deprecatedEncryptionWarningMessage,
+                  ListView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12 + horizontalPadding,
+                    ),
+                    children: [
+                      if (!c.request!.originalRequest.useNip44)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: WarningBannerView(
+                            title: l10n.deprecatedEncryptionWarning,
+                            subtitle: l10n.deprecatedEncryptionWarningMessage,
+                          ),
+                        ),
+                      if (c.request!.originalRequest.bunkerPubkey ==
+                          c.app!.userPubkey)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: WarningBannerView(
+                            title: l10n.metadataLeakWarning,
+                            subtitle: l10n.metadataLeakWarningMessage,
+                          ),
+                        ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          DateFormat.yMMMMd(
+                            Get.locale,
+                          ).add_Hms().format(c.request!.date),
+                          style: TextStyle(
+                            color: Theme.of(context).disabledColor,
+                          ),
+                        ),
                       ),
-                    ),
-                  if (c.request!.originalRequest.bunkerPubkey ==
-                      c.app!.userPubkey)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: WarningBannerView(
-                        title: l10n.metadataLeakWarning,
-                        subtitle: l10n.metadataLeakWarningMessage,
+                      SizedBox(height: 8),
+                      Text(
+                        l10n.commandLabel(
+                          c.request!.originalRequest.commandString,
+                        ),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
-                    ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Text(
-                      DateFormat.yMMMMd(
-                        Get.locale,
-                      ).add_Hms().format(c.request!.date),
-                      style: TextStyle(color: Theme.of(context).disabledColor),
-                    ),
+                      if (c.request!.originalRequest.command ==
+                          Nip46Commands.signEvent)
+                        Builder(
+                          builder: (context) {
+                            try {
+                              final eventJson = jsonDecode(
+                                c.request!.originalRequest.params.first,
+                              );
+                              final kind = eventJson['kind'] as int?;
+                              if (kind != null) {
+                                final kindDescription =
+                                    NostrKinds.getDescription(context, kind);
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    l10n.kindLabel(kindDescription),
+                                    style: Theme.of(context).textTheme.bodyLarge
+                                        ?.copyWith(
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
+                                        ),
+                                  ),
+                                );
+                              }
+                            } catch (e) {
+                              // If parsing fails, don't show anything
+                            }
+                            return SizedBox.shrink();
+                          },
+                        ),
+                      SizedBox(height: 8),
+                      if (c.request!.originalRequest.command ==
+                              Nip46Commands.signEvent &&
+                          (() {
+                            try {
+                              final eventJson = jsonDecode(
+                                c.request!.originalRequest.params.first,
+                              );
+                              return eventJson['kind'] == 3;
+                            } catch (e) {
+                              return false;
+                            }
+                          })())
+                        Kind3Widget(
+                          eventJson: c.request!.originalRequest.params.first,
+                          userPubkey: c.app!.userPubkey,
+                        ),
+                      Text(
+                        l10n.params,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      if (c.request!.originalRequest.command !=
+                          Nip46Commands.signEvent)
+                        ...c.request!.originalRequest.params.map(
+                          (param) => SelectableText(param),
+                        ),
+                      if (c.request!.originalRequest.command ==
+                          Nip46Commands.signEvent)
+                        JsonViewer(
+                          json: c.request!.originalRequest.params.first,
+                        ),
+                      SizedBox(height: kToolbarHeight * 2),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    l10n.commandLabel(c.request!.originalRequest.commandString),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  if (c.request!.originalRequest.command ==
-                      Nip46Commands.signEvent)
-                    Builder(
-                      builder: (context) {
-                        try {
-                          final eventJson = jsonDecode(
-                            c.request!.originalRequest.params.first,
-                          );
-                          final kind = eventJson['kind'] as int?;
-                          if (kind != null) {
-                            final kindDescription = NostrKinds.getDescription(
-                              context,
-                              kind,
-                            );
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                l10n.kindLabel(kindDescription),
-                                style: Theme.of(context).textTheme.bodyLarge
-                                    ?.copyWith(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                              ),
-                            );
-                          }
-                        } catch (e) {
-                          // If parsing fails, don't show anything
-                        }
-                        return SizedBox.shrink();
-                      },
+                  if (c.isRequestPending)
+                    Positioned(
+                      right: 12 + horizontalPadding,
+                      left: 12 + horizontalPadding,
+                      bottom: 12,
+                      child: ActionsButtonsView(),
                     ),
-                  SizedBox(height: 8),
-                  if (c.request!.originalRequest.command ==
-                          Nip46Commands.signEvent &&
-                      (() {
-                        try {
-                          final eventJson = jsonDecode(
-                            c.request!.originalRequest.params.first,
-                          );
-                          return eventJson['kind'] == 3;
-                        } catch (e) {
-                          return false;
-                        }
-                      })())
-                    Kind3Widget(
-                      eventJson: c.request!.originalRequest.params.first,
-                      userPubkey: c.app!.userPubkey,
-                    ),
-                  Text(
-                    l10n.params,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  if (c.request!.originalRequest.command !=
-                      Nip46Commands.signEvent)
-                    ...c.request!.originalRequest.params.map(
-                      (param) => SelectableText(param),
-                    ),
-                  if (c.request!.originalRequest.command ==
-                      Nip46Commands.signEvent)
-                    JsonViewer(json: c.request!.originalRequest.params.first),
-                  SizedBox(height: kToolbarHeight * 2),
                 ],
-              ),
-              if (c.isRequestPending)
-                Positioned(
-                  right: 12,
-                  left: 12,
-                  bottom: 12,
-                  child: ActionsButtonsView(),
-                ),
-            ],
+              );
+            },
           ),
         );
       },

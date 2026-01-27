@@ -19,44 +19,52 @@ class AddApplicationPage extends StatelessWidget {
       appBar: AppBar(title: Text(l10n.addAnApp)),
       body: GetBuilder<AddApplicationController>(
         builder: (c) {
-          return Stepper(
-            currentStep: c.currentStep,
-            steps: [
-              Step(
-                isActive: c.currentStep == 0,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(l10n.chooseTheAccount),
-                    Builder(
-                      builder: (context) {
-                        if (c.currentStep == 0) {
-                          return Container();
-                        }
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth > 500;
+              return Stepper(
+                type: isWide ? StepperType.horizontal : StepperType.vertical,
+                currentStep: c.currentStep,
+                steps: [
+                  Step(
+                    isActive: c.currentStep == 0,
+                    title: isWide
+                        ? Text(l10n.chooseTheAccount)
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(l10n.chooseTheAccount),
+                              Builder(
+                                builder: (context) {
+                                  if (c.currentStep == 0) {
+                                    return Container();
+                                  }
 
-                        return NPicture(
-                          ndk: Repository.ndk,
-                          pubkey: c.selectedPubkey.value,
-                          circleAvatarRadius: 14,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                content: ChooseAccountView(),
-              ),
-              Step(
-                isActive: c.currentStep == 1,
-                title: Text(l10n.connectAnApp),
-                content: ConnectAnAppView(),
-              ),
-              Step(
-                isActive: c.currentStep == 2,
-                title: Text(l10n.appConfiguration),
-                content: AppConfigurationView(),
-              ),
-            ],
-            controlsBuilder: (_, _) => Container(),
+                                  return NPicture(
+                                    ndk: Repository.ndk,
+                                    pubkey: c.selectedPubkey.value,
+                                    circleAvatarRadius: 14,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                    content: ChooseAccountView(),
+                  ),
+                  Step(
+                    isActive: c.currentStep == 1,
+                    title: Text(l10n.connectAnApp),
+                    content: ConnectAnAppView(),
+                  ),
+                  Step(
+                    isActive: c.currentStep == 2,
+                    title: Text(l10n.appConfiguration),
+                    content: AppConfigurationView(),
+                  ),
+                ],
+                controlsBuilder: (_, _) => Container(),
+              );
+            },
           );
         },
       ),
