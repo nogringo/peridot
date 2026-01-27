@@ -368,5 +368,12 @@
   "sortByName": "Name",
   "sortByLastUsed": "Zuletzt verwendet",
   "allAccounts": "Alle Konten",
-  "filterByAccount": "Nach Konto filtern"
+  "filterByAccount": "Nach Konto filtern",
+
+  "logs": "Protokoll",
+  "noLogs": "Noch keine Protokolle",
+  "processed": "Verarbeitet",
+
+  "deleteAllLogs": "Alle Protokolle löschen",
+  "deleteAllLogsConfirm": "Sind Sie sicher, dass Sie alle Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
 }

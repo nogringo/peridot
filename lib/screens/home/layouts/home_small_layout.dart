@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/destinations/applications_view.dart';
+import 'package:peridot/screens/home/destinations/logs_view.dart';
 import 'package:peridot/screens/home/destinations/requests_view.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/requests_icon_view.dart';
@@ -19,6 +20,7 @@ class HomeSmallLayout extends StatelessWidget {
             [
               AppLocalizations.of(context)!.applications,
               AppLocalizations.of(context)!.requests,
+              AppLocalizations.of(context)!.logs,
             ][HomeController.to.selectedIndex.value],
           ),
           actions: [
@@ -32,6 +34,7 @@ class HomeSmallLayout extends StatelessWidget {
         body: [
           ApplicationsView(),
           RequestsView(),
+          LogsView(),
         ][HomeController.to.selectedIndex.value],
         bottomNavigationBar: NavigationBar(
           selectedIndex: HomeController.to.selectedIndex.value,
@@ -43,6 +46,10 @@ class HomeSmallLayout extends StatelessWidget {
             NavigationDestination(
               icon: RequestsIconView(),
               label: AppLocalizations.of(context)!.requests,
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.history),
+              label: AppLocalizations.of(context)!.logs,
             ),
           ],
           onDestinationSelected: HomeController.to.onDestinationSelected,

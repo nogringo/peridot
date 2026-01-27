@@ -368,5 +368,12 @@
   "sortByName": "Nombre",
   "sortByLastUsed": "Último uso",
   "allAccounts": "Todas las cuentas",
-  "filterByAccount": "Filtrar por cuenta"
+  "filterByAccount": "Filtrar por cuenta",
+
+  "logs": "Historial",
+  "noLogs": "Sin historial",
+  "processed": "Procesado",
+
+  "deleteAllLogs": "Eliminar todo el historial",
+  "deleteAllLogsConfirm": "¿Está seguro de que desea eliminar todo el historial? Esta acción no se puede deshacer."
 }

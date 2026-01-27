@@ -1523,5 +1523,27 @@
   "filterByAccount": "Filter by account",
   "@filterByAccount": {
     "description": "Tooltip for account filter"
+  },
+
+  "logs": "Logs",
+  "@logs": {
+    "description": "Logs tab title"
+  },
+  "noLogs": "No logs yet",
+  "@noLogs": {
+    "description": "Message when there are no logs"
+  },
+  "processed": "Processed",
+  "@processed": {
+    "description": "Status label for processed requests"
+  },
+
+  "deleteAllLogs": "Delete all logs",
+  "@deleteAllLogs": {
+    "description": "Title for delete all logs dialog"
+  },
+  "deleteAllLogsConfirm": "Are you sure you want to delete all logs? This action cannot be undone.",
+  "@deleteAllLogsConfirm": {
+    "description": "Confirmation message for deleting all logs"
   }
 }

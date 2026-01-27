@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/destinations/applications_view.dart';
+import 'package:peridot/screens/home/destinations/logs_view.dart';
 import 'package:peridot/screens/home/destinations/requests_view.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/requests_icon_view.dart';
@@ -73,6 +74,10 @@ class HomeLargeLayout extends StatelessWidget {
                             icon: RequestsIconView(),
                             label: Text(AppLocalizations.of(context)!.requests),
                           ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.history),
+                            label: Text(AppLocalizations.of(context)!.logs),
+                          ),
                         ],
                         trailing: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -122,6 +127,7 @@ class HomeLargeLayout extends StatelessWidget {
                           child: [
                             ApplicationsView(),
                             RequestsView(),
+                            LogsView(),
                           ][HomeController.to.selectedIndex.value],
                         ),
                       ),

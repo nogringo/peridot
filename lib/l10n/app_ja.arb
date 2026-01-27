@@ -368,5 +368,12 @@
   "sortByName": "名前",
   "sortByLastUsed": "最終使用",
   "allAccounts": "すべてのアカウント",
-  "filterByAccount": "アカウントでフィルター"
+  "filterByAccount": "アカウントでフィルター",
+
+  "logs": "ログ",
+  "noLogs": "ログはありません",
+  "processed": "処理済み",
+
+  "deleteAllLogs": "すべてのログを削除",
+  "deleteAllLogsConfirm": "すべてのログを削除してもよろしいですか？この操作は元に戻せません。"
 }

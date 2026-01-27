@@ -77,9 +77,7 @@ class HomeController extends GetxController {
         result.sort((a, b) {
           final nameA = a.app.name?.toLowerCase() ?? '';
           final nameB = b.app.name?.toLowerCase() ?? '';
-          return isAscending
-              ? nameA.compareTo(nameB)
-              : nameB.compareTo(nameA);
+          return isAscending ? nameA.compareTo(nameB) : nameB.compareTo(nameA);
         });
         break;
       case AppSortOption.lastUsed:
@@ -98,7 +96,9 @@ class HomeController extends GetxController {
   }
 
   late StreamSubscription requestsSub;
+  late StreamSubscription allRequestsSub;
   List<BunkerRequest> requests = [];
+  List<BunkerRequest> allRequests = [];
   List<AppWithRequests> appsWithRequests = [];
 
   RxInt selectedIndex = 0.obs;
@@ -129,9 +129,25 @@ class HomeController extends GetxController {
                 (req) => Repository.bunker.getApp(req.originalRequest) != null,
               )
               .toList();
-          _updateAppsWithRequests(requests.values
-              .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))
-              .toList());
+          _updateAppsWithRequests(
+            requests.values
+                .map((e) => BunkerRequest.fromJson(e as Map<String, dynamic>))
+                .toList(),
+          );
+          update();
+        });
+
+    allRequestsSub = stringMapStoreFactory
+        .store('requests')
+        .query(finder: Finder(sortOrders: [SortOrder('date', false)]))
+        .onSnapshots(Repository.to.db)
+        .listen((requests) {
+          allRequests = requests
+              .map((e) => BunkerRequest.fromJson(e.value))
+              .where(
+                (req) => Repository.bunker.getApp(req.originalRequest) != null,
+              )
+              .toList();
           update();
         });
   }
@@ -169,10 +185,19 @@ class HomeController extends GetxController {
   @override
   void dispose() {
     requestsSub.cancel();
+    allRequestsSub.cancel();
     super.dispose();
   }
 
   void onDestinationSelected(int value) {
     selectedIndex.value = value;
+  }
+
+  Future<void> deleteAllLogs() async {
+    final requestsStore = stringMapStoreFactory.store('requests');
+    final recordKeys = allRequests
+        .map((req) => req.originalRequest.id)
+        .toList();
+    await requestsStore.records(recordKeys).delete(Repository.to.db);
   }
 }

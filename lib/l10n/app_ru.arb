@@ -369,5 +369,12 @@
   "sortByName": "Имя",
   "sortByLastUsed": "Последнее использование",
   "allAccounts": "Все аккаунты",
-  "filterByAccount": "Фильтр по аккаунту"
+  "filterByAccount": "Фильтр по аккаунту",
+
+  "logs": "Журнал",
+  "noLogs": "Журнал пуст",
+  "processed": "Обработано",
+
+  "deleteAllLogs": "Удалить весь журнал",
+  "deleteAllLogsConfirm": "Вы уверены, что хотите удалить весь журнал? Это действие нельзя отменить."
 }

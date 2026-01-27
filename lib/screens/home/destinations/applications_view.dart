@@ -43,8 +43,8 @@ class ApplicationsView extends StatelessWidget {
                                 app.app.name ?? l10n.unnamedApp,
                                 style: TextStyle(fontWeight: FontWeight.w600),
                               ),
-                              trailing: app.pending.isEmpty &&
-                                      app.blocked.isEmpty
+                              trailing:
+                                  app.pending.isEmpty && app.blocked.isEmpty
                                   ? null
                                   : Wrap(
                                       spacing: 8,
@@ -54,14 +54,16 @@ class ApplicationsView extends StatelessWidget {
                                             shape: StadiumBorder(),
                                             avatar: Icon(Icons.access_time),
                                             label: Text(
-                                                app.pending.length.toString()),
+                                              app.pending.length.toString(),
+                                            ),
                                           ),
                                         if (app.blocked.isNotEmpty)
                                           Chip(
                                             shape: StadiumBorder(),
                                             avatar: Icon(Icons.cancel),
                                             label: Text(
-                                                app.blocked.length.toString()),
+                                              app.blocked.length.toString(),
+                                            ),
                                           ),
                                       ],
                                     ),
@@ -94,29 +96,31 @@ class ApplicationsView extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: Obx(() => Row(
-            children: [
-              _buildSortButton(
-                context: context,
-                label: l10n.sortByName,
-                option: AppSortOption.name,
-                currentOption: c.sortOption.value,
-                currentOrder: c.sortOrder.value,
-                onTap: () => c.toggleSort(AppSortOption.name),
-              ),
-              SizedBox(width: 8),
-              _buildSortButton(
-                context: context,
-                label: l10n.sortByLastUsed,
-                option: AppSortOption.lastUsed,
-                currentOption: c.sortOption.value,
-                currentOrder: c.sortOrder.value,
-                onTap: () => c.toggleSort(AppSortOption.lastUsed),
-              ),
-              Spacer(),
-              if (hasMultipleAccounts) _buildAccountFilter(context, c, l10n),
-            ],
-          )),
+      child: Obx(
+        () => Row(
+          children: [
+            _buildSortButton(
+              context: context,
+              label: l10n.sortByName,
+              option: AppSortOption.name,
+              currentOption: c.sortOption.value,
+              currentOrder: c.sortOrder.value,
+              onTap: () => c.toggleSort(AppSortOption.name),
+            ),
+            SizedBox(width: 8),
+            _buildSortButton(
+              context: context,
+              label: l10n.sortByLastUsed,
+              option: AppSortOption.lastUsed,
+              currentOption: c.sortOption.value,
+              currentOrder: c.sortOrder.value,
+              onTap: () => c.toggleSort(AppSortOption.lastUsed),
+            ),
+            Spacer(),
+            if (hasMultipleAccounts) _buildAccountFilter(context, c, l10n),
+          ],
+        ),
+      ),
     );
   }
 
@@ -134,8 +138,9 @@ class ApplicationsView extends StatelessWidget {
     return TextButton.icon(
       onPressed: onTap,
       style: TextButton.styleFrom(
-        foregroundColor:
-            isSelected ? theme.colorScheme.primary : theme.colorScheme.onSurface,
+        foregroundColor: isSelected
+            ? theme.colorScheme.primary
+            : theme.colorScheme.onSurface,
       ),
       icon: isSelected
           ? Icon(

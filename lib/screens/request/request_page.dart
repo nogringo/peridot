@@ -12,7 +12,9 @@ import 'package:peridot/screens/request/request_controller.dart';
 import 'package:peridot/screens/request/widgets/json_viewer.dart';
 import 'package:peridot/screens/request/widgets/kind_3_widget.dart';
 import 'package:peridot/screens/request/widgets/warning_banner_view.dart';
+import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/utils/nostr_kinds.dart';
+import 'package:peridot/widgets/status_chip.dart';
 
 class RequestPage extends StatelessWidget {
   const RequestPage({super.key});
@@ -27,9 +29,38 @@ class RequestPage extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(c.app?.name ?? l10n.deletedApp),
+            title: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => _navigateToApp(c.app!),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        c.app?.name ?? l10n.deletedApp,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Icon(Icons.open_in_new, size: 16),
+                  ],
+                ),
+              ),
+            ),
             actions: [
-              NPicture(ndk: Repository.ndk, pubkey: c.app!.userPubkey),
+              StatusChip(status: c.request!.status),
+              SizedBox(width: 8),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => _navigateToApp(c.app!),
+                  child: NPicture(
+                    ndk: Repository.ndk,
+                    pubkey: c.app!.userPubkey,
+                  ),
+                ),
+              ),
               SizedBox(width: 12),
             ],
           ),
@@ -134,16 +165,21 @@ class RequestPage extends StatelessWidget {
                   SizedBox(height: kToolbarHeight * 2),
                 ],
               ),
-              Positioned(
-                right: 12,
-                left: 12,
-                bottom: 12,
-                child: ActionsButtonsView(),
-              ),
+              if (c.isRequestPending)
+                Positioned(
+                  right: 12,
+                  left: 12,
+                  bottom: 12,
+                  child: ActionsButtonsView(),
+                ),
             ],
           ),
         );
       },
     );
+  }
+
+  void _navigateToApp(App app) {
+    Get.toNamed(AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey));
   }
 }
