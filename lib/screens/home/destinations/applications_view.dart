@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
-import 'package:nostr_widgets/widgets/n_picture.dart';
+import 'package:ndk_flutter/widgets/picture/n_picture.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
@@ -36,7 +36,7 @@ class ApplicationsView extends StatelessWidget {
 
                             return ListTile(
                               leading: NPicture(
-                                ndk: Repository.ndk,
+                                ndkFlutter: Repository.ndkFlutter,
                                 pubkey: app.app.userPubkey,
                               ),
                               title: Text(
@@ -253,7 +253,7 @@ class ApplicationsView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 NPicture(
-                  ndk: Repository.ndk,
+                  ndkFlutter: Repository.ndkFlutter,
                   pubkey: pubkey,
                   circleAvatarRadius: 12,
                 ),

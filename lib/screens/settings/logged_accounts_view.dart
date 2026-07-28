@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
-import 'package:nostr_widgets/nostr_widgets.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
@@ -25,8 +25,8 @@ class LoggedAccountsView extends StatelessWidget {
               ...Repository.to.usersPubkeys.map((pubkey) {
                 return ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: NPicture(ndk: Repository.ndk, pubkey: pubkey),
-                  title: NName(ndk: Repository.ndk, pubkey: pubkey),
+                  leading: NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
+                  title: NName(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
                   subtitle: Text(
                     Nip19.encodePubKey(pubkey),
                     maxLines: 1,

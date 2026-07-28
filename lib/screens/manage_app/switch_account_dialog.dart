@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:get/get.dart';
-import 'package:nostr_widgets/nostr_widgets.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 
@@ -22,8 +22,8 @@ class SwitchAccountDialog extends StatelessWidget {
               final isSelected =
                   ManageAppController.to.selectedPubkey.value == pubkey;
               return ListTile(
-                leading: NPicture(ndk: Repository.ndk, pubkey: pubkey),
-                title: NName(ndk: Repository.ndk, pubkey: pubkey),
+                leading: NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
+                title: NName(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
                 trailing: isSelected
                     ? Icon(
                         Icons.radio_button_checked,

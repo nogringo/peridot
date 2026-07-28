@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:nostr_widgets/nostr_widgets.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
@@ -70,7 +70,7 @@ class LogsView extends StatelessWidget {
 
                       return ListTile(
                         leading: NPicture(
-                          ndk: Repository.ndk,
+                          ndkFlutter: Repository.ndkFlutter,
                           pubkey: app.userPubkey,
                         ),
                         title: Text(app.name ?? l10n.unnamedApp),

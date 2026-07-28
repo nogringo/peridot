@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:ndk/ndk.dart';
-import 'package:nostr_widgets/widgets/widgets.dart';
+import 'package:ndk_flutter/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
@@ -191,12 +191,12 @@ class _FollowCard extends StatelessWidget {
       ),
       child: ListTile(
         leading: NPicture(
-          ndk: Repository.ndk,
+          ndkFlutter: Repository.ndkFlutter,
           pubkey: pubkey,
           circleAvatarRadius: 20,
         ),
         title: NName(
-          ndk: Repository.ndk,
+          ndkFlutter: Repository.ndkFlutter,
           pubkey: pubkey,
           style: Theme.of(
             context,

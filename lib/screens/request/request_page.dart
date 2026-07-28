@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:nostr_widgets/widgets/widgets.dart';
+import 'package:ndk_flutter/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:get/get.dart';
@@ -58,7 +58,7 @@ class RequestPage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () => _navigateToApp(c.app!),
                   child: NPicture(
-                    ndk: Repository.ndk,
+                    ndkFlutter: Repository.ndkFlutter,
                     pubkey: c.app!.userPubkey,
                   ),
                 ),

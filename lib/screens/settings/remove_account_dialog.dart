@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
-import 'package:nostr_widgets/nostr_widgets.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
@@ -23,14 +23,14 @@ class RemoveAccountDialog extends StatelessWidget {
         children: [
           Row(
             children: [
-              NPicture(ndk: Repository.ndk, pubkey: pubkey),
+              NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     NName(
-                      ndk: Repository.ndk,
+                      ndkFlutter: Repository.ndkFlutter,
                       pubkey: pubkey,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),

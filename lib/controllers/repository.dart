@@ -5,6 +5,7 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/models/bunker_request.dart';
@@ -21,6 +22,7 @@ import 'package:sembast/sembast.dart' as sembast;
 class Repository extends GetxController {
   static Repository get to => Get.find();
   static Ndk get ndk => Get.find();
+  static NdkFlutter get ndkFlutter => Get.find();
   static Bunker get bunker => Get.find();
 
   bool isAppLoaded = false;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
-import 'package:nostr_widgets/nostr_widgets.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
@@ -24,11 +24,11 @@ class ConnectedAccountView extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             leading: NPicture(
-              ndk: Repository.ndk,
+              ndkFlutter: Repository.ndkFlutter,
               pubkey: ManageAppController.to.app!.userPubkey,
             ),
             title: NName(
-              ndk: Repository.ndk,
+              ndkFlutter: Repository.ndkFlutter,
               pubkey: ManageAppController.to.app!.userPubkey,
             ),
             subtitle: Text(

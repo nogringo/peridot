@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -8,15 +9,23 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/services/notification_service.dart';
-import 'package:nostr_widgets/l10n/app_localizations.dart' as nostr_widgets;
+import 'package:ndk_flutter/l10n/app_localizations.dart' as ndk_flutter;
 import 'package:toastification/toastification.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final ndk = Ndk.defaultConfig();
+  final ndk = Ndk(
+    NdkConfig(
+      cache: MemCacheManager(),
+      eventVerifier: NdkEventVerifier(),
+      eventSignerFactory: const NdkEventSignerFactory(),
+    ),
+  );
   Get.put(ndk);
+
+  Get.put(NdkFlutter(ndk: ndk));
 
   final bunker = Bunker(ndk: ndk);
   Get.put(bunker);
@@ -48,7 +57,7 @@ class MainApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
-          nostr_widgets.AppLocalizations.delegate,
+          ndk_flutter.AppLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData.from(
