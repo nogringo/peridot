@@ -26,7 +26,7 @@ jobs:
           channel: 'stable'
 
       - name: Install FastForge
-        run: dart pub global activate fastforge 0.6.12
+        run: dart pub global activate fastforge
 
       - name: Get dependencies
         run: flutter pub get
@@ -42,7 +42,7 @@ jobs:
         env:
           # The runner has no FUSE, so appimagetool must unpack itself instead of mounting.
           APPIMAGE_EXTRACT_AND_RUN: '1'
-        run: dart pub global run fastforge package --platform linux --targets deb,appimage --skip-clean --artifact-name '{{name}}-{{version}}-{{platform}}-x64.{{ext}}'
+        run: fastforge package --platform linux --targets deb,appimage --skip-clean --artifact-name '{{name}}-{{version}}-{{platform}}-x64.{{ext}}'
 
       - name: Create tar.gz archive
         run: |

@@ -20,7 +20,7 @@ jobs:
 
       - name: Install FastForge and Inno Setup
         run: |
-          dart pub global activate fastforge 0.6.12
+          dart pub global activate fastforge
           choco install innosetup -y --no-progress
 
       - name: Get dependencies
@@ -35,7 +35,7 @@ jobs:
           echo "Version: $version"
 
       - name: Build installer
-        run: dart pub global run fastforge package --platform windows --targets exe --skip-clean
+        run: fastforge package --platform windows --targets exe --skip-clean
 
       - name: Create zip archive
         run: |

@@ -62,7 +62,7 @@ jobs:
       - name: Create DMG
         run: |
           npm install -g create-dmg
-          create-dmg 'build/macos/Build/Products/Release/peridot.app' build/macos/Build/Products/Release/ || true
+          create-dmg 'build/macos/Build/Products/Release/Peridot.app' build/macos/Build/Products/Release/ || true
           mv build/macos/Build/Products/Release/*.dmg build/macos/Build/Products/Release/peridot-${{ steps.version.outputs.VERSION }}-macos.dmg || true
 
       - name: Notarize DMG
@@ -91,7 +91,7 @@ jobs:
         with:
           name: macos-build
           path: |
-            build/macos/Build/Products/Release/peridot.app
+            build/macos/Build/Products/Release/Peridot.app
             build/macos/Build/Products/Release/*.dmg
 
       - name: Create Release
@@ -100,7 +100,7 @@ jobs:
         with:
           files: |
             build/macos/Build/Products/Release/*.dmg
-            build/macos/Build/Products/Release/peridot.app
+            build/macos/Build/Products/Release/Peridot.app
           draft: false
           prerelease: false
         env:
