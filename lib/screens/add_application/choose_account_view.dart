@@ -36,7 +36,10 @@ class ChooseAccountView extends StatelessWidget {
             }
 
             return ListTile(
-              leading: NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
+              leading: NPicture(
+                ndkFlutter: Repository.ndkFlutter,
+                pubkey: pubkey,
+              ),
               title: NName(
                 ndkFlutter: Repository.ndkFlutter,
                 pubkey: pubkey,

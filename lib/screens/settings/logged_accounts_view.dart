@@ -25,8 +25,14 @@ class LoggedAccountsView extends StatelessWidget {
               ...Repository.to.usersPubkeys.map((pubkey) {
                 return ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
-                  title: NName(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
+                  leading: NPicture(
+                    ndkFlutter: Repository.ndkFlutter,
+                    pubkey: pubkey,
+                  ),
+                  title: NName(
+                    ndkFlutter: Repository.ndkFlutter,
+                    pubkey: pubkey,
+                  ),
                   subtitle: Text(
                     Nip19.encodePubKey(pubkey),
                     maxLines: 1,

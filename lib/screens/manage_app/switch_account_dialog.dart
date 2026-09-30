@@ -22,7 +22,10 @@ class SwitchAccountDialog extends StatelessWidget {
               final isSelected =
                   ManageAppController.to.selectedPubkey.value == pubkey;
               return ListTile(
-                leading: NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
+                leading: NPicture(
+                  ndkFlutter: Repository.ndkFlutter,
+                  pubkey: pubkey,
+                ),
                 title: NName(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
                 trailing: isSelected
                     ? Icon(

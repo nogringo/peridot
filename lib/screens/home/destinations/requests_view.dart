@@ -43,7 +43,7 @@ class RequestsView extends StatelessWidget {
                         ),
                         Text(
                           DateFormat.yMMMMd(
-                            Get.locale,
+                            AppLocalizations.of(context)!.localeName,
                           ).add_Hms().format(req.date),
                           style: Theme.of(context).textTheme.labelSmall,
                         ),

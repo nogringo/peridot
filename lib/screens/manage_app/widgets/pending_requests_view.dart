@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -75,7 +74,9 @@ class PendingRequestsView extends StatelessWidget {
                       ),
                     ),
                     subtitle: Text(
-                      DateFormat.yMMMMd(Get.locale).add_Hms().format(req.date),
+                      DateFormat.yMMMMd(
+                        l10n.localeName,
+                      ).add_Hms().format(req.date),
                     ),
                     // trailing: IconButton(
                     //   onPressed: () {},

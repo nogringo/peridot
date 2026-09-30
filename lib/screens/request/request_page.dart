@@ -99,7 +99,7 @@ class RequestPage extends StatelessWidget {
                         alignment: Alignment.topRight,
                         child: Text(
                           DateFormat.yMMMMd(
-                            Get.locale,
+                            l10n.localeName,
                           ).add_Hms().format(c.request!.date),
                           style: TextStyle(
                             color: Theme.of(context).disabledColor,

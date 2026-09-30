@@ -85,7 +85,7 @@ class LogsView extends StatelessWidget {
                             ),
                             Text(
                               DateFormat.yMMMMd(
-                                Get.locale,
+                                l10n.localeName,
                               ).add_Hms().format(req.date),
                               style: Theme.of(context).textTheme.labelSmall,
                             ),

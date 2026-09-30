@@ -31,7 +31,10 @@ class BackupAccountPage extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: NPicture(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
+            leading: NPicture(
+              ndkFlutter: Repository.ndkFlutter,
+              pubkey: pubkey,
+            ),
             title: NName(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
           ),
           SizedBox(height: 16),
