@@ -35,9 +35,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Linux and Windows artifacts keep their dist/<version>/ subfolder.
+          shopt -s globstar
           gh release create "$GITHUB_REF_NAME" \
             --repo "$GITHUB_REPOSITORY" \
             --title "$GITHUB_REF_NAME" \
             --verify-tag \
             --generate-notes \
-            release/*.dmg release/*.deb release/*.AppImage release/*.tar.gz release/*.exe release/*.zip
+            release/**/*.dmg release/**/*.deb release/**/*.AppImage release/**/*.tar.gz release/**/*.exe release/**/*.zip
