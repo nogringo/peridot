@@ -1,0 +1,6 @@
+display_name: Peridot
+icon: linux/icon.png
+generic_name: Nostr bunker
+categories:
+  - Utility
+startup_notify: true

@@ -1,0 +1,15 @@
+app_id: io.github.nogringo.peridot
+display_name: Peridot
+executable_name: peridot.exe
+publisher_name: Russell
+publisher_url: https://github.com/nogringo/peridot
+install_dir_name: '{autopf}\Peridot'
+setup_icon_file: windows/runner/resources/app_icon.ico
+locales:
+  - en
+  - de
+  - es
+  - fr
+  - ja
+  - ru
+  - zh

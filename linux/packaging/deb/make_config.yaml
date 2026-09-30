@@ -1,0 +1,18 @@
+display_name: Peridot
+package_name: peridot
+maintainer:
+  name: Russell
+  email: npub1kg4sdvz3l4fr99n2jdz2vdxe2mpacva87hkdetv76ywacsfq5leqquw5te@uid.ovh
+priority: optional
+section: utils
+installed_size: 45000
+icon: linux/icon.png
+generic_name: Nostr bunker
+categories:
+  - Utility
+startup_notify: true
+# Matches the GTK app id, which is the window class under Wayland.
+startup_wm_class: io.github.nogringo.peridot
+dependencies:
+  - libgtk-3-0t64 | libgtk-3-0
+  - libsecret-1-0

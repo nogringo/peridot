@@ -2,7 +2,6 @@ name: Build Windows App
 
 on:
   push:
-    branches: [ master ]
     tags:
       - 'v*'
   workflow_dispatch:
@@ -19,11 +18,13 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Install FastForge and Inno Setup
+        run: |
+          dart pub global activate fastforge 0.6.12
+          choco install innosetup -y --no-progress
+
       - name: Get dependencies
         run: flutter pub get
-
-      - name: Build Windows app
-        run: flutter build windows --release
 
       - name: Get version from pubspec
         id: version
@@ -33,21 +34,24 @@ jobs:
           echo "VERSION=$version" >> $env:GITHUB_OUTPUT
           echo "Version: $version"
 
+      - name: Build installer
+        run: dart pub global run fastforge package --platform windows --targets exe --skip-clean
+
       - name: Create zip archive
         run: |
-          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
+          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath dist/${{ steps.version.outputs.VERSION }}/peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
+          path: dist/*/*
 
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: peridot-${{ steps.version.outputs.VERSION }}-windows-portable.zip
+          files: dist/*/*
           draft: false
           prerelease: false
         env:

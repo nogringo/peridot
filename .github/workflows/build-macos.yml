@@ -2,7 +2,6 @@ name: Build macOS App
 
 on:
   push:
-    branches: [ master ]
     tags:
       - 'v*'
   workflow_dispatch:
@@ -53,11 +52,18 @@ jobs:
       - name: Build macOS app
         run: flutter build macos --release
 
+      - name: Get version from pubspec
+        id: version
+        run: |
+          VERSION=$(awk '/^version:/ {print $2}' pubspec.yaml)
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Version: $VERSION"
+
       - name: Create DMG
         run: |
           npm install -g create-dmg
           create-dmg 'build/macos/Build/Products/Release/peridot.app' build/macos/Build/Products/Release/ || true
-          mv build/macos/Build/Products/Release/*.dmg build/macos/Build/Products/Release/Peridot.dmg || true
+          mv build/macos/Build/Products/Release/*.dmg build/macos/Build/Products/Release/peridot-${{ steps.version.outputs.VERSION }}-macos.dmg || true
 
       - name: Notarize DMG
         env:
@@ -65,7 +71,7 @@ jobs:
           NOTARY_API_KEY_ID: ${{ secrets.NOTARY_API_KEY_ID }}
           NOTARY_API_ISSUER_ID: ${{ secrets.NOTARY_API_ISSUER_ID }}
         run: |
-          DMG_PATH=build/macos/Build/Products/Release/Peridot.dmg
+          DMG_PATH=build/macos/Build/Products/Release/peridot-${{ steps.version.outputs.VERSION }}-macos.dmg
           KEY_PATH=$RUNNER_TEMP/notary_key.p8
           echo -n "$NOTARY_API_KEY_BASE64" | base64 --decode -o "$KEY_PATH"
           NOTARY_AUTH=(--key "$KEY_PATH" --key-id "$NOTARY_API_KEY_ID" --issuer "$NOTARY_API_ISSUER_ID")
