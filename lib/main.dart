@@ -27,7 +27,13 @@ void main() async {
 
   Get.put(NdkFlutter(ndk: ndk));
 
-  final bunker = Bunker(ndk: ndk);
+  final bunker = Bunker(
+    ndk: ndk,
+    defaultBunkerRelays: const [
+      'wss://relay.nmail.li',
+      'wss://relay.primal.net',
+    ],
+  );
   Get.put(bunker);
 
   final repository = Repository();
