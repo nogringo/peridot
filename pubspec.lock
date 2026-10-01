@@ -586,18 +586,18 @@ packages:
     dependency: "direct main"
     description:
       name: ndk
-      sha256: f6657362eb7054683c673e7792df2584bff3fc4a775992afccc79bb56e5a10bc
+      sha256: "3b3112f0e0a6603138181bf2a603157a61fa5278707ecf1a5ec7a09344031f50"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1-dev.1"
   ndk_flutter:
     dependency: "direct main"
     description:
       name: ndk_flutter
-      sha256: "1312ff38eccb3b84109b16edeec173c3df241919180e57a87d20880c0322039c"
+      sha256: "7455b0d0686e8e781b4e52e8e4f74d4eb52aa0fcbd0095621df7ce946824f441"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1-dev.1"
   nip49:
     dependency: "direct main"
     description:
