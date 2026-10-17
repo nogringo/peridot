@@ -146,6 +146,12 @@
   "connectWithNostrConnectUrl": "Se connecter avec l'URL Nostr connect",
   "decryptionFailed": "Désolé, nous n'avons pas pu déchiffrer votre clé privée avec ce mot de passe.",
   "invalidPrivateKey": "Désolé, il semble que cette clé privée soit invalide.",
+  "privateKeyRequired": "Veuillez entrer votre clé privée",
+  "publicKeyEntered": "Ceci est une clé publique (npub). Entrez plutôt votre clé privée (nsec).",
+  "invalidNsec": "Ce nsec est invalide. Vérifiez qu'il est complet et sans faute de frappe.",
+  "invalidNcryptsec": "Ce ncryptsec est invalide. Vérifiez qu'il est complet et sans faute de frappe.",
+  "unrecognizedKeyFormat": "Format non reconnu. Entrez un nsec, un ncryptsec ou une clé hex de 64 caractères.",
+  "wrongHexKeyLength": "Une clé privée hex fait 64 caractères, celle-ci en fait {count}.",
 
   "userMetadata": "Métadonnées Utilisateur",
   "shortTextNote": "Note de Texte Courte",

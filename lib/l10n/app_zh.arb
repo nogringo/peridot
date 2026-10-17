@@ -146,6 +146,12 @@
   "connectWithNostrConnectUrl": "使用 Nostr connect URL 连接",
   "decryptionFailed": "抱歉，我们无法使用该密码解密您的私钥。",
   "invalidPrivateKey": "抱歉，该私钥似乎无效。",
+  "privateKeyRequired": "请输入您的私钥",
+  "publicKeyEntered": "这是公钥（npub）。请改为输入您的私钥（nsec）。",
+  "invalidNsec": "此 nsec 无效。请检查它是否完整且没有输入错误。",
+  "invalidNcryptsec": "此 ncryptsec 无效。请检查它是否完整且没有输入错误。",
+  "unrecognizedKeyFormat": "无法识别的格式。请输入 nsec、ncryptsec 或 64 个字符的 hex 密钥。",
+  "wrongHexKeyLength": "hex 私钥有 64 个字符，而这个有 {count} 个。",
 
   "userMetadata": "用户元数据",
   "shortTextNote": "短文本笔记",

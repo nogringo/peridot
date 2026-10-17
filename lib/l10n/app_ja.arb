@@ -146,6 +146,12 @@
   "connectWithNostrConnectUrl": "Nostr connect URLで接続",
   "decryptionFailed": "申し訳ありませんが、そのパスワードで秘密鍵を復号化できませんでした。",
   "invalidPrivateKey": "申し訳ありませんが、その秘密鍵は無効のようです。",
+  "privateKeyRequired": "秘密鍵を入力してください",
+  "publicKeyEntered": "これは公開鍵（npub）です。代わりに秘密鍵（nsec）を入力してください。",
+  "invalidNsec": "このnsecは無効です。欠けている文字や入力ミスがないか確認してください。",
+  "invalidNcryptsec": "このncryptsecは無効です。欠けている文字や入力ミスがないか確認してください。",
+  "unrecognizedKeyFormat": "認識できない形式です。nsec、ncryptsec、または64文字のhex鍵を入力してください。",
+  "wrongHexKeyLength": "hex形式の秘密鍵は64文字ですが、入力されたのは{count}文字です。",
 
   "userMetadata": "ユーザーメタデータ",
   "shortTextNote": "短いテキストノート",

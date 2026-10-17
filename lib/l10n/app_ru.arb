@@ -146,6 +146,12 @@
   "connectWithNostrConnectUrl": "Подключиться через URL Nostr connect",
   "decryptionFailed": "Извините, мы не смогли расшифровать ваш приватный ключ с этим паролем.",
   "invalidPrivateKey": "Извините, похоже, что этот приватный ключ недействителен.",
+  "privateKeyRequired": "Пожалуйста, введите ваш приватный ключ",
+  "publicKeyEntered": "Это публичный ключ (npub). Введите вместо него ваш приватный ключ (nsec).",
+  "invalidNsec": "Этот nsec недействителен. Проверьте, что он полный и без опечаток.",
+  "invalidNcryptsec": "Этот ncryptsec недействителен. Проверьте, что он полный и без опечаток.",
+  "unrecognizedKeyFormat": "Неизвестный формат. Введите nsec, ncryptsec или hex-ключ из 64 символов.",
+  "wrongHexKeyLength": "Приватный hex-ключ содержит 64 символа, а этот: {count}.",
 
   "userMetadata": "Метаданные пользователя",
   "shortTextNote": "Короткая текстовая заметка",

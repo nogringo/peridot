@@ -577,6 +577,36 @@
   "@invalidPrivateKey": {
     "description": "Error message when private key is invalid"
   },
+  "privateKeyRequired": "Please enter your private key",
+  "@privateKeyRequired": {
+    "description": "Error when the private key field is empty"
+  },
+  "publicKeyEntered": "This is a public key (npub). Enter your private key (nsec) instead.",
+  "@publicKeyEntered": {
+    "description": "Error when an npub is entered instead of a private key"
+  },
+  "invalidNsec": "This nsec is invalid. Check that it is complete and has no typo.",
+  "@invalidNsec": {
+    "description": "Error when an nsec has a bad checksum or is truncated"
+  },
+  "invalidNcryptsec": "This ncryptsec is invalid. Check that it is complete and has no typo.",
+  "@invalidNcryptsec": {
+    "description": "Error when an ncryptsec has a bad checksum or is truncated"
+  },
+  "unrecognizedKeyFormat": "Unrecognized format. Enter an nsec, an ncryptsec or a 64-character hex key.",
+  "@unrecognizedKeyFormat": {
+    "description": "Error when the private key is not an nsec, ncryptsec or hex key"
+  },
+  "wrongHexKeyLength": "A hex private key has 64 characters, this one has {count}.",
+  "@wrongHexKeyLength": {
+    "description": "Error when a hex private key does not have 64 characters",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "The number of characters entered"
+      }
+    }
+  },
 
   "userMetadata": "User Metadata",
   "@userMetadata": {

@@ -74,6 +74,7 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                       enableSuggestions: false,
                       decoration: InputDecoration(
                         labelText: l10n.nsecNcryptsecOrHex,
+                        errorText: c.privkeyError,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -105,6 +106,7 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                             obscureText: !c.isPasswordVisible,
                             decoration: InputDecoration(
                               hintText: l10n.yourPassword,
+                              errorText: c.passwordError,
                               suffixIcon: IconButton(
                                 onPressed: c.togglePasswordVisibility,
                                 tooltip: c.isPasswordVisible
@@ -117,6 +119,7 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                                 ),
                               ),
                             ),
+                            onChanged: c.onPasswordFieldChanged,
                           ),
                         ],
                       ),
