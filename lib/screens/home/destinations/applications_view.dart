@@ -6,6 +6,8 @@ import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/home_controller.dart';
+import 'package:peridot/screens/home/home_shell.dart';
+import 'package:peridot/widgets/responsive_list_view.dart';
 import 'package:peridot/screens/home/widgets/no_apps_view.dart';
 
 class ApplicationsView extends StatelessWidget {
@@ -28,12 +30,18 @@ class ApplicationsView extends StatelessWidget {
             final c = controller;
             return Column(
               children: [
-                _buildHeader(context, c, l10n),
+                Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: homeTabMaxWidth),
+                    child: _buildHeader(context, c, l10n),
+                  ),
+                ),
                 Divider(height: 1),
                 Expanded(
                   child: c.appsWithRequests.isEmpty
                       ? NoAppsView()
-                      : ListView.builder(
+                      : ResponsiveListView.builder(
+                          maxWidth: homeTabMaxWidth,
                           padding: EdgeInsets.only(bottom: kToolbarHeight + 12),
                           itemCount: c.appsWithRequests.length,
                           itemBuilder: (context, index) {

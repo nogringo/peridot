@@ -8,6 +8,7 @@ import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/l10n/app_localizations_en.dart';
 import 'package:peridot/routes/app_routes.dart';
+import 'package:peridot/screens/home/home_shell.dart';
 import 'package:peridot/screens/manage_app/manage_app_page.dart';
 import 'package:peridot/screens/request/request_page.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
@@ -123,6 +124,23 @@ void main() {
 
   group('large screen', () {
     const size = Size(1200, 800);
+
+    testWidgets('pins the rail to the left and caps the list width', (
+      tester,
+    ) async {
+      await pumpRouter(
+        tester,
+        size: const Size(1920, 1080),
+        location: AppRoutes.applications,
+      );
+
+      expect(tester.getTopLeft(find.byType(NavigationRail)).dx, 0);
+      expect(
+        tester.getSize(find.byType(ListTile)).width,
+        lessThanOrEqualTo(homeTabMaxWidth),
+      );
+      await unmount(tester);
+    });
 
     testWidgets('keeps the rail next to a detail page', (tester) async {
       await pumpRouter(

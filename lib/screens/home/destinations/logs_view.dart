@@ -6,6 +6,8 @@ import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/home_controller.dart';
+import 'package:peridot/screens/home/home_shell.dart';
+import 'package:peridot/widgets/responsive_list_view.dart';
 import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/status_chip.dart';
 
@@ -47,26 +49,32 @@ class LogsView extends StatelessWidget {
 
             return Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () =>
-                            _showDeleteConfirmation(context, c, l10n),
-                        icon: Icon(Icons.delete_outline),
-                        label: Text(l10n.deleteAll),
+                Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: homeTabMaxWidth),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
-                    ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton.icon(
+                            onPressed: () =>
+                                _showDeleteConfirmation(context, c, l10n),
+                            icon: Icon(Icons.delete_outline),
+                            label: Text(l10n.deleteAll),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 Divider(height: 1),
                 Expanded(
-                  child: ListView.builder(
+                  child: ResponsiveListView.builder(
+                    maxWidth: homeTabMaxWidth,
                     itemCount: c.allRequests.length,
                     itemBuilder: (context, index) {
                       final req = c.allRequests[index];

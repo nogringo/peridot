@@ -36,11 +36,9 @@ class ResponsiveListView extends StatelessWidget {
           maxWidth: maxWidth,
         );
 
-        final basePadding = padding ?? EdgeInsets.zero;
-        final responsivePadding = EdgeInsets.symmetric(
-          horizontal: horizontalPadding + (basePadding.horizontal / 2),
-          vertical: basePadding.vertical / 2,
-        );
+        final responsivePadding =
+            (padding ?? EdgeInsets.zero).resolve(Directionality.of(context)) +
+            EdgeInsets.symmetric(horizontal: horizontalPadding);
 
         if (children != null) {
           return ListView(padding: responsivePadding, children: children!);
