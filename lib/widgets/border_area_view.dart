@@ -14,16 +14,18 @@ class BorderAreaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding ?? EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        border: Border.all(
+    // A Material, not a decorated Container, so child ink (tile hover) is clipped to the corners.
+    return Material(
+      type: MaterialType.transparency,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
           color: borderColor ?? Theme.of(context).dividerColor,
           width: 1.5,
         ),
         borderRadius: BorderRadius.circular(24),
       ),
-      child: child,
+      child: Padding(padding: padding ?? EdgeInsets.all(8), child: child),
     );
   }
 }
