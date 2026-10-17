@@ -59,7 +59,9 @@ class RequestsView extends StatelessWidget {
                       shape: StadiumBorder(),
                     ),
                     onTap: () {
-                      context.go(AppRoutes.request(req.originalRequest.id));
+                      context.go(
+                        AppRoutes.pendingRequest(req.originalRequest.id),
+                      );
                     },
                   );
                 }),

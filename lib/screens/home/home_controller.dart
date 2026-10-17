@@ -99,7 +99,6 @@ class HomeController extends Controller {
   List<BunkerRequest> allRequests = [];
   List<AppWithRequests> appsWithRequests = [];
 
-  int selectedIndex = 0;
   AppSortOption sortOption = AppSortOption.name;
   AppSortOrder sortOrder = AppSortOrder.ascending;
   String? filterByAccount;
@@ -185,11 +184,6 @@ class HomeController extends Controller {
     requestsSub.cancel();
     allRequestsSub.cancel();
     super.dispose();
-  }
-
-  void onDestinationSelected(int value) {
-    selectedIndex = value;
-    update();
   }
 
   Future<void> deleteAllLogs() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/screens/home/home_shell.dart';
 import 'package:peridot/screens/settings/default_bunker_relays_view.dart';
 import 'package:peridot/screens/settings/logged_accounts_view.dart';
 import 'package:peridot/screens/settings/system_settings_view.dart';
@@ -13,7 +14,13 @@ class SettingsPage extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settings)),
+      appBar: AppBar(
+        // The bottom bar is hidden here, this is the way back on small screens.
+        leading: isWideLayout(context)
+            ? null
+            : BackButton(onPressed: () => HomeScope.of(context).showLastTab()),
+        title: Text(l10n.settings),
+      ),
       body: ResponsiveListView(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         children: const [

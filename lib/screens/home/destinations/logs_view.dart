@@ -98,7 +98,9 @@ class LogsView extends StatelessWidget {
                         ),
                         trailing: StatusChip(status: req.status),
                         onTap: () {
-                          context.go(AppRoutes.request(req.originalRequest.id));
+                          context.go(
+                            AppRoutes.loggedRequest(req.originalRequest.id),
+                          );
                         },
                       );
                     },

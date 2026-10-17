@@ -3,7 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/screens/add_privkey/add_privkey_page.dart';
 import 'package:peridot/screens/add_application/add_application_page.dart';
-import 'package:peridot/screens/home/home_page.dart';
+import 'package:peridot/screens/home/home_shell.dart';
+import 'package:peridot/screens/home/home_tab_page.dart';
 import 'package:peridot/screens/request/request_page.dart';
 import 'package:peridot/screens/settings/settings_page.dart';
 import 'package:peridot/screens/backup_account/backup_account_page.dart';
@@ -14,6 +15,9 @@ class AppRoutes {
   static BuildContext get context => navigatorKey.currentContext!;
 
   static const String applications = '/';
+  static const String requests = '/requests';
+  static const String logs = '/logs';
+  static const tabs = [applications, requests, logs];
   static const String addPrivkey = '/add-nsec';
   static const String addApplication = '/add-application';
   static const String settings = '/settings';
@@ -23,7 +27,8 @@ class AppRoutes {
   static String manageApp(String appPubkey) => '/manage-app/$appPubkey';
   static String appRequest(String appPubkey, String requestId) =>
       '/manage-app/$appPubkey/request/$requestId';
-  static String request(String requestId) => '/request/$requestId';
+  static String pendingRequest(String requestId) => '$requests/$requestId';
+  static String loggedRequest(String requestId) => '$logs/$requestId';
 
   // Repository notifies on every bunker request, the redirect only cares about this.
   static final _hasAccounts = () {
@@ -45,36 +50,72 @@ class AppRoutes {
     },
     onException: (context, state, router) => router.go(applications),
     routes: [
-      GoRoute(
-        path: applications,
-        builder: (context, state) => const HomePage(),
-        routes: [
-          GoRoute(
-            path: 'settings',
-            builder: (context, state) => const SettingsPage(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            HomeShell(state: state, navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
             routes: [
               GoRoute(
-                path: 'add-nsec',
-                builder: (context, state) => const AddPrivkeyPage(),
-              ),
-              GoRoute(
-                path: 'backup-account/:pubkey',
+                path: applications,
                 builder: (context, state) =>
-                    BackupAccountPage(pubkey: state.pathParameters['pubkey']!),
+                    const HomeTabPage(tab: HomeTab.applications),
+                routes: [
+                  GoRoute(
+                    path: 'add-application',
+                    builder: (context, state) => const AddApplicationPage(),
+                  ),
+                  GoRoute(
+                    path: 'manage-app/:appPubkey',
+                    builder: (context, state) => ManageAppPage(
+                      appPubkey: state.pathParameters['appPubkey']!,
+                    ),
+                    routes: [_requestRoute('request/:requestId')],
+                  ),
+                ],
               ),
             ],
           ),
-          GoRoute(
-            path: 'add-application',
-            builder: (context, state) => const AddApplicationPage(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: requests,
+                builder: (context, state) =>
+                    const HomeTabPage(tab: HomeTab.requests),
+                routes: [_requestRoute(':requestId')],
+              ),
+            ],
           ),
-          GoRoute(
-            path: 'manage-app/:appPubkey',
-            builder: (context, state) =>
-                ManageAppPage(appPubkey: state.pathParameters['appPubkey']!),
-            routes: [_requestRoute()],
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: logs,
+                builder: (context, state) =>
+                    const HomeTabPage(tab: HomeTab.logs),
+                routes: [_requestRoute(':requestId')],
+              ),
+            ],
           ),
-          _requestRoute(),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: settings,
+                builder: (context, state) => const SettingsPage(),
+                routes: [
+                  GoRoute(
+                    path: 'add-nsec',
+                    builder: (context, state) => const AddPrivkeyPage(),
+                  ),
+                  GoRoute(
+                    path: 'backup-account/:pubkey',
+                    builder: (context, state) => BackupAccountPage(
+                      pubkey: state.pathParameters['pubkey']!,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
       GoRoute(
@@ -84,8 +125,8 @@ class AppRoutes {
     ],
   );
 
-  static GoRoute _requestRoute() => GoRoute(
-    path: 'request/:requestId',
+  static GoRoute _requestRoute(String path) => GoRoute(
+    path: path,
     builder: (context, state) =>
         RequestPage(requestId: state.pathParameters['requestId']!),
   );
