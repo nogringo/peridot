@@ -78,6 +78,13 @@
   "permission_nip04_decrypt": "Расшифровка (NIP-04)",
   "permission_nip44_encrypt": "Шифрование (NIP-44)",
   "permission_nip44_decrypt": "Расшифровка (NIP-44)",
+  "permissionDescription_connect": "Позволяет приложению подключаться к этому аккаунту",
+  "permissionDescription_get_public_key": "Позволяет приложению видеть ваш открытый ключ",
+  "permissionDescription_sign_event": "Позволяет приложению подписывать и публиковать события от вашего имени",
+  "permissionDescription_ping": "Позволяет приложению проверять, что подписант отвечает",
+  "permissionDescription_get_relays": "Позволяет приложению видеть ваш список релеев",
+  "permissionDescription_encrypt": "Позволяет приложению шифровать сообщения и данные вашим ключом",
+  "permissionDescription_decrypt": "Позволяет приложению читать ваши зашифрованные сообщения и данные",
 
   "permissionRequested": "Запрос разрешения",
   "appRequestingPermission": "{appName} запрашивает разрешение:",

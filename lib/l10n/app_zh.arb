@@ -78,6 +78,13 @@
   "permission_nip04_decrypt": "解密 (NIP-04)",
   "permission_nip44_encrypt": "加密 (NIP-44)",
   "permission_nip44_decrypt": "解密 (NIP-44)",
+  "permissionDescription_connect": "允许应用连接到此账户",
+  "permissionDescription_get_public_key": "允许应用查看你的公钥",
+  "permissionDescription_sign_event": "允许应用以你的身份签名并发布事件",
+  "permissionDescription_ping": "允许应用检查签名器是否响应",
+  "permissionDescription_get_relays": "允许应用查看你的中继列表",
+  "permissionDescription_encrypt": "允许应用用你的密钥加密消息和数据",
+  "permissionDescription_decrypt": "允许应用读取你的加密消息和数据",
 
   "permissionRequested": "权限请求",
   "appRequestingPermission": "{appName} 正在请求权限：",

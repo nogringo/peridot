@@ -311,6 +311,34 @@
   "@permission_nip44_decrypt": {
     "description": "Permission name for NIP-44 decryption"
   },
+  "permissionDescription_connect": "Lets the app connect to this account",
+  "@permissionDescription_connect": {
+    "description": "Explanation of the permission for connect"
+  },
+  "permissionDescription_get_public_key": "Lets the app see your public key",
+  "@permissionDescription_get_public_key": {
+    "description": "Explanation of the permission for getting the public key"
+  },
+  "permissionDescription_sign_event": "Lets the app sign and publish events as you",
+  "@permissionDescription_sign_event": {
+    "description": "Explanation of the permission for signing events"
+  },
+  "permissionDescription_ping": "Lets the app check that the signer is responding",
+  "@permissionDescription_ping": {
+    "description": "Explanation of the permission for ping"
+  },
+  "permissionDescription_get_relays": "Lets the app see your relay list",
+  "@permissionDescription_get_relays": {
+    "description": "Explanation of the permission for getting relays"
+  },
+  "permissionDescription_encrypt": "Lets the app encrypt messages and data with your key",
+  "@permissionDescription_encrypt": {
+    "description": "Explanation of the permission for encryption (NIP-04 and NIP-44)"
+  },
+  "permissionDescription_decrypt": "Lets the app read your encrypted messages and data",
+  "@permissionDescription_decrypt": {
+    "description": "Explanation of the permission for decryption (NIP-04 and NIP-44)"
+  },
 
   "permissionRequested": "Permission Requested",
   "@permissionRequested": {

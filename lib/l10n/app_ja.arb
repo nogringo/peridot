@@ -78,6 +78,13 @@
   "permission_nip04_decrypt": "復号化 (NIP-04)",
   "permission_nip44_encrypt": "暗号化 (NIP-44)",
   "permission_nip44_decrypt": "復号化 (NIP-44)",
+  "permissionDescription_connect": "アプリがこのアカウントに接続することを許可します",
+  "permissionDescription_get_public_key": "アプリがあなたの公開鍵を見ることを許可します",
+  "permissionDescription_sign_event": "アプリがあなたとしてイベントに署名し公開することを許可します",
+  "permissionDescription_ping": "アプリが署名者の応答を確認することを許可します",
+  "permissionDescription_get_relays": "アプリがあなたのリレーリストを見ることを許可します",
+  "permissionDescription_encrypt": "アプリがあなたの鍵でメッセージとデータを暗号化することを許可します",
+  "permissionDescription_decrypt": "アプリがあなたの暗号化されたメッセージとデータを読むことを許可します",
 
   "permissionRequested": "権限のリクエスト",
   "appRequestingPermission": "{appName} が権限を要求しています：",

@@ -78,6 +78,13 @@
   "permission_nip04_decrypt": "Entschlüsseln (NIP-04)",
   "permission_nip44_encrypt": "Verschlüsseln (NIP-44)",
   "permission_nip44_decrypt": "Entschlüsseln (NIP-44)",
+  "permissionDescription_connect": "Erlaubt der App, sich mit diesem Konto zu verbinden",
+  "permissionDescription_get_public_key": "Erlaubt der App, Ihren öffentlichen Schlüssel zu sehen",
+  "permissionDescription_sign_event": "Erlaubt der App, Events in Ihrem Namen zu signieren und zu veröffentlichen",
+  "permissionDescription_ping": "Erlaubt der App zu prüfen, ob der Signer antwortet",
+  "permissionDescription_get_relays": "Erlaubt der App, Ihre Relay-Liste zu sehen",
+  "permissionDescription_encrypt": "Erlaubt der App, Nachrichten und Daten mit Ihrem Schlüssel zu verschlüsseln",
+  "permissionDescription_decrypt": "Erlaubt der App, Ihre verschlüsselten Nachrichten und Daten zu lesen",
 
   "permissionRequested": "Berechtigung angefordert",
   "appRequestingPermission": "{appName} fordert Berechtigung an:",

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
-import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/border_area_view.dart';
+import 'package:peridot/widgets/permission_switch_tile.dart';
 
 class PermissionsView extends StatelessWidget {
   final ManageAppController controller;
@@ -36,10 +36,9 @@ class PermissionsView extends StatelessWidget {
             )
           else
             ...controller.app!.permissions.map(
-              (permission) => SwitchListTile(
-                title: Text(translatePermission(context, permission.command)),
-                value: permission.isAllowed,
-                onChanged: (_) => controller.togglePermission(permission),
+              (permission) => PermissionSwitchTile(
+                permission: permission,
+                onToggle: () => controller.togglePermission(permission),
               ),
             ),
           SizedBox(height: 16),

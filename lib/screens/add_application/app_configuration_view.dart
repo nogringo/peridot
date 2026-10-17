@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_application/add_application_controller.dart';
-import 'package:peridot/utils/translate_permission.dart';
+import 'package:peridot/widgets/permission_switch_tile.dart';
 import 'package:peridot/widgets/trust_level_options_view.dart';
 
 class AppConfigurationView extends StatelessWidget {
@@ -16,45 +16,48 @@ class AppConfigurationView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final app = controller.app;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(l10n.appName, style: textTheme.titleMedium),
-        TextField(
-          controller: controller.appNameFieldController,
-          onChanged: (value) => controller.update(),
-          decoration: InputDecoration(hintText: l10n.enterAppName),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 600),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l10n.appName, style: textTheme.titleMedium),
+            TextField(
+              controller: controller.appNameFieldController,
+              onChanged: (value) => controller.update(),
+              decoration: InputDecoration(hintText: l10n.enterAppName),
+            ),
+            SizedBox(height: 16),
+            TrustLevelView(controller: controller),
+            SizedBox(height: 16),
+            Text(l10n.requestedPermissions, style: textTheme.titleMedium),
+            SizedBox(height: 8),
+            if (app != null && app.permissions.isNotEmpty)
+              Column(
+                children: app.permissions
+                    .map(
+                      (permission) => PermissionSwitchTile(
+                        permission: permission,
+                        onToggle: () => controller.togglePermission(permission),
+                      ),
+                    )
+                    .toList(),
+              )
+            else
+              Text(
+                l10n.noSpecificPermissionsRequested,
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            SizedBox(height: 32),
+            FilledButton(
+              onPressed: () => controller.finish(context),
+              child: Text(l10n.finish),
+            ),
+          ],
         ),
-        SizedBox(height: 16),
-        TrustLevelView(controller: controller),
-        SizedBox(height: 16),
-        Text(l10n.requestedPermissions, style: textTheme.titleMedium),
-        SizedBox(height: 8),
-        if (app != null && app.permissions.isNotEmpty)
-          Column(
-            children: app.permissions
-                .map(
-                  (permission) => SwitchListTile(
-                    title: Text(
-                      translatePermission(context, permission.command),
-                    ),
-                    value: permission.isAllowed,
-                    onChanged: (_) => controller.togglePermission(permission),
-                  ),
-                )
-                .toList(),
-          )
-        else
-          Text(
-            l10n.noSpecificPermissionsRequested,
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        SizedBox(height: 32),
-        FilledButton(
-          onPressed: () => controller.finish(context),
-          child: Text(l10n.finish),
-        ),
-      ],
+      ),
     );
   }
 }

@@ -78,6 +78,13 @@
   "permission_nip04_decrypt": "Pura salaus (NIP-04)",
   "permission_nip44_encrypt": "Salaa (NIP-44)",
   "permission_nip44_decrypt": "Pura salaus (NIP-44)",
+  "permissionDescription_connect": "Sallii sovelluksen yhdistää tähän tiliin",
+  "permissionDescription_get_public_key": "Sallii sovelluksen nähdä julkisen avaimesi",
+  "permissionDescription_sign_event": "Sallii sovelluksen allekirjoittaa ja julkaista tapahtumia puolestasi",
+  "permissionDescription_ping": "Sallii sovelluksen tarkistaa, että allekirjoittaja vastaa",
+  "permissionDescription_get_relays": "Sallii sovelluksen nähdä välityspalvelinluettelosi",
+  "permissionDescription_encrypt": "Sallii sovelluksen salata viestejä ja tietoja avaimellasi",
+  "permissionDescription_decrypt": "Sallii sovelluksen lukea salattuja viestejäsi ja tietojasi",
 
   "permissionRequested": "Käyttöoikeutta pyydetään",
   "appRequestingPermission": "{appName} pyytää käyttöoikeutta:",

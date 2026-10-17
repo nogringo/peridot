@@ -77,3 +77,19 @@ String translatePermission(BuildContext context, String permission) {
     return translatedBase;
   }
 }
+
+String? describePermission(BuildContext context, String permission) {
+  final l10n = AppLocalizations.of(context)!;
+  final base = permission.split(':').first.replaceFirst('permission_', '');
+
+  return switch (base) {
+    'connect' => l10n.permissionDescription_connect,
+    'get_public_key' => l10n.permissionDescription_get_public_key,
+    'sign_event' => l10n.permissionDescription_sign_event,
+    'ping' => l10n.permissionDescription_ping,
+    'get_relays' => l10n.permissionDescription_get_relays,
+    'nip04_encrypt' || 'nip44_encrypt' => l10n.permissionDescription_encrypt,
+    'nip04_decrypt' || 'nip44_decrypt' => l10n.permissionDescription_decrypt,
+    _ => null,
+  };
+}
