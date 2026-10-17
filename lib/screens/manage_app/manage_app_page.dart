@@ -10,6 +10,7 @@ import 'package:peridot/screens/manage_app/widgets/permissions_view.dart';
 import 'package:peridot/screens/manage_app/widgets/processed_requests_view.dart';
 import 'package:peridot/screens/manage_app/widgets/trust_level_view.dart';
 import 'package:peridot/widgets/responsive_list_view.dart';
+import 'package:peridot/widgets/not_found_page.dart';
 
 class ManageAppPage extends StatefulWidget {
   final String appPubkey;
@@ -45,7 +46,10 @@ class _ManageAppPageState extends State<ManageAppPage> {
         final app = controller.app;
         final l10n = AppLocalizations.of(context)!;
         if (app == null) {
-          return Center(child: Text(l10n.appNotFound));
+          return NotFoundPage(
+            title: l10n.appNotFound,
+            message: l10n.appNotFoundMessage,
+          );
         }
         return Scaffold(
           appBar: AppBar(

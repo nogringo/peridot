@@ -16,6 +16,7 @@ import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/utils/nostr_kinds.dart';
 import 'package:peridot/widgets/responsive_list_view.dart'
     show responsiveHorizontalPadding;
+import 'package:peridot/widgets/not_found_page.dart';
 import 'package:peridot/widgets/status_chip.dart';
 
 class RequestPage extends StatefulWidget {
@@ -44,9 +45,9 @@ class _RequestPageState extends State<RequestPage> {
       builder: (context, _) {
         if (c.isLoading) return Scaffold();
         if (c.request == null) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: Center(child: Text(l10n.requestNotFound)),
+          return NotFoundPage(
+            title: l10n.requestNotFound,
+            message: l10n.requestNotFoundMessage,
           );
         }
 

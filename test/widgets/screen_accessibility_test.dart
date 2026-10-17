@@ -12,10 +12,12 @@ import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/destinations/applications_view.dart';
 import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
+import 'package:peridot/screens/manage_app/manage_app_page.dart';
 import 'package:peridot/screens/manage_app/switch_account_dialog.dart';
 import 'package:peridot/screens/request/request_page.dart';
 import 'package:peridot/screens/request/widgets/kind_3_widget.dart';
 import 'package:peridot/theme.dart';
+import 'package:peridot/widgets/not_found_page.dart';
 import 'package:sembast/sembast_memory.dart';
 
 import '../helpers/fixtures.dart';
@@ -169,6 +171,7 @@ void main() {
 
       expect(tester.takeException(), isNull);
       expect(find.text(l10n.requestNotFound), findsOneWidget);
+      expect(find.text(l10n.requestNotFoundMessage), findsOneWidget);
     });
 
     testWidgets('a request from a deleted app only offers to delete it', (
@@ -274,5 +277,36 @@ void main() {
       handle.dispose();
       await drainMetadataRequests(tester);
     });
+  });
+
+  group('not found page', () {
+    testWidgets('an unknown app says it was not found', (tester) async {
+      await tester.pumpWidget(
+        testApp(const ManageAppPage(appPubkey: 'missing')),
+      );
+
+      expect(tester.takeException(), isNull);
+      expect(find.text(l10n.appNotFound), findsOneWidget);
+      expect(find.text(l10n.appNotFoundMessage), findsOneWidget);
+    });
+
+    for (final brightness in Brightness.values) {
+      testWidgets('is readable in the ${brightness.name} theme', (
+        tester,
+      ) async {
+        final handle = tester.ensureSemantics();
+        await tester.pumpWidget(
+          testApp(
+            NotFoundPage(
+              title: l10n.requestNotFound,
+              message: l10n.requestNotFoundMessage,
+            ),
+            theme: appTheme(brightness),
+          ),
+        );
+        await expectLater(tester, meetsGuideline(textContrastGuideline));
+        handle.dispose();
+      });
+    }
   });
 }

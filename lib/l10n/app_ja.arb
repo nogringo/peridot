@@ -63,7 +63,9 @@
   "privateKeyCopied": "秘密鍵をクリップボードにコピーしました",
 
   "appNotFound": "アプリが見つかりません",
+  "appNotFoundMessage": "削除されたか、別のデバイスで接続された可能性があります。",
   "requestNotFound": "リクエストが見つかりません",
+  "requestNotFoundMessage": "削除されたか、別のデバイスで受信された可能性があります。",
   "allowed": "許可済み",
   "blocked": "ブロック済み",
   

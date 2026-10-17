@@ -63,7 +63,9 @@
   "privateKeyCopied": "Chave privada copiada para a área de transferência",
   
   "appNotFound": "Aplicação não encontrada",
+  "appNotFoundMessage": "Pode ter sido eliminada ou ligada noutro dispositivo.",
   "requestNotFound": "Pedido não encontrado",
+  "requestNotFoundMessage": "Pode ter sido eliminado ou recebido noutro dispositivo.",
   "allowed": "Permitido",
   "blocked": "Bloqueado",
   

@@ -254,9 +254,17 @@
   "@appNotFound": {
     "description": "Error message when app is not found"
   },
+  "appNotFoundMessage": "It may have been deleted, or connected on another device.",
+  "@appNotFoundMessage": {
+    "description": "Explains why an app could not be found"
+  },
   "requestNotFound": "Request not found",
   "@requestNotFound": {
     "description": "Error message when a request is not found"
+  },
+  "requestNotFoundMessage": "It may have been deleted, or received on another device.",
+  "@requestNotFoundMessage": {
+    "description": "Explains why a request could not be found"
   },
   "allowed": "Allowed",
   "@allowed": {

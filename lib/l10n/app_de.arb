@@ -63,7 +63,9 @@
   "privateKeyCopied": "Privater Schlüssel in Zwischenablage kopiert",
 
   "appNotFound": "Anwendung nicht gefunden",
+  "appNotFoundMessage": "Sie wurde möglicherweise gelöscht oder auf einem anderen Gerät verbunden.",
   "requestNotFound": "Anfrage nicht gefunden",
+  "requestNotFoundMessage": "Sie wurde möglicherweise gelöscht oder auf einem anderen Gerät empfangen.",
   "allowed": "Erlaubt",
   "blocked": "Blockiert",
 

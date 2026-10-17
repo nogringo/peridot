@@ -63,7 +63,9 @@
   "privateKeyCopied": "Clave privada copiada al portapapeles",
   
   "appNotFound": "Aplicación no encontrada",
+  "appNotFoundMessage": "Es posible que se haya eliminado o que se haya conectado en otro dispositivo.",
   "requestNotFound": "Solicitud no encontrada",
+  "requestNotFoundMessage": "Es posible que se haya eliminado o que se haya recibido en otro dispositivo.",
   "allowed": "Permitido",
   "blocked": "Bloqueado",
   

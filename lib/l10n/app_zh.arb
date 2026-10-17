@@ -63,7 +63,9 @@
   "privateKeyCopied": "私钥已复制到剪贴板",
 
   "appNotFound": "未找到应用",
+  "appNotFoundMessage": "它可能已被删除，或是在其他设备上连接的。",
   "requestNotFound": "未找到请求",
+  "requestNotFoundMessage": "它可能已被删除，或是在其他设备上收到的。",
   "allowed": "已允许",
   "blocked": "已阻止",
   

@@ -63,7 +63,9 @@
   "privateKeyCopied": "Clé privée copiée dans le presse-papiers",
   
   "appNotFound": "Application non trouvée",
+  "appNotFoundMessage": "Elle a peut-être été supprimée, ou connectée sur un autre appareil.",
   "requestNotFound": "Requête non trouvée",
+  "requestNotFoundMessage": "Elle a peut-être été supprimée, ou reçue sur un autre appareil.",
   "allowed": "Autorisé",
   "blocked": "Bloqué",
   

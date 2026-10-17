@@ -63,7 +63,9 @@
   "privateKeyCopied": "Chiave privata copiata negli appunti",
 
   "appNotFound": "App non trovata",
+  "appNotFoundMessage": "Potrebbe essere stata eliminata o connessa su un altro dispositivo.",
   "requestNotFound": "Richiesta non trovata",
+  "requestNotFoundMessage": "Potrebbe essere stata eliminata o ricevuta su un altro dispositivo.",
   "allowed": "Consentito",
   "blocked": "Bloccato",
 
