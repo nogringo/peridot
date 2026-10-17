@@ -123,7 +123,9 @@ class _RequestPageState extends State<RequestPage> {
                             l10n.localeName,
                           ).add_Hms().format(c.request!.date),
                           style: TextStyle(
-                            color: Theme.of(context).disabledColor,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),

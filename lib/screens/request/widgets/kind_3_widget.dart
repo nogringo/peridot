@@ -113,6 +113,27 @@ class _Kind3WidgetState extends State<Kind3Widget> {
       );
     }
 
+    return FollowChangesView(
+      addedFollows: addedFollows,
+      removedFollows: removedFollows,
+    );
+  }
+}
+
+class FollowChangesView extends StatelessWidget {
+  final Set<String> addedFollows;
+  final Set<String> removedFollows;
+
+  const FollowChangesView({
+    super.key,
+    required this.addedFollows,
+    required this.removedFollows,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (addedFollows.isEmpty && removedFollows.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(16),

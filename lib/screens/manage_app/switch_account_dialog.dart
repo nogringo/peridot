@@ -23,22 +23,26 @@ class SwitchAccountDialog extends StatelessWidget {
             children: [
               ...Repository.to.usersPubkeys.map((pubkey) {
                 final isSelected = controller.selectedPubkey == pubkey;
-                return ListTile(
-                  leading: NPicture(
-                    ndkFlutter: Repository.ndkFlutter,
-                    pubkey: pubkey,
+                return Semantics(
+                  inMutuallyExclusiveGroup: true,
+                  child: ListTile(
+                    selected: isSelected,
+                    leading: NPicture(
+                      ndkFlutter: Repository.ndkFlutter,
+                      pubkey: pubkey,
+                    ),
+                    title: NName(
+                      ndkFlutter: Repository.ndkFlutter,
+                      pubkey: pubkey,
+                    ),
+                    trailing: isSelected
+                        ? Icon(
+                            Icons.radio_button_checked,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                        : null,
+                    onTap: () => controller.selectAccount(pubkey),
                   ),
-                  title: NName(
-                    ndkFlutter: Repository.ndkFlutter,
-                    pubkey: pubkey,
-                  ),
-                  trailing: isSelected
-                      ? Icon(
-                          Icons.radio_button_checked,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                      : null,
-                  onTap: () => controller.selectAccount(pubkey),
                 );
               }),
             ],
