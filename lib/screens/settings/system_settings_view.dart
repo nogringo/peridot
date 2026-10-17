@@ -26,17 +26,18 @@ class SystemSettingsView extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16),
-          ListenableBuilder(
-            listenable: settingsController,
-            builder: (context, _) => SwitchListTile(
-              title: Text(l10n.startOnSystemStartup),
-              subtitle: Text(l10n.startOnSystemStartupDescription),
-              value: settingsController.isAutoStartEnabled,
-              onChanged: (value) async {
-                await settingsController.toggleAutoStart();
-              },
+          if (settingsController.supportsAutoStart)
+            ListenableBuilder(
+              listenable: settingsController,
+              builder: (context, _) => SwitchListTile(
+                title: Text(l10n.startOnSystemStartup),
+                subtitle: Text(l10n.startOnSystemStartupDescription),
+                value: settingsController.isAutoStartEnabled,
+                onChanged: (value) async {
+                  await settingsController.toggleAutoStart();
+                },
+              ),
             ),
-          ),
           ValueListenableBuilder(
             valueListenable: notificationService.isNotificationEnabled,
             builder: (context, isNotificationEnabled, _) => SwitchListTile(

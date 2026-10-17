@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,16 @@ class SettingsController extends Controller {
   final newRelayFieldController = TextEditingController();
   bool isAutoStartEnabled = false;
 
+  bool get supportsAutoStart =>
+      !kIsWeb &&
+      [
+        TargetPlatform.macOS,
+        TargetPlatform.windows,
+        TargetPlatform.linux,
+      ].contains(defaultTargetPlatform);
+
   Future<void> checkAutoStartStatus() async {
+    if (!supportsAutoStart) return;
     try {
       // Setup first before checking status
       _setupLaunchAtStartup();
