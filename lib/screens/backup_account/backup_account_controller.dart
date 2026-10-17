@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:toastification/toastification.dart';
 import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
+import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:nip49/nip49.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -41,7 +42,7 @@ class BackupAccountController extends GetxController {
         throw Exception('Account not found');
       }
 
-      final signer = account.signer as Bip340EventSigner;
+      final signer = account.signer as NdkEventSigner;
       final privateKey = signer.privateKey;
 
       // Encrypt with NIP-49
@@ -76,7 +77,7 @@ class BackupAccountController extends GetxController {
         throw Exception('Account not found');
       }
 
-      final signer = account.signer as Bip340EventSigner;
+      final signer = account.signer as NdkEventSigner;
       final privateKey = signer.privateKey;
 
       // Convert to nsec format
