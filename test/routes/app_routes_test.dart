@@ -91,6 +91,14 @@ void main() {
   group('small screen', () {
     const size = Size(400, 800);
 
+    testWidgets('keeps the add app button at the bottom right', (tester) async {
+      await pumpRouter(tester, size: size, location: AppRoutes.applications);
+
+      expect(find.byTooltip(l10n.addAnApp), findsOneWidget);
+      expect(find.byType(NavigationRail), findsNothing);
+      await unmount(tester);
+    });
+
     testWidgets('shows the bottom bar on a tab root only', (tester) async {
       await pumpRouter(tester, size: size, location: AppRoutes.requests);
       expect(find.byType(NavigationBar), findsOneWidget);
@@ -125,6 +133,25 @@ void main() {
   group('large screen', () {
     const size = Size(1200, 800);
 
+    testWidgets('the collapsed rail offers to add an app from any tab', (
+      tester,
+    ) async {
+      await pumpRouter(
+        tester,
+        size: const Size(800, 800),
+        location: AppRoutes.logs,
+      );
+
+      expect(
+        find.descendant(
+          of: find.byType(NavigationRail),
+          matching: find.byTooltip(l10n.addAnApp),
+        ),
+        findsOneWidget,
+      );
+      await unmount(tester);
+    });
+
     testWidgets('pins the rail to the left and caps the list width', (
       tester,
     ) async {
@@ -135,6 +162,14 @@ void main() {
       );
 
       expect(tester.getTopLeft(find.byType(NavigationRail)).dx, 0);
+      expect(find.byType(FloatingActionButton), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(NavigationRail),
+          matching: find.byType(FloatingActionButton),
+        ),
+        findsOneWidget,
+      );
       expect(
         tester.getSize(find.byType(ListTile)).width,
         lessThanOrEqualTo(homeTabMaxWidth),

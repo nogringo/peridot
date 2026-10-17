@@ -39,8 +39,11 @@ class HomeTabPage extends StatelessWidget {
         HomeTab.requests => RequestsView(controller: controller),
         HomeTab.logs => LogsView(controller: controller),
       },
-      floatingActionButton: tab == HomeTab.applications
+      // On wide screens this button lives in the navigation rail.
+      floatingActionButton:
+          tab == HomeTab.applications && !isWideLayout(context)
           ? FloatingActionButton(
+              tooltip: l10n.addAnApp,
               onPressed: () => context.go(AppRoutes.addApplication),
               child: Icon(Icons.add),
             )

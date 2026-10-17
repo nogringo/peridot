@@ -131,28 +131,54 @@ class _HomeShellState extends State<HomeShell> {
                       color: Theme.of(context).colorScheme.primary,
                       size: 32,
                     );
+                    void addApp() => context.go(AppRoutes.addApplication);
 
                     if (isExtraWide) {
                       return SizedBox(
                         width: 256,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(width: 12),
-                              icon,
-                              SizedBox(width: 24),
-                              Text(
-                                l10n.appBrandName,
-                                style: Theme.of(context).textTheme.titleLarge,
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(width: 12),
+                                  icon,
+                                  SizedBox(width: 24),
+                                  Text(
+                                    l10n.appBrandName,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.titleLarge,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16),
+                              FloatingActionButton.extended(
+                                elevation: 0,
+                                onPressed: addApp,
+                                icon: Icon(Icons.add),
+                                label: Text(l10n.addAnApp),
                               ),
                             ],
                           ),
                         ),
                       );
                     }
-                    return icon;
+                    return Column(
+                      children: [
+                        icon,
+                        SizedBox(height: 16),
+                        FloatingActionButton(
+                          elevation: 0,
+                          tooltip: l10n.addAnApp,
+                          onPressed: addApp,
+                          child: Icon(Icons.add),
+                        ),
+                      ],
+                    );
                   },
                 ),
                 destinations: [
