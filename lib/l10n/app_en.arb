@@ -233,6 +233,14 @@
   "@hidePrivateKey": {
     "description": "Button text to hide private key"
   },
+  "showPassword": "Show Password",
+  "@showPassword": {
+    "description": "Tooltip to show a password field's content"
+  },
+  "hidePassword": "Hide Password",
+  "@hidePassword": {
+    "description": "Tooltip to hide a password field's content"
+  },
   "copyPrivateKey": "Copy Private Key",
   "@copyPrivateKey": {
     "description": "Button text to copy private key"

@@ -57,6 +57,8 @@
   "backupAccount": "Sauvegarder le Compte",
   "showPrivateKey": "Afficher la Clé Privée",
   "hidePrivateKey": "Masquer la Clé Privée",
+  "showPassword": "Afficher le Mot de Passe",
+  "hidePassword": "Masquer le Mot de Passe",
   "copyPrivateKey": "Copier la Clé Privée",
   "privateKeyCopied": "Clé privée copiée dans le presse-papiers",
   

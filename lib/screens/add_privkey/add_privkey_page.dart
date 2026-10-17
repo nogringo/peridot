@@ -69,10 +69,24 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                     SizedBox(height: 8),
                     TextField(
                       controller: c.privkeyFieldController,
+                      obscureText: !c.isPrivkeyVisible,
+                      autocorrect: false,
+                      enableSuggestions: false,
                       decoration: InputDecoration(
                         labelText: l10n.nsecNcryptsecOrHex,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: c.togglePrivkeyVisibility,
+                          tooltip: c.isPrivkeyVisible
+                              ? l10n.hidePrivateKey
+                              : l10n.showPrivateKey,
+                          icon: Icon(
+                            c.isPrivkeyVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
                         ),
                       ),
                       onChanged: c.onPrivkeyFieldChanged,
@@ -88,8 +102,20 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                           ),
                           TextField(
                             controller: c.ncryptsecPasswordFieldController,
+                            obscureText: !c.isPasswordVisible,
                             decoration: InputDecoration(
                               hintText: l10n.yourPassword,
+                              suffixIcon: IconButton(
+                                onPressed: c.togglePasswordVisibility,
+                                tooltip: c.isPasswordVisible
+                                    ? l10n.hidePassword
+                                    : l10n.showPassword,
+                                icon: Icon(
+                                  c.isPasswordVisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                ),
+                              ),
                             ),
                           ),
                         ],

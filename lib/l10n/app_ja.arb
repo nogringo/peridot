@@ -57,6 +57,8 @@
   "backupAccount": "アカウントをバックアップ",
   "showPrivateKey": "秘密鍵を表示",
   "hidePrivateKey": "秘密鍵を非表示",
+  "showPassword": "パスワードを表示",
+  "hidePassword": "パスワードを非表示",
   "copyPrivateKey": "秘密鍵をコピー",
   "privateKeyCopied": "秘密鍵をクリップボードにコピーしました",
 

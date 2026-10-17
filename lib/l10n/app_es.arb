@@ -57,6 +57,8 @@
   "backupAccount": "Respaldar Cuenta",
   "showPrivateKey": "Mostrar Clave Privada",
   "hidePrivateKey": "Ocultar Clave Privada",
+  "showPassword": "Mostrar Contraseña",
+  "hidePassword": "Ocultar Contraseña",
   "copyPrivateKey": "Copiar Clave Privada",
   "privateKeyCopied": "Clave privada copiada al portapapeles",
   

@@ -57,6 +57,8 @@
   "backupAccount": "Konto sichern",
   "showPrivateKey": "Privaten Schlüssel anzeigen",
   "hidePrivateKey": "Privaten Schlüssel ausblenden",
+  "showPassword": "Passwort anzeigen",
+  "hidePassword": "Passwort ausblenden",
   "copyPrivateKey": "Privaten Schlüssel kopieren",
   "privateKeyCopied": "Privater Schlüssel in Zwischenablage kopiert",
 

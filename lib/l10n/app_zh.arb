@@ -57,6 +57,8 @@
   "backupAccount": "备份账户",
   "showPrivateKey": "显示私钥",
   "hidePrivateKey": "隐藏私钥",
+  "showPassword": "显示密码",
+  "hidePassword": "隐藏密码",
   "copyPrivateKey": "复制私钥",
   "privateKeyCopied": "私钥已复制到剪贴板",
 

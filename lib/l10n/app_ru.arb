@@ -57,6 +57,8 @@
   "backupAccount": "Резервная копия учетной записи",
   "showPrivateKey": "Показать приватный ключ",
   "hidePrivateKey": "Скрыть приватный ключ",
+  "showPassword": "Показать пароль",
+  "hidePassword": "Скрыть пароль",
   "copyPrivateKey": "Копировать приватный ключ",
   "privateKeyCopied": "Приватный ключ скопирован в буфер обмена",
   
