@@ -383,5 +383,11 @@
   "processed": "Procesado",
 
   "deleteAllLogs": "Eliminar todo el historial",
-  "deleteAllLogsConfirm": "¿Está seguro de que desea eliminar todo el historial? Esta acción no se puede deshacer."
+  "deleteAllLogsConfirm": "¿Está seguro de que desea eliminar todo el historial? Esta acción no se puede deshacer.",
+
+  "switchAccount": "Cambiar de cuenta",
+  "copyJson": "Copiar JSON",
+  "sortAscending": "Ascendente",
+  "sortDescending": "Descendente",
+  "nostrConnectUrl": "URL de Nostr Connect"
 }

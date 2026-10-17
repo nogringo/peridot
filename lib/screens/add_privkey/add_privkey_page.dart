@@ -54,7 +54,7 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                             style: TextStyle(
                               color: Theme.of(
                                 context,
-                              ).colorScheme.onSurface.withValues(alpha: 0.5),
+                              ).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
@@ -105,7 +105,7 @@ class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
                             controller: c.ncryptsecPasswordFieldController,
                             obscureText: !c.isPasswordVisible,
                             decoration: InputDecoration(
-                              hintText: l10n.yourPassword,
+                              labelText: l10n.yourPassword,
                               errorText: c.passwordError,
                               suffixIcon: IconButton(
                                 onPressed: c.togglePasswordVisibility,

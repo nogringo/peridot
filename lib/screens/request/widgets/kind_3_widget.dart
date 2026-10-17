@@ -6,6 +6,14 @@ import 'package:ndk_flutter/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
+Color _followChangeColor(BuildContext context, {required bool isAdded}) {
+  final theme = Theme.of(context);
+  if (!isAdded) return theme.colorScheme.error;
+  return theme.brightness == Brightness.light
+      ? Colors.green.shade800
+      : Colors.green.shade300;
+}
+
 class Kind3Widget extends StatefulWidget {
   final String eventJson;
   final String userPubkey;
@@ -123,12 +131,16 @@ class _Kind3WidgetState extends State<Kind3Widget> {
             padding: const EdgeInsets.only(top: 16, bottom: 8),
             child: Row(
               children: [
-                Icon(Icons.person_add, color: Colors.green, size: 20),
+                Icon(
+                  Icons.person_add,
+                  color: _followChangeColor(context, isAdded: true),
+                  size: 20,
+                ),
                 SizedBox(width: 8),
                 Text(
                   l10n.addingFollowsCount(addedFollows.length),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.green,
+                    color: _followChangeColor(context, isAdded: true),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -147,12 +159,16 @@ class _Kind3WidgetState extends State<Kind3Widget> {
             padding: const EdgeInsets.only(top: 16, bottom: 8),
             child: Row(
               children: [
-                Icon(Icons.person_remove, color: Colors.red, size: 20),
+                Icon(
+                  Icons.person_remove,
+                  color: _followChangeColor(context, isAdded: false),
+                  size: 20,
+                ),
                 SizedBox(width: 8),
                 Text(
                   l10n.removingFollowsCount(removedFollows.length),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.red,
+                    color: _followChangeColor(context, isAdded: false),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -179,15 +195,12 @@ class _FollowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = _followChangeColor(context, isAdded: isAdded);
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: isAdded
-              ? Colors.green.withValues(alpha: 0.3)
-              : Colors.red.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
         borderRadius: BorderRadius.circular(12),
-        color: (isAdded ? Colors.green : Colors.red).withValues(alpha: 0.05),
+        color: color.withValues(alpha: 0.05),
       ),
       child: ListTile(
         leading: NPicture(

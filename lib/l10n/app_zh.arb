@@ -384,5 +384,11 @@
   "processed": "已处理",
 
   "deleteAllLogs": "删除所有日志",
-  "deleteAllLogsConfirm": "确定要删除所有日志吗？此操作无法撤消。"
+  "deleteAllLogsConfirm": "确定要删除所有日志吗？此操作无法撤消。",
+
+  "switchAccount": "切换账户",
+  "copyJson": "复制 JSON",
+  "sortAscending": "升序",
+  "sortDescending": "降序",
+  "nostrConnectUrl": "Nostr 连接 URL"
 }

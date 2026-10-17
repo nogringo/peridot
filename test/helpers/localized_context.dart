@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
-Widget localizedApp(Widget child) {
+Widget localizedApp(Widget child, {ThemeData? theme}) {
   return MaterialApp(
+    theme: theme,
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
     home: Scaffold(body: child),

@@ -28,6 +28,7 @@ class HomeSmallLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
+                tooltip: AppLocalizations.of(context)!.settings,
                 onPressed: () =>
                     Navigator.pushNamed(context, AppRoutes.settings),
                 icon: Icon(Icons.settings),

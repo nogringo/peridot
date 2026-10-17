@@ -23,18 +23,14 @@ class NoAppsView extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.noApplicationsConnected,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.6),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.tapPlusToAddApplication,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.5),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),

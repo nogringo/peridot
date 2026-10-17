@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:toastification/toastification.dart';
@@ -23,6 +24,7 @@ void showCopyToast([BuildContext? context]) {
     foregroundColor: theme.colorScheme.onSurface,
     borderSide: BorderSide(color: theme.dividerColor, width: 2),
   );
+  announce(AppLocalizations.of(context)!.copied, context);
 }
 
 void showErrorToast(String message, [BuildContext? context]) {
@@ -40,8 +42,23 @@ void showErrorToast(String message, [BuildContext? context]) {
     borderRadius: BorderRadius.circular(12.0),
     closeButton: ToastCloseButton(showType: CloseButtonShowType.none),
     applyBlurEffect: false,
-    backgroundColor: Colors.red.shade600,
-    foregroundColor: Colors.red,
+    // flatColored always paints a red.shade50 background, so the text needs a dark red to stay readable.
+    foregroundColor: Colors.red.shade900,
     borderSide: const BorderSide(color: Colors.red, width: 2),
+  );
+  announce(message, context, assertiveness: Assertiveness.assertive);
+}
+
+// toastification exposes no live region, so screen readers never read toasts on their own.
+void announce(
+  String message,
+  BuildContext context, {
+  Assertiveness assertiveness = Assertiveness.polite,
+}) {
+  SemanticsService.sendAnnouncement(
+    View.of(context),
+    message,
+    Directionality.of(context),
+    assertiveness: assertiveness,
   );
 }

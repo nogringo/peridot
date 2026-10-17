@@ -170,26 +170,37 @@ class ApplicationsView extends StatelessWidget {
   }) {
     final isSelected = option == currentOption;
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
-    return TextButton.icon(
-      onPressed: onTap,
-      style: TextButton.styleFrom(
-        foregroundColor: isSelected
-            ? theme.colorScheme.primary
-            : theme.colorScheme.onSurface,
-      ),
-      icon: isSelected
-          ? Icon(
-              currentOrder == AppSortOrder.ascending
-                  ? Icons.arrow_upward
-                  : Icons.arrow_downward,
-              size: 18,
-            )
-          : SizedBox(width: 18),
-      label: Text(
-        label,
-        style: TextStyle(
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+    return MergeSemantics(
+      child: Semantics(
+        selected: isSelected,
+        value: isSelected
+            ? (currentOrder == AppSortOrder.ascending
+                  ? l10n.sortAscending
+                  : l10n.sortDescending)
+            : null,
+        child: TextButton.icon(
+          onPressed: onTap,
+          style: TextButton.styleFrom(
+            foregroundColor: isSelected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.onSurface,
+          ),
+          icon: isSelected
+              ? Icon(
+                  currentOrder == AppSortOrder.ascending
+                      ? Icons.arrow_upward
+                      : Icons.arrow_downward,
+                  size: 18,
+                )
+              : SizedBox(width: 18),
+          label: Text(
+            label,
+            style: TextStyle(
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
         ),
       ),
     );

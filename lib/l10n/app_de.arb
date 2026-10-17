@@ -383,5 +383,11 @@
   "processed": "Verarbeitet",
 
   "deleteAllLogs": "Alle Protokolle löschen",
-  "deleteAllLogsConfirm": "Sind Sie sicher, dass Sie alle Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+  "deleteAllLogsConfirm": "Sind Sie sicher, dass Sie alle Protokolle löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+
+  "switchAccount": "Konto wechseln",
+  "copyJson": "JSON kopieren",
+  "sortAscending": "Aufsteigend",
+  "sortDescending": "Absteigend",
+  "nostrConnectUrl": "Nostr Connect-URL"
 }

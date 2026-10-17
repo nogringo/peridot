@@ -5,7 +5,9 @@ import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/a11y-dark.dart';
 import 'package:flutter_highlight/themes/a11y-light.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/request/request_controller.dart';
+import 'package:peridot/utils/toast_utils.dart';
 
 class JsonViewer extends StatelessWidget {
   final String json;
@@ -50,8 +52,13 @@ class JsonViewer extends StatelessWidget {
                       top: 4,
                       right: 4,
                       child: IconButton(
+                        tooltip: AppLocalizations.of(context)!.copyJson,
                         onPressed: () {
                           controller.copyJson(formattedJson);
+                          announce(
+                            AppLocalizations.of(context)!.copied,
+                            context,
+                          );
                         },
                         icon: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 100),

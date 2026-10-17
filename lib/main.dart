@@ -8,6 +8,7 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/services/notification_service.dart';
+import 'package:peridot/theme.dart';
 import 'package:ndk_flutter/l10n/app_localizations.dart' as ndk_flutter;
 import 'package:toastification/toastification.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -63,15 +64,8 @@ class MainApp extends StatelessWidget {
           ndk_flutter.AppLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData.from(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-        ),
-        darkTheme: ThemeData.from(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.teal,
-            brightness: Brightness.dark,
-          ),
-        ),
+        theme: appTheme(Brightness.light),
+        darkTheme: appTheme(Brightness.dark),
         themeMode: ThemeMode.system,
         initialRoute: AppRoutes.applications,
         onGenerateRoute: AppRoutes.onGenerateRoute,

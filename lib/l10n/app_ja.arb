@@ -383,5 +383,11 @@
   "processed": "処理済み",
 
   "deleteAllLogs": "すべてのログを削除",
-  "deleteAllLogsConfirm": "すべてのログを削除してもよろしいですか？この操作は元に戻せません。"
+  "deleteAllLogsConfirm": "すべてのログを削除してもよろしいですか？この操作は元に戻せません。",
+
+  "switchAccount": "アカウントを切り替え",
+  "copyJson": "JSONをコピー",
+  "sortAscending": "昇順",
+  "sortDescending": "降順",
+  "nostrConnectUrl": "Nostr コネクト URL"
 }

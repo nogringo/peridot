@@ -21,14 +21,14 @@ class NoRequestsView extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.noRequests,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withAlpha(153),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.whenYouReceiveRequests,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withAlpha(128),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),

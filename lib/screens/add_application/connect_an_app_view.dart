@@ -61,6 +61,7 @@ class NostrConnectView extends StatelessWidget {
               TextField(
                 controller: controller.nostrConnectFieldController,
                 decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.nostrConnectUrl,
                   hintText: AppLocalizations.of(context)!.nostrConnectUrlHint,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),

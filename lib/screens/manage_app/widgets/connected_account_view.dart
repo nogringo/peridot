@@ -35,6 +35,7 @@ class ConnectedAccountView extends StatelessWidget {
             ),
             subtitle: Text(Nip19.encodePubKey(controller.app!.appPubkey)),
             trailing: IconButton(
+              tooltip: l10n.switchAccount,
               onPressed: () => controller.openSwitchAccountDialog(context),
               icon: Icon(Icons.swap_horiz),
             ),

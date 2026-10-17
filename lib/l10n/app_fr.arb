@@ -383,5 +383,11 @@
   "processed": "Traité",
 
   "deleteAllLogs": "Supprimer tout l'historique",
-  "deleteAllLogsConfirm": "Êtes-vous sûr de vouloir supprimer tout l'historique ? Cette action est irréversible."
+  "deleteAllLogsConfirm": "Êtes-vous sûr de vouloir supprimer tout l'historique ? Cette action est irréversible.",
+
+  "switchAccount": "Changer de compte",
+  "copyJson": "Copier le JSON",
+  "sortAscending": "Croissant",
+  "sortDescending": "Décroissant",
+  "nostrConnectUrl": "URL Nostr Connect"
 }

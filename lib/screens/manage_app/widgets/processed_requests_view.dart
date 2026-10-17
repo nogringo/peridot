@@ -121,6 +121,7 @@ class ProcessedRequestsView extends StatelessWidget {
                       ).add_Hms().format(req.date),
                     ),
                     trailing: IconButton(
+                      tooltip: l10n.delete,
                       onPressed: () async {
                         await controller.deleteRequest(req.originalRequest.id);
                       },

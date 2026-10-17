@@ -111,6 +111,7 @@ class HomeLargeLayout extends StatelessWidget {
                                   );
                                 }
                                 return IconButton(
+                                  tooltip: l10n.settings,
                                   onPressed: () => Navigator.pushNamed(
                                     context,
                                     AppRoutes.settings,

@@ -20,34 +20,42 @@ class TrustLevelOptionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
-    final child = Container(
+    final borderRadius = BorderRadius.circular(16);
+    final (title, subtitle) = switch (optionMode) {
+      AuthorisationMode.allwaysAsk => (
+        l10n.alwaysAskPermission,
+        l10n.alwaysAskPermissionDescription,
+      ),
+      AuthorisationMode.allowCommonRequests => (
+        l10n.allowCommonActions,
+        l10n.allowCommonActionsDescription,
+      ),
+      AuthorisationMode.fullyTrust => (
+        l10n.fullyTrust,
+        l10n.fullyTrustDescription,
+      ),
+    };
+
+    return Container(
       decoration: BoxDecoration(
         border: Border.all(
           color: isSelected
               ? colorScheme.primary
               : colorScheme.onSurface.withValues(alpha: 0.5),
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: borderRadius,
         color: isSelected ? colorScheme.primary.withValues(alpha: 0.1) : null,
       ),
-      child: {
-        AuthorisationMode.allwaysAsk: ListTile(
-          title: Text(l10n.alwaysAskPermission),
-          subtitle: Text(l10n.alwaysAskPermissionDescription),
+      child: Semantics(
+        inMutuallyExclusiveGroup: true,
+        child: ListTile(
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
+          selected: isSelected,
+          onTap: isSelected ? null : onSelected,
+          title: Text(title),
+          subtitle: Text(subtitle),
         ),
-        AuthorisationMode.allowCommonRequests: ListTile(
-          title: Text(l10n.allowCommonActions),
-          subtitle: Text(l10n.allowCommonActionsDescription),
-        ),
-        AuthorisationMode.fullyTrust: ListTile(
-          title: Text(l10n.fullyTrust),
-          subtitle: Text(l10n.fullyTrustDescription),
-        ),
-      }[optionMode],
+      ),
     );
-
-    if (isSelected) return child;
-
-    return GestureDetector(onTap: onSelected, child: child);
   }
 }

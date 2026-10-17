@@ -79,11 +79,17 @@ class LoggedAccountsView extends StatelessWidget {
                         value: 'remove',
                         child: Row(
                           children: [
-                            Icon(Icons.delete, size: 20, color: Colors.red),
+                            Icon(
+                              Icons.delete,
+                              size: 20,
+                              color: Theme.of(context).colorScheme.error,
+                            ),
                             SizedBox(width: 8),
                             Text(
                               l10n.removeAccount,
-                              style: TextStyle(color: Colors.red),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
                             ),
                           ],
                         ),

@@ -384,5 +384,11 @@
   "processed": "Обработано",
 
   "deleteAllLogs": "Удалить весь журнал",
-  "deleteAllLogsConfirm": "Вы уверены, что хотите удалить весь журнал? Это действие нельзя отменить."
+  "deleteAllLogsConfirm": "Вы уверены, что хотите удалить весь журнал? Это действие нельзя отменить.",
+
+  "switchAccount": "Сменить учетную запись",
+  "copyJson": "Копировать JSON",
+  "sortAscending": "По возрастанию",
+  "sortDescending": "По убыванию",
+  "nostrConnectUrl": "URL Nostr Connect"
 }

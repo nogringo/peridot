@@ -45,35 +45,42 @@ class _RequestPageState extends State<RequestPage> {
 
         return Scaffold(
           appBar: AppBar(
-            title: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => _navigateToApp(context, c.app!),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        c.app?.name ?? l10n.deletedApp,
-                        overflow: TextOverflow.ellipsis,
+            title: Tooltip(
+              message: l10n.manageApplication,
+              child: Semantics(
+                button: true,
+                child: InkWell(
+                  onTap: () => _navigateToApp(context, c.app!),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          c.app?.name ?? l10n.deletedApp,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 4),
-                    Icon(Icons.open_in_new, size: 16),
-                  ],
+                      SizedBox(width: 4),
+                      Icon(Icons.open_in_new, size: 16),
+                    ],
+                  ),
                 ),
               ),
             ),
             actions: [
               StatusChip(status: c.request!.status),
               SizedBox(width: 8),
-              MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () => _navigateToApp(context, c.app!),
-                  child: NPicture(
-                    ndkFlutter: Repository.ndkFlutter,
-                    pubkey: c.app!.userPubkey,
+              // Same action as the title, which already carries it for keyboard and screen reader users.
+              ExcludeSemantics(
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => _navigateToApp(context, c.app!),
+                    child: NPicture(
+                      ndkFlutter: Repository.ndkFlutter,
+                      pubkey: c.app!.userPubkey,
+                    ),
                   ),
                 ),
               ),

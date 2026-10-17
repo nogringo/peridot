@@ -81,7 +81,7 @@ class SecureBackupView extends StatelessWidget {
           TextField(
             controller: controller.passwordFieldController,
             obscureText: true,
-            decoration: InputDecoration(hintText: l10n.password),
+            decoration: InputDecoration(labelText: l10n.password),
             onChanged: controller.onPasswordFieldChanged,
           ),
           SizedBox(height: 16),

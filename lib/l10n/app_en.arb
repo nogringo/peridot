@@ -1583,5 +1583,26 @@
   "deleteAllLogsConfirm": "Are you sure you want to delete all logs? This action cannot be undone.",
   "@deleteAllLogsConfirm": {
     "description": "Confirmation message for deleting all logs"
+  },
+
+  "switchAccount": "Switch account",
+  "@switchAccount": {
+    "description": "Tooltip for the button that switches the account used by an app"
+  },
+  "copyJson": "Copy JSON",
+  "@copyJson": {
+    "description": "Tooltip for the button that copies the request JSON"
+  },
+  "sortAscending": "Ascending",
+  "@sortAscending": {
+    "description": "Screen reader value for an ascending sort"
+  },
+  "sortDescending": "Descending",
+  "@sortDescending": {
+    "description": "Screen reader value for a descending sort"
+  },
+  "nostrConnectUrl": "Nostr Connect URL",
+  "@nostrConnectUrl": {
+    "description": "Label for the Nostr Connect URL field"
   }
 }

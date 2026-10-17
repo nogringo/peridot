@@ -29,6 +29,7 @@ class DefaultBunkerRelaysView extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                     title: Text(relay),
                     trailing: IconButton(
+                      tooltip: l10n.removeRelay,
                       onPressed: () => _confirmRemoveRelay(context, relay),
                       icon: Icon(Icons.close),
                     ),
@@ -41,8 +42,9 @@ class DefaultBunkerRelaysView extends StatelessWidget {
           TextField(
             controller: SettingsController.to.newRelayFieldController,
             decoration: InputDecoration(
-              hintText: l10n.enterRelayUrl,
+              labelText: l10n.enterRelayUrl,
               suffixIcon: IconButton(
+                tooltip: l10n.addRelay,
                 onPressed: () =>
                     SettingsController.to.addDefaultBunkerRelay(context),
                 icon: Icon(Icons.add),
