@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -82,7 +83,7 @@ class SettingsController extends Controller {
   }
 
   void showBackupAccount(BuildContext context, String pubkey) {
-    Navigator.pushNamed(context, AppRoutes.backupAccount(pubkey));
+    context.go(AppRoutes.backupAccount(pubkey));
   }
 
   void removeAccount(BuildContext context, String pubkey) async {
@@ -94,13 +95,6 @@ class SettingsController extends Controller {
     if (shouldRemove != true) return;
 
     await Repository.to.removeAccount(pubkey);
-
-    if (Repository.to.usersPubkeys.isEmpty) {
-      AppRoutes.navigator.pushNamedAndRemoveUntil(
-        AppRoutes.addPrivkey,
-        (_) => false,
-      );
-    }
   }
 
   Future<void> addDefaultBunkerRelay(BuildContext context) async {

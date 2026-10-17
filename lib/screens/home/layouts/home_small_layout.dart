@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/destinations/applications_view.dart';
@@ -29,8 +30,7 @@ class HomeSmallLayout extends StatelessWidget {
             actions: [
               IconButton(
                 tooltip: AppLocalizations.of(context)!.settings,
-                onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.settings),
+                onPressed: () => context.go(AppRoutes.settings),
                 icon: Icon(Icons.settings),
               ),
               SizedBox(width: 12),
@@ -62,7 +62,7 @@ class HomeSmallLayout extends StatelessWidget {
           floatingActionButton: controller.selectedIndex == 0
               ? FloatingActionButton(
                   onPressed: () async {
-                    Navigator.pushNamed(context, AppRoutes.addApplication);
+                    context.go(AppRoutes.addApplication);
                   },
                   child: Icon(Icons.add),
                 )

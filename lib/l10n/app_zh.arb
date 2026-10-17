@@ -63,6 +63,7 @@
   "privateKeyCopied": "私钥已复制到剪贴板",
 
   "appNotFound": "未找到应用",
+  "requestNotFound": "未找到请求",
   "allowed": "已允许",
   "blocked": "已阻止",
   

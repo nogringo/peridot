@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/home/destinations/applications_view.dart';
@@ -96,10 +97,8 @@ class HomeLargeLayout extends StatelessWidget {
                                         horizontal: 12,
                                       ),
                                       child: OutlinedButton.icon(
-                                        onPressed: () => Navigator.pushNamed(
-                                          context,
-                                          AppRoutes.settings,
-                                        ),
+                                        onPressed: () =>
+                                            context.go(AppRoutes.settings),
                                         label: Text(
                                           AppLocalizations.of(
                                             context,
@@ -112,10 +111,8 @@ class HomeLargeLayout extends StatelessWidget {
                                 }
                                 return IconButton(
                                   tooltip: l10n.settings,
-                                  onPressed: () => Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.settings,
-                                  ),
+                                  onPressed: () =>
+                                      context.go(AppRoutes.settings),
                                   icon: Icon(Icons.settings),
                                 );
                               },
@@ -150,10 +147,7 @@ class HomeLargeLayout extends StatelessWidget {
                 floatingActionButton: controller.selectedIndex == 0
                     ? FloatingActionButton(
                         onPressed: () async {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.addApplication,
-                          );
+                          context.go(AppRoutes.addApplication);
                         },
                         child: Icon(Icons.add),
                       )

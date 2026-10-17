@@ -34,6 +34,14 @@ class ActionsButtonsView extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        // The bunker ignores requests from unknown apps, only deleting remains.
+        if (controller.app == null) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [deleteButton],
+          );
+        }
+
         if (controller.isRequestBlocked) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,

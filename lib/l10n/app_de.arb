@@ -63,6 +63,7 @@
   "privateKeyCopied": "Privater Schlüssel in Zwischenablage kopiert",
 
   "appNotFound": "Anwendung nicht gefunden",
+  "requestNotFound": "Anfrage nicht gefunden",
   "allowed": "Erlaubt",
   "blocked": "Blockiert",
 

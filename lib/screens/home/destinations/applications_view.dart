@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:ndk_flutter/widgets/picture/n_picture.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -71,8 +72,7 @@ class ApplicationsView extends StatelessWidget {
                                           ),
                                       ],
                                     ),
-                              onTap: () => Navigator.pushNamed(
-                                context,
+                              onTap: () => context.go(
                                 AppRoutes.manageApp(app.app.appPubkey),
                               ),
                             );

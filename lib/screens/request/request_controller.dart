@@ -8,6 +8,7 @@ import 'package:sembast/sembast.dart';
 
 class RequestController extends Controller {
   BunkerRequest? request;
+  bool isLoading = true;
 
   App? get app => Repository.bunker.apps
       .where((app) => app.appPubkey == request!.originalRequest.appPubkey)
@@ -27,8 +28,8 @@ class RequestController extends Controller {
     var store = stringMapStoreFactory.store('requests');
     final record = await store.record(requestId).get(Repository.to.db);
 
-    request = BunkerRequest.fromJson(record as Map<String, dynamic>);
-
+    if (record != null) request = BunkerRequest.fromJson(record);
+    isLoading = false;
     update();
   }
 

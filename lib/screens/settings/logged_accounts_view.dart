@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -101,7 +102,7 @@ class LoggedAccountsView extends StatelessWidget {
               SizedBox(height: 8),
               OutlinedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.addPrivkey);
+                  context.go(AppRoutes.settingsAddPrivkey);
                 },
                 child: Text(l10n.addAnAccount),
               ),

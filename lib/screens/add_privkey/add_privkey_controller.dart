@@ -101,10 +101,7 @@ class AddPrivkeyController extends Controller {
 
   Future<void> addAccount(String privateKey) async {
     await Repository.to.addAccount(privateKey);
-    AppRoutes.navigator.pushNamedAndRemoveUntil(
-      AppRoutes.applications,
-      (_) => false,
-    );
+    AppRoutes.router.go(AppRoutes.applications);
   }
 
   void createAccount() {

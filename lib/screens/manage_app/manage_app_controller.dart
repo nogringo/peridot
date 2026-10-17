@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -134,7 +135,7 @@ class ManageAppController extends Controller {
   }
 
   void openReqScreen(BuildContext context, Nip46Request reqObj) {
-    Navigator.pushNamed(context, AppRoutes.request(reqObj.id));
+    context.go(AppRoutes.appRequest(reqObj.appPubkey, reqObj.id));
   }
 
   Future<void> deleteRequest(String requestId) async {

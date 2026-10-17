@@ -53,8 +53,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: MaterialApp(
-        navigatorKey: AppRoutes.navigatorKey,
+      child: MaterialApp.router(
+        routerConfig: AppRoutes.router,
         title: appTitle,
         localizationsDelegates: [
           AppLocalizations.delegate,
@@ -67,8 +67,6 @@ class MainApp extends StatelessWidget {
         theme: appTheme(Brightness.light),
         darkTheme: appTheme(Brightness.dark),
         themeMode: ThemeMode.system,
-        initialRoute: AppRoutes.applications,
-        onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
   }

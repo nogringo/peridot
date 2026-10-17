@@ -63,6 +63,7 @@
   "privateKeyCopied": "Yksityinen avain kopioitu leikepöydälle",
   
   "appNotFound": "Sovellusta ei löytynyt",
+  "requestNotFound": "Pyyntöä ei löytynyt",
   "allowed": "Sallittu",
   "blocked": "Estetty",
   

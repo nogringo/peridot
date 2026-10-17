@@ -63,6 +63,7 @@
   "privateKeyCopied": "秘密鍵をクリップボードにコピーしました",
 
   "appNotFound": "アプリが見つかりません",
+  "requestNotFound": "リクエストが見つかりません",
   "allowed": "許可済み",
   "blocked": "ブロック済み",
   

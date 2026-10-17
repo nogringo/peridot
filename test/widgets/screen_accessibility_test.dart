@@ -161,6 +161,41 @@ void main() {
       await drainMetadataRequests(tester);
     });
 
+    testWidgets('an unknown request id says it was not found', (tester) async {
+      await tester.pumpWidget(testApp(RequestPage(requestId: 'missing')));
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+
+      expect(tester.takeException(), isNull);
+      expect(find.text(l10n.requestNotFound), findsOneWidget);
+    });
+
+    testWidgets('a request from a deleted app only offers to delete it', (
+      tester,
+    ) async {
+      await tester.runAsync(
+        () => stringMapStoreFactory
+            .store('requests')
+            .record('orphan')
+            .put(
+              Repository.to.db,
+              bunkerRequest(id: 'orphan', appPubkey: 'deleted').toJson(),
+            ),
+      );
+      await tester.pumpWidget(testApp(RequestPage(requestId: 'orphan')));
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+
+      expect(tester.takeException(), isNull);
+      expect(find.text(l10n.deletedApp), findsOneWidget);
+      expect(find.text(l10n.delete), findsOneWidget);
+      expect(find.text(l10n.allowOnce), findsNothing);
+      await tester.tap(find.text(l10n.deletedApp));
+      expect(tester.takeException(), isNull);
+    });
+
     for (final brightness in Brightness.values) {
       testWidgets('is readable in the ${brightness.name} theme', (
         tester,

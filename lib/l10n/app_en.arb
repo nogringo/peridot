@@ -254,6 +254,10 @@
   "@appNotFound": {
     "description": "Error message when app is not found"
   },
+  "requestNotFound": "Request not found",
+  "@requestNotFound": {
+    "description": "Error message when a request is not found"
+  },
   "allowed": "Allowed",
   "@allowed": {
     "description": "Status label for allowed permission"

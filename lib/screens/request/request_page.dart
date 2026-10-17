@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ndk_flutter/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -41,49 +42,60 @@ class _RequestPageState extends State<RequestPage> {
     return ListenableBuilder(
       listenable: c,
       builder: (context, _) {
-        if (c.request == null) return Scaffold();
+        if (c.isLoading) return Scaffold();
+        if (c.request == null) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: Center(child: Text(l10n.requestNotFound)),
+          );
+        }
 
+        final app = c.app;
         return Scaffold(
           appBar: AppBar(
-            title: Tooltip(
-              message: l10n.manageApplication,
-              child: Semantics(
-                button: true,
-                child: InkWell(
-                  onTap: () => _navigateToApp(context, c.app!),
-                  borderRadius: BorderRadius.circular(8),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          c.app?.name ?? l10n.deletedApp,
-                          overflow: TextOverflow.ellipsis,
+            title: app == null
+                ? Text(l10n.deletedApp, overflow: TextOverflow.ellipsis)
+                : Tooltip(
+                    message: l10n.manageApplication,
+                    child: Semantics(
+                      button: true,
+                      child: InkWell(
+                        onTap: () => _navigateToApp(context, app),
+                        borderRadius: BorderRadius.circular(8),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                app.name ?? l10n.unnamedApp,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            SizedBox(width: 4),
+                            Icon(Icons.open_in_new, size: 16),
+                          ],
                         ),
                       ),
-                      SizedBox(width: 4),
-                      Icon(Icons.open_in_new, size: 16),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
             actions: [
               StatusChip(status: c.request!.status),
-              SizedBox(width: 8),
-              // Same action as the title, which already carries it for keyboard and screen reader users.
-              ExcludeSemantics(
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () => _navigateToApp(context, c.app!),
-                    child: NPicture(
-                      ndkFlutter: Repository.ndkFlutter,
-                      pubkey: c.app!.userPubkey,
+              if (app != null) ...[
+                SizedBox(width: 8),
+                // Same action as the title, which already carries it for keyboard and screen reader users.
+                ExcludeSemantics(
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () => _navigateToApp(context, app),
+                      child: NPicture(
+                        ndkFlutter: Repository.ndkFlutter,
+                        pubkey: app.userPubkey,
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
               SizedBox(width: 12),
             ],
           ),
@@ -108,7 +120,7 @@ class _RequestPageState extends State<RequestPage> {
                           ),
                         ),
                       if (c.request!.originalRequest.bunkerPubkey ==
-                          c.app!.userPubkey)
+                          app?.userPubkey)
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: WarningBannerView(
@@ -168,7 +180,8 @@ class _RequestPageState extends State<RequestPage> {
                           },
                         ),
                       SizedBox(height: 8),
-                      if (c.request!.originalRequest.command ==
+                      if (app != null &&
+                          c.request!.originalRequest.command ==
                               Nip46Commands.signEvent &&
                           (() {
                             try {
@@ -182,7 +195,7 @@ class _RequestPageState extends State<RequestPage> {
                           })())
                         Kind3Widget(
                           eventJson: c.request!.originalRequest.params.first,
-                          userPubkey: c.app!.userPubkey,
+                          userPubkey: app.userPubkey,
                         ),
                       Text(
                         l10n.params,
@@ -219,6 +232,6 @@ class _RequestPageState extends State<RequestPage> {
   }
 
   void _navigateToApp(BuildContext context, App app) {
-    Navigator.pushNamed(context, AppRoutes.manageApp(app.appPubkey));
+    context.go(AppRoutes.manageApp(app.appPubkey));
   }
 }

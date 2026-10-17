@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -97,10 +98,7 @@ class LogsView extends StatelessWidget {
                         ),
                         trailing: StatusChip(status: req.status),
                         onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.request(req.originalRequest.id),
-                          );
+                          context.go(AppRoutes.request(req.originalRequest.id));
                         },
                       );
                     },
