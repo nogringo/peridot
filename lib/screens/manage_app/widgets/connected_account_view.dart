@@ -7,7 +7,9 @@ import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
 class ConnectedAccountView extends StatelessWidget {
-  const ConnectedAccountView({super.key});
+  final ManageAppController controller;
+
+  const ConnectedAccountView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +27,15 @@ class ConnectedAccountView extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
             leading: NPicture(
               ndkFlutter: Repository.ndkFlutter,
-              pubkey: ManageAppController.to.app!.userPubkey,
+              pubkey: controller.app!.userPubkey,
             ),
             title: NName(
               ndkFlutter: Repository.ndkFlutter,
-              pubkey: ManageAppController.to.app!.userPubkey,
+              pubkey: controller.app!.userPubkey,
             ),
-            subtitle: Text(
-              Nip19.encodePubKey(ManageAppController.to.app!.appPubkey),
-            ),
+            subtitle: Text(Nip19.encodePubKey(controller.app!.appPubkey)),
             trailing: IconButton(
-              onPressed: ManageAppController.to.openSwitchAccountDialog,
+              onPressed: () => controller.openSwitchAccountDialog(context),
               icon: Icon(Icons.swap_horiz),
             ),
           ),

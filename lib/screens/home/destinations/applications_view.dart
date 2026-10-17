@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:ndk_flutter/widgets/picture/n_picture.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -9,18 +8,23 @@ import 'package:peridot/screens/home/home_controller.dart';
 import 'package:peridot/screens/home/widgets/no_apps_view.dart';
 
 class ApplicationsView extends StatelessWidget {
-  const ApplicationsView({super.key});
+  final HomeController controller;
+
+  const ApplicationsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return GetBuilder<Repository>(
-      builder: (_) {
+    return ListenableBuilder(
+      listenable: Repository.to,
+      builder: (context, _) {
         if (Repository.bunker.apps.isEmpty) return NoAppsView();
 
-        return GetBuilder<HomeController>(
-          builder: (c) {
+        return ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) {
+            final c = controller;
             return Column(
               children: [
                 _buildHeader(context, c, l10n),
@@ -67,12 +71,9 @@ class ApplicationsView extends StatelessWidget {
                                           ),
                                       ],
                                     ),
-                              onTap: () => Get.toNamed(
-                                AppRoutes.manageApp.replaceAll(
-                                  ':appPubkey',
-                                  app.app.appPubkey,
-                                ),
-                                arguments: app,
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                AppRoutes.manageApp(app.app.appPubkey),
                               ),
                             );
                           },
@@ -103,60 +104,56 @@ class ApplicationsView extends StatelessWidget {
           if (isNarrow) {
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Obx(
-                () => Row(
-                  children: [
-                    _buildSortButton(
-                      context: context,
-                      label: l10n.sortByName,
-                      option: AppSortOption.name,
-                      currentOption: c.sortOption.value,
-                      currentOrder: c.sortOrder.value,
-                      onTap: () => c.toggleSort(AppSortOption.name),
-                    ),
+              child: Row(
+                children: [
+                  _buildSortButton(
+                    context: context,
+                    label: l10n.sortByName,
+                    option: AppSortOption.name,
+                    currentOption: c.sortOption,
+                    currentOrder: c.sortOrder,
+                    onTap: () => c.toggleSort(AppSortOption.name),
+                  ),
+                  SizedBox(width: 8),
+                  _buildSortButton(
+                    context: context,
+                    label: l10n.sortByLastUsed,
+                    option: AppSortOption.lastUsed,
+                    currentOption: c.sortOption,
+                    currentOrder: c.sortOrder,
+                    onTap: () => c.toggleSort(AppSortOption.lastUsed),
+                  ),
+                  if (hasMultipleAccounts) ...[
                     SizedBox(width: 8),
-                    _buildSortButton(
-                      context: context,
-                      label: l10n.sortByLastUsed,
-                      option: AppSortOption.lastUsed,
-                      currentOption: c.sortOption.value,
-                      currentOrder: c.sortOrder.value,
-                      onTap: () => c.toggleSort(AppSortOption.lastUsed),
-                    ),
-                    if (hasMultipleAccounts) ...[
-                      SizedBox(width: 8),
-                      _buildAccountFilter(context, c, l10n),
-                    ],
+                    _buildAccountFilter(context, c, l10n),
                   ],
-                ),
+                ],
               ),
             );
           }
 
-          return Obx(
-            () => Row(
-              children: [
-                _buildSortButton(
-                  context: context,
-                  label: l10n.sortByName,
-                  option: AppSortOption.name,
-                  currentOption: c.sortOption.value,
-                  currentOrder: c.sortOrder.value,
-                  onTap: () => c.toggleSort(AppSortOption.name),
-                ),
-                SizedBox(width: 8),
-                _buildSortButton(
-                  context: context,
-                  label: l10n.sortByLastUsed,
-                  option: AppSortOption.lastUsed,
-                  currentOption: c.sortOption.value,
-                  currentOrder: c.sortOrder.value,
-                  onTap: () => c.toggleSort(AppSortOption.lastUsed),
-                ),
-                Spacer(),
-                if (hasMultipleAccounts) _buildAccountFilter(context, c, l10n),
-              ],
-            ),
+          return Row(
+            children: [
+              _buildSortButton(
+                context: context,
+                label: l10n.sortByName,
+                option: AppSortOption.name,
+                currentOption: c.sortOption,
+                currentOrder: c.sortOrder,
+                onTap: () => c.toggleSort(AppSortOption.name),
+              ),
+              SizedBox(width: 8),
+              _buildSortButton(
+                context: context,
+                label: l10n.sortByLastUsed,
+                option: AppSortOption.lastUsed,
+                currentOption: c.sortOption,
+                currentOrder: c.sortOrder,
+                onTap: () => c.toggleSort(AppSortOption.lastUsed),
+              ),
+              Spacer(),
+              if (hasMultipleAccounts) _buildAccountFilter(context, c, l10n),
+            ],
           );
         },
       ),
@@ -225,9 +222,9 @@ class ApplicationsView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                c.filterByAccount.value == null
+                c.filterByAccount == null
                     ? l10n.allAccounts
-                    : _shortenPubkey(c.filterByAccount.value!),
+                    : _shortenPubkey(c.filterByAccount!),
               ),
               Icon(Icons.arrow_drop_down, size: 20),
             ],
@@ -237,7 +234,7 @@ class ApplicationsView extends StatelessWidget {
       menuChildren: [
         MenuItemButton(
           onPressed: () => c.setFilterByAccount(null),
-          leadingIcon: c.filterByAccount.value == null
+          leadingIcon: c.filterByAccount == null
               ? Icon(Icons.check, size: 20)
               : SizedBox(width: 20),
           child: Text(l10n.allAccounts),
@@ -246,7 +243,7 @@ class ApplicationsView extends StatelessWidget {
         ...accounts.map(
           (pubkey) => MenuItemButton(
             onPressed: () => c.setFilterByAccount(pubkey),
-            leadingIcon: c.filterByAccount.value == pubkey
+            leadingIcon: c.filterByAccount == pubkey
                 ? Icon(Icons.check, size: 20)
                 : SizedBox(width: 20),
             child: Row(

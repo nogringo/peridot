@@ -1,34 +1,29 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/models/bunker_request.dart';
-import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:sembast/sembast.dart';
 
-class RequestController extends GetxController {
-  static RequestController get to => Get.find();
-
+class RequestController extends Controller {
   BunkerRequest? request;
 
   App? get app => Repository.bunker.apps
       .where((app) => app.appPubkey == request!.originalRequest.appPubkey)
       .firstOrNull;
-  RxBool isJsonCopied = false.obs;
+  bool isJsonCopied = false;
 
-  bool get isRequestPending =>
-      RequestController.to.request!.status == BunkerRequestStatus.pending;
-  bool get isRequestBlocked =>
-      RequestController.to.request!.status == BunkerRequestStatus.blocked;
+  bool get isRequestPending => request!.status == BunkerRequestStatus.pending;
+  bool get isRequestBlocked => request!.status == BunkerRequestStatus.blocked;
   bool get isRequestProcessed =>
-      RequestController.to.request!.status == BunkerRequestStatus.processed;
+      request!.status == BunkerRequestStatus.processed;
 
-  @override
-  void onInit() async {
-    super.onInit();
+  RequestController(String requestId) {
+    _loadRequest(requestId);
+  }
 
-    final requestId = Get.parameters['requestId']!;
-
+  Future<void> _loadRequest(String requestId) async {
     var store = stringMapStoreFactory.store('requests');
     final record = await store.record(requestId).get(Repository.to.db);
 
@@ -38,21 +33,23 @@ class RequestController extends GetxController {
   }
 
   void copyJson(String json) async {
-    if (isJsonCopied.value) return;
+    if (isJsonCopied) return;
     Clipboard.setData(ClipboardData(text: json));
-    isJsonCopied.value = true;
+    isJsonCopied = true;
+    update();
     await Future.delayed(Duration(seconds: 2));
-    isJsonCopied.value = false;
+    isJsonCopied = false;
+    update();
   }
 
-  void allowOnce() {
-    Get.back();
+  void allowOnce(BuildContext context) {
+    Navigator.pop(context);
 
     Repository.bunker.processRequest(request!.originalRequest);
   }
 
-  void rejectOnce() async {
-    Get.back();
+  void rejectOnce(BuildContext context) async {
+    Navigator.pop(context);
 
     request!.status = BunkerRequestStatus.blocked;
     var store = stringMapStoreFactory.store('requests');
@@ -61,19 +58,15 @@ class RequestController extends GetxController {
         .put(Repository.to.db, request!.toJson());
   }
 
-  void allowForever() async {
-    Get.back();
+  void allowForever(BuildContext context) async {
+    Navigator.pop(context);
 
     Repository.bunker.allowForever(
       command: request!.originalRequest.commandString,
       app: app!,
     );
 
-    try {
-      ManageAppController.to.update();
-    } catch (e) {
-      //
-    }
+    Repository.to.update();
     Repository.to.saveBunkerState();
 
     var store = stringMapStoreFactory.store('requests');
@@ -101,19 +94,15 @@ class RequestController extends GetxController {
     }
   }
 
-  void rejectForever() async {
-    Get.back();
+  void rejectForever(BuildContext context) async {
+    Navigator.pop(context);
 
     Repository.bunker.rejectForever(
       command: request!.originalRequest.commandString,
       app: app!,
     );
 
-    try {
-      ManageAppController.to.update();
-    } catch (e) {
-      //
-    }
+    Repository.to.update();
     Repository.to.saveBunkerState();
 
     var store = stringMapStoreFactory.store('requests');
@@ -143,8 +132,8 @@ class RequestController extends GetxController {
     }
   }
 
-  Future<void> deleteRequest() async {
-    Get.back();
+  Future<void> deleteRequest(BuildContext context) async {
+    Navigator.pop(context);
 
     var store = stringMapStoreFactory.store('requests');
     await store.record(request!.originalRequest.id).delete(Repository.to.db);

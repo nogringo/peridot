@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 
 class TrustLevelOptionsView extends StatelessWidget {
@@ -20,17 +19,16 @@ class TrustLevelOptionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
     final child = Container(
       decoration: BoxDecoration(
         border: Border.all(
           color: isSelected
-              ? Get.theme.colorScheme.primary
-              : Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              ? colorScheme.primary
+              : colorScheme.onSurface.withValues(alpha: 0.5),
         ),
         borderRadius: BorderRadius.circular(16),
-        color: isSelected
-            ? Get.theme.colorScheme.primary.withValues(alpha: 0.1)
-            : null,
+        color: isSelected ? colorScheme.primary.withValues(alpha: 0.1) : null,
       ),
       child: {
         AuthorisationMode.allwaysAsk: ListTile(

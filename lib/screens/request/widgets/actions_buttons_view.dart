@@ -3,40 +3,38 @@ import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/request/request_controller.dart';
 
 class ActionsButtonsView extends StatelessWidget {
-  const ActionsButtonsView({super.key});
+  final RequestController controller;
+
+  const ActionsButtonsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
     final allowOnceButton = FilledButton(
-      onPressed: RequestController.to.allowOnce,
-      child: Text(
-        RequestController.to.isRequestBlocked ? l10n.allow : l10n.allowOnce,
-      ),
+      onPressed: () => controller.allowOnce(context),
+      child: Text(controller.isRequestBlocked ? l10n.allow : l10n.allowOnce),
     );
     final rejectOnceButton = FilledButton(
-      onPressed: RequestController.to.rejectOnce,
-      child: Text(
-        RequestController.to.isRequestBlocked ? l10n.reject : l10n.rejectOnce,
-      ),
+      onPressed: () => controller.rejectOnce(context),
+      child: Text(controller.isRequestBlocked ? l10n.reject : l10n.rejectOnce),
     );
     final allowForeverButton = FilledButton(
-      onPressed: RequestController.to.allowForever,
+      onPressed: () => controller.allowForever(context),
       child: Text(l10n.allowForever),
     );
     final rejectForeverButton = FilledButton(
-      onPressed: RequestController.to.rejectForever,
+      onPressed: () => controller.rejectForever(context),
       child: Text(l10n.rejectForever),
     );
     final deleteButton = FilledButton(
-      onPressed: RequestController.to.deleteRequest,
+      onPressed: () => controller.deleteRequest(context),
       child: Text(l10n.delete),
     );
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (RequestController.to.isRequestBlocked) {
+        if (controller.isRequestBlocked) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 8,
@@ -46,7 +44,7 @@ class ActionsButtonsView extends StatelessWidget {
 
         final isWide = constraints.maxWidth > 600;
 
-        if (isWide && RequestController.to.isRequestPending) {
+        if (isWide && controller.isRequestPending) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 8,
@@ -59,7 +57,7 @@ class ActionsButtonsView extends StatelessWidget {
           );
         }
 
-        if (isWide && RequestController.to.isRequestProcessed) {
+        if (isWide && controller.isRequestProcessed) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 8,
@@ -67,7 +65,7 @@ class ActionsButtonsView extends StatelessWidget {
           );
         }
 
-        if (RequestController.to.isRequestPending) {
+        if (controller.isRequestPending) {
           return Column(
             spacing: 8,
             children: [
@@ -89,7 +87,7 @@ class ActionsButtonsView extends StatelessWidget {
           );
         }
 
-        if (RequestController.to.isRequestProcessed) {
+        if (controller.isRequestProcessed) {
           return Column(
             spacing: 8,
             children: [

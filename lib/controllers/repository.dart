@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:ndk/shared/nips/nip01/bip340.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/config.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/models/bunker_request.dart';
+import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/utils/get_database.dart';
 import 'package:sembast/sembast.dart' as sembast;
@@ -19,14 +20,14 @@ import 'package:sembast/sembast.dart' as sembast;
 // TODO check cascading delete
 // TODO import export apps
 
-class Repository extends GetxController {
-  static Repository get to => Get.find();
-  static Ndk get ndk => Get.find();
-  static NdkFlutter get ndkFlutter => Get.find();
-  static Bunker get bunker => Get.find();
+class Repository extends Controller {
+  static late final Repository to;
+  static late final Ndk ndk;
+  static late final NdkFlutter ndkFlutter;
+  static late final Bunker bunker;
 
   bool isAppLoaded = false;
-  RxSet<String> usersPubkeys = RxSet<String>({});
+  Set<String> usersPubkeys = {};
   Map<String, int> appLastUsed = {};
 
   StreamSubscription<Nip46Request>? pendingRequestsSub;
@@ -55,8 +56,9 @@ class Repository extends GetxController {
 
       final app = bunker.getApp(req);
 
-      if (Get.context != null) {
-        final l10n = AppLocalizations.of(Get.context!)!;
+      final context = AppRoutes.navigatorKey.currentContext;
+      if (context != null && context.mounted) {
+        final l10n = AppLocalizations.of(context)!;
         final appName = app?.name ?? l10n.deletedApp;
         NotificationService.to.showNotification(
           title: l10n.newPendingRequest,

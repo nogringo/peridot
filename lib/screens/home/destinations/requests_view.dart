@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -10,14 +9,19 @@ import 'package:peridot/screens/home/widgets/no_requests_view.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
 class RequestsView extends StatelessWidget {
-  const RequestsView({super.key});
+  final HomeController controller;
+
+  const RequestsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<Repository>(
-      builder: (_) {
-        return GetBuilder<HomeController>(
-          builder: (c) {
+    return ListenableBuilder(
+      listenable: Repository.to,
+      builder: (context, _) {
+        return ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) {
+            final c = controller;
             if (c.requests.isEmpty) return NoRequestsView();
 
             return ListView(
@@ -54,11 +58,9 @@ class RequestsView extends StatelessWidget {
                       shape: StadiumBorder(),
                     ),
                     onTap: () {
-                      Get.toNamed(
-                        AppRoutes.request.replaceAll(
-                          ':requestId',
-                          req.originalRequest.id,
-                        ),
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.request(req.originalRequest.id),
                       );
                     },
                   );

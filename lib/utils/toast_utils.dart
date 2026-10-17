@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/routes/app_routes.dart';
 import 'package:toastification/toastification.dart';
 
 void showCopyToast([BuildContext? context]) {
-  context ??= Get.context;
+  context ??= AppRoutes.navigatorKey.currentContext;
 
   if (context == null) return;
 
+  final theme = Theme.of(context);
   toastification.show(
     context: context,
     type: ToastificationType.success,
@@ -18,14 +19,14 @@ void showCopyToast([BuildContext? context]) {
     borderRadius: BorderRadius.circular(100.0),
     closeButton: ToastCloseButton(showType: CloseButtonShowType.none),
     applyBlurEffect: true,
-    backgroundColor: Get.theme.colorScheme.surface,
-    foregroundColor: Get.theme.colorScheme.onSurface,
-    borderSide: BorderSide(color: Get.theme.dividerColor, width: 2),
+    backgroundColor: theme.colorScheme.surface,
+    foregroundColor: theme.colorScheme.onSurface,
+    borderSide: BorderSide(color: theme.dividerColor, width: 2),
   );
 }
 
 void showErrorToast(String message, [BuildContext? context]) {
-  context ??= Get.context;
+  context ??= AppRoutes.navigatorKey.currentContext;
 
   if (context == null) return;
 

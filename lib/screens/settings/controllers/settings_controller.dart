@@ -4,34 +4,29 @@ import 'package:flutter/services.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/toast_utils.dart';
-import 'package:get/get.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:peridot/config.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/remove_account_dialog.dart';
 
-class SettingsController extends GetxController {
-  static SettingsController get to => Get.find();
+class SettingsController extends Controller {
+  static late final SettingsController to;
 
   final newRelayFieldController = TextEditingController();
-  final RxBool isAutoStartEnabled = false.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    checkAutoStartStatus();
-  }
+  bool isAutoStartEnabled = false;
 
   Future<void> checkAutoStartStatus() async {
     try {
       // Setup first before checking status
       _setupLaunchAtStartup();
-      isAutoStartEnabled.value = await launchAtStartup.isEnabled();
+      isAutoStartEnabled = await launchAtStartup.isEnabled();
     } catch (e) {
       // If checking fails, assume it's disabled
-      isAutoStartEnabled.value = false;
+      isAutoStartEnabled = false;
     }
+    update();
   }
 
   void _setupLaunchAtStartup() {
@@ -46,48 +41,54 @@ class SettingsController extends GetxController {
     try {
       _setupLaunchAtStartup(); // Ensure it's setup before any operation
 
-      if (isAutoStartEnabled.value) {
+      if (isAutoStartEnabled) {
         // Disable auto-start
         await launchAtStartup.disable();
-        isAutoStartEnabled.value = false;
+        isAutoStartEnabled = false;
       } else {
         // Enable auto-start
         await launchAtStartup.enable();
-        isAutoStartEnabled.value = true;
+        isAutoStartEnabled = true;
       }
+      update();
     } catch (e) {
       // If toggle fails, keep the current state
       // Could show a toast notification here if needed
     }
   }
 
-  void handleAccountMenuAction(String action, String pubkey) {
+  void handleAccountMenuAction(
+    BuildContext context,
+    String action,
+    String pubkey,
+  ) {
     switch (action) {
       case 'copy':
-        copyNpubToClipboard(pubkey);
+        copyNpubToClipboard(context, pubkey);
         break;
       case 'backup':
-        showBackupAccount(pubkey);
+        showBackupAccount(context, pubkey);
         break;
       case 'remove':
-        removeAccount(pubkey);
+        removeAccount(context, pubkey);
         break;
     }
   }
 
-  void copyNpubToClipboard(String pubkey) {
+  void copyNpubToClipboard(BuildContext context, String pubkey) {
     final npub = Nip19.encodePubKey(pubkey);
     Clipboard.setData(ClipboardData(text: npub));
-    showCopyToast();
+    showCopyToast(context);
   }
 
-  void showBackupAccount(String pubkey) {
-    Get.toNamed(AppRoutes.backupAccount.replaceAll(':pubkey', pubkey));
+  void showBackupAccount(BuildContext context, String pubkey) {
+    Navigator.pushNamed(context, AppRoutes.backupAccount(pubkey));
   }
 
-  void removeAccount(String pubkey) async {
-    final shouldRemove = await Get.dialog<bool>(
-      RemoveAccountDialog(pubkey: pubkey),
+  void removeAccount(BuildContext context, String pubkey) async {
+    final shouldRemove = await showDialog<bool>(
+      context: context,
+      builder: (_) => RemoveAccountDialog(pubkey: pubkey),
     );
 
     if (shouldRemove != true) return;
@@ -95,27 +96,30 @@ class SettingsController extends GetxController {
     await Repository.to.removeAccount(pubkey);
 
     if (Repository.to.usersPubkeys.isEmpty) {
-      Get.offAllNamed(AppRoutes.addPrivkey);
+      AppRoutes.navigator.pushNamedAndRemoveUntil(
+        AppRoutes.addPrivkey,
+        (_) => false,
+      );
     }
   }
 
-  Future<void> addDefaultBunkerRelay() async {
+  Future<void> addDefaultBunkerRelay(BuildContext context) async {
     final relay = newRelayFieldController.text.trim();
     if (relay.isEmpty) return;
 
-    final l10n = AppLocalizations.of(Get.context!)!;
+    final l10n = AppLocalizations.of(context)!;
     try {
       final uri = Uri.parse(relay);
       if (uri.scheme != 'wss' && uri.scheme != 'ws') {
-        showErrorToast(l10n.relayUrlProtocolError);
+        showErrorToast(l10n.relayUrlProtocolError, context);
         return;
       }
       if (!uri.hasAuthority) {
-        showErrorToast(l10n.invalidRelayUrlFormat);
+        showErrorToast(l10n.invalidRelayUrlFormat, context);
         return;
       }
     } catch (e) {
-      showErrorToast(l10n.invalidRelayUrl);
+      showErrorToast(l10n.invalidRelayUrl, context);
       return;
     }
 

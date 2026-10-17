@@ -9,7 +9,9 @@ import 'package:sembast/sembast.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
 class BlockedRequestsView extends StatelessWidget {
-  const BlockedRequestsView({super.key});
+  final ManageAppController controller;
+
+  const BlockedRequestsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class BlockedRequestsView extends StatelessWidget {
 
         final appPubkey = req.originalRequest.appPubkey;
 
-        final currentApp = ManageAppController.to.app;
+        final currentApp = controller.app;
         if (currentApp == null) return false;
 
         return appPubkey == currentApp.appPubkey;
@@ -74,8 +76,7 @@ class BlockedRequestsView extends StatelessWidget {
                             if (requests.isNotEmpty)
                               TextButton.icon(
                                 onPressed: () async {
-                                  await ManageAppController.to
-                                      .deleteAllRequests(requests);
+                                  await controller.deleteAllRequests(requests);
                                 },
                                 icon: Icon(Icons.delete_sweep),
                                 label: Text(l10n.deleteAll),
@@ -94,9 +95,7 @@ class BlockedRequestsView extends StatelessWidget {
                           if (requests.isNotEmpty)
                             TextButton.icon(
                               onPressed: () async {
-                                await ManageAppController.to.deleteAllRequests(
-                                  requests,
-                                );
+                                await controller.deleteAllRequests(requests);
                               },
                               icon: Icon(Icons.delete_sweep),
                               label: Text(l10n.deleteAll),
@@ -121,15 +120,12 @@ class BlockedRequestsView extends StatelessWidget {
                     ),
                     trailing: IconButton(
                       onPressed: () async {
-                        await ManageAppController.to.deleteRequest(
-                          req.originalRequest.id,
-                        );
+                        await controller.deleteRequest(req.originalRequest.id);
                       },
                       icon: Icon(Icons.delete_outlined),
                     ),
-                    onTap: () => ManageAppController.to.openReqScreen(
-                      req.originalRequest,
-                    ),
+                    onTap: () =>
+                        controller.openReqScreen(context, req.originalRequest),
                   );
                 }),
                 if (requests.isNotEmpty) SizedBox(height: 16),

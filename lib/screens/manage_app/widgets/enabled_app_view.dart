@@ -4,7 +4,9 @@ import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
 class EnabledAppView extends StatelessWidget {
-  const EnabledAppView({super.key});
+  final ManageAppController controller;
+
+  const EnabledAppView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,14 @@ class EnabledAppView extends StatelessWidget {
           SwitchListTile(
             title: Text(l10n.enableThisApp),
             subtitle: Text(l10n.enableThisAppDescription),
-            value: ManageAppController.to.app!.isEnabled,
-            onChanged: ManageAppController.to.appEnableChange,
+            value: controller.app!.isEnabled,
+            onChanged: controller.appEnableChange,
           ),
           SwitchListTile(
             title: Text(l10n.removeClientTag),
             subtitle: Text(l10n.removeClientTagDescription),
-            value: ManageAppController.to.app!.removeClientTag,
-            onChanged: ManageAppController.to.removeClientTagChange,
+            value: controller.app!.removeClientTag,
+            onChanged: controller.removeClientTagChange,
           ),
         ],
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -52,11 +51,11 @@ class RemoveAccountDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () => Get.back(result: false),
+          onPressed: () => Navigator.pop(context, false),
           child: Text(l10n.cancel),
         ),
         FilledButton(
-          onPressed: () => Get.back(result: true),
+          onPressed: () => Navigator.pop(context, true),
           child: Text(l10n.remove),
         ),
       ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/models/bunker_request.dart';
@@ -8,50 +8,34 @@ import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/manage_app/switch_account_dialog.dart';
 import 'package:sembast/sembast.dart';
 
-class ManageAppController extends GetxController {
-  static ManageAppController get to => Get.find();
-
+class ManageAppController extends Controller {
   App? app;
   final renameController = TextEditingController();
   final renameFocusNode = FocusNode();
 
-  RxString selectedPubkey = "".obs;
+  String selectedPubkey = "";
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    // First try to get the app from arguments (passed directly)
-    final args = Get.arguments;
-    if (args != null && args is App) {
-      app = args;
-    } else {
-      // Otherwise, find the app by appPubkey from the route parameter
-      final appPubkey = Get.parameters['appPubkey'];
-      if (appPubkey != null) {
-        app = Repository.bunker.apps.firstWhereOrNull(
-          (a) => a.appPubkey == appPubkey,
-        );
-      }
-    }
+  ManageAppController(String appPubkey) {
+    app = Repository.bunker.apps
+        .where((a) => a.appPubkey == appPubkey)
+        .firstOrNull;
 
     if (app != null) {
       renameController.text =
-          app!.name ?? AppLocalizations.of(Get.context!)!.unnamedApp;
+          app!.name ?? AppLocalizations.of(AppRoutes.context)!.unnamedApp;
+      selectedPubkey = app!.userPubkey;
     }
 
     // Listen to focus changes to auto-save
     renameFocusNode.addListener(_onFocusChange);
-
-    selectedPubkey.value = app!.userPubkey;
   }
 
   @override
-  void onClose() {
+  void dispose() {
     renameFocusNode.removeListener(_onFocusChange);
     renameController.dispose();
     renameFocusNode.dispose();
-    super.onClose();
+    super.dispose();
   }
 
   void _onFocusChange() {
@@ -73,7 +57,7 @@ class ManageAppController extends GetxController {
     final newName = renameController.text.trim();
     if (newName.isEmpty) {
       renameController.text =
-          app!.name ?? AppLocalizations.of(Get.context!)!.unnamedApp;
+          app!.name ?? AppLocalizations.of(AppRoutes.context)!.unnamedApp;
       return;
     }
 
@@ -82,25 +66,24 @@ class ManageAppController extends GetxController {
     await Repository.to.saveBunkerState();
   }
 
-  void deleteApp() async {
+  void deleteApp(BuildContext context) async {
     if (app == null) return;
 
-    final l10n = AppLocalizations.of(Get.context!)!;
-    final confirmed = await Get.dialog<bool>(
-      AlertDialog(
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
         title: Text(l10n.deleteApplication),
         content: Text(
-          l10n.deleteApplicationConfirm(
-            app!.name ?? AppLocalizations.of(Get.context!)!.unnamedApp,
-          ),
+          l10n.deleteApplicationConfirm(app!.name ?? l10n.unnamedApp),
         ),
         actions: [
           TextButton(
-            onPressed: () => Get.back(result: false),
+            onPressed: () => Navigator.pop(context, false),
             child: Text(l10n.cancel),
           ),
           FilledButton(
-            onPressed: () => Get.back(result: true),
+            onPressed: () => Navigator.pop(context, true),
             child: Text(l10n.delete),
           ),
         ],
@@ -109,7 +92,7 @@ class ManageAppController extends GetxController {
 
     if (confirmed == true) {
       await Repository.to.removeApp(app!);
-      Get.back();
+      if (context.mounted) Navigator.pop(context);
       await Repository.to.saveBunkerState();
     }
   }
@@ -131,23 +114,27 @@ class ManageAppController extends GetxController {
     Repository.to.saveBunkerState();
   }
 
-  void openSwitchAccountDialog() {
-    Get.dialog(SwitchAccountDialog());
+  void openSwitchAccountDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => SwitchAccountDialog(controller: this),
+    );
   }
 
   void selectAccount(String pubkey) {
-    selectedPubkey.value = pubkey;
+    selectedPubkey = pubkey;
+    update();
   }
 
-  void switchAccount() {
-    app!.userPubkey = selectedPubkey.value;
+  void switchAccount(BuildContext context) {
+    app!.userPubkey = selectedPubkey;
     update();
-    Get.back();
+    Navigator.pop(context);
     Repository.to.saveBunkerState();
   }
 
-  void openReqScreen(Nip46Request reqObj) {
-    Get.toNamed(AppRoutes.request.replaceAll(':requestId', reqObj.id));
+  void openReqScreen(BuildContext context, Nip46Request reqObj) {
+    Navigator.pushNamed(context, AppRoutes.request(reqObj.id));
   }
 
   Future<void> deleteRequest(String requestId) async {

@@ -9,7 +9,9 @@ import 'package:sembast/sembast.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
 class PendingRequestsView extends StatelessWidget {
-  const PendingRequestsView({super.key});
+  final ManageAppController controller;
+
+  const PendingRequestsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class PendingRequestsView extends StatelessWidget {
 
         final appPubkey = req.originalRequest.appPubkey;
 
-        final currentApp = ManageAppController.to.app;
+        final currentApp = controller.app;
         if (currentApp == null) return false;
 
         return appPubkey == currentApp.appPubkey;
@@ -82,9 +84,8 @@ class PendingRequestsView extends StatelessWidget {
                     //   onPressed: () {},
                     //   icon: Icon(Icons.more_vert), // TODO add popup
                     // ),
-                    onTap: () => ManageAppController.to.openReqScreen(
-                      req.originalRequest,
-                    ),
+                    onTap: () =>
+                        controller.openReqScreen(context, req.originalRequest),
                   );
                 }),
                 if (requests.isNotEmpty) SizedBox(height: 16),

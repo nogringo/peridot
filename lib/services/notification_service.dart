@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get/get.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/translate_permission.dart';
@@ -22,8 +21,8 @@ class NotificationAction {
   NotificationAction({required this.id, required this.title});
 }
 
-class NotificationService extends GetxService {
-  static NotificationService get to => Get.find();
+class NotificationService {
+  static late final NotificationService to;
 
   final FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
@@ -41,7 +40,7 @@ class NotificationService extends GetxService {
   final Map<int, Function(bool)> _permissionCallbacks = {};
 
   // Observable for notification enabled state
-  final RxBool isNotificationEnabled = true.obs;
+  final isNotificationEnabled = ValueNotifier(true);
 
   Future<NotificationService> init() async {
     // Load saved notification preference

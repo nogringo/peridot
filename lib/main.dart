@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
@@ -23,9 +22,8 @@ void main() async {
       eventSignerFactory: const NdkEventSignerFactory(),
     ),
   );
-  Get.put(ndk);
-
-  Get.put(NdkFlutter(ndk: ndk));
+  Repository.ndk = ndk;
+  Repository.ndkFlutter = NdkFlutter(ndk: ndk);
 
   final bunker = Bunker(
     ndk: ndk,
@@ -34,18 +32,16 @@ void main() async {
       'wss://relay.primal.net',
     ],
   );
-  Get.put(bunker);
+  Repository.bunker = bunker;
 
   final repository = Repository();
   await repository.loadApp();
-  Get.put(repository);
+  Repository.to = repository;
 
-  final notificationService = await NotificationService().init();
-  Get.put(notificationService);
+  NotificationService.to = await NotificationService().init();
 
-  // Initialize SettingsController to load auto-start status
-  final settingsController = Get.put(SettingsController());
-  await settingsController.checkAutoStartStatus();
+  SettingsController.to = SettingsController();
+  await SettingsController.to.checkAutoStartStatus();
 
   runApp(const MainApp());
 }
@@ -56,7 +52,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: GetMaterialApp(
+      child: MaterialApp(
+        navigatorKey: AppRoutes.navigatorKey,
         title: appTitle,
         localizationsDelegates: [
           AppLocalizations.delegate,
@@ -77,7 +74,7 @@ class MainApp extends StatelessWidget {
         ),
         themeMode: ThemeMode.system,
         initialRoute: AppRoutes.applications,
-        getPages: AppRoutes.pages,
+        onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
   }

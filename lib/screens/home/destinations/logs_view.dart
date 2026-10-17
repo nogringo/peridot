@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
@@ -10,16 +9,21 @@ import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/status_chip.dart';
 
 class LogsView extends StatelessWidget {
-  const LogsView({super.key});
+  final HomeController controller;
+
+  const LogsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return GetBuilder<Repository>(
-      builder: (_) {
-        return GetBuilder<HomeController>(
-          builder: (c) {
+    return ListenableBuilder(
+      listenable: Repository.to,
+      builder: (context, _) {
+        return ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) {
+            final c = controller;
             if (c.allRequests.isEmpty) {
               return Center(
                 child: Column(
@@ -93,11 +97,9 @@ class LogsView extends StatelessWidget {
                         ),
                         trailing: StatusChip(status: req.status),
                         onTap: () {
-                          Get.toNamed(
-                            AppRoutes.request.replaceAll(
-                              ':requestId',
-                              req.originalRequest.id,
-                            ),
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.request(req.originalRequest.id),
                           );
                         },
                       );

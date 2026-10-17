@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:ndk_flutter/widgets/widgets.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
 import 'package:peridot/screens/request/widgets/actions_buttons_view.dart';
@@ -18,15 +17,30 @@ import 'package:peridot/widgets/responsive_list_view.dart'
     show responsiveHorizontalPadding;
 import 'package:peridot/widgets/status_chip.dart';
 
-class RequestPage extends StatelessWidget {
-  const RequestPage({super.key});
+class RequestPage extends StatefulWidget {
+  final String requestId;
+
+  const RequestPage({super.key, required this.requestId});
+
+  @override
+  State<RequestPage> createState() => _RequestPageState();
+}
+
+class _RequestPageState extends State<RequestPage> {
+  late final c = RequestController(widget.requestId);
+
+  @override
+  void dispose() {
+    c.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return GetBuilder(
-      init: RequestController(),
-      builder: (c) {
+    return ListenableBuilder(
+      listenable: c,
+      builder: (context, _) {
         if (c.request == null) return Scaffold();
 
         return Scaffold(
@@ -34,7 +48,7 @@ class RequestPage extends StatelessWidget {
             title: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => _navigateToApp(c.app!),
+                onTap: () => _navigateToApp(context, c.app!),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -56,7 +70,7 @@ class RequestPage extends StatelessWidget {
               MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
-                  onTap: () => _navigateToApp(c.app!),
+                  onTap: () => _navigateToApp(context, c.app!),
                   child: NPicture(
                     ndkFlutter: Repository.ndkFlutter,
                     pubkey: c.app!.userPubkey,
@@ -174,6 +188,7 @@ class RequestPage extends StatelessWidget {
                           Nip46Commands.signEvent)
                         JsonViewer(
                           json: c.request!.originalRequest.params.first,
+                          controller: c,
                         ),
                       SizedBox(height: kToolbarHeight * 2),
                     ],
@@ -183,7 +198,7 @@ class RequestPage extends StatelessWidget {
                       right: 12 + horizontalPadding,
                       left: 12 + horizontalPadding,
                       bottom: 12,
-                      child: ActionsButtonsView(),
+                      child: ActionsButtonsView(controller: c),
                     ),
                 ],
               );
@@ -194,7 +209,7 @@ class RequestPage extends StatelessWidget {
     );
   }
 
-  void _navigateToApp(App app) {
-    Get.toNamed(AppRoutes.manageApp.replaceAll(':appPubkey', app.appPubkey));
+  void _navigateToApp(BuildContext context, App app) {
+    Navigator.pushNamed(context, AppRoutes.manageApp(app.appPubkey));
   }
 }

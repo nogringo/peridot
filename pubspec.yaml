@@ -14,7 +14,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^10.3.4
-  get: ^4.7.3
   google_fonts: ^9.0.0
   intl: ^0.20.3
   # win32_registry 3 port (leanflutter/launch_at_startup#41), needed for win32 6

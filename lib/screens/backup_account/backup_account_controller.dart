@@ -2,30 +2,31 @@ import 'package:flutter/services.dart';
 import 'package:peridot/utils/toast_utils.dart';
 import 'package:flutter/widgets.dart';
 import 'package:toastification/toastification.dart';
-import 'package:get/get.dart';
 import 'package:ndk/ndk.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:nip49/nip49.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 
-class BackupAccountController extends GetxController {
-  static BackupAccountController get to => Get.find();
-
-  final pubkey = Get.parameters["pubkey"];
+class BackupAccountController extends Controller {
+  final String pubkey;
   final passwordFieldController = TextEditingController();
-  RxBool canEncrypt = false.obs;
+  bool canEncrypt = false;
+
+  BackupAccountController(this.pubkey);
 
   void onPasswordFieldChanged(String value) {
-    canEncrypt.value = value.trim().isNotEmpty;
+    canEncrypt = value.trim().isNotEmpty;
+    update();
   }
 
-  Future<void> copySecureBackup() async {
+  Future<void> copySecureBackup(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     final password = passwordFieldController.text.trim();
     if (password.isEmpty) {
-      final l10n = AppLocalizations.of(Get.context!)!;
       toastification.show(
-        context: Get.context!,
+        context: context,
         title: Text(l10n.pleaseEnterPassword),
         type: ToastificationType.error,
         autoCloseDuration: Duration(seconds: 5),
@@ -54,11 +55,12 @@ class BackupAccountController extends GetxController {
 
       // Clear password field for security
       passwordFieldController.clear();
-      canEncrypt.value = false;
+      canEncrypt = false;
+      update();
     } catch (e) {
-      final l10n = AppLocalizations.of(Get.context!)!;
+      if (!context.mounted) return;
       toastification.show(
-        context: Get.context!,
+        context: context,
         title: Text(l10n.backupFailed),
         description: Text(e.toString()),
         type: ToastificationType.error,
@@ -69,7 +71,8 @@ class BackupAccountController extends GetxController {
     }
   }
 
-  Future<void> copyUnsecureBackup() async {
+  Future<void> copyUnsecureBackup(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       // Get the account and its private key
       final account = Repository.ndk.accounts.accounts[pubkey];
@@ -87,9 +90,9 @@ class BackupAccountController extends GetxController {
       await Clipboard.setData(ClipboardData(text: nsec));
       showCopyToast();
     } catch (e) {
-      final l10n = AppLocalizations.of(Get.context!)!;
+      if (!context.mounted) return;
       toastification.show(
-        context: Get.context!,
+        context: context,
         title: Text(l10n.copyFailed),
         description: Text(e.toString()),
         type: ToastificationType.error,
@@ -101,8 +104,8 @@ class BackupAccountController extends GetxController {
   }
 
   @override
-  void onClose() {
+  void dispose() {
     passwordFieldController.dispose();
-    super.onClose();
+    super.dispose();
   }
 }

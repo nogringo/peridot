@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
@@ -7,22 +6,28 @@ import 'package:peridot/screens/backup_account/backup_account_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 import 'package:peridot/widgets/responsive_list_view.dart';
 
-class BackupAccountPage extends StatelessWidget {
-  const BackupAccountPage({super.key});
+class BackupAccountPage extends StatefulWidget {
+  final String pubkey;
+
+  const BackupAccountPage({super.key, required this.pubkey});
+
+  @override
+  State<BackupAccountPage> createState() => _BackupAccountPageState();
+}
+
+class _BackupAccountPageState extends State<BackupAccountPage> {
+  late final controller = BackupAccountController(widget.pubkey);
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final pubkey = Get.parameters["pubkey"];
-
-    if (pubkey == null) {
-      return Scaffold(
-        appBar: AppBar(title: Text(l10n.backupAccount)),
-        body: Center(
-          child: Text(l10n.noAccountSelected, style: Get.textTheme.titleLarge),
-        ),
-      );
-    }
+    final pubkey = widget.pubkey;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.backupThisAccount)),
@@ -38,9 +43,9 @@ class BackupAccountPage extends StatelessWidget {
             title: NName(ndkFlutter: Repository.ndkFlutter, pubkey: pubkey),
           ),
           SizedBox(height: 16),
-          SecureBackupView(),
+          SecureBackupView(controller: controller),
           SizedBox(height: 16),
-          UnsecureBackupView(),
+          UnsecureBackupView(controller: controller),
           SizedBox(height: kToolbarHeight),
         ],
       ),
@@ -49,7 +54,9 @@ class BackupAccountPage extends StatelessWidget {
 }
 
 class SecureBackupView extends StatelessWidget {
-  const SecureBackupView({super.key});
+  final BackupAccountController controller;
+
+  const SecureBackupView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -69,28 +76,26 @@ class SecureBackupView extends StatelessWidget {
           SizedBox(height: 8),
           Text(
             l10n.backupSecurelyWithPassword,
-            style: Get.textTheme.titleMedium,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-          GetBuilder<BackupAccountController>(
-            init: BackupAccountController(),
-            builder: (c) {
-              return TextField(
-                controller: c.passwordFieldController,
-                obscureText: true,
-                decoration: InputDecoration(hintText: l10n.password),
-                onChanged: c.onPasswordFieldChanged,
+          TextField(
+            controller: controller.passwordFieldController,
+            obscureText: true,
+            decoration: InputDecoration(hintText: l10n.password),
+            onChanged: controller.onPasswordFieldChanged,
+          ),
+          SizedBox(height: 16),
+          ListenableBuilder(
+            listenable: controller,
+            builder: (context, _) {
+              return FilledButton(
+                onPressed: controller.canEncrypt
+                    ? () => controller.copySecureBackup(context)
+                    : null,
+                child: Text(l10n.copyEncryptedVersion),
               );
             },
           ),
-          SizedBox(height: 16),
-          Obx(() {
-            return FilledButton(
-              onPressed: BackupAccountController.to.canEncrypt.value
-                  ? () => BackupAccountController.to.copySecureBackup()
-                  : null,
-              child: Text(l10n.copyEncryptedVersion),
-            );
-          }),
         ],
       ),
     );
@@ -98,7 +103,9 @@ class SecureBackupView extends StatelessWidget {
 }
 
 class UnsecureBackupView extends StatelessWidget {
-  const UnsecureBackupView({super.key});
+  final BackupAccountController controller;
+
+  const UnsecureBackupView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -126,11 +133,11 @@ class UnsecureBackupView extends StatelessWidget {
             SizedBox(height: 8),
             Text(
               l10n.backupInsecurelyWithoutPassword,
-              style: Get.textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             SizedBox(height: 8),
             FilledButton(
-              onPressed: () => BackupAccountController.to.copyUnsecureBackup(),
+              onPressed: () => controller.copyUnsecureBackup(context),
               child: Text(l10n.copyUnencryptedVersion),
             ),
           ],

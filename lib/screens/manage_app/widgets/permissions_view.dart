@@ -5,7 +5,9 @@ import 'package:peridot/utils/translate_permission.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
 class PermissionsView extends StatelessWidget {
-  const PermissionsView({super.key});
+  final ManageAppController controller;
+
+  const PermissionsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class PermissionsView extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
-          if (ManageAppController.to.app!.permissions.isEmpty)
+          if (controller.app!.permissions.isEmpty)
             Padding(
               padding: EdgeInsets.all(16),
               child: Text(
@@ -33,12 +35,11 @@ class PermissionsView extends StatelessWidget {
               ),
             )
           else
-            ...ManageAppController.to.app!.permissions.map(
+            ...controller.app!.permissions.map(
               (permission) => SwitchListTile(
                 title: Text(translatePermission(context, permission.command)),
                 value: permission.isAllowed,
-                onChanged: (_) =>
-                    ManageAppController.to.togglePermission(permission),
+                onChanged: (_) => controller.togglePermission(permission),
               ),
             ),
           SizedBox(height: 16),

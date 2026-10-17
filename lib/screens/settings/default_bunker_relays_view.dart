@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
@@ -17,9 +16,13 @@ class DefaultBunkerRelaysView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(l10n.defaultBunkerRelays, style: Get.textTheme.titleLarge),
-          GetBuilder<SettingsController>(
-            builder: (_) {
+          Text(
+            l10n.defaultBunkerRelays,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          ListenableBuilder(
+            listenable: SettingsController.to,
+            builder: (context, _) {
               return Column(
                 children: Repository.bunker.defaultBunkerRelays.map((relay) {
                   return ListTile(
@@ -40,14 +43,16 @@ class DefaultBunkerRelaysView extends StatelessWidget {
             decoration: InputDecoration(
               hintText: l10n.enterRelayUrl,
               suffixIcon: IconButton(
-                onPressed: SettingsController.to.addDefaultBunkerRelay,
+                onPressed: () =>
+                    SettingsController.to.addDefaultBunkerRelay(context),
                 icon: Icon(Icons.add),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            onSubmitted: (_) => SettingsController.to.addDefaultBunkerRelay(),
+            onSubmitted: (_) =>
+                SettingsController.to.addDefaultBunkerRelay(context),
           ),
         ],
       ),
@@ -59,29 +64,34 @@ class DefaultBunkerRelaysView extends StatelessWidget {
 
     // Check if this is the last relay
     if (Repository.bunker.defaultBunkerRelays.length <= 1) {
-      await Get.dialog(
-        AlertDialog(
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
           title: Text(l10n.cannotRemoveLastRelay),
           content: Text(l10n.cannotRemoveLastRelayMessage),
           actions: [
-            FilledButton(onPressed: () => Get.back(), child: Text(l10n.ok)),
+            FilledButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.ok),
+            ),
           ],
         ),
       );
       return;
     }
 
-    final confirmed = await Get.dialog<bool>(
-      AlertDialog(
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
         title: Text(l10n.removeRelay),
         content: Text(l10n.removeRelayConfirm(relay)),
         actions: [
           TextButton(
-            onPressed: () => Get.back(result: false),
+            onPressed: () => Navigator.pop(context, false),
             child: Text(l10n.cancel),
           ),
           FilledButton(
-            onPressed: () => Get.back(result: true),
+            onPressed: () => Navigator.pop(context, true),
             child: Text(l10n.remove),
           ),
         ],

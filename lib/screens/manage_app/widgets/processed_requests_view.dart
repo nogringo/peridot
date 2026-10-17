@@ -9,7 +9,9 @@ import 'package:sembast/sembast.dart';
 import 'package:peridot/utils/translate_permission.dart';
 
 class ProcessedRequestsView extends StatelessWidget {
-  const ProcessedRequestsView({super.key});
+  final ManageAppController controller;
+
+  const ProcessedRequestsView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class ProcessedRequestsView extends StatelessWidget {
         final bunkerPubkey = req.originalRequest.bunkerPubkey;
         final appPubkey = req.originalRequest.appPubkey;
 
-        final currentApp = ManageAppController.to.app;
+        final currentApp = controller.app;
         if (currentApp == null) return false;
 
         return bunkerPubkey == currentApp.bunkerPubkey &&
@@ -76,8 +78,7 @@ class ProcessedRequestsView extends StatelessWidget {
                             if (requests.isNotEmpty)
                               TextButton.icon(
                                 onPressed: () async {
-                                  await ManageAppController.to
-                                      .deleteAllRequests(requests);
+                                  await controller.deleteAllRequests(requests);
                                 },
                                 icon: Icon(Icons.delete_sweep),
                                 label: Text(l10n.deleteAll),
@@ -96,9 +97,7 @@ class ProcessedRequestsView extends StatelessWidget {
                           if (requests.isNotEmpty)
                             TextButton.icon(
                               onPressed: () async {
-                                await ManageAppController.to.deleteAllRequests(
-                                  requests,
-                                );
+                                await controller.deleteAllRequests(requests);
                               },
                               icon: Icon(Icons.delete_sweep),
                               label: Text(l10n.deleteAll),
@@ -123,15 +122,12 @@ class ProcessedRequestsView extends StatelessWidget {
                     ),
                     trailing: IconButton(
                       onPressed: () async {
-                        await ManageAppController.to.deleteRequest(
-                          req.originalRequest.id,
-                        );
+                        await controller.deleteRequest(req.originalRequest.id);
                       },
                       icon: Icon(Icons.delete_outlined),
                     ),
-                    onTap: () => ManageAppController.to.openReqScreen(
-                      req.originalRequest,
-                    ),
+                    onTap: () =>
+                        controller.openReqScreen(context, req.originalRequest),
                   );
                 }),
                 if (requests.isNotEmpty) SizedBox(height: 16),

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/a11y-dark.dart';
 import 'package:flutter_highlight/themes/a11y-light.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:peridot/screens/request/request_controller.dart';
 
 class JsonViewer extends StatelessWidget {
   final String json;
+  final RequestController controller;
 
-  const JsonViewer({super.key, required this.json});
+  const JsonViewer({super.key, required this.json, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -51,21 +51,15 @@ class JsonViewer extends StatelessWidget {
                       right: 4,
                       child: IconButton(
                         onPressed: () {
-                          RequestController.to.copyJson(formattedJson);
+                          controller.copyJson(formattedJson);
                         },
-                        icon: Obx(() {
-                          return AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 100),
-                            child: Icon(
-                              RequestController.to.isJsonCopied.value
-                                  ? Icons.check
-                                  : Icons.copy,
-                              key: ValueKey<bool>(
-                                RequestController.to.isJsonCopied.value,
-                              ),
-                            ),
-                          );
-                        }),
+                        icon: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 100),
+                          child: Icon(
+                            controller.isJsonCopied ? Icons.check : Icons.copy,
+                            key: ValueKey<bool>(controller.isJsonCopied),
+                          ),
+                        ),
                       ),
                     ),
                   ],

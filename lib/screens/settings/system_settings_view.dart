@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
-import 'package:peridot/screens/settings/controllers/system_settings_controller.dart';
 import 'package:peridot/services/notification_service.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
@@ -11,9 +9,8 @@ class SystemSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsController = Get.find<SettingsController>();
+    final settingsController = SettingsController.to;
     final notificationService = NotificationService.to;
-    Get.put(SystemSettingsController());
     final l10n = AppLocalizations.of(context)!;
 
     return BorderAreaView(
@@ -23,24 +20,29 @@ class SystemSettingsView extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(l10n.systemSettings, style: Get.textTheme.titleLarge),
+            child: Text(
+              l10n.systemSettings,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
           SizedBox(height: 16),
-          Obx(
-            () => SwitchListTile(
+          ListenableBuilder(
+            listenable: settingsController,
+            builder: (context, _) => SwitchListTile(
               title: Text(l10n.startOnSystemStartup),
               subtitle: Text(l10n.startOnSystemStartupDescription),
-              value: settingsController.isAutoStartEnabled.value,
+              value: settingsController.isAutoStartEnabled,
               onChanged: (value) async {
                 await settingsController.toggleAutoStart();
               },
             ),
           ),
-          Obx(
-            () => SwitchListTile(
+          ValueListenableBuilder(
+            valueListenable: notificationService.isNotificationEnabled,
+            builder: (context, isNotificationEnabled, _) => SwitchListTile(
               title: Text(l10n.notifications),
               subtitle: Text(l10n.notificationsDescription),
-              value: notificationService.isNotificationEnabled.value,
+              value: isNotificationEnabled,
               onChanged: (value) async {
                 await notificationService.setNotificationsEnabled(value);
               },

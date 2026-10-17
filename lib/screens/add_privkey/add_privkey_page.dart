@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_privkey/add_privkey_controller.dart';
 
-class AddPrivkeyPage extends StatelessWidget {
+class AddPrivkeyPage extends StatefulWidget {
   const AddPrivkeyPage({super.key});
 
   @override
+  State<AddPrivkeyPage> createState() => _AddPrivkeyPageState();
+}
+
+class _AddPrivkeyPageState extends State<AddPrivkeyPage> {
+  final c = AddPrivkeyController();
+
+  @override
+  void dispose() {
+    c.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddPrivkeyController>(
-      init: AddPrivkeyController(),
-      builder: (c) {
+    return ListenableBuilder(
+      listenable: c,
+      builder: (context, _) {
         final l10n = AppLocalizations.of(context)!;
         return Scaffold(
           appBar: AppBar(title: Text(l10n.addPrivateKey)),
@@ -40,9 +52,9 @@ class AddPrivkeyPage extends StatelessWidget {
                           child: Text(
                             l10n.or,
                             style: TextStyle(
-                              color: Get.theme.colorScheme.onSurface.withValues(
-                                alpha: 0.5,
-                              ),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.5),
                             ),
                           ),
                         ),
@@ -56,22 +68,17 @@ class AddPrivkeyPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     TextField(
-                      controller:
-                          AddPrivkeyController.to.privkeyFieldController,
+                      controller: c.privkeyFieldController,
                       decoration: InputDecoration(
                         labelText: l10n.nsecNcryptsecOrHex,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      onChanged: AddPrivkeyController.to.onPrivkeyFieldChanged,
+                      onChanged: c.onPrivkeyFieldChanged,
                     ),
-                    Obx(() {
-                      if (!AddPrivkeyController.to.isNcryptsec.value) {
-                        return Container();
-                      }
-
-                      return Column(
+                    if (c.isNcryptsec)
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(height: 8),
@@ -80,19 +87,16 @@ class AddPrivkeyPage extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           TextField(
-                            controller: AddPrivkeyController
-                                .to
-                                .ncryptsecPasswordFieldController,
+                            controller: c.ncryptsecPasswordFieldController,
                             decoration: InputDecoration(
                               hintText: l10n.yourPassword,
                             ),
                           ),
                         ],
-                      );
-                    }),
+                      ),
                     SizedBox(height: 8),
                     FilledButton(
-                      onPressed: AddPrivkeyController.to.importPrivateKey,
+                      onPressed: () => c.importPrivateKey(context),
                       child: Text(l10n.importKey),
                     ),
                     SizedBox(height: kToolbarHeight),

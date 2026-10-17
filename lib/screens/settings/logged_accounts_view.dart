@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:ndk/shared/nips/nip19/nip19.dart';
 import 'package:ndk_flutter/ndk_flutter.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
+import 'package:peridot/routes/app_routes.dart';
 import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
@@ -15,12 +15,16 @@ class LoggedAccountsView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return BorderAreaView(
       padding: EdgeInsets.all(16),
-      child: GetBuilder<Repository>(
-        builder: (c) {
+      child: ListenableBuilder(
+        listenable: Repository.to,
+        builder: (context, _) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(l10n.loggedAccounts, style: Get.textTheme.titleLarge),
+              Text(
+                l10n.loggedAccounts,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               SizedBox(height: 8),
               ...Repository.to.usersPubkeys.map((pubkey) {
                 return ListTile(
@@ -48,7 +52,7 @@ class LoggedAccountsView extends StatelessWidget {
                       ),
                     ),
                     onSelected: (value) => SettingsController.to
-                        .handleAccountMenuAction(value, pubkey),
+                        .handleAccountMenuAction(context, value, pubkey),
                     itemBuilder: (context) => [
                       PopupMenuItem(
                         value: 'copy',
@@ -91,7 +95,7 @@ class LoggedAccountsView extends StatelessWidget {
               SizedBox(height: 8),
               OutlinedButton(
                 onPressed: () {
-                  Get.toNamed('/add-nsec');
+                  Navigator.pushNamed(context, AppRoutes.addPrivkey);
                 },
                 child: Text(l10n.addAnAccount),
               ),

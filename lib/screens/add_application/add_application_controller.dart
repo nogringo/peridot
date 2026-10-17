@@ -1,25 +1,23 @@
 import 'package:flutter/services.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/utils/toast_utils.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:ndk/ndk.dart' hide NostrConnect;
 import 'package:peridot/controllers/repository.dart';
 
-class AddApplicationController extends GetxController {
-  static AddApplicationController get to => Get.find();
-
+class AddApplicationController extends Controller {
   final nostrConnectFieldController = TextEditingController();
   final appNameFieldController = TextEditingController();
-  late RxString selectedPubkey;
+  late String selectedPubkey;
   String? bunkerUrl;
   String? currentSecret;
   NdkResponse? bunkerSubscription;
   App? app;
 
-  RxBool isNostrConnectConnecting = false.obs;
-  Rx<AuthorisationMode> appAuthorisationMode =
-      AuthorisationMode.allowCommonRequests.obs;
+  bool isNostrConnectConnecting = false;
+  AuthorisationMode appAuthorisationMode =
+      AuthorisationMode.allowCommonRequests;
 
   bool get hasNostrConnectURL {
     try {
@@ -53,18 +51,18 @@ class AddApplicationController extends GetxController {
   bool get canAddApp => appNameFieldController.text.trim().isNotEmpty;
 
   AddApplicationController() {
-    selectedPubkey = Repository.to.usersPubkeys.first.obs;
+    selectedPubkey = Repository.to.usersPubkeys.first;
     if (Repository.ndk.accounts.accounts.length == 1) {
       chooseAccountStepDone();
     }
   }
 
   @override
-  void onClose() {
+  void dispose() {
     stopListeningBunker();
     nostrConnectFieldController.dispose();
     appNameFieldController.dispose();
-    super.onClose();
+    super.dispose();
   }
 
   Future<void> stopListeningBunker() async {
@@ -80,9 +78,19 @@ class AddApplicationController extends GetxController {
     showCopyToast();
   }
 
+  void selectAccount(String pubkey) {
+    selectedPubkey = pubkey;
+    update();
+  }
+
+  void setAuthorisationMode(AuthorisationMode mode) {
+    appAuthorisationMode = mode;
+    update();
+  }
+
   void chooseAccountStepDone() {
     bunkerUrl = Repository.bunker.getBunkerUrl(
-      userPubkey: selectedPubkey.value,
+      userPubkey: selectedPubkey,
       onConnected: (app) {
         this.app = app;
         update();
@@ -93,16 +101,17 @@ class AddApplicationController extends GetxController {
   }
 
   void connectWithNostrConnect() async {
-    isNostrConnectConnecting.value = true;
+    isNostrConnectConnecting = true;
+    update();
 
     app = await Repository.bunker.connectApp(
-      userPubkey: selectedPubkey.value,
+      userPubkey: selectedPubkey,
       nostrConnect: NostrConnectUrl.fromUrl(
         nostrConnectFieldController.text.trim(),
       ),
     );
 
-    isNostrConnectConnecting.value = false;
+    isNostrConnectConnecting = false;
 
     if (app!.name != null) {
       appNameFieldController.text = app!.name!;
@@ -122,7 +131,7 @@ class AddApplicationController extends GetxController {
     update();
   }
 
-  void finish() async {
+  void finish(BuildContext context) async {
     app!.isEnabled = true;
 
     final newName = appNameFieldController.text;
@@ -130,7 +139,7 @@ class AddApplicationController extends GetxController {
       app!.name = newName;
     }
 
-    app!.authorisationMode = appAuthorisationMode.value;
+    app!.authorisationMode = appAuthorisationMode;
 
     final requests = await Repository.to.getPendingAndBlockedRequests(
       appPubkey: app!.appPubkey,
@@ -142,7 +151,7 @@ class AddApplicationController extends GetxController {
 
     Repository.to.update();
 
-    Get.back();
+    if (context.mounted) Navigator.pop(context);
 
     Repository.to.saveBunkerState();
   }

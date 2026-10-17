@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/add_application/add_application_controller.dart';
 import 'package:peridot/widgets/border_area_view.dart';
 
 class ConnectAnAppView extends StatelessWidget {
-  const ConnectAnAppView({super.key});
+  final AddApplicationController controller;
+
+  const ConnectAnAppView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,31 +20,29 @@ class ConnectAnAppView extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.connectWithBunkerUrl,
-                style: Get.textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(height: 8),
-              GetBuilder<AddApplicationController>(
-                builder: (c) {
-                  return SelectableText(c.bunkerUrl ?? "");
-                },
-              ),
+              SelectableText(controller.bunkerUrl ?? ""),
               SizedBox(height: 12),
               OutlinedButton(
-                onPressed: () => AddApplicationController.to.copyBunkerUrl(),
+                onPressed: () => controller.copyBunkerUrl(),
                 child: Text(AppLocalizations.of(context)!.copyBunkerUrl),
               ),
             ],
           ),
         ),
         SizedBox(height: 16),
-        NostrConnectView(),
+        NostrConnectView(controller: controller),
       ],
     );
   }
 }
 
 class NostrConnectView extends StatelessWidget {
-  const NostrConnectView({super.key});
+  final AddApplicationController controller;
+
+  const NostrConnectView({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -56,46 +55,37 @@ class NostrConnectView extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.connectWithNostrConnectUrl,
-                style: Get.textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(height: 8),
               TextField(
-                controller:
-                    AddApplicationController.to.nostrConnectFieldController,
+                controller: controller.nostrConnectFieldController,
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.nostrConnectUrlHint,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onChanged:
-                    AddApplicationController.to.onNostrConnectFieldChanged,
+                onChanged: controller.onNostrConnectFieldChanged,
               ),
               SizedBox(height: 12),
-              GetBuilder<AddApplicationController>(
-                builder: (c) {
-                  return OutlinedButton(
-                    onPressed: c.hasNostrConnectURL
-                        ? c.connectWithNostrConnect
-                        : null,
-                    child: Text(AppLocalizations.of(context)!.connect),
-                  );
-                },
+              OutlinedButton(
+                onPressed: controller.hasNostrConnectURL
+                    ? controller.connectWithNostrConnect
+                    : null,
+                child: Text(AppLocalizations.of(context)!.connect),
               ),
             ],
           ),
-          Obx(() {
-            if (!AddApplicationController.to.isNostrConnectConnecting.value) {
-              return Container();
-            }
-
-            return Positioned.fill(
+          if (controller.isNostrConnectConnecting)
+            Positioned.fill(
               child: ColoredBox(
-                color: Get.theme.colorScheme.surface.withValues(alpha: 0.5),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surface.withValues(alpha: 0.5),
                 child: Center(child: CircularProgressIndicator()),
               ),
-            );
-          }),
+            ),
         ],
       ),
     );

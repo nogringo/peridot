@@ -1,13 +1,11 @@
-import 'package:get/get.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class SystemSettingsController extends GetxController {
+class SystemSettingsController {
   final _storage = const FlutterSecureStorage();
-  final RxBool isTorEnabled = false.obs;
+  final isTorEnabled = ValueNotifier(false);
 
-  @override
-  void onInit() {
-    super.onInit();
+  SystemSettingsController() {
     _loadTorPreference();
   }
 

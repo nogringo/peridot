@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:get/get.dart';
 import 'package:nostr_bunker/nostr_bunker.dart';
+import 'package:peridot/controllers/controller.dart';
 import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/models/bunker_request.dart';
 import 'package:sembast/sembast.dart';
@@ -22,9 +22,7 @@ class AppWithRequests {
   });
 }
 
-class HomeController extends GetxController {
-  static HomeController get to => Get.find();
-
+class HomeController extends Controller {
   static void allowForever({required String command, required App app}) {
     Repository.bunker.allowForever(command: command, app: app);
     Repository.to.update();
@@ -101,10 +99,10 @@ class HomeController extends GetxController {
   List<BunkerRequest> allRequests = [];
   List<AppWithRequests> appsWithRequests = [];
 
-  RxInt selectedIndex = 0.obs;
-  Rx<AppSortOption> sortOption = AppSortOption.name.obs;
-  Rx<AppSortOrder> sortOrder = AppSortOrder.ascending.obs;
-  RxnString filterByAccount = RxnString(null);
+  int selectedIndex = 0;
+  AppSortOption sortOption = AppSortOption.name;
+  AppSortOrder sortOrder = AppSortOrder.ascending;
+  String? filterByAccount;
 
   List<BunkerRequest> get pendingRequests => requests
       .where((req) => req.status == BunkerRequestStatus.pending)
@@ -155,29 +153,29 @@ class HomeController extends GetxController {
   void _updateAppsWithRequests(List<BunkerRequest> requests) {
     appsWithRequests = getSortedApps(
       requests,
-      sortOption: sortOption.value,
-      sortOrder: sortOrder.value,
-      filterByAccount: filterByAccount.value,
+      sortOption: sortOption,
+      sortOrder: sortOrder,
+      filterByAccount: filterByAccount,
     );
   }
 
   void toggleSort(AppSortOption option) {
-    if (sortOption.value == option) {
+    if (sortOption == option) {
       // Toggle order if same column clicked
-      sortOrder.value = sortOrder.value == AppSortOrder.ascending
+      sortOrder = sortOrder == AppSortOrder.ascending
           ? AppSortOrder.descending
           : AppSortOrder.ascending;
     } else {
       // New column, reset to ascending
-      sortOption.value = option;
-      sortOrder.value = AppSortOrder.ascending;
+      sortOption = option;
+      sortOrder = AppSortOrder.ascending;
     }
     _updateAppsWithRequests(requests);
     update();
   }
 
   void setFilterByAccount(String? pubkey) {
-    filterByAccount.value = pubkey;
+    filterByAccount = pubkey;
     _updateAppsWithRequests(requests);
     update();
   }
@@ -190,7 +188,8 @@ class HomeController extends GetxController {
   }
 
   void onDestinationSelected(int value) {
-    selectedIndex.value = value;
+    selectedIndex = value;
+    update();
   }
 
   Future<void> deleteAllLogs() async {

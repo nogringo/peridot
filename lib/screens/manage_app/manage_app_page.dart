@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/manage_app/manage_app_controller.dart';
 import 'package:peridot/screens/manage_app/widgets/blocked_requests_view.dart';
@@ -11,16 +11,38 @@ import 'package:peridot/screens/manage_app/widgets/processed_requests_view.dart'
 import 'package:peridot/screens/manage_app/widgets/trust_level_view.dart';
 import 'package:peridot/widgets/responsive_list_view.dart';
 
-class ManageAppPage extends StatelessWidget {
-  const ManageAppPage({super.key});
+class ManageAppPage extends StatefulWidget {
+  final String appPubkey;
+
+  const ManageAppPage({super.key, required this.appPubkey});
+
+  @override
+  State<ManageAppPage> createState() => _ManageAppPageState();
+}
+
+class _ManageAppPageState extends State<ManageAppPage> {
+  late final ManageAppController controller;
+  late final Listenable listenable;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ManageAppController(widget.appPubkey);
+    listenable = Listenable.merge([controller, Repository.to]);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ManageAppController());
-
-    return GetBuilder<ManageAppController>(
-      builder: (c) {
-        final app = c.app;
+    return ListenableBuilder(
+      listenable: listenable,
+      builder: (context, _) {
+        final app = controller.app;
         final l10n = AppLocalizations.of(context)!;
         if (app == null) {
           return Center(child: Text(l10n.appNotFound));
@@ -40,7 +62,7 @@ class ManageAppPage extends StatelessWidget {
             ),
             actions: [
               TextButton.icon(
-                onPressed: ManageAppController.to.deleteApp,
+                onPressed: () => controller.deleteApp(context),
                 label: Text(l10n.delete),
                 icon: Icon(Icons.delete_outline),
               ),
@@ -50,16 +72,16 @@ class ManageAppPage extends StatelessWidget {
           body: ResponsiveListView(
             padding: EdgeInsets.symmetric(horizontal: 12),
             children: [
-              EnabledAppView(),
+              EnabledAppView(controller: controller),
               SizedBox(height: 16),
-              ConnectedAccountView(),
+              ConnectedAccountView(controller: controller),
               SizedBox(height: 16),
-              TrustLevelView(),
+              TrustLevelView(controller: controller),
               SizedBox(height: 16),
-              PermissionsView(),
-              PendingRequestsView(),
-              BlockedRequestsView(),
-              ProcessedRequestsView(),
+              PermissionsView(controller: controller),
+              PendingRequestsView(controller: controller),
+              BlockedRequestsView(controller: controller),
+              ProcessedRequestsView(controller: controller),
               SizedBox(height: kToolbarHeight),
             ],
           ),

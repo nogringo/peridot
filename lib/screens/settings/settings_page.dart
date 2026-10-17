@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/settings/default_bunker_relays_view.dart';
 import 'package:peridot/screens/settings/logged_accounts_view.dart';
-import 'package:peridot/screens/settings/controllers/settings_controller.dart';
 import 'package:peridot/screens/settings/system_settings_view.dart';
 import 'package:peridot/widgets/responsive_list_view.dart';
 
@@ -12,7 +10,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SettingsController());
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
