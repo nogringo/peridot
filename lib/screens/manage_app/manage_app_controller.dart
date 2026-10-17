@@ -64,6 +64,7 @@ class ManageAppController extends Controller {
 
     app!.name = newName;
     update();
+    Repository.to.update();
     await Repository.to.saveBunkerState();
   }
 

@@ -108,6 +108,8 @@ class HomeController extends Controller {
       .toList();
 
   void init() {
+    Repository.to.addListener(_onRepositoryChange);
+
     requestsSub = stringMapStoreFactory
         .store('requests')
         .query(
@@ -149,6 +151,11 @@ class HomeController extends Controller {
         });
   }
 
+  void _onRepositoryChange() {
+    _updateAppsWithRequests(requests);
+    update();
+  }
+
   void _updateAppsWithRequests(List<BunkerRequest> requests) {
     appsWithRequests = getSortedApps(
       requests,
@@ -181,6 +188,7 @@ class HomeController extends Controller {
 
   @override
   void dispose() {
+    Repository.to.removeListener(_onRepositoryChange);
     requestsSub.cancel();
     allRequestsSub.cancel();
     super.dispose();
