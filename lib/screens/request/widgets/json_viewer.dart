@@ -1,10 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
-import 'package:flutter_highlight/themes/a11y-dark.dart';
-import 'package:flutter_highlight/themes/a11y-light.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/screens/request/request_controller.dart';
 import 'package:peridot/utils/toast_utils.dart';
@@ -32,21 +28,18 @@ class JsonViewer extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: ColoredBox(
-                color:
-                    (Theme.of(context).brightness == Brightness.light
-                            ? a11yLightTheme
-                            : a11yDarkTheme)["root"]!
-                        .backgroundColor!,
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 child: Stack(
                   children: [
-                    HighlightView(
-                      formattedJson,
-                      language: 'json',
-                      theme: Theme.of(context).brightness == Brightness.light
-                          ? a11yLightTheme
-                          : a11yDarkTheme,
-                      padding: EdgeInsets.all(12),
-                      textStyle: GoogleFonts.sourceCodePro(),
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: SelectableText(
+                        formattedJson,
+                        style: const TextStyle(
+                          fontFamily: 'monospace',
+                          fontFamilyFallback: ['Menlo', 'Consolas', 'Courier'],
+                        ),
+                      ),
                     ),
                     Positioned(
                       top: 4,
