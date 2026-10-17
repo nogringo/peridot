@@ -1,10 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:peridot/controllers/repository.dart';
 import 'package:peridot/l10n/app_localizations.dart';
 import 'package:peridot/utils/translate_permission.dart';
-import 'package:sembast/sembast.dart';
 
 // Top-level function for background notification handling
 @pragma('vm:entry-point')
@@ -42,10 +41,20 @@ class NotificationService {
   // Observable for notification enabled state
   final isNotificationEnabled = ValueNotifier(true);
 
+  WebFlutterLocalNotificationsPlugin? get _webPlugin => _notifications
+      .resolvePlatformSpecificImplementation<
+        WebFlutterLocalNotificationsPlugin
+      >();
+
+  // Browsers require an explicit grant, requested from a user gesture.
+  bool get _hasPermission =>
+      !kIsWeb ||
+      _webPlugin?.permissionStatus == WebNotificationPermission.granted;
+
   Future<NotificationService> init() async {
     // Load saved notification preference
     final savedPref = await _storage.read(key: 'notifications_enabled');
-    isNotificationEnabled.value = savedPref != 'false';
+    isNotificationEnabled.value = savedPref != 'false' && _hasPermission;
 
     const androidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
@@ -85,9 +94,9 @@ class NotificationService {
   }
 
   Future<void> setNotificationsEnabled(bool enabled) async {
+    if (enabled && !await requestPermissions()) return;
     isNotificationEnabled.value = enabled;
-    var store = StoreRef.main();
-    await store.record("notifications_enabled").put(Repository.to.db, enabled);
+    await _storage.write(key: 'notifications_enabled', value: '$enabled');
   }
 
   void _onNotificationTapped(NotificationResponse response) {
@@ -111,6 +120,10 @@ class NotificationService {
   }
 
   Future<bool> requestPermissions() async {
+    if (kIsWeb) {
+      return await _webPlugin?.requestNotificationsPermission() ?? false;
+    }
+
     final androidPlugin = _notifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -200,6 +213,8 @@ class NotificationService {
     required List<NotificationAction> actions,
     String? payload,
   }) async {
+    if (!_hasPermission) return;
+
     // Android notification with actions
     final androidDetails = AndroidNotificationDetails(
       _permissionChannelId,
@@ -261,6 +276,8 @@ class NotificationService {
     required String body,
     String? payload,
   }) async {
+    if (!isNotificationEnabled.value || !_hasPermission) return;
+
     const androidDetails = AndroidNotificationDetails(
       _permissionChannelId,
       _permissionChannelName,
